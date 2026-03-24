@@ -1,0 +1,512 @@
+import 'package:chessground/chessground.dart';
+import 'package:dartchess/dartchess.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:lichess_mobile/src/model/board_editor/board_editor_controller.dart';
+import 'package:lichess_mobile/src/model/common/chess.dart';
+import 'package:lichess_mobile/src/view/board_editor/board_editor_screen.dart';
+import 'package:lichess_mobile/src/widgets/bottom_bar.dart';
+
+import '../../test_provider_scope.dart';
+
+void _mockClipboard(String text) {
+  TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+    SystemChannels.platform,
+    (methodCall) async {
+      if (methodCall.method == 'Clipboard.getData') {
+        return {'text': text};
+      }
+      return null;
+    },
+  );
+}
+
+void main() {
+  group('Board Editor', () {
+    testWidgets('Displays initial FEN on start', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      final editor = tester.widget<ChessboardEditor>(find.byType(ChessboardEditor));
+      expect(editor.pieces, readFen(kInitialFEN));
+      expect(editor.orientation, Side.white);
+      expect(editor.pointerMode, EditorPointerMode.drag);
+
+      // Legal position, so allowed to open analysis board
+      expect(
+        tester.widget<BottomBarButton>(find.byKey(const Key('analysis-board-button'))).onTap,
+        isNotNull,
+      );
+    });
+
+    testWidgets('Opening with variant loads its starting position', (tester) async {
+      final app = await makeTestProviderScopeApp(
+        tester,
+        home: const BoardEditorScreen(params: (initialVariant: Variant.horde, initialFen: null)),
+      );
+      await tester.pumpWidget(app);
+
+      final editor = tester.widget<ChessboardEditor>(find.byType(ChessboardEditor));
+      expect(editor.pieces, readFen(Variant.horde.initialPosition.fen));
+    });
+
+    testWidgets('Changing variant', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      await tester.tap(find.bySemanticsLabel('Menu'));
+      await tester.pumpAndSettle(); // wait for menu to open
+      await tester.tap(find.text('Variant'));
+      await tester.pumpAndSettle(); // wait for variant selection dialog to open
+      await tester.ensureVisible(find.textContaining('Horde'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.textContaining('Horde'));
+      await tester.pumpAndSettle(); // wait for variant to change
+
+      // After changing variant, pieces are not reset to that Variant's initial position
+      expect(
+        tester.widget<ChessboardEditor>(find.byType(ChessboardEditor)).pieces,
+        readFen(Chess.initial.fen),
+      );
+
+      /// But when explicitly resetting to the starting position, we now load the Horde starting position
+      await tester.tap(find.bySemanticsLabel('Menu'));
+      await tester.pumpAndSettle(); // wait for menu to open
+      await tester.tap(find.text('Starting position'));
+      await tester.pumpAndSettle(); // wait for position to reset
+      expect(
+        tester.widget<ChessboardEditor>(find.byType(ChessboardEditor)).pieces,
+        readFen(Horde.initial.fen),
+      );
+
+      // Legal position, so allowed to open analysis board
+      expect(
+        tester.widget<BottomBarButton>(find.byKey(const Key('analysis-board-button'))).onTap,
+        isNotNull,
+      );
+    });
+
+    testWidgets('Flip board', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      await tester.tap(find.byKey(const Key('flip-button')));
+      await tester.pump();
+
+      expect(
+        tester.widget<ChessboardEditor>(find.byType(ChessboardEditor)).orientation,
+        Side.black,
+      );
+    });
+
+    testWidgets('Side to play and castling rights', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      await tester.tap(find.byKey(const Key('flip-button')));
+      await tester.pump();
+
+      final container = ProviderScope.containerOf(tester.element(find.byType(ChessboardEditor)));
+
+      final controllerProvider = boardEditorControllerProvider(null);
+
+      container.read(controllerProvider.notifier).setSideToPlay(Side.black);
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b KQkq - 0 1',
+      );
+
+      container.read(controllerProvider.notifier).setCastling(Side.white, CastlingSide.king, false);
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b Qkq - 0 1',
+      );
+
+      container
+          .read(controllerProvider.notifier)
+          .setCastling(Side.white, CastlingSide.queen, false);
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b kq - 0 1',
+      );
+
+      container.read(controllerProvider.notifier).setCastling(Side.black, CastlingSide.king, false);
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b q - 0 1',
+      );
+
+      container
+          .read(controllerProvider.notifier)
+          .setCastling(Side.black, CastlingSide.queen, false);
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b - - 0 1',
+      );
+
+      container.read(controllerProvider.notifier).setCastling(Side.white, CastlingSide.king, true);
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR b K - 0 1',
+      );
+    });
+
+    testWidgets('Castling rights ignored when rook is missing', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      final container = ProviderScope.containerOf(tester.element(find.byType(ChessboardEditor)));
+      final controllerProvider = boardEditorControllerProvider(null);
+
+      // Starting position, but with all rooks removed
+      container
+          .read(controllerProvider.notifier)
+          .loadFen('1nbqkbn1/pppppppp/8/8/8/8/PPPPPPPP/1NBQKBN1');
+
+      // By default, all castling rights are true, but since there are no rooks, the final FEN should have no castling rights
+      expect(
+        container.read(controllerProvider).fen,
+        '1nbqkbn1/pppppppp/8/8/8/8/PPPPPPPP/1NBQKBN1 w - - 0 1',
+      );
+    });
+
+    testWidgets('support chess960 castling rights', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      final container = ProviderScope.containerOf(tester.element(find.byType(ChessboardEditor)));
+      final controllerProvider = boardEditorControllerProvider(null);
+
+      container
+          .read(controllerProvider.notifier)
+          .loadFen('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/4RK1R');
+
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/4RK1R w KQkq - 0 1',
+      );
+    });
+
+    testWidgets('Castling rights ignored when king is not in backrank', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      final container = ProviderScope.containerOf(tester.element(find.byType(ChessboardEditor)));
+      final controllerProvider = boardEditorControllerProvider(null);
+
+      container
+          .read(controllerProvider.notifier)
+          .loadFen('rnbqkbnr/pppppppp/8/8/8/5K2/PPPPPPPP/4R2R');
+
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/pppppppp/8/8/8/5K2/PPPPPPPP/4R2R w kq - 0 1',
+      );
+    });
+
+    testWidgets('Possible en passant squares are calculated correctly', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      final container = ProviderScope.containerOf(tester.element(find.byType(ChessboardEditor)));
+      final controllerProvider = boardEditorControllerProvider(null);
+      container
+          .read(controllerProvider.notifier)
+          .loadFen('1nbqkbn1/pppppppp/8/8/8/8/PPPPPPPP/1NBQKBN1');
+
+      expect(container.read(controllerProvider).enPassantOptions, SquareSet.empty);
+
+      container
+          .read(controllerProvider.notifier)
+          .loadFen('r1bqkbnr/4p1p1/3n4/pPppPppP/8/8/P1PP1P2/RNBQKBNR w KQkq - 0 1');
+      expect(
+        container.read(controllerProvider).enPassantOptions,
+        SquareSet.fromSquares([Square.a6, Square.c6, Square.f6]),
+      );
+      container
+          .read(controllerProvider.notifier)
+          .loadFen('rnbqkbnr/pp1p1p1p/8/8/PpPpPQpP/8/NPRP1PP1/2B1KBNR b Kkq - 0 1');
+      container.read(controllerProvider.notifier).setSideToPlay(Side.black);
+      expect(
+        container.read(controllerProvider).enPassantOptions,
+        SquareSet.fromSquares([Square.e3, Square.h3]),
+      );
+    });
+
+    testWidgets('Can drag pieces to new squares', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      final container = ProviderScope.containerOf(tester.element(find.byType(ChessboardEditor)));
+      final controllerProvider = boardEditorControllerProvider(null);
+
+      // Two legal moves by white
+      await dragFromTo(tester, 'e2', 'e4');
+      await dragFromTo(tester, 'd2', 'd4');
+
+      // Illegal move by black
+      await dragFromTo(tester, 'a8', 'a6');
+
+      // White queen captures white bishop
+      await dragFromTo(tester, 'd1', 'c1');
+
+      expect(
+        container.read(controllerProvider).fen,
+        // Obtained by playing the moves above on lichess.org/editor
+        '1nbqkbnr/pppppppp/r7/8/3PP3/8/PPP2PPP/RNQ1KBNR w KQk - 0 1',
+      );
+    });
+
+    testWidgets('illegal position cannot be analyzed', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      // White queen "captures" white king => illegal position
+      await dragFromTo(tester, 'd1', 'e1');
+
+      expect(
+        tester.widget<BottomBarButton>(find.byKey(const Key('analysis-board-button'))).onTap,
+        isNull,
+      );
+    });
+
+    testWidgets('Delete pieces via bin button', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      final container = ProviderScope.containerOf(tester.element(find.byType(ChessboardEditor)));
+      final controllerProvider = boardEditorControllerProvider(null);
+
+      await tester.tap(find.byKey(const Key('delete-button-white')));
+      await tester.pump();
+
+      await tapSquare(tester, 'e2');
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1',
+      );
+
+      // Change back to drag mode -> tapping has no effect anymore
+      await tester.tap(find.byKey(const Key('drag-button-white')));
+      await tester.pump();
+      await tapSquare(tester, 'e3');
+
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1',
+      );
+
+      // Now remove all of black's pawns
+      await tester.tap(find.byKey(const Key('delete-button-black')));
+      await tester.pump();
+      await panFromTo(tester, 'a7', 'h7');
+
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/8/8/8/8/8/PPPP1PPP/RNBQKBNR w KQkq - 0 1',
+      );
+    });
+
+    testWidgets('Delete pieces with tapping square again', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      final container = ProviderScope.containerOf(tester.element(find.byType(ChessboardEditor)));
+      final controllerProvider = boardEditorControllerProvider(null);
+
+      await tester.tap(find.byKey(const Key('piece-button-white-queen')));
+      await tester.pump();
+
+      await tapSquare(tester, 'e2');
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPPQPPP/RNBQKBNR w KQkq - 0 1',
+      );
+      //Tap d1 square with the white Queen still in hand, empties the square
+      await tapSquare(tester, 'd1');
+
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/pppppppp/8/8/8/8/PPPPQPPP/RNB1KBNR w KQkq - 0 1',
+      );
+    });
+
+    testWidgets('Add pieces via tap and pan', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      await tester.tap(find.byKey(const Key('piece-button-white-queen')));
+      await panFromTo(tester, 'a1', 'a8');
+      await tester.tap(find.byKey(const Key('piece-button-black-rook')));
+      await tapSquare(tester, 'h1');
+      await tapSquare(tester, 'h3');
+
+      final container = ProviderScope.containerOf(tester.element(find.byType(ChessboardEditor)));
+      final controllerProvider = boardEditorControllerProvider(null);
+
+      expect(
+        container.read(controllerProvider).fen,
+        'Qnbqkbnr/Qppppppp/Q7/Q7/Q7/Q6r/QPPPPPPP/QNBQKBNr w k - 0 1',
+      );
+    });
+
+    group('FEN dialog', () {
+      tearDown(() {
+        TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger.setMockMethodCallHandler(
+          SystemChannels.platform,
+          null,
+        );
+      });
+
+      testWidgets('Pasting valid FEN loads position and closes dialog', (tester) async {
+        // Spanish Opening after 1.e4 e5 2.Nf3 Nc6 3.Bb5: bishop on c4, not f1
+        const fen = 'r1bqkbnr/pppp1ppp/2n5/4p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 2 3';
+        _mockClipboard(fen);
+
+        final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+        await tester.pumpWidget(app);
+
+        await tester.tap(find.byIcon(Icons.edit));
+        await tester.pumpAndSettle();
+
+        expect(find.byType(AlertDialog), findsOneWidget);
+
+        await tester.tap(find.byIcon(Icons.paste));
+        await tester.pumpAndSettle();
+
+        // Dialog is gone, board editor is still on screen
+        expect(find.byType(AlertDialog), findsNothing);
+        expect(find.byType(BoardEditorScreen), findsOneWidget);
+
+        // Board reflects the new position
+        expect(find.byKey(const Key('c4-whitebishop')), findsOneWidget);
+        expect(find.byKey(const Key('f1-whitebishop')), findsNothing);
+      });
+
+      testWidgets('Pasting invalid FEN closes dialog and shows snackbar', (tester) async {
+        _mockClipboard('not a valid fen');
+
+        final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+        await tester.pumpWidget(app);
+
+        await tester.tap(find.byIcon(Icons.edit));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.byIcon(Icons.paste));
+        await tester.pumpAndSettle();
+
+        expect(find.byType(AlertDialog), findsNothing);
+        expect(find.text('Invalid FEN'), findsOneWidget);
+      });
+    });
+
+    testWidgets('Drag pieces onto the board', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      // Start by pressing bin button, dragging a piece should override this
+      await tester.tap(find.byKey(const Key('delete-button-black')));
+      await tester.pump();
+
+      final pieceButtonOffset = tester.getCenter(find.byKey(const Key('piece-button-white-pawn')));
+      await tester.dragFrom(
+        pieceButtonOffset,
+        tester.getCenter(find.byKey(const Key('d3-empty'))) - pieceButtonOffset,
+      );
+      await tester.dragFrom(
+        pieceButtonOffset,
+        tester.getCenter(find.byKey(const Key('d1-whitequeen'))) - pieceButtonOffset,
+      );
+
+      final container = ProviderScope.containerOf(tester.element(find.byType(ChessboardEditor)));
+      final controllerProvider = boardEditorControllerProvider(null);
+
+      expect(container.read(controllerProvider).editorPointerMode, EditorPointerMode.drag);
+
+      expect(
+        container.read(controllerProvider).fen,
+        'rnbqkbnr/pppppppp/8/8/8/3P4/PPPPPPPP/RNBPKBNR w KQkq - 0 1',
+      );
+    });
+
+    testWidgets('Continue against computer', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      await tester.tap(find.bySemanticsLabel('Menu'));
+      await tester.pumpAndSettle(); // wait for menu to open
+      await tester.tap(find.text('Variant'));
+      await tester.pumpAndSettle(); // wait for variant selection dialog to open
+      await tester.tap(find.textContaining('Atomic'));
+      await tester.pumpAndSettle(); // wait for variant to change
+
+      await tester.tap(find.bySemanticsLabel('Menu'));
+      await tester.pumpAndSettle(); // wait for menu to open
+      await tester.tap(find.text('Continue from here'));
+      await tester.pumpAndSettle(); // wait for dialog to open
+
+      await tester.tap(find.text('Play against computer'));
+      await tester.pumpAndSettle(); // wait for play menu to open
+      // Variant we set previously should be preselected
+      expect(find.text('Atomic'), findsOneWidget);
+    });
+
+    testWidgets('Continue OTB', (tester) async {
+      final app = await makeTestProviderScopeApp(tester, home: const BoardEditorScreen());
+      await tester.pumpWidget(app);
+
+      await tester.tap(find.bySemanticsLabel('Menu'));
+      await tester.pumpAndSettle(); // wait for menu to open
+      await tester.tap(find.text('Variant'));
+      await tester.pumpAndSettle(); // wait for variant selection dialog to open
+      await tester.tap(find.textContaining('Atomic'));
+      await tester.pumpAndSettle(); // wait for variant to change
+
+      await tester.tap(find.bySemanticsLabel('Menu'));
+      await tester.pumpAndSettle(); // wait for menu to open
+      await tester.tap(find.text('Continue from here'));
+      await tester.pumpAndSettle(); // wait for dialog to open
+
+      await tester.tap(find.text('Over the board'));
+      await tester.pumpAndSettle(); // wait for over the board menu to open
+      // Variant we set previously should be preselected
+      expect(find.textContaining('Atomic'), findsOneWidget);
+    });
+  });
+}
+
+Future<void> dragFromTo(WidgetTester tester, String from, String to) async {
+  final fromOffset = squareOffset(tester, Square.fromName(from));
+
+  await tester.dragFrom(fromOffset, squareOffset(tester, Square.fromName(to)) - fromOffset);
+  await tester.pumpAndSettle();
+}
+
+Future<void> panFromTo(WidgetTester tester, String from, String to) async {
+  final fromOffset = squareOffset(tester, Square.fromName(from));
+
+  await tester.timedDragFrom(
+    fromOffset,
+    squareOffset(tester, Square.fromName(to)) - fromOffset,
+    const Duration(seconds: 1),
+  );
+  await tester.pumpAndSettle();
+}
+
+Future<void> tapSquare(WidgetTester tester, String square) async {
+  await tester.tapAt(squareOffset(tester, Square.fromName(square)));
+  await tester.pumpAndSettle();
+}
+
+Offset squareOffset(WidgetTester tester, Square square) {
+  final editor = find.byType(ChessboardEditor);
+  final squareSize = tester.getSize(editor).width / 8;
+
+  return tester.getTopLeft(editor) +
+      Offset(
+        square.file.value * squareSize + squareSize / 2,
+        (7 - square.rank.value) * squareSize + squareSize / 2,
+      );
+}
