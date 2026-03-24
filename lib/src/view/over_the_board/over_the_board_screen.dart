@@ -332,7 +332,7 @@ class _BottomBar extends ConsumerWidget {
         ),
         if (!clock.timeIncrement.isInfinite)
           BottomBarButton(
-          label: clock.active ? context.l10n.pause : context.l10n.resume,
+            label: clock.active ? context.l10n.pause : context.l10n.resume,
             onTap: gameState.finished
                 ? null
                 : () {
