@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class LichessColors {
+class ChessigmaColors {
   // This class is not meant to be instantiated or extended; this constructor
   // prevents instantiation and extension.
-  LichessColors._();
+  ChessigmaColors._();
 
   // material colors palette generated with:
   // http://mmbitson.com

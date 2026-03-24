@@ -4,7 +4,7 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/styles/lichess_icons.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
 
 part 'chess.freezed.dart';
 part 'chess.g.dart';

@@ -52,7 +52,7 @@ class HttpClientFactory {
   final Client Function(Client client)? wrapper;
 
   Client _createClient() {
-    const userAgent = 'Lichess Mobile';
+    const userAgent = 'Chessigma Mobile';
     try {
       if (Platform.isAndroid) {
         final engine = CronetEngine.build(
@@ -178,7 +178,7 @@ final userAgentProvider = Provider<String>((Ref ref) {
 
 /// Creates a user-agent string with the app version, build number, and device info and possibly the user ID if a user is logged in.
 String makeUserAgent(PackageInfo info, BaseDeviceInfo deviceInfo, String sri, LightUser? user) {
-  final base = 'Lichess Mobile/${info.version} as:${user?.id ?? 'anon'} sri:$sri';
+  final base = 'Chessigma Mobile/${info.version} as:${user?.id ?? 'anon'} sri:$sri';
 
   if (deviceInfo is AndroidDeviceInfo) {
     return '$base os:Android/${deviceInfo.version.release} dev:${deviceInfo.model}';

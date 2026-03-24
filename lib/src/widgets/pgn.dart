@@ -8,7 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chessigma_mobile/src/model/account/account_preferences.dart';
 import 'package:chessigma_mobile/src/model/common/node.dart';
 import 'package:chessigma_mobile/src/model/common/uci.dart';
-import 'package:chessigma_mobile/src/styles/lichess_colors.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/utils/duration.dart';
 import 'package:chessigma_mobile/src/utils/l10n_context.dart';

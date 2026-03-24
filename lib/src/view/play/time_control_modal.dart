@@ -2,7 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:chessigma_mobile/src/model/common/time_increment.dart';
 import 'package:chessigma_mobile/src/model/lobby/game_setup_preferences.dart';
-import 'package:chessigma_mobile/src/styles/lichess_icons.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/utils/l10n_context.dart';
 import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';

@@ -11,7 +11,7 @@ import 'package:chessigma_mobile/src/model/common/eval.dart';
 import 'package:chessigma_mobile/src/model/engine/evaluation_preferences.dart';
 import 'package:chessigma_mobile/src/model/engine/evaluation_service.dart';
 import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/styles/lichess_colors.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
 import 'package:chessigma_mobile/src/view/analysis/game_analysis_board.dart';
 import 'package:chessigma_mobile/src/view/analysis/retro_screen.dart';
 import 'package:chessigma_mobile/src/view/study/study_screen.dart';

@@ -35,7 +35,7 @@ abstract class ChessigmaBinding {
     assert(() {
       if (instance == null) {
         throw FlutterError.fromParts([
-          ErrorSummary('Lichess binding has not yet been initialized.'),
+          ErrorSummary('Chessigma binding has not yet been initialized.'),
           ErrorHint(
             'In the app, this is done by the `AppChessigmaBinding.ensureInitialized()` call '
             'in the `void main()` method.',

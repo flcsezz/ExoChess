@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:chessigma_mobile/src/styles/lichess_icons.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 
 const _customOpacity = 0.6;

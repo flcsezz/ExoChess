@@ -12,7 +12,7 @@ import 'package:chessigma_mobile/src/model/message/message_repository.dart';
 import 'package:chessigma_mobile/src/model/user/user.dart';
 import 'package:chessigma_mobile/src/network/connectivity.dart';
 import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/styles/lichess_icons.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/utils/http_network_image.dart';
 import 'package:chessigma_mobile/src/utils/l10n_context.dart';

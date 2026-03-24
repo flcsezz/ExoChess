@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chessigma_mobile/src/constants.dart';
 import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
 import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
-import 'package:chessigma_mobile/src/styles/lichess_icons.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/utils/color_palette.dart';
 import 'package:chessigma_mobile/src/utils/l10n_context.dart';

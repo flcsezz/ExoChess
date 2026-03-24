@@ -20,7 +20,7 @@ import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
 import 'package:chessigma_mobile/src/model/settings/preferences_storage.dart';
 import 'package:chessigma_mobile/src/network/http.dart';
 import 'package:chessigma_mobile/src/network/socket.dart';
-import 'package:chessigma_mobile/src/styles/lichess_icons.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
 import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
 import 'package:chessigma_mobile/src/view/engine/engine_button.dart';
 import 'package:chessigma_mobile/src/view/engine/engine_gauge.dart';

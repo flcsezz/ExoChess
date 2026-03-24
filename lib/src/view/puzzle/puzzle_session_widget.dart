@@ -7,7 +7,7 @@ import 'package:chessigma_mobile/src/model/puzzle/puzzle_controller.dart';
 import 'package:chessigma_mobile/src/model/puzzle/puzzle_providers.dart';
 import 'package:chessigma_mobile/src/model/puzzle/puzzle_service.dart';
 import 'package:chessigma_mobile/src/model/puzzle/puzzle_session.dart';
-import 'package:chessigma_mobile/src/styles/lichess_colors.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
 import 'package:chessigma_mobile/src/utils/screen.dart';
 import 'package:chessigma_mobile/src/view/account/rating_pref_aware.dart';
 

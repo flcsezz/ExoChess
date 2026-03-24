@@ -14,7 +14,7 @@ import 'package:chessigma_mobile/src/model/puzzle/puzzle_repository.dart';
 import 'package:chessigma_mobile/src/model/puzzle/storm.dart';
 import 'package:chessigma_mobile/src/model/puzzle/storm_controller.dart';
 import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/styles/lichess_icons.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/utils/gestures_exclusion.dart';
 import 'package:chessigma_mobile/src/utils/immersive_mode.dart';

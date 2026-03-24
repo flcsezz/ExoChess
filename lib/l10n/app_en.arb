@@ -1,6 +1,6 @@
 {
   "mobileAccountPreferences": "Account preferences",
-  "mobileAccountPreferencesHelp": "These preferences are applied to your Lichess account and will be used across all devices.",
+  "mobileAccountPreferencesHelp": "These preferences are applied to your Chessigma account and will be used across all devices.",
   "mobileAllGames": "All games",
   "mobileAreYouSure": "Are you sure?",
   "mobileBoardSettings": "Board settings",
@@ -102,7 +102,7 @@
   },
   "mobileWaitingForOpponentToJoin": "Waiting for opponent to join...",
   "mobileWatchTab": "Watch",
-  "mobileWelcomeToLichessApp": "Welcome to Lichess app!",
+  "mobileWelcomeToChessigmaApp": "Welcome to Chessigma app!",
   "mobileViewGame": "View Game",
   "mobileCustomizeHomeTip": "Tip: You can add more widgets to the Home Screen or remove those you don't need!",
   "mobileCustomizeHomeTipDismiss": "Dismiss",
@@ -414,7 +414,7 @@
   "broadcastNewBroadcast": "New live broadcast",
   "broadcastSubscribedBroadcasts": "Subscribed broadcasts",
   "broadcastAboutBroadcasts": "About broadcasts",
-  "broadcastHowToUseLichessBroadcasts": "How to use Lichess Broadcasts.",
+  "broadcastHowToUseChessigmaBroadcasts": "How to use Chessigma Broadcasts.",
   "broadcastTheNewRoundHelp": "The new round will have the same members and contributors as the previous one.",
   "broadcastAddRound": "Add a round",
   "broadcastOngoing": "Ongoing",
@@ -435,8 +435,8 @@
     }
   },
   "broadcastSourceSingleUrl": "PGN Source URL",
-  "broadcastSourceUrlHelp": "URL that Lichess will check to get PGN updates. It must be publicly accessible from the Internet.",
-  "broadcastSourceGameIds": "Up to 64 Lichess game IDs, separated by spaces.",
+  "broadcastSourceUrlHelp": "URL that Chessigma will check to get PGN updates. It must be publicly accessible from the Internet.",
+  "broadcastSourceGameIds": "Up to 64 Chessigma game IDs, separated by spaces.",
   "broadcastStartDateTimeZone": "Start date in the tournament local timezone: {param}",
   "@broadcastStartDateTimeZone": {
     "placeholders": {
@@ -466,7 +466,7 @@
   "broadcastAge": "Age",
   "broadcastUnrated": "Unrated",
   "broadcastRecentTournaments": "Recent tournaments",
-  "broadcastOpenLichess": "Open in Lichess",
+  "broadcastOpenChessigma": "Open in Chessigma",
   "broadcastTeams": "Teams",
   "broadcastBoards": "Boards",
   "broadcastOverview": "Overview",
@@ -675,9 +675,9 @@
   "challengeDeclineVariant": "I'm not willing to play this variant right now.",
   "challengeDeclineNoBot": "I'm not accepting challenges from bots.",
   "challengeDeclineOnlyBot": "I'm only accepting challenges from bots.",
-  "challengeInviteLichessUser": "Or invite a Lichess user:",
+  "challengeInviteChessigmaUser": "Or invite a Chessigma user:",
   "contactContact": "Contact",
-  "contactContactLichess": "Contact Lichess",
+  "contactContactChessigma": "Contact Chessigma",
   "coordinatesCoordinates": "Coordinates",
   "coordinatesCoordinateTraining": "Coordinate training",
   "coordinatesAverageScoreAsWhiteX": "Average score as white: {param}",
@@ -712,8 +712,8 @@
   "coordinatesNameSquare": "Name square",
   "coordinatesPracticeOnlySomeFilesAndRanks": "Practice only some files & ranks",
   "patronDonate": "Donate",
-  "patronLichessPatron": "Lichess Patron",
-  "patronBecomePatron": "Become a Lichess Patron",
+  "patronChessigmaPatron": "Chessigma Patron",
+  "patronBecomePatron": "Become a Chessigma Patron",
   "perfStatPerfStats": "{param} stats",
   "@perfStatPerfStats": {
     "placeholders": {
@@ -831,7 +831,7 @@
   "preferencesZenMode": "Zen mode",
   "preferencesShowPlayerRatings": "Show player ratings",
   "preferencesShowFlairs": "Show player flairs",
-  "preferencesExplainShowPlayerRatings": "This hides all ratings from Lichess, to help focus on the chess. Rated games still impact your rating, this is only about what you get to see.",
+  "preferencesExplainShowPlayerRatings": "This hides all ratings from Chessigma, to help focus on the chess. Rated games still impact your rating, this is only about what you get to see.",
   "preferencesDisplayBoardResizeHandle": "Show board resize handle",
   "preferencesOnlyOnInitialPosition": "Only on initial position",
   "preferencesInGameOnly": "In-game only",
@@ -879,8 +879,8 @@
   "preferencesNotifyTournamentSoon": "Tournament starting soon",
   "preferencesNotifyBroadcasts": "Broadcasts you have subscribed to",
   "preferencesNotifyTimeAlarm": "Correspondence clock running out",
-  "preferencesNotifyBell": "Bell notification within Lichess",
-  "preferencesNotifyPush": "Device notification when you're not on Lichess",
+  "preferencesNotifyBell": "Bell notification within Chessigma",
+  "preferencesNotifyPush": "Device notification when you're not on Chessigma",
   "preferencesNotifyWeb": "Browser",
   "preferencesNotifyDevice": "Device",
   "preferencesBellNotificationSound": "Bell notification sound",
@@ -978,7 +978,7 @@
   "puzzleFromMyGames": "From my games",
   "puzzleLookupOfPlayer": "Lookup puzzles from a player's games",
   "puzzleSearchPuzzles": "Search puzzles",
-  "puzzleFromMyGamesNone": "You have no puzzles in the database, but Lichess still loves you very much.\n\nPlay rapid and classical games to increase your chances of having a puzzle of yours added!",
+  "puzzleFromMyGamesNone": "You have no puzzles in the database, but Chessigma still loves you very much.\n\nPlay rapid and classical games to increase your chances of having a puzzle of yours added!",
   "puzzlePuzzleDashboardDescription": "Train, analyse, improve",
   "puzzlePercentSolved": "{param} solved",
   "@puzzlePercentSolved": {
@@ -1461,9 +1461,9 @@
   "forgotPassword": "Forgot password?",
   "error_weakPassword": "This password is extremely common, and too easy to guess.",
   "error_namePassword": "Please don't use your username as your password.",
-  "blankedPassword": "You have used the same password on another site, and that site has been compromised. To ensure the safety of your Lichess account, we need you to set a new password. Thank you for your understanding.",
-  "youAreLeavingLichess": "You are leaving Lichess",
-  "neverTypeYourPassword": "Never type your Lichess password on another site!",
+  "blankedPassword": "You have used the same password on another site, and that site has been compromised. To ensure the safety of your Chessigma account, we need you to set a new password. Thank you for your understanding.",
+  "youAreLeavingChessigma": "You are leaving Chessigma",
+  "neverTypeYourPassword": "Never type your Chessigma password on another site!",
   "proceedToX": "Proceed to {param}",
   "@proceedToX": {
     "placeholders": {
@@ -1599,7 +1599,7 @@
   "freeOnlineChess": "Free Online Chess",
   "exportGames": "Export games",
   "ratingFilter": "Rating filter",
-  "thisAccountViolatedTos": "This account violated the Lichess Terms of Service",
+  "thisAccountViolatedTos": "This account violated the Chessigma Terms of Service",
   "openingExplorerAndTablebase": "Opening explorer & tablebase",
   "takeback": "Takeback",
   "proposeATakeback": "Propose a takeback",
@@ -1903,7 +1903,7 @@
   "inlineNotation": "Inline notation",
   "makeAStudy": "For safekeeping and sharing, consider making a study.",
   "clearSavedMoves": "Clear moves",
-  "previouslyOnLichessTV": "Previously on Lichess TV",
+  "previouslyOnChessigmaTV": "Previously on Chessigma TV",
   "onlinePlayers": "Online players",
   "activePlayers": "Active players",
   "bewareTheGameIsRatedButHasNoClock": "Beware, the game is rated but has no clock!",
@@ -2195,7 +2195,7 @@
   "simulHostExtraTime": "Host extra initial clock time",
   "simulAddExtraTimePerPlayer": "Add initial time to your clock for each player joining the simul.",
   "simulHostExtraTimePerPlayer": "Host extra clock time per player",
-  "lichessTournaments": "Lichess tournaments",
+  "lichessTournaments": "Chessigma tournaments",
   "tournamentFAQ": "Arena tournament FAQ",
   "timeBeforeTournamentStarts": "Time before tournament starts",
   "averageCentipawnLoss": "Average centipawn loss",
@@ -2325,8 +2325,8 @@
       }
     }
   },
-  "networkLagBetweenYouAndLichess": "Network lag between you and Lichess",
-  "timeToProcessAMoveOnLichessServer": "Time to process a move on Lichess's server",
+  "networkLagBetweenYouAndChessigma": "Network lag between you and Chessigma",
+  "timeToProcessAMoveOnChessigmaServer": "Time to process a move on Chessigma's server",
   "downloadAnnotated": "Download annotated",
   "downloadRaw": "Download raw",
   "downloadImported": "Download imported",
@@ -2345,8 +2345,8 @@
   "kidMode": "Kid mode",
   "kidModeIsEnabled": "Kid mode is enabled.",
   "kidModeExplanation": "This is about safety. In kid mode, all site communications are disabled. Enable this for your children and school students, to protect them from other internet users.",
-  "inKidModeTheLichessLogoGetsIconX": "In kid mode, the Lichess logo gets a {param} icon, so you know your kids are safe.",
-  "@inKidModeTheLichessLogoGetsIconX": {
+  "inKidModeTheChessigmaLogoGetsIconX": "In kid mode, the Chessigma logo gets a {param} icon, so you know your kids are safe.",
+  "@inKidModeTheChessigmaLogoGetsIconX": {
     "placeholders": {
       "param": {
         "type": "String"
@@ -2539,7 +2539,7 @@
       }
     }
   },
-  "showUnreadChessigmaMessage": "You have received a private message from Lichess.",
+  "showUnreadChessigmaMessage": "You have received a private message from Chessigma.",
   "clickHereToReadIt": "Click here to read it",
   "sorry": "Sorry :(",
   "weHadToTimeYouOutForAWhile": "We had to time you out for a while.",
@@ -2566,7 +2566,7 @@
       }
     }
   },
-  "agreementPolicy": "I agree that I will follow all Lichess policies.",
+  "agreementPolicy": "I agree that I will follow all Chessigma policies.",
   "searchOrStartNewDiscussion": "Search or start new conversation",
   "edit": "Edit",
   "ultraBullet": "UltraBullet",
@@ -2706,7 +2706,7 @@
       }
     }
   },
-  "lostAgainstTOSViolator": "You lost rating points to someone who violated the Lichess TOS",
+  "lostAgainstTOSViolator": "You lost rating points to someone who violated the Chessigma TOS",
   "refundXpointsTimeControlY": "Refund: {param1} {param2} rating points.",
   "@refundXpointsTimeControlY": {
     "placeholders": {
@@ -2802,13 +2802,13 @@
   "youCantStartNewGame": "You can't start a new game until this one is finished.",
   "since": "Since",
   "until": "Until",
-  "lichessDbExplanation": "Rated games played on Lichess",
+  "lichessDbExplanation": "Rated games played on Chessigma",
   "switchSides": "Switch sides",
   "closingAccountWithdrawAppeal": "Closing your account will withdraw your appeal",
   "ourEventTips": "Our tips for organising events",
   "instructions": "Instructions",
   "showMeEverything": "Show me everything",
-  "lichessPatronInfo": "Lichess is a charity and entirely free/libre open source software.\nAll operating costs, development, and content are funded solely by user donations.",
+  "lichessPatronInfo": "Chessigma is a charity and entirely free/libre open source software.\nAll operating costs, development, and content are funded solely by user donations.",
   "nothingToSeeHere": "Nothing to see here at the moment.",
   "stats": "Stats",
   "accessibility": "Accessibility",
@@ -3284,7 +3284,7 @@
       }
     }
   },
-  "streamerLichessStreamers": "Lichess streamers",
+  "streamerChessigmaStreamers": "Chessigma streamers",
   "studyPrivate": "Private",
   "studyMyStudies": "My studies",
   "studyStudiesIContributeTo": "Studies I contribute to",
@@ -3346,7 +3346,7 @@
   "studyDownloadGame": "Download game",
   "studyStudyUrl": "Study URL",
   "studyCurrentChapterUrl": "Current chapter URL",
-  "studyYouCanPasteThisInTheForumToEmbed": "You can paste this in the forum or your Lichess blog to embed",
+  "studyYouCanPasteThisInTheForumToEmbed": "You can paste this in the forum or your Chessigma blog to embed",
   "studyStartAtInitialPosition": "Start at initial position",
   "studyStartAtX": "Start at {param}",
   "@studyStartAtX": {
@@ -3488,8 +3488,8 @@
     }
   },
   "studyGetTheTour": "Need help? Get the tour!",
-  "studyWelcomeToLichessStudyTitle": "Welcome to Lichess Study!",
-  "studyWelcomeToLichessStudyText": "This is a shared analysis board.<br><br>Use it to analyse and annotate games,<br>discuss positions with friends,<br>and of course for chess lessons!<br><br>It's a powerful tool, let's take some time to see how it works.",
+  "studyWelcomeToChessigmaStudyTitle": "Welcome to Chessigma Study!",
+  "studyWelcomeToChessigmaStudyText": "This is a shared analysis board.<br><br>Use it to analyse and annotate games,<br>discuss positions with friends,<br>and of course for chess lessons!<br><br>It's a powerful tool, let's take some time to see how it works.",
   "studySharedAndSaveTitle": "Shared and saved",
   "studySharedAndSavedText": "Other members can see your moves in real time!<br>Plus, everything is saved forever.",
   "studyStudyMembersTitle": "Study members",
@@ -3533,8 +3533,8 @@
   "studyFromInitialPositionText": "Just a board setup for a new game.<br>Suited to explore openings.",
   "studyCustomPositionTitle": "Custom position",
   "studyCustomPositionText": "Setup the board your way.<br>Suited to explore endgames.",
-  "studyLoadExistingLichessGameTitle": "Load an existing lichess game",
-  "studyLoadExistingLichessGameText": "Paste a lichess game URL<br>(like lichess.org/7fHIU0XI)<br>to load the game moves in the chapter.",
+  "studyLoadExistingChessigmaGameTitle": "Load an existing lichess game",
+  "studyLoadExistingChessigmaGameText": "Paste a lichess game URL<br>(like lichess.org/7fHIU0XI)<br>to load the game moves in the chapter.",
   "studyFromFenStringTitle": "From a FEN string",
   "studyFromFenStringText": "Paste a position in FEN format<br><i>4k3/4rb2/8/7p/8/5Q2/1PP5/1K6 w</i><br>to start the chapter from a position.",
   "studyFromPgnGameTitle": "From a PGN game",

@@ -17,7 +17,7 @@ import 'package:chessigma_mobile/src/model/game/game_preferences.dart';
 import 'package:chessigma_mobile/src/model/game/playable_game.dart';
 import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
 import 'package:chessigma_mobile/src/model/user/user_repository_providers.dart';
-import 'package:chessigma_mobile/src/styles/lichess_icons.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
 import 'package:chessigma_mobile/src/utils/chessboard.dart';
 import 'package:chessigma_mobile/src/utils/focus_detector.dart';
 import 'package:chessigma_mobile/src/utils/gestures_exclusion.dart';

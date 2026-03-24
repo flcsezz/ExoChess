@@ -122,18 +122,18 @@ flutter:
     - assets/endgames.json
 
   fonts:
-    - family: LichessIcons
+    - family: ChessigmaIcons
       fonts:
-        - asset: assets/fonts/LichessIcons.ttf
+        - asset: assets/fonts/ChessigmaIcons.ttf
     - family: SocialIcons
       fonts:
         - asset: assets/fonts/SocialIcons.ttf
     - family: ChessFont
       fonts:
         - asset: assets/fonts/ChessSansPiratf.ttf
-    - family: LichessPuzzleIcons
+    - family: ChessigmaPuzzleIcons
       fonts:
-        - asset: assets/fonts/PuzzleIcons.ttf
+        - asset: assets/fonts/ChessigmaPuzzleIcons.ttf
 
   # Enable generation of localized Strings from arb files.
   generate: true

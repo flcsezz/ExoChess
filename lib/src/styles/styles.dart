@@ -1,6 +1,6 @@
 import 'package:dynamic_system_colors/dynamic_system_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/styles/lichess_colors.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
 
 // ignore: avoid_classes_with_only_static_members
 abstract class Styles {

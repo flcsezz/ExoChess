@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:chessigma_mobile/src/constants.dart';
 import 'package:chessigma_mobile/src/model/common/perf.dart';
 import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/styles/lichess_icons.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/view/account/rating_pref_aware.dart';
 import 'package:chessigma_mobile/src/view/puzzle/storm_dashboard.dart';

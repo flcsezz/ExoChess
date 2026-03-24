@@ -5,7 +5,7 @@ import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
 import 'package:chessigma_mobile/src/model/study/study.dart';
 import 'package:chessigma_mobile/src/model/study/study_filter.dart';
 import 'package:chessigma_mobile/src/model/study/study_list_paginator.dart';
-import 'package:chessigma_mobile/src/styles/lichess_icons.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/utils/l10n.dart';
 import 'package:chessigma_mobile/src/utils/l10n_context.dart';

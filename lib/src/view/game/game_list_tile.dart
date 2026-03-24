@@ -10,7 +10,7 @@ import 'package:chessigma_mobile/src/model/game/game_share_service.dart';
 import 'package:chessigma_mobile/src/model/game/game_status.dart';
 import 'package:chessigma_mobile/src/model/game/gif_export.dart';
 import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/styles/lichess_colors.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/utils/l10n.dart';
 import 'package:chessigma_mobile/src/utils/l10n_context.dart';

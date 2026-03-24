@@ -3,7 +3,7 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';
 import 'package:chessigma_mobile/src/model/common/chess.dart';
 import 'package:chessigma_mobile/src/model/common/speed.dart';
-import 'package:chessigma_mobile/src/styles/lichess_icons.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
 
 /// Represents a lichess rating perf item
 enum Perf {

@@ -14,7 +14,7 @@ import 'package:chessigma_mobile/src/network/http.dart';
 import 'package:logging/logging.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-const kOAuthRedirectUriScheme = 'org.lichess.mobile';
+const kOAuthRedirectUriScheme = 'org.chessigma.mobile';
 const kOAuthRedirectUriHost = 'login-callback';
 const kOAuthRedirectUri = '$kOAuthRedirectUriScheme://$kOAuthRedirectUriHost';
 const oauthScopes = ['web:mobile'];

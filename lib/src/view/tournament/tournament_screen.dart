@@ -20,7 +20,7 @@ import 'package:chessigma_mobile/src/model/tournament/tournament_providers.dart'
 import 'package:chessigma_mobile/src/model/tournament/tournament_repository.dart';
 import 'package:chessigma_mobile/src/model/user/user.dart';
 import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/styles/lichess_icons.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/tab_scaffold.dart';
 import 'package:chessigma_mobile/src/theme.dart';

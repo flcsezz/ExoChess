@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:chessigma_mobile/src/model/common/chess.dart';
 import 'package:chessigma_mobile/src/model/tournament/tournament.dart';
 import 'package:chessigma_mobile/src/model/tournament/tournament_providers.dart';
-import 'package:chessigma_mobile/src/styles/lichess_colors.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/utils/focus_detector.dart';
 import 'package:chessigma_mobile/src/utils/l10n_context.dart';
