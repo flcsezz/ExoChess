@@ -25,7 +25,13 @@ class DefaultFirebaseOptions {
 
 typedef BackgroundMessageHandler = Future<void> Function(RemoteMessage message);
 
-enum AuthorizationStatus { notDetermined, denied, authorized, provisional, ephemeral }
+enum AuthorizationStatus {
+  notDetermined,
+  denied,
+  authorized,
+  provisional,
+  ephemeral,
+}
 
 class NotificationSettings {
   final AuthorizationStatus authorizationStatus;

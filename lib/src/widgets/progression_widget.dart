@@ -18,9 +18,7 @@ class ProgressionWidget extends StatelessWidget {
       children: [
         if (progress != 0) ...[
           Icon(
-            progress > 0
-                ? ChessigmaIcons.arrow_full_upperright
-                : ChessigmaIcons.arrow_full_lowerright,
+            progress > 0 ? ChessigmaIcons.arrow_full_upperright : ChessigmaIcons.arrow_full_lowerright,
             size: fontSize,
             color: progress > 0 ? context.chessigmaColors.good : context.chessigmaColors.error,
           ),

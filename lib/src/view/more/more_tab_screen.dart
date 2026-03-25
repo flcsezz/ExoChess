@@ -26,7 +26,10 @@ class MoreTabScreen extends ConsumerWidget {
     final isOnline = ref.watch(connectivityChangesProvider).value?.isOnline ?? true;
 
     return PlatformScaffold(
-      appBar: PlatformAppBar(title: Text(context.l10n.more), leading: const SettingsIconButton()),
+      appBar: PlatformAppBar(
+        title: Text(context.l10n.more),
+        leading: const SettingsIconButton(),
+      ),
       body: ListView(
         children: [
           ListSection(
@@ -76,10 +79,10 @@ class MoreTabScreen extends ConsumerWidget {
                     : null,
                 onTap: () {
                   Navigator.of(context, rootNavigator: true).push(
-                    BoardEditorScreen.buildRoute(context, const (
-                      initialVariant: Variant.standard,
-                      initialFen: null,
-                    )),
+                    BoardEditorScreen.buildRoute(
+                      context,
+                      const (initialVariant: Variant.standard, initialFen: null),
+                    ),
                   );
                 },
               ),
@@ -90,10 +93,7 @@ class MoreTabScreen extends ConsumerWidget {
                     ? const CupertinoListTileChevron()
                     : null,
                 onTap: () {
-                  Navigator.of(
-                    context,
-                    rootNavigator: true,
-                  ).push(ImportPgnScreen.buildRoute(context));
+                  Navigator.of(context, rootNavigator: true).push(ImportPgnScreen.buildRoute(context));
                 },
               ),
               ListTile(

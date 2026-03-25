@@ -120,10 +120,11 @@ class NotificationService {
     );
 
     // Listen for token refresh and update the token on the server accordingly.
-    _fcmTokenRefreshSubscription = ChessigmaBinding.instance.firebaseMessaging.onTokenRefresh
-        .listen((String token) {
-          _registerToken(token);
-        });
+    _fcmTokenRefreshSubscription = ChessigmaBinding.instance.firebaseMessaging.onTokenRefresh.listen((
+      String token,
+    ) {
+      _registerToken(token);
+    });
 
     // listen for connectivity changes to register device once the app is online
     // This needs to be done *after* via have gotten permission, otherwise on iOS
@@ -149,9 +150,7 @@ class NotificationService {
     }
 
     // Handle any other interaction that caused the app to open when in background.
-    ChessigmaBinding.instance.firebaseMessagingOnMessageOpenedApp.listen(
-      _handleFcmMessageOpenedApp,
-    );
+    ChessigmaBinding.instance.firebaseMessagingOnMessageOpenedApp.listen(_handleFcmMessageOpenedApp);
   }
 
   /// Shows a notification.

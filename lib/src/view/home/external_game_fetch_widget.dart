@@ -90,9 +90,7 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
             TextField(
               controller: _usernameController,
               decoration: InputDecoration(
-                hintText: _selectedSource == ExternalSource.chesscom
-                    ? 'MagnusCarlsen'
-                    : 'DrNykterstein',
+                hintText: _selectedSource == ExternalSource.chesscom ? 'MagnusCarlsen' : 'DrNykterstein',
                 filled: true,
                 fillColor: inputBgColor,
                 border: OutlineInputBorder(
@@ -110,7 +108,9 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
                 style: ElevatedButton.styleFrom(
                   backgroundColor: accentColor,
                   foregroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
                 child: const Text(
                   'Fetch Recent Games',
@@ -178,7 +178,9 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
                 style: ElevatedButton.styleFrom(
                   backgroundColor: accentColor,
                   foregroundColor: Colors.black,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
                 ),
                 child: const Text(
                   'Import PGN Games',
@@ -190,7 +192,10 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
 
           const SizedBox(height: 16),
           if (!_isPgnSelected)
-            const Text('Try it out:', style: TextStyle(color: Colors.grey, fontSize: 12))
+            const Text(
+              'Try it out:',
+              style: TextStyle(color: Colors.grey, fontSize: 12),
+            )
           else
             const Text(
               'You can paste one or multiple PGN games to import them',
@@ -263,9 +268,9 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text('Error loading file: $e')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error loading file: $e')),
+        );
       }
     }
   }
@@ -294,9 +299,7 @@ class _SourceCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surfaceContainerHigh,
           borderRadius: BorderRadius.circular(12),
-          border: isSelected
-              ? Border.all(color: accentColor, width: 2)
-              : Border.all(color: Colors.grey.withAlpha(50)),
+          border: isSelected ? Border.all(color: accentColor, width: 2) : Border.all(color: Colors.grey.withAlpha(50)),
         ),
         child: Stack(
           children: [
@@ -324,7 +327,10 @@ class _SourceCard extends StatelessWidget {
                 child: Container(
                   width: 6,
                   height: 6,
-                  decoration: BoxDecoration(color: accentColor, shape: BoxShape.circle),
+                  decoration: BoxDecoration(
+                    color: accentColor,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
           ],
@@ -335,7 +341,11 @@ class _SourceCard extends StatelessWidget {
 }
 
 class _TryItOutAvatar extends StatelessWidget {
-  const _TryItOutAvatar({required this.name, required this.imageUrl, required this.onTap});
+  const _TryItOutAvatar({
+    required this.name,
+    required this.imageUrl,
+    required this.onTap,
+  });
 
   final String name;
   final String imageUrl;
@@ -355,9 +365,15 @@ class _TryItOutAvatar extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircleAvatar(radius: 10, backgroundImage: AssetImage(imageUrl)),
+            CircleAvatar(
+              radius: 10,
+              backgroundImage: AssetImage(imageUrl),
+            ),
             const SizedBox(width: 6),
-            Text(name, style: const TextStyle(fontSize: 11, color: Colors.white70)),
+            Text(
+              name,
+              style: const TextStyle(fontSize: 11, color: Colors.white70),
+            ),
           ],
         ),
       ),

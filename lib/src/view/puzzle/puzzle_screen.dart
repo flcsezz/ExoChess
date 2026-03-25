@@ -773,9 +773,7 @@ class _BottomBarState extends ConsumerState<_BottomBar> {
           onPressed: () {
             launchShareDialog(
               context,
-              ShareParams(
-                text: chessigmaUri('/training/${puzzleState.puzzle.puzzle.id}').toString(),
-              ),
+              ShareParams(text: chessigmaUri('/training/${puzzleState.puzzle.puzzle.id}').toString()),
             );
           },
         ),

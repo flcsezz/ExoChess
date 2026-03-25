@@ -25,7 +25,10 @@ class PlayMenu extends StatelessWidget {
         ListTile(
           onTap: () {
             Navigator.of(context).popUntil((route) => route is! ModalBottomSheetRoute);
-            Navigator.of(context, rootNavigator: true).push(OverTheBoardScreen.buildRoute(context));
+            Navigator.of(
+              context,
+              rootNavigator: true,
+            ).push(OverTheBoardScreen.buildRoute(context));
           },
           leading: const Icon(Icons.table_restaurant_outlined),
           title: Text(context.l10n.mobileOverTheBoard),

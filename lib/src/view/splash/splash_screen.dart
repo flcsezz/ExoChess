@@ -11,7 +11,11 @@ import 'package:flutter/material.dart';
 ///
 /// The widget stays visible until [isReady] becomes true, then fades out.
 class ChessigmaSplashScreen extends StatefulWidget {
-  const ChessigmaSplashScreen({super.key, required this.isReady, required this.child});
+  const ChessigmaSplashScreen({
+    super.key,
+    required this.isReady,
+    required this.child,
+  });
 
   final bool isReady;
   final Widget child;
@@ -31,11 +35,13 @@ class _ChessigmaSplashScreenState extends State<ChessigmaSplashScreen>
   void initState() {
     super.initState();
 
-    _exitCtrl = AnimationController(vsync: this, duration: const Duration(milliseconds: 300));
-    _exitOpacity = Tween<double>(
-      begin: 1.0,
-      end: 0.0,
-    ).animate(CurvedAnimation(parent: _exitCtrl, curve: Curves.easeIn));
+    _exitCtrl = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _exitOpacity = Tween<double>(begin: 1.0, end: 0.0).animate(
+      CurvedAnimation(parent: _exitCtrl, curve: Curves.easeIn),
+    );
 
     if (widget.isReady) {
       _runExit();
@@ -70,7 +76,10 @@ class _ChessigmaSplashScreenState extends State<ChessigmaSplashScreen>
     return Stack(
       children: [
         widget.child,
-        FadeTransition(opacity: _exitOpacity, child: const _SplashContent()),
+        FadeTransition(
+          opacity: _exitOpacity,
+          child: const _SplashContent(),
+        ),
       ],
     );
   }
@@ -91,7 +100,11 @@ class _SplashContent extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/images/chessigma-logo.png', width: 140, height: 140),
+            Image.asset(
+              'assets/images/chessigma-logo.png',
+              width: 140,
+              height: 140,
+            ),
             const SizedBox(height: 24),
             ShaderMask(
               shaderCallback: (bounds) => const LinearGradient(
@@ -116,7 +129,10 @@ class _SplashContent extends StatelessWidget {
                 Container(width: 40, height: 1, color: _gold.withAlpha(128)),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Text('Σ', style: TextStyle(color: _gold, fontSize: 18, height: 1)),
+                  child: Text(
+                    'Σ',
+                    style: TextStyle(color: _gold, fontSize: 18, height: 1),
+                  ),
                 ),
                 Container(width: 40, height: 1, color: _gold.withAlpha(128)),
               ],

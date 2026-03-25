@@ -77,10 +77,8 @@ class _UserScreenState extends ConsumerState<UserScreen> {
           SemanticIconButton(
             icon: const PlatformShareIcon(),
             semanticsLabel: 'Share profile',
-            onPressed: () => launchShareDialog(
-              context,
-              ShareParams(uri: chessigmaUri('/@/${widget.user.name}')),
-            ),
+            onPressed: () =>
+                launchShareDialog(context, ShareParams(uri: chessigmaUri('/@/${widget.user.name}'))),
           ),
         ],
       ),

@@ -92,10 +92,9 @@ ExternalGameHistoryItem _convertPgnGameToExternalItemStatic(
     opening = ExternalLightOpening(eco: eco, name: openingName);
   }
 
-  final gameId =
-      headers['Site']?.replaceAll('https://lichess.org/', '') ??
-      headers['Id'] ??
-      DateTime.now().millisecondsSinceEpoch.toString();
+  final gameId = headers['Site']?.replaceAll('https://lichess.org/', '') ??
+                 headers['Id'] ??
+                 DateTime.now().millisecondsSinceEpoch.toString();
 
   final pgn = _extractGamePgnStatic(fullPgnText, gameIndex);
 
@@ -193,9 +192,9 @@ GameStatus _parseGameStatusStatic(String result) {
 
 final externalUserHistoryProvider = AsyncNotifierProvider.autoDispose
     .family<ExternalUserHistoryNotifier, IList<ExternalGameHistoryItem>, ExternalUserHistoryParams>(
-      ExternalUserHistoryNotifier.new,
-      name: 'ExternalUserHistoryProvider',
-    );
+  ExternalUserHistoryNotifier.new,
+  name: 'ExternalUserHistoryProvider',
+);
 
 class ExternalUserHistoryNotifier extends AsyncNotifier<IList<ExternalGameHistoryItem>> {
   ExternalUserHistoryNotifier(this.params);
@@ -246,7 +245,10 @@ class ExternalUserHistoryNotifier extends AsyncNotifier<IList<ExternalGameHistor
     state = const AsyncLoading();
 
     try {
-      final games = await _fetchGames(max: _nbPerPage, untilGameIndex: _games.length - 1);
+      final games = await _fetchGames(
+        max: _nbPerPage,
+        untilGameIndex: _games.length - 1,
+      );
 
       if (games.isEmpty) {
         _hasMore = false;
@@ -270,7 +272,9 @@ class ExternalUserHistoryNotifier extends AsyncNotifier<IList<ExternalGameHistor
   }) async {
     final client = ref.read(defaultClientProvider);
 
-    final queryParams = <String, String>{'max': (max ?? 20).toString()};
+    final queryParams = <String, String>{
+      'max': (max ?? 20).toString(),
+    };
 
     if (untilGameIndex != null) {
       queryParams['until'] = (untilGameIndex + 1).toString();
@@ -373,29 +377,25 @@ class ExternalUserHistoryNotifier extends AsyncNotifier<IList<ExternalGameHistor
         } catch (_) {}
       }
 
-      final gameId =
-          (gameData['url'] as String?)?.split('/').last ??
-          DateTime.now().millisecondsSinceEpoch.toString();
+      final gameId = (gameData['url'] as String?)?.split('/').last ?? DateTime.now().millisecondsSinceEpoch.toString();
 
-      items.add(
-        ExternalGameHistoryItem(
-          source: ExternalSource.chesscom,
-          username: username,
-          externalGameId: gameId,
-          pgn: pgn,
-          players: ExternalGamePlayers(
-            white: ExternalPlayer(name: whiteName, rating: whiteRating),
-            black: ExternalPlayer(name: blackName, rating: blackRating),
-          ),
-          createdAt: createdAt ?? DateTime.now(),
-          status: _parseGameStatusStatic(result),
-          variant: Variant.standard,
-          speed: Speed.blitz,
-          perf: Perf.blitz,
-          rated: headers['Event']?.contains('Rated') ?? true,
-          winner: _parseWinnerStatic(result),
+      items.add(ExternalGameHistoryItem(
+        source: ExternalSource.chesscom,
+        username: username,
+        externalGameId: gameId,
+        pgn: pgn,
+        players: ExternalGamePlayers(
+          white: ExternalPlayer(name: whiteName, rating: whiteRating),
+          black: ExternalPlayer(name: blackName, rating: blackRating),
         ),
-      );
+        createdAt: createdAt ?? DateTime.now(),
+        status: _parseGameStatusStatic(result),
+        variant: Variant.standard,
+        speed: Speed.blitz,
+        perf: Perf.blitz,
+        rated: headers['Event']?.contains('Rated') ?? true,
+        winner: _parseWinnerStatic(result),
+      ));
 
       if (max != null && items.length >= max) break;
     }
@@ -406,19 +406,16 @@ class ExternalUserHistoryNotifier extends AsyncNotifier<IList<ExternalGameHistor
 
 final externalGameDetailsProvider = FutureProvider.autoDispose
     .family<ExternalGameHistoryItem, ExternalGameDetailsParams>((ref, params) {
-      final client = ref.read(defaultClientProvider);
-      switch (params.source) {
-        case ExternalSource.lichess:
-          return _fetchLichessGameDetails(client, params.externalGameId);
-        case ExternalSource.chesscom:
-          return _fetchChessComGameDetails(client, params.externalGameId, params.username);
-      }
-    });
+  final client = ref.read(defaultClientProvider);
+  switch (params.source) {
+    case ExternalSource.lichess:
+      return _fetchLichessGameDetails(client, params.externalGameId);
+    case ExternalSource.chesscom:
+      return _fetchChessComGameDetails(client, params.externalGameId, params.username);
+  }
+});
 
-Future<ExternalGameHistoryItem> _fetchLichessGameDetails(
-  Client client,
-  String externalGameId,
-) async {
+Future<ExternalGameHistoryItem> _fetchLichessGameDetails(Client client, String externalGameId) async {
   final uri = Uri.https('lichess.org', '/game/export/$externalGameId');
 
   final response = await client.get(uri);

@@ -119,9 +119,7 @@ class _Progress extends StatelessWidget {
         Text(rating.toString(), maxLines: 1),
         const SizedBox(width: 5),
         Icon(
-          progress > 0
-              ? ChessigmaIcons.arrow_full_upperright
-              : ChessigmaIcons.arrow_full_lowerright,
+          progress > 0 ? ChessigmaIcons.arrow_full_upperright : ChessigmaIcons.arrow_full_lowerright,
           size: 16,
           color: progress > 0 ? context.chessigmaColors.good : context.chessigmaColors.error,
         ),

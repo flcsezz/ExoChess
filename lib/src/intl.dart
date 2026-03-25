@@ -18,9 +18,7 @@ Future<Locale> setupIntl(WidgetsBinding widgetsBinding) async {
   final systemLocale = getSystemLocale(widgetsBinding);
 
   // Get locale from shared preferences, if any
-  final json = ChessigmaBinding.instance.sharedPreferences.getString(
-    PrefCategory.general.storageKey,
-  );
+  final json = ChessigmaBinding.instance.sharedPreferences.getString(PrefCategory.general.storageKey);
   final generalPref = json != null
       ? GeneralPrefs.fromJson(jsonDecode(json) as Map<String, dynamic>)
       : GeneralPrefs.defaults;
