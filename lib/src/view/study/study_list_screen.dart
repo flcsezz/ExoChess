@@ -221,7 +221,7 @@ class _StudyListScreenState extends ConsumerState<StudyListScreen> {
       ),
       body: switch (studiesAsync) {
         AsyncData(value: final studies) => ListView.separated(
-          shrinkWrap: true,
+          // Optimization: shrinkWrap is removed to improve layout performance.
           itemCount: studies.studies.length + 1,
           controller: _scrollController,
           separatorBuilder: (context, index) => index == 0

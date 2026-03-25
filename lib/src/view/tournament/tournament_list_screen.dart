@@ -221,7 +221,7 @@ class _TournamentListBodyState extends ConsumerState<_TournamentListBody> {
       key: _refreshIndicatorKey,
       onRefresh: () async => ref.refresh(tournamentsProvider),
       child: ListView.separated(
-        shrinkWrap: true,
+        // Optimization: shrinkWrap is removed to improve layout performance.
         itemCount: tournamentListItems.length,
         separatorBuilder: (context, index) => Theme.of(context).platform == TargetPlatform.iOS
             ? const PlatformDivider(height: 1, cupertinoHasLeading: true)

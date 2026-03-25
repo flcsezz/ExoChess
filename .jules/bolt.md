@@ -1,0 +1,3 @@
+## 2025-05-15 - [Remove redundant shrinkWrap: true]
+**Learning:** `shrinkWrap: true` is a performance bottleneck in Flutter. It forces the scroll view to calculate the total size of its children during layout, disabling lazy loading and potentially causing multiple layout passes. In most cases where a `ListView` or `GridView` is the main content of a `Scaffold` or is wrapped in a sized container, `shrinkWrap: true` is unnecessary.
+**Action:** Always check if a scrollable really needs `shrinkWrap: true`. If the parent provides bounded constraints (like a `Scaffold` body or a `SizedBox` with fixed height), remove it.

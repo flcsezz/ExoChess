@@ -45,7 +45,8 @@ Future<void> showChoicePicker<T>(
                       ? SizedBox(
                           width: double.maxFinite,
                           height: deviceHeight * 0.6,
-                          child: ListView(shrinkWrap: true, children: choiceWidgets),
+                          // Optimization: shrinkWrap is removed to improve layout performance.
+                          child: ListView(children: choiceWidgets),
                         )
                       : ListBody(children: choiceWidgets),
                 );
