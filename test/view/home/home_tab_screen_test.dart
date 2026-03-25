@@ -317,7 +317,8 @@ void main() {
       ) async {
         final app = await makeTestProviderScope(tester, child: const Application());
 
-        TestChessigmaBinding.instance.numAppStarts = kColdAppStartsHideCustomizationTipThreshold + 1;
+        TestChessigmaBinding.instance.numAppStarts =
+            kColdAppStartsHideCustomizationTipThreshold + 1;
 
         await tester.pumpWidget(app);
 

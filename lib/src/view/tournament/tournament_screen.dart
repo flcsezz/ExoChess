@@ -1333,7 +1333,11 @@ class _TournamentPlayerDetails extends ConsumerWidget {
                         label: context.l10n.stormScore,
                         value: '${player.score}',
                         prefix: player.fire
-                            ? Icon(ChessigmaIcons.blitz, size: 15, color: context.chessigmaColors.brag)
+                            ? Icon(
+                                ChessigmaIcons.blitz,
+                                size: 15,
+                                color: context.chessigmaColors.brag,
+                              )
                             : null,
                       ),
                       if (player.performance != null)

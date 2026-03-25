@@ -88,7 +88,10 @@ class _ChessigmaMessageState extends State<ChessigmaMessage> {
 
   @override
   Widget build(BuildContext context) {
-    final trans = context.l10n.xIsAFreeYLibreOpenSourceChessServer('Chessigma', context.l10n.really);
+    final trans = context.l10n.xIsAFreeYLibreOpenSourceChessServer(
+      'Chessigma',
+      context.l10n.really,
+    );
     final regexp = RegExp(r'''^([^(]*\()([^)]*)(\).*)$''');
     final match = regexp.firstMatch(trans);
     final List<TextSpan> spans = [];

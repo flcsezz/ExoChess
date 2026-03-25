@@ -12,10 +12,7 @@ import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
 final _dateFormatter = DateFormat.yMMMd().add_Hm();
 
 class ExternalGameHistoryTile extends StatelessWidget {
-  const ExternalGameHistoryTile({
-    required this.item,
-    super.key,
-  });
+  const ExternalGameHistoryTile({required this.item, super.key});
 
   final ExternalGameHistoryItem item;
 
@@ -31,8 +28,8 @@ class ExternalGameHistoryTile extends StatelessWidget {
         return item.winner == null
             ? Icon(CupertinoIcons.equal_square_fill, color: context.chessigmaColors.brag)
             : item.winner == pov
-                ? Icon(CupertinoIcons.plus_square_fill, color: context.chessigmaColors.good)
-                : Icon(CupertinoIcons.minus_square_fill, color: context.chessigmaColors.error);
+            ? Icon(CupertinoIcons.plus_square_fill, color: context.chessigmaColors.good)
+            : Icon(CupertinoIcons.minus_square_fill, color: context.chessigmaColors.error);
       }
     }
 

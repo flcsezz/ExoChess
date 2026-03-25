@@ -133,10 +133,7 @@ class ExternalGamePlayers {
   final ExternalPlayer white;
   final ExternalPlayer black;
 
-  const ExternalGamePlayers({
-    required this.white,
-    required this.black,
-  });
+  const ExternalGamePlayers({required this.white, required this.black});
 }
 
 class ExternalPlayer {
@@ -144,31 +141,21 @@ class ExternalPlayer {
   final int? rating;
   final int? ratingDiff;
 
-  const ExternalPlayer({
-    this.name,
-    this.rating,
-    this.ratingDiff,
-  });
+  const ExternalPlayer({this.name, this.rating, this.ratingDiff});
 }
 
 class ExternalLightOpening {
   final String eco;
   final String name;
 
-  const ExternalLightOpening({
-    required this.eco,
-    required this.name,
-  });
+  const ExternalLightOpening({required this.eco, required this.name});
 }
 
 class ExternalClockData {
   final Duration initial;
   final Duration increment;
 
-  const ExternalClockData({
-    required this.initial,
-    required this.increment,
-  });
+  const ExternalClockData({required this.initial, required this.increment});
 
   String display() {
     return TimeIncrement(initial.inSeconds, increment.inSeconds).display;
@@ -179,10 +166,7 @@ class ExternalUserHistoryParams {
   final ExternalSource source;
   final String username;
 
-  const ExternalUserHistoryParams({
-    required this.source,
-    required this.username,
-  });
+  const ExternalUserHistoryParams({required this.source, required this.username});
 
   @override
   bool operator ==(Object other) =>

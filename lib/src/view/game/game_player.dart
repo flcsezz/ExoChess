@@ -352,7 +352,9 @@ class _MoveExpirationState extends ConsumerState<MoveExpiration> {
     return secs <= 20
         ? Text(
             context.l10n.nbSecondsToPlayTheFirstMove(secs),
-            style: TextStyle(color: widget.mePlaying && emerg ? context.chessigmaColors.error : null),
+            style: TextStyle(
+              color: widget.mePlaying && emerg ? context.chessigmaColors.error : null,
+            ),
           )
         : const Text('');
   }

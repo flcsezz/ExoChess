@@ -147,11 +147,13 @@ class _SessionItem extends StatelessWidget {
   final Brightness brightness;
   final void Function(PuzzleId id)? onTap;
 
-  Color get good =>
-      brightness == Brightness.light ? ChessigmaColors.good.shade300 : ChessigmaColors.good.shade400;
+  Color get good => brightness == Brightness.light
+      ? ChessigmaColors.good.shade300
+      : ChessigmaColors.good.shade400;
 
-  Color get error =>
-      brightness == Brightness.light ? ChessigmaColors.error.shade300 : ChessigmaColors.error.shade400;
+  Color get error => brightness == Brightness.light
+      ? ChessigmaColors.error.shade300
+      : ChessigmaColors.error.shade400;
 
   Color get next => Colors.grey.withValues(alpha: 0.5);
 

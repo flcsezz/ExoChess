@@ -90,27 +90,37 @@ ThemeData _makeDefaultTheme(
   final hasSystemColors = systemScheme != null && generalPrefs.systemColors == true;
 
   const chessigmaGold = Color(0xFFE8B84B);
-  
+
   final neutralScheme = ColorScheme.fromSeed(
     seedColor: chessigmaGold,
     brightness: brightness,
     dynamicSchemeVariant: DynamicSchemeVariant.neutral,
   );
-  
-  final boardScheme = ColorScheme.fromSeed(
-    seedColor: chessigmaGold,
-    brightness: brightness,
-  ).copyWith(
-    surface: brightness == Brightness.dark ? const Color(0xFF0A0E1A) : neutralScheme.surface,
-    onSurface: neutralScheme.onSurface,
-    surfaceDim: brightness == Brightness.dark ? const Color(0xFF080B14) : neutralScheme.surfaceDim,
-    surfaceBright: neutralScheme.surfaceBright,
-    surfaceContainer: brightness == Brightness.dark ? const Color(0xFF121828) : neutralScheme.surfaceContainer,
-    surfaceContainerLowest: brightness == Brightness.dark ? const Color(0xFF05070D) : neutralScheme.surfaceContainerLowest,
-    surfaceContainerLow: brightness == Brightness.dark ? const Color(0xFF0F1422) : neutralScheme.surfaceContainerLow,
-    surfaceContainerHigh: brightness == Brightness.dark ? const Color(0xFF1A2138) : neutralScheme.surfaceContainerHigh,
-    surfaceContainerHighest: brightness == Brightness.dark ? const Color(0xFF222B45) : neutralScheme.surfaceContainerHighest,
-  );
+
+  final boardScheme = ColorScheme.fromSeed(seedColor: chessigmaGold, brightness: brightness)
+      .copyWith(
+        surface: brightness == Brightness.dark ? const Color(0xFF0A0E1A) : neutralScheme.surface,
+        onSurface: neutralScheme.onSurface,
+        surfaceDim: brightness == Brightness.dark
+            ? const Color(0xFF080B14)
+            : neutralScheme.surfaceDim,
+        surfaceBright: neutralScheme.surfaceBright,
+        surfaceContainer: brightness == Brightness.dark
+            ? const Color(0xFF121828)
+            : neutralScheme.surfaceContainer,
+        surfaceContainerLowest: brightness == Brightness.dark
+            ? const Color(0xFF05070D)
+            : neutralScheme.surfaceContainerLowest,
+        surfaceContainerLow: brightness == Brightness.dark
+            ? const Color(0xFF0F1422)
+            : neutralScheme.surfaceContainerLow,
+        surfaceContainerHigh: brightness == Brightness.dark
+            ? const Color(0xFF1A2138)
+            : neutralScheme.surfaceContainerHigh,
+        surfaceContainerHighest: brightness == Brightness.dark
+            ? const Color(0xFF222B45)
+            : neutralScheme.surfaceContainerHighest,
+      );
 
   final textTheme = isIOS ? kCupertinoDefaultTextTheme : null;
 

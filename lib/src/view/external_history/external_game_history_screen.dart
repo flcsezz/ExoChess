@@ -8,21 +8,12 @@ import 'package:chessigma_mobile/src/widgets/feedback.dart';
 import 'package:chessigma_mobile/src/widgets/platform.dart';
 
 class ExternalGameHistoryScreen extends ConsumerWidget {
-  const ExternalGameHistoryScreen({
-    required this.params,
-    super.key,
-  });
+  const ExternalGameHistoryScreen({required this.params, super.key});
 
   final ExternalUserHistoryParams params;
 
-  static Route<dynamic> buildRoute(
-    BuildContext context,
-    ExternalUserHistoryParams params,
-  ) {
-    return buildScreenRoute(
-      context,
-      screen: ExternalGameHistoryScreen(params: params),
-    );
+  static Route<dynamic> buildRoute(BuildContext context, ExternalUserHistoryParams params) {
+    return buildScreenRoute(context, screen: ExternalGameHistoryScreen(params: params));
   }
 
   @override
@@ -30,9 +21,7 @@ class ExternalGameHistoryScreen extends ConsumerWidget {
     final historyState = ref.watch(externalUserHistoryProvider(params));
 
     return PlatformScaffold(
-      appBar: PlatformAppBar(
-        title: Text('${params.source.displayName}: ${params.username}'),
-      ),
+      appBar: PlatformAppBar(title: Text('${params.source.displayName}: ${params.username}')),
       body: historyState.when(
         data: (games) {
           if (games.isEmpty) {

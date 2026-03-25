@@ -110,7 +110,7 @@ enum MoveEvaluation {
       final eval = fromNag(node.nags!.first);
       if (eval != null) return eval;
     }
-    
+
     // Check for judgment in server eval if available
     try {
       final serverEval = node.serverEval;

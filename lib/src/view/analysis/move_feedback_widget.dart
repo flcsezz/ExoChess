@@ -30,10 +30,7 @@ class _MoveFeedbackWidgetState extends State<MoveFeedbackWidget>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 1000),
-      vsync: this,
-    );
+    _controller = AnimationController(duration: const Duration(milliseconds: 1000), vsync: this);
 
     _opacityAnimation = TweenSequence<double>([
       TweenSequenceItem(tween: Tween(begin: 0.0, end: 1.0), weight: 20),
@@ -80,11 +77,11 @@ class _MoveFeedbackWidgetState extends State<MoveFeedbackWidget>
   Widget build(BuildContext context) {
     final squareSize = widget.boardSize / 8;
     final squareIndex = widget.square;
-    
+
     // Calculate file and rank (0-7)
     final int file = squareIndex % 8;
     final int rank = squareIndex ~/ 8;
-    
+
     // Adjust for orientation
     final double left = widget.orientation == Side.white
         ? file * squareSize

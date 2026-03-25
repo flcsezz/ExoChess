@@ -1347,10 +1347,7 @@ class InlineMove extends ConsumerWidget {
                   const SizedBox(width: 4),
                   Container(
                     padding: const EdgeInsets.all(1),
-                    decoration: BoxDecoration(
-                      color: evaluation.color,
-                      shape: BoxShape.circle,
-                    ),
+                    decoration: BoxDecoration(color: evaluation.color, shape: BoxShape.circle),
                     child: Text(
                       evaluation.symbol,
                       style: const TextStyle(

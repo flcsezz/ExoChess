@@ -202,7 +202,7 @@ class _HomeScreenState extends ConsumerState<HomeTabScreen> {
                         widget: HomeEditableWidget.externalFetch,
                         shouldShow: true,
                         child: const ExternalGameFetchWidget(),
-                        ),
+                      ),
 
                       _OfflineCorrespondencePreview(offlineCorresGames, maxGamesToShow: 5),
                     ],
@@ -252,7 +252,7 @@ class _HomeScreenState extends ConsumerState<HomeTabScreen> {
               widget: HomeEditableWidget.externalFetch,
               shouldShow: true,
               child: const ExternalGameFetchWidget(),
-              ),
+            ),
 
             _EditableWidget(
               widget: HomeEditableWidget.recentGames,
@@ -292,8 +292,8 @@ class _HomeScreenState extends ConsumerState<HomeTabScreen> {
                   : PlatformAppBar(
                       title: const AppBarChessigmaTitle(),
                       centerTitle: true,
-              leading: const SettingsIconButton(),
-            ),
+                      leading: const SettingsIconButton(),
+                    ),
               body: widget.editModeEnabled
                   ? content
                   : HapticRefreshIndicator(
@@ -550,12 +550,7 @@ class _TabletCreateAGameSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        PlayMenu(),
-      ],
-    );
+    return const Column(crossAxisAlignment: CrossAxisAlignment.center, children: [PlayMenu()]);
   }
 }
 

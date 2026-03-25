@@ -21,31 +21,31 @@ ExternalGameHistoryItem _convertPgnGameToExternalItemStatic(
   int gameIndex,
 ) {
   final headers = game.headers;
-  
+
   final whiteName = headers['White'] ?? '?';
   final blackName = headers['Black'] ?? '?';
-  
+
   final whiteRating = int.tryParse(headers['WhiteElo'] ?? '');
   final blackRating = int.tryParse(headers['BlackElo'] ?? '');
-  
+
   final whiteRatingDiff = int.tryParse(headers['WhiteRatingDiff'] ?? '');
   final blackRatingDiff = int.tryParse(headers['BlackRatingDiff'] ?? '');
-  
+
   final variantStr = headers['Variant'] ?? 'Standard';
   final variant = _parseVariantStatic(variantStr);
-  
+
   final speedStr = headers['Speed'] ?? 'classical';
   final speed = _parseSpeedStatic(speedStr);
-  
+
   final perfStr = headers['Perf'] ?? 'Classic';
   final perf = _parsePerfStatic(perfStr);
-  
+
   final result = headers['Result'] ?? '*';
   final winner = _parseWinnerStatic(result);
-  
+
   final ratedStr = headers['Rated'] ?? 'false';
   final rated = ratedStr.toLowerCase() == 'true';
-  
+
   DateTime? createdAt;
   final dateStr = headers['UTCDate'];
   final timeStr = headers['UTCTime'];
@@ -65,7 +65,7 @@ ExternalGameHistoryItem _convertPgnGameToExternalItemStatic(
       }
     } catch (_) {}
   }
-  
+
   ExternalClockData? clock;
   final clockStr = headers['Clock'];
   if (clockStr != null) {
@@ -81,23 +81,24 @@ ExternalGameHistoryItem _convertPgnGameToExternalItemStatic(
       }
     }
   }
-  
+
   final daysStr = headers['DaysPerTurn'];
   final daysPerTurn = daysStr != null ? int.tryParse(daysStr) : null;
-  
+
   final eco = headers['ECO'] ?? '';
   final openingName = headers['Opening'] ?? '';
   ExternalLightOpening? opening;
   if (eco.isNotEmpty || openingName.isNotEmpty) {
     opening = ExternalLightOpening(eco: eco, name: openingName);
   }
-  
-  final gameId = headers['Site']?.replaceAll('https://lichess.org/', '') ?? 
-                 headers['Id'] ?? 
-                 DateTime.now().millisecondsSinceEpoch.toString();
-  
+
+  final gameId =
+      headers['Site']?.replaceAll('https://lichess.org/', '') ??
+      headers['Id'] ??
+      DateTime.now().millisecondsSinceEpoch.toString();
+
   final pgn = _extractGamePgnStatic(fullPgnText, gameIndex);
-  
+
   return ExternalGameHistoryItem(
     source: ExternalSource.lichess,
     username: searchedUsername,
@@ -192,9 +193,9 @@ GameStatus _parseGameStatusStatic(String result) {
 
 final externalUserHistoryProvider = AsyncNotifierProvider.autoDispose
     .family<ExternalUserHistoryNotifier, IList<ExternalGameHistoryItem>, ExternalUserHistoryParams>(
-  ExternalUserHistoryNotifier.new,
-  name: 'ExternalUserHistoryProvider',
-);
+      ExternalUserHistoryNotifier.new,
+      name: 'ExternalUserHistoryProvider',
+    );
 
 class ExternalUserHistoryNotifier extends AsyncNotifier<IList<ExternalGameHistoryItem>> {
   ExternalUserHistoryNotifier(this.params);
@@ -245,10 +246,7 @@ class ExternalUserHistoryNotifier extends AsyncNotifier<IList<ExternalGameHistor
     state = const AsyncLoading();
 
     try {
-      final games = await _fetchGames(
-        max: _nbPerPage,
-        untilGameIndex: _games.length - 1,
-      );
+      final games = await _fetchGames(max: _nbPerPage, untilGameIndex: _games.length - 1);
 
       if (games.isEmpty) {
         _hasMore = false;
@@ -271,38 +269,36 @@ class ExternalUserHistoryNotifier extends AsyncNotifier<IList<ExternalGameHistor
     int? untilGameIndex,
   }) async {
     final client = ref.read(defaultClientProvider);
-    
-    final queryParams = <String, String>{
-      'max': (max ?? 20).toString(),
-    };
-    
+
+    final queryParams = <String, String>{'max': (max ?? 20).toString()};
+
     if (untilGameIndex != null) {
       queryParams['until'] = (untilGameIndex + 1).toString();
     }
-    
+
     final uri = Uri.https('lichess.org', '/api/games/user/$username', queryParams);
-    
+
     final response = await client.get(uri);
-    
+
     if (response.statusCode == 404) {
       throw Exception('User not found: $username');
     }
-    
+
     if (response.statusCode == 429) {
       throw Exception('Rate limited. Please try again later.');
     }
-    
+
     if (response.statusCode != 200) {
       throw Exception('Failed to fetch games: ${response.statusCode}');
     }
-    
+
     final pgnText = response.body;
     if (pgnText.trim().isEmpty) {
       return [];
     }
-    
+
     final pgnGames = PgnGame.parseMultiGamePgn(pgnText);
-    
+
     return pgnGames.asMap().entries.map((entry) {
       final index = entry.key;
       final game = entry.value;
@@ -316,55 +312,55 @@ class ExternalUserHistoryNotifier extends AsyncNotifier<IList<ExternalGameHistor
     int? untilGameIndex,
   }) async {
     final client = ref.read(defaultClientProvider);
-    
+
     // Chess.com archives API
     final archivesUri = Uri.https('api.chess.com', '/pub/player/$username/games/archives');
     final archivesResponse = await client.get(archivesUri);
-    
+
     if (archivesResponse.statusCode == 404) {
       throw Exception('User not found: $username');
     }
-    
+
     if (archivesResponse.statusCode != 200) {
       throw Exception('Failed to fetch archives: ${archivesResponse.statusCode}');
     }
-    
+
     final archivesData = jsonDecode(archivesResponse.body) as Map<String, dynamic>;
     final archives = List<String>.from(archivesData['archives'] as Iterable? ?? []);
-    
+
     if (archives.isEmpty) {
       return [];
     }
-    
+
     // Fetch latest archive
     final latestArchiveUri = Uri.parse(archives.last);
     final gamesResponse = await client.get(latestArchiveUri);
-    
+
     if (gamesResponse.statusCode != 200) {
       throw Exception('Failed to fetch games from archive: ${gamesResponse.statusCode}');
     }
-    
+
     final gamesData = jsonDecode(gamesResponse.body) as Map<String, dynamic>;
     final games = List<Map<String, dynamic>>.from(gamesData['games'] as Iterable? ?? []);
-    
+
     final List<ExternalGameHistoryItem> items = [];
     for (final gameData in games.reversed) {
       final pgn = gameData['pgn'] as String?;
       if (pgn == null) continue;
-      
+
       final pgnGames = PgnGame.parseMultiGamePgn(pgn);
       if (pgnGames.isEmpty) continue;
-      
+
       final game = pgnGames.first;
       final headers = game.headers;
-      
+
       final whiteName = headers['White'] ?? '?';
       final blackName = headers['Black'] ?? '?';
       final result = headers['Result'] ?? '*';
-      
+
       final whiteRating = int.tryParse(headers['WhiteElo'] ?? '');
       final blackRating = int.tryParse(headers['BlackElo'] ?? '');
-      
+
       // Chess.com uses a different date format sometimes, but PGN headers should be standard
       DateTime? createdAt;
       final dateStr = headers['Date'];
@@ -377,70 +373,77 @@ class ExternalUserHistoryNotifier extends AsyncNotifier<IList<ExternalGameHistor
         } catch (_) {}
       }
 
-      final gameId = (gameData['url'] as String?)?.split('/').last ?? DateTime.now().millisecondsSinceEpoch.toString();
+      final gameId =
+          (gameData['url'] as String?)?.split('/').last ??
+          DateTime.now().millisecondsSinceEpoch.toString();
 
-      items.add(ExternalGameHistoryItem(
-        source: ExternalSource.chesscom,
-        username: username,
-        externalGameId: gameId,
-        pgn: pgn,
-        players: ExternalGamePlayers(
-          white: ExternalPlayer(name: whiteName, rating: whiteRating),
-          black: ExternalPlayer(name: blackName, rating: blackRating),
+      items.add(
+        ExternalGameHistoryItem(
+          source: ExternalSource.chesscom,
+          username: username,
+          externalGameId: gameId,
+          pgn: pgn,
+          players: ExternalGamePlayers(
+            white: ExternalPlayer(name: whiteName, rating: whiteRating),
+            black: ExternalPlayer(name: blackName, rating: blackRating),
+          ),
+          createdAt: createdAt ?? DateTime.now(),
+          status: _parseGameStatusStatic(result),
+          variant: Variant.standard,
+          speed: Speed.blitz,
+          perf: Perf.blitz,
+          rated: headers['Event']?.contains('Rated') ?? true,
+          winner: _parseWinnerStatic(result),
         ),
-        createdAt: createdAt ?? DateTime.now(),
-        status: _parseGameStatusStatic(result),
-        variant: Variant.standard, 
-        speed: Speed.blitz, 
-        perf: Perf.blitz,
-        rated: headers['Event']?.contains('Rated') ?? true,
-        winner: _parseWinnerStatic(result),
-      ));
-      
+      );
+
       if (max != null && items.length >= max) break;
     }
-    
+
     return items;
   }
 }
 
 final externalGameDetailsProvider = FutureProvider.autoDispose
     .family<ExternalGameHistoryItem, ExternalGameDetailsParams>((ref, params) {
-  final client = ref.read(defaultClientProvider);
-  switch (params.source) {
-    case ExternalSource.lichess:
-      return _fetchLichessGameDetails(client, params.externalGameId);
-    case ExternalSource.chesscom:
-      return _fetchChessComGameDetails(client, params.externalGameId, params.username);
-  }
-});
+      final client = ref.read(defaultClientProvider);
+      switch (params.source) {
+        case ExternalSource.lichess:
+          return _fetchLichessGameDetails(client, params.externalGameId);
+        case ExternalSource.chesscom:
+          return _fetchChessComGameDetails(client, params.externalGameId, params.username);
+      }
+    });
 
-Future<ExternalGameHistoryItem> _fetchLichessGameDetails(Client client, String externalGameId) async {
+Future<ExternalGameHistoryItem> _fetchLichessGameDetails(
+  Client client,
+  String externalGameId,
+) async {
   final uri = Uri.https('lichess.org', '/game/export/$externalGameId');
-  
+
   final response = await client.get(uri);
-  
+
   if (response.statusCode == 404) {
     throw Exception('Game not found: $externalGameId');
   }
-  
+
   if (response.statusCode != 200) {
     throw Exception('Failed to fetch game: ${response.statusCode}');
   }
-  
+
   final pgnText = response.body;
-  
+
   final pgnGames = PgnGame.parseMultiGamePgn(pgnText);
-  
+
   if (pgnGames.isEmpty) {
     throw Exception('No game data found');
   }
-  
+
   return _convertPgnGameToExternalItemStatic(pgnGames.first, '', pgnText, 0);
 }
 
 Future<ExternalGameHistoryItem> _fetchChessComGameDetails(
-  Client client, 
+  Client client,
   String externalGameId,
   String username,
 ) {

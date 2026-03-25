@@ -25,6 +25,5 @@ class ChallengeService {
   }
 
   /// Stop listening to challenge events from the server.
-  void dispose() {
-  }
+  void dispose() {}
 }

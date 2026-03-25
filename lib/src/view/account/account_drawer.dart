@@ -192,7 +192,10 @@ class _AccountDrawerState extends ConsumerState<AccountDrawer> {
           ],
           if (Theme.of(context).platform == TargetPlatform.android)
             ListTile(
-              leading: Icon(ChessigmaIcons.patron, semanticLabel: context.l10n.patronChessigmaPatron),
+              leading: Icon(
+                ChessigmaIcons.patron,
+                semanticLabel: context.l10n.patronChessigmaPatron,
+              ),
               title: Text(context.l10n.patronDonate),
               enabled: isOnline,
               onTap: () {

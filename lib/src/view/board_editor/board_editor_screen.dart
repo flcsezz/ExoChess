@@ -313,8 +313,8 @@ class _BottomBar extends ConsumerWidget {
                     ),
                   );
                 },
-                ),
-                BottomSheetAction(
+              ),
+              BottomSheetAction(
                 makeLabel: (context) => Text(context.l10n.variant),
 
                 onPressed: () => showChoicePicker<Variant>(
