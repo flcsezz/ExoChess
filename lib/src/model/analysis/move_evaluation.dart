@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:chessigma_mobile/src/model/common/feedback_data.dart';
 import 'package:chessigma_mobile/src/utils/l10n_context.dart';
 
-enum MoveEvaluation {
+enum MoveEvaluation implements FeedbackData {
   brilliant,
   great,
   best,
@@ -13,6 +14,7 @@ enum MoveEvaluation {
   blunder,
   forced;
 
+  @override
   String label(BuildContext context) {
     switch (this) {
       case MoveEvaluation.brilliant:

@@ -1,21 +1,20 @@
 import 'package:chessground/chessground.dart';
-import 'package:collection/collection.dart';
-import 'package:dartchess/dartchess.dart';
-import 'package:dynamic_system_colors/dynamic_system_colors.dart';
-import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chessigma_mobile/src/model/account/account_preferences.dart';
+import 'package:chessigma_mobile/src/model/analysis/move_evaluation.dart';
+import 'package:chessigma_mobile/src/model/common/feedback_data.dart';
 import 'package:chessigma_mobile/src/model/common/node.dart';
 import 'package:chessigma_mobile/src/model/common/uci.dart';
 import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/utils/duration.dart';
 import 'package:chessigma_mobile/src/utils/l10n_context.dart';
 import 'package:chessigma_mobile/src/utils/rate_limit.dart';
-import 'package:chessigma_mobile/src/model/analysis/move_evaluation.dart';
 import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
 import 'package:chessigma_mobile/src/widgets/list.dart';
+import 'package:collection/collection.dart';
+import 'package:dartchess/dartchess.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const innacuracyColor = ChessigmaColors.cyan;
 const mistakeColor = Color(0xFFe69f00);
@@ -1188,9 +1187,10 @@ class _IndentedSideLinesState extends State<_IndentedSideLines> {
   }
 }
 
-Color? _textColor(BuildContext context, double opacity, {int? nag}) {
+Color? _textColor(BuildContext context, double opacity, {int? nag, FeedbackData? feedback}) {
   final defaultColor = TextTheme.of(context).bodyLarge?.color?.withValues(alpha: opacity);
 
+  if (feedback != null) return feedback.color;
   return nag != null && nag > 0 ? _nagColor(context, nag) : defaultColor;
 }
 
@@ -1279,7 +1279,7 @@ class InlineMove extends ConsumerWidget {
             ? moveAnnotationChar(branch.nags!)
             : '');
 
-    final evaluation = MoveEvaluation.fromAnalysis(branch);
+    final evaluation = branch.feedback ?? MoveEvaluation.fromAnalysis(branch);
     final nag = params.shouldShowAnnotations ? branch.nags?.firstOrNull : null;
     final ply = branch.position.ply;
 
@@ -1337,7 +1337,12 @@ class InlineMove extends ConsumerWidget {
                           color: isPremove
                               // TODO Possibly choose a more suitable color
                               ? ChessigmaColors.brag
-                              : _textColor(context, isCurrentMove ? 1 : 0.9, nag: nag),
+                              : _textColor(
+                                  context,
+                                  isCurrentMove ? 1 : 0.9,
+                                  nag: nag,
+                                  feedback: evaluation,
+                                ),
                         ),
                       ),
                     ],

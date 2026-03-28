@@ -1,10 +1,11 @@
+import 'package:chessigma_mobile/src/model/common/chess.dart';
+import 'package:chessigma_mobile/src/model/common/eval.dart';
+import 'package:chessigma_mobile/src/model/common/feedback_data.dart';
+import 'package:chessigma_mobile/src/model/common/uci.dart';
 import 'package:collection/collection.dart';
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/eval.dart';
-import 'package:chessigma_mobile/src/model/common/uci.dart';
 import 'package:logging/logging.dart';
 
 part 'node.freezed.dart';
@@ -19,7 +20,7 @@ final _logger = Logger('Node');
 /// It should not be directly used in a riverpod state, because it is mutable.
 /// It can be converted into an immutable [ViewNode], using the [view] getter.
 abstract class Node {
-  Node({required this.position, this.eval, this.opening});
+  Node({required this.position, this.eval, this.opening, this.feedback});
 
   final Position position;
 
@@ -28,6 +29,9 @@ abstract class Node {
 
   /// The opening associated with this node.
   Opening? opening;
+
+  /// The feedback associated with this node.
+  FeedbackData? feedback;
 
   final List<Branch> children = [];
 
@@ -358,6 +362,7 @@ class Branch extends Node {
     required super.position,
     super.eval,
     super.opening,
+    super.feedback,
     required this.sanMove,
     this.isComputerVariation = false,
     this.isCollapsed = false,
@@ -400,6 +405,7 @@ class Branch extends Node {
     sanMove: sanMove,
     eval: eval,
     opening: opening,
+    feedback: feedback,
     children: IList(children.map((child) => child.view)),
     isComputerVariation: isComputerVariation,
     isCollapsed: isCollapsed,
@@ -477,12 +483,14 @@ class Branch extends Node {
 ///
 /// Represents the initial position, where no move has been played yet.
 class Root extends Node {
-  Root({required super.position, super.eval});
+  Root({required super.position, super.eval, super.opening, super.feedback});
 
   @override
   ViewRoot get view => ViewRoot(
     position: position,
     eval: eval,
+    opening: opening,
+    feedback: feedback,
     children: IList(children.map((child) => child.view)),
   );
 
@@ -591,6 +599,7 @@ abstract class ViewNode {
   IList<PgnComment>? get comments;
   IList<PgnComment>? get lichessAnalysisComments;
   IList<int>? get nags;
+  FeedbackData? get feedback;
 
   Iterable<ViewBranch> get mainline sync* {
     ViewNode current = this;
@@ -637,6 +646,8 @@ sealed class ViewRoot extends ViewNode with _$ViewRoot {
     required Position position,
     required IList<ViewBranch> children,
     ClientEval? eval,
+    Opening? opening,
+    FeedbackData? feedback,
   }) = _ViewRoot;
 
   @override
@@ -674,6 +685,7 @@ sealed class ViewBranch extends ViewNode with _$ViewBranch {
     @Default(false) bool isCollapsed,
     required bool isComputerVariation,
     ClientEval? eval,
+    FeedbackData? feedback,
     IList<PgnComment>? lichessAnalysisComments,
     IList<PgnComment>? startingComments,
     IList<PgnComment>? comments,
@@ -685,6 +697,7 @@ sealed class ViewBranch extends ViewNode with _$ViewBranch {
     sanMove: sanMove,
     position: position,
     opening: opening,
+    feedback: feedback,
     isCollapsed: isCollapsed,
     isComputerVariation: isComputerVariation,
     eval: eval,

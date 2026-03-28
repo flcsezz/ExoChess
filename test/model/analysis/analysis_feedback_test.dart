@@ -14,12 +14,12 @@ void main() {
 
     test('exposes correct display metadata for each quality', () {
       final best = AnalysisFeedback.fromCpLoss(0);
-      expect(best.label, 'Best');
+      expect(best.staticLabel, 'Best');
       expect(best.badgeKey, 'best_move');
       expect(best.severity, AnalysisSeverity.info);
 
       final blunder = AnalysisFeedback.fromCpLoss(350);
-      expect(blunder.label, 'Blunder');
+      expect(blunder.staticLabel, 'Blunder');
       expect(blunder.badgeKey, 'blunder');
       expect(blunder.severity, AnalysisSeverity.error);
     });

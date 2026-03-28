@@ -1,6 +1,6 @@
+import 'package:chessigma_mobile/src/model/common/feedback_data.dart';
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/model/analysis/move_evaluation.dart';
 
 class MoveFeedbackWidget extends StatefulWidget {
   const MoveFeedbackWidget({
@@ -11,7 +11,7 @@ class MoveFeedbackWidget extends StatefulWidget {
     super.key,
   });
 
-  final MoveEvaluation evaluation;
+  final FeedbackData evaluation;
   final Square square;
   final double boardSize;
   final Side orientation;

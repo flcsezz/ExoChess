@@ -1,11 +1,8 @@
 import 'package:chessground/chessground.dart';
-import 'package:dartchess/dartchess.dart';
-import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chessigma_mobile/src/constants.dart';
 import 'package:chessigma_mobile/src/model/analysis/common_analysis_prefs.dart';
 import 'package:chessigma_mobile/src/model/analysis/common_analysis_state.dart';
+import 'package:chessigma_mobile/src/model/analysis/move_evaluation.dart';
 import 'package:chessigma_mobile/src/model/common/chess.dart';
 import 'package:chessigma_mobile/src/model/common/eval.dart';
 import 'package:chessigma_mobile/src/model/engine/evaluation_preferences.dart';
@@ -13,11 +10,14 @@ import 'package:chessigma_mobile/src/model/engine/evaluation_service.dart';
 import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
 import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
 import 'package:chessigma_mobile/src/view/analysis/game_analysis_board.dart';
+import 'package:chessigma_mobile/src/view/analysis/move_feedback_widget.dart';
 import 'package:chessigma_mobile/src/view/analysis/retro_screen.dart';
 import 'package:chessigma_mobile/src/view/study/study_screen.dart';
-import 'package:chessigma_mobile/src/model/analysis/move_evaluation.dart';
-import 'package:chessigma_mobile/src/view/analysis/move_feedback_widget.dart';
 import 'package:chessigma_mobile/src/widgets/pgn.dart';
+import 'package:dartchess/dartchess.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// An abstract widget that provides the common interface for analysis boards:
 /// - [GameAnalysisBoard]
@@ -131,7 +131,9 @@ abstract class AnalysisBoardState<
 
     final annotation = showAnnotations ? makeAnnotation(currentNode.nags) : null;
     final sanMove = currentNode.sanMove;
-    final evaluation = showAnnotations ? MoveEvaluation.fromAnalysis(currentNode) : null;
+    final evaluation = showAnnotations
+        ? (currentNode.feedback ?? MoveEvaluation.fromAnalysis(currentNode))
+        : null;
 
     return Stack(
       children: [
