@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:chessigma_mobile/src/model/common/feedback_data.dart';
+import 'package:flutter/material.dart';
 
 enum AnalysisQuality { best, great, good, inaccuracy, mistake, blunder }
 
@@ -39,6 +39,7 @@ class AnalysisFeedback implements FeedbackData {
     }
   }
 
+  @override
   String get symbol {
     switch (quality) {
       case AnalysisQuality.best:

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:chessigma_mobile/src/model/common/feedback_data.dart';
 import 'package:chessigma_mobile/src/utils/l10n_context.dart';
+import 'package:flutter/material.dart';
 
 enum MoveEvaluation implements FeedbackData {
   brilliant,
@@ -40,6 +40,7 @@ enum MoveEvaluation implements FeedbackData {
     }
   }
 
+  @override
   Color get color {
     switch (this) {
       case MoveEvaluation.brilliant:
@@ -63,6 +64,7 @@ enum MoveEvaluation implements FeedbackData {
     }
   }
 
+  @override
   String get symbol {
     switch (this) {
       case MoveEvaluation.brilliant:
