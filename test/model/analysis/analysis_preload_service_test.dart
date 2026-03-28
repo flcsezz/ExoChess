@@ -5,28 +5,31 @@ import 'package:chessigma_mobile/src/model/common/id.dart';
 
 void main() {
   group('AnalysisPreloadService', () {
-    test('starts analysis on preload request', () {
+    test('starts analysis on preload request', () async {
       final container = ProviderContainer();
-      final service = container.read(analysisPreloadServiceProvider);
-      
       const gameId = GameId('testgame');
-      service.preload(gameId);
+      final notifier = container.read(analysisPreloadServiceProvider(gameId).notifier);
       
-      expect(service.isPreloading(gameId), isTrue);
+      notifier.preload();
+      
+      expect(container.read(analysisPreloadServiceProvider(gameId)).status, PreloadStatus.loading);
+      
+      await Future<void>.delayed(const Duration(milliseconds: 600));
+      
+      expect(container.read(analysisPreloadServiceProvider(gameId)).status, PreloadStatus.success);
     });
 
-    test('reuses cache for same game', () {
+    test('retry resets state', () async {
       final container = ProviderContainer();
-      final service = container.read(analysisPreloadServiceProvider);
-      
       const gameId = GameId('testgame');
-      service.preload(gameId);
-      final firstFuture = service.getPreloadFuture(gameId);
+      final notifier = container.read(analysisPreloadServiceProvider(gameId).notifier);
       
-      service.preload(gameId);
-      final secondFuture = service.getPreloadFuture(gameId);
+      notifier.preload();
+      await Future<void>.delayed(const Duration(milliseconds: 600));
+      expect(container.read(analysisPreloadServiceProvider(gameId)).status, PreloadStatus.success);
       
-      expect(firstFuture, same(secondFuture));
+      notifier.retry();
+      expect(container.read(analysisPreloadServiceProvider(gameId)).status, PreloadStatus.loading);
     });
   });
 }

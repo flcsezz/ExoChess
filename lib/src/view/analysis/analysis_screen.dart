@@ -1,10 +1,7 @@
-import 'package:dartchess/dartchess.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_player.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_preferences.dart';
+import 'package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart';
 import 'package:chessigma_mobile/src/model/analysis/opening_service.dart';
 import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
 import 'package:chessigma_mobile/src/model/common/chess.dart';
@@ -44,6 +41,10 @@ import 'package:chessigma_mobile/src/widgets/feedback.dart';
 import 'package:chessigma_mobile/src/widgets/platform_context_menu_button.dart';
 import 'package:chessigma_mobile/src/widgets/user.dart';
 import 'package:chessigma_mobile/src/widgets/variant_app_bar_title.dart';
+import 'package:dartchess/dartchess.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -292,6 +293,10 @@ class _Body extends ConsumerWidget {
       }
     }
 
+    final preloadState = options.gameId != null
+        ? ref.watch(analysisPreloadServiceProvider(options.gameId!))
+        : null;
+
     return FocusDetector(
       onFocusRegained: () {
         if (context.mounted) {
@@ -299,6 +304,7 @@ class _Body extends ConsumerWidget {
         }
       },
       child: AnalysisLayout(
+        loading: preloadState?.status == PreloadStatus.loading,
         tabController: controller,
         pov: pov,
         sideToMove: analysisState.currentPosition.turn,

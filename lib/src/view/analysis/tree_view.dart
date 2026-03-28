@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_preferences.dart';
+import 'package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart';
 import 'package:chessigma_mobile/src/view/game/game_result_dialog.dart';
 import 'package:chessigma_mobile/src/widgets/pgn.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const kOpeningHeaderHeight = 32.0;
 
@@ -18,6 +19,9 @@ class AnalysisTreeView extends ConsumerWidget {
 
     final analysisState = ref.watch(ctrlProvider).requireValue;
     final prefs = ref.watch(analysisPreferencesProvider);
+    final preloadState = options.gameId != null
+        ? ref.watch(analysisPreloadServiceProvider(options.gameId!))
+        : null;
     // enable computer analysis takes effect here only if it's a lichess game
     final enableServerAnalysis = !options.isLichessGameAnalysis || prefs.enableServerAnalysis;
 
@@ -25,6 +29,23 @@ class AnalysisTreeView extends ConsumerWidget {
       padding: EdgeInsets.zero,
       child: Column(
         children: [
+          if (preloadState?.status == PreloadStatus.error)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  const Icon(Icons.error_outline, color: Colors.red),
+                  const SizedBox(width: 8),
+                  Expanded(child: Text('Analysis failed: ${preloadState?.error}')),
+                  TextButton(
+                    onPressed: () => ref
+                        .read(analysisPreloadServiceProvider(options.gameId!).notifier)
+                        .retry(),
+                    child: const Text('Retry'),
+                  ),
+                ],
+              ),
+            ),
           DebouncedPgnTreeView(
             root: analysisState.root,
             currentPath: analysisState.currentPath,

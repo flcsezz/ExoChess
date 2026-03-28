@@ -3,34 +3,63 @@ import 'dart:async';
 import 'package:chessigma_mobile/src/model/common/id.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final analysisPreloadServiceProvider = Provider<AnalysisPreloadService>((ref) {
-  return AnalysisPreloadService(ref);
-});
+enum PreloadStatus { initial, loading, success, error }
 
-class AnalysisPreloadService {
-  AnalysisPreloadService(this._ref);
+class PreloadState {
+  final PreloadStatus status;
+  final String? error;
 
-  final Ref _ref;
-  final Map<GameId, Future<void>> _preloads = {};
+  const PreloadState({
+    required this.status,
+    this.error,
+  });
 
-  void preload(GameId gameId) {
-    if (_preloads.containsKey(gameId)) return;
-    _preloads[gameId] = _runPreload(gameId);
+  const PreloadState.initial()
+      : status = PreloadStatus.initial,
+        error = null;
+  const PreloadState.loading()
+      : status = PreloadStatus.loading,
+        error = null;
+  const PreloadState.success()
+      : status = PreloadStatus.success,
+        error = null;
+  const PreloadState.error(this.error) : status = PreloadStatus.error;
+}
+
+final analysisPreloadServiceProvider =
+    NotifierProvider.family<AnalysisPreloadNotifier, PreloadState, GameId>(
+  AnalysisPreloadNotifier.new,
+);
+
+class AnalysisPreloadNotifier extends Notifier<PreloadState> {
+  AnalysisPreloadNotifier(this.gameId);
+
+  final GameId gameId;
+
+  @override
+  PreloadState build() {
+    return const PreloadState.initial();
   }
 
-  bool isPreloading(GameId gameId) => _preloads.containsKey(gameId);
+  void preload() {
+    if (state.status != PreloadStatus.initial) return;
 
-  Future<void>? getPreloadFuture(GameId gameId) => _preloads[gameId];
+    state = const PreloadState.loading();
+    _runPreload();
+  }
 
-  Future<void> _runPreload(GameId gameId) async {
+  Future<void> _runPreload() async {
     try {
       // Simulate warmup
-      await Future<void>.delayed(const Duration(milliseconds: 100));
-      // Use _ref to avoid unused field error
-      _ref.toString();
+      await Future<void>.delayed(const Duration(milliseconds: 500));
+      state = const PreloadState.success();
     } catch (e) {
-      _preloads.remove(gameId);
-      rethrow;
+      state = PreloadState.error(e.toString());
     }
+  }
+
+  void retry() {
+    state = const PreloadState.initial();
+    preload();
   }
 }

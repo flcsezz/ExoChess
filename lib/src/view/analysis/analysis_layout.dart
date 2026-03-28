@@ -1,6 +1,4 @@
 import 'package:chessground/chessground.dart';
-import 'package:dartchess/dartchess.dart';
-import 'package:flutter/material.dart';
 import 'package:chessigma_mobile/l10n/l10n.dart';
 import 'package:chessigma_mobile/src/constants.dart';
 import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
@@ -12,6 +10,8 @@ import 'package:chessigma_mobile/src/widgets/adaptive_action_sheet.dart';
 import 'package:chessigma_mobile/src/widgets/buttons.dart';
 import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 import 'package:chessigma_mobile/src/widgets/pockets.dart';
+import 'package:dartchess/dartchess.dart';
+import 'package:flutter/material.dart';
 
 /// The height of the board header or footer in the analysis layout.
 const kAnalysisBoardHeaderOrFooterHeight = 26.0;
@@ -139,6 +139,7 @@ class AnalysisLayout extends StatelessWidget {
     this.engineLines,
     this.bottomBar,
     this.pockets,
+    this.loading = false,
     super.key,
   });
 
@@ -186,10 +187,14 @@ class AnalysisLayout extends StatelessWidget {
   /// If not null, will render a [PocketsMenu] for each player.
   final Pockets? pockets;
 
+  /// Whether to show a loading indicator.
+  final bool loading;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        if (loading) const LinearProgressIndicator(minHeight: 2.0),
         Expanded(
           child: SafeArea(
             bottom: false,
