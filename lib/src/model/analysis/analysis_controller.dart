@@ -154,10 +154,9 @@ class AnalysisController extends AsyncNotifier<AnalysisState>
   @override
   Future<AnalysisState> build() async {
     final serverAnalysisService = ref.watch(serverAnalysisServiceProvider);
-    final preloadService = ref.watch(analysisPreloadServiceProvider);
 
-    if (options.gameId != null) {
-      preloadService.preload(options.gameId!);
+    if (options.gameId case final gameId?) {
+      ref.read(analysisPreloadServiceProvider(gameId).notifier).preload();
     }
 
     ref.onDispose(() {
