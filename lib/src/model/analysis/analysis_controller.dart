@@ -4,6 +4,7 @@ import 'package:chessigma_mobile/src/model/account/account_service.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_feedback.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_player.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_preferences.dart';
+import 'package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart';
 import 'package:chessigma_mobile/src/model/analysis/common_analysis_state.dart';
 import 'package:chessigma_mobile/src/model/analysis/forecast.dart';
 import 'package:chessigma_mobile/src/model/analysis/opening_service.dart';
@@ -153,6 +154,11 @@ class AnalysisController extends AsyncNotifier<AnalysisState>
   @override
   Future<AnalysisState> build() async {
     final serverAnalysisService = ref.watch(serverAnalysisServiceProvider);
+    final preloadService = ref.watch(analysisPreloadServiceProvider);
+
+    if (options.gameId != null) {
+      preloadService.preload(options.gameId!);
+    }
 
     ref.onDispose(() {
       _socketSubscription?.cancel();
