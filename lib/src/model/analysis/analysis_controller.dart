@@ -1,13 +1,7 @@
 import 'dart:async';
 
-import 'package:collection/collection.dart';
-import 'package:dartchess/dartchess.dart';
-import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:intl/intl.dart';
 import 'package:chessigma_mobile/src/model/account/account_service.dart';
+import 'package:chessigma_mobile/src/model/analysis/analysis_feedback.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_player.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_preferences.dart';
 import 'package:chessigma_mobile/src/model/analysis/common_analysis_state.dart';
@@ -21,6 +15,7 @@ import 'package:chessigma_mobile/src/model/common/node.dart';
 import 'package:chessigma_mobile/src/model/common/service/move_feedback.dart';
 import 'package:chessigma_mobile/src/model/common/service/sound_service.dart';
 import 'package:chessigma_mobile/src/model/common/socket.dart';
+import 'package:chessigma_mobile/src/model/common/socket_events.dart';
 import 'package:chessigma_mobile/src/model/common/uci.dart';
 import 'package:chessigma_mobile/src/model/engine/evaluation_mixin.dart';
 import 'package:chessigma_mobile/src/model/engine/evaluation_preferences.dart';
@@ -29,12 +24,18 @@ import 'package:chessigma_mobile/src/model/game/game_repository.dart';
 import 'package:chessigma_mobile/src/model/game/game_repository_providers.dart';
 import 'package:chessigma_mobile/src/model/game/playable_game.dart';
 import 'package:chessigma_mobile/src/model/game/player.dart';
-import 'package:chessigma_mobile/src/model/common/socket_events.dart';
 import 'package:chessigma_mobile/src/network/connectivity.dart';
 import 'package:chessigma_mobile/src/network/http.dart';
 import 'package:chessigma_mobile/src/network/socket.dart';
 import 'package:chessigma_mobile/src/view/engine/engine_gauge.dart';
 import 'package:chessigma_mobile/src/widgets/pgn.dart';
+import 'package:collection/collection.dart';
+import 'package:dartchess/dartchess.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
 part 'analysis_controller.freezed.dart';
 
@@ -1055,6 +1056,7 @@ sealed class AnalysisCurrentNode
     IList<PgnComment>? startingComments,
     IList<PgnComment>? comments,
     IList<int>? nags,
+    AnalysisFeedback? feedback,
   }) = _AnalysisCurrentNode;
 
   factory AnalysisCurrentNode.fromNode(Node node) {
