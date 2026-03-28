@@ -12,7 +12,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get mobileAccountPreferences => 'Tùy chỉnh tài khoản';
 
   @override
-  String get mobileAccountPreferencesHelp => 'Các tùy chọn này được áp dụng cho tài khoản Chessigma của bạn và sẽ được sử dụng trên tất cả các thiết bị.';
+  String get mobileAccountPreferencesHelp => 'Các tùy chọn này được áp dụng cho tài khoản Lichess của bạn và sẽ được sử dụng trên tất cả các thiết bị.';
 
   @override
   String get mobileAllGames => 'Tất cả ván đấu';
@@ -242,7 +242,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get mobileWatchTab => 'Xem';
 
   @override
-  String get mobileWelcomeToChessigmaApp => 'Chào mừng đến với ứng dụng Chessigma!';
+  String get mobileWelcomeToLichessApp => 'Chào mừng đến với ứng dụng Lichess!';
 
   @override
   String get mobileViewGame => 'Xem Trận Gốc';
@@ -282,6 +282,12 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get mobileOrImportPgnFile => 'Hoặc nhập một tệp PGN';
+
+  @override
+  String get showUnreadChessigmaMessage => 'You have an unread Chessigma message';
+
+  @override
+  String get mobileWelcomeToChessigmaApp => 'Welcome to Chessigma app!';
 
   @override
   String get variantStandardTitle => 'Luật cờ vua tiêu chuẩn (FIDE)';
@@ -741,7 +747,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get broadcastAboutBroadcasts => 'Giới thiệu về phát sóng';
 
   @override
-  String get broadcastHowToUseChessigmaBroadcasts => 'Cách sử dụng Phát sóng của Chessigma.';
+  String get broadcastHowToUseLichessBroadcasts => 'Cách sử dụng Phát sóng của Lichess.';
 
   @override
   String get broadcastTheNewRoundHelp => 'Vòng mới sẽ có các thành viên và cộng tác viên giống như vòng trước.';
@@ -776,10 +782,10 @@ class AppLocalizationsVi extends AppLocalizations {
   String get broadcastSourceSingleUrl => 'URL Nguồn PGN';
 
   @override
-  String get broadcastSourceUrlHelp => 'URL mà Chessigma sẽ khảo sát để nhận cập nhật PGN. Nó phải được truy cập công khai từ Internet.';
+  String get broadcastSourceUrlHelp => 'URL mà Lichess sẽ khảo sát để nhận cập nhật PGN. Nó phải được truy cập công khai từ Internet.';
 
   @override
-  String get broadcastSourceGameIds => 'Tối đa 64 ID ván cờ trên Chessigma, phân tách bằng dấu cách.';
+  String get broadcastSourceGameIds => 'Tối đa 64 ID ván cờ trên Lichess, phân tách bằng dấu cách.';
 
   @override
   String broadcastStartDateTimeZone(String param) {
@@ -850,7 +856,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get broadcastRecentTournaments => 'Các giải đấu tham gia gần đây';
 
   @override
-  String get broadcastOpenChessigma => 'Mở trên Chessigma';
+  String get broadcastOpenLichess => 'Mở trên Lichess';
 
   @override
   String get broadcastTeams => 'Các đội';
@@ -1136,13 +1142,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get challengeDeclineOnlyBot => 'Tôi chỉ chấp nhận các thách đấu từ BOT.';
 
   @override
-  String get challengeInviteChessigmaUser => 'Hoặc mời một người dùng Chessigma:';
+  String get challengeInviteLichessUser => 'Hoặc mời một người dùng Lichess:';
 
   @override
   String get contactContact => 'Liên hệ';
 
   @override
-  String get contactContactChessigma => 'Liên hệ Chessigma';
+  String get contactContactLichess => 'Liên hệ Lichess';
 
   @override
   String get coordinatesCoordinates => 'Tầm nhìn';
@@ -1209,10 +1215,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get patronDonate => 'Ủng hộ';
 
   @override
-  String get patronChessigmaPatron => 'Người bảo trợ Chessigma';
+  String get patronChessigmaPatron => 'Chessigma Patron';
 
   @override
-  String get patronBecomePatron => 'Trở thành một Người bảo trợ Chessigma';
+  String get patronLichessPatron => 'Người bảo trợ Lichess';
+
+  @override
+  String get patronBecomePatron => 'Trở thành một Người bảo trợ Lichess';
 
   @override
   String perfStatPerfStats(String param) {
@@ -1368,7 +1377,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get preferencesShowFlairs => 'Hiển thị biểu tượng của người chơi';
 
   @override
-  String get preferencesExplainShowPlayerRatings => 'Điều này sẽ ẩn toàn bộ hệ số khỏi Chessigma để giúp tập trung vào ván cờ. Ván đấu có xếp hạng vẫn ảnh hưởng đến hệ số của bạn, đây chỉ là những gì bạn có thể nhìn thấy.';
+  String get preferencesExplainShowPlayerRatings => 'Điều này sẽ ẩn toàn bộ hệ số khỏi Lichess để giúp tập trung vào ván cờ. Ván đấu có xếp hạng vẫn ảnh hưởng đến hệ số của bạn, đây chỉ là những gì bạn có thể nhìn thấy.';
 
   @override
   String get preferencesDisplayBoardResizeHandle => 'Hiện nút thay đổi kích cỡ bàn cờ';
@@ -1512,10 +1521,10 @@ class AppLocalizationsVi extends AppLocalizations {
   String get preferencesNotifyTimeAlarm => 'Thời gian đánh cờ qua thư sắp hết';
 
   @override
-  String get preferencesNotifyBell => 'Chuông thông báo khi đang truy cập Chessigma';
+  String get preferencesNotifyBell => 'Chuông thông báo khi đang truy cập Lichess';
 
   @override
-  String get preferencesNotifyPush => 'Thông báo tới thiết bị của bạn khi bạn không truy cập Chessigma';
+  String get preferencesNotifyPush => 'Thông báo tới thiết bị của bạn khi bạn không truy cập Lichess';
 
   @override
   String get preferencesNotifyWeb => 'Trình duyệt';
@@ -1733,7 +1742,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get puzzleSearchPuzzles => 'Tìm câu đố';
 
   @override
-  String get puzzleFromMyGamesNone => 'Bạn không có câu đố nào trong dữ liệu, nhưng Chessigma vẫn rất yêu mến bạn.\n\nHãy chơi thêm nhiều ván cờ nhanh và cờ chậm để có cơ hội có một câu đố từ ván cờ của riêng bạn!';
+  String get puzzleFromMyGamesNone => 'Bạn không có câu đố nào trong dữ liệu, nhưng Lichess vẫn rất yêu mến bạn.\n\nHãy chơi thêm nhiều ván cờ nhanh và cờ chậm để có cơ hội có một câu đố từ ván cờ của riêng bạn!';
 
   @override
   String get puzzlePuzzleDashboardDescription => 'Rèn luyện, phân tích, cải thiện';
@@ -2882,13 +2891,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get error_namePassword => 'Vui lòng không sử dụng tên đăng nhập làm mật khẩu.';
 
   @override
-  String get blankedPassword => 'Bạn đã sử dụng cùng một mật khẩu trên một trang web khác và trang web đó đã bị xâm nhập. Để đảm bảo an toàn cho tài khoản Chessigma của bạn, chúng tôi cần bạn đặt mật khẩu mới. Cảm ơn vì bạn đã thông cảm.';
+  String get blankedPassword => 'Bạn đã sử dụng cùng một mật khẩu trên một trang web khác và trang web đó đã bị xâm nhập. Để đảm bảo an toàn cho tài khoản Lichess của bạn, chúng tôi cần bạn đặt mật khẩu mới. Cảm ơn vì bạn đã thông cảm.';
 
   @override
-  String get youAreLeavingChessigma => 'Bạn đang thoát Chessigma';
+  String get youAreLeavingLichess => 'Bạn đang thoát Lichess';
 
   @override
-  String get neverTypeYourPassword => 'Không bao giờ nhập mật khẩu Chessigma của bạn trên bất kì trang web nào khác!';
+  String get neverTypeYourPassword => 'Không bao giờ nhập mật khẩu Lichess của bạn trên bất kì trang web nào khác!';
 
   @override
   String proceedToX(String param) {
@@ -3125,7 +3134,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get ratingFilter => 'Bộ lọc hệ số';
 
   @override
-  String get thisAccountViolatedTos => 'Tài khoản này đã vi phạm Điều khoản Dịch vụ của Chessigma';
+  String get thisAccountViolatedTos => 'Tài khoản này đã vi phạm Điều khoản Dịch vụ của Lichess';
 
   @override
   String get openingExplorerAndTablebase => 'Sách khai cuộc & tàn cuộc';
@@ -3585,7 +3594,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get clearSavedMoves => 'Xóa nước cờ';
 
   @override
-  String get previouslyOnChessigmaTV => 'Ván trước được lên Chessigma TV';
+  String get previouslyOnLichessTV => 'Ván trước được lên Lichess TV';
 
   @override
   String get onlinePlayers => 'Các kỳ thủ trực tuyến';
@@ -3967,7 +3976,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String tpTimeSpentOnTV(String param) {
-    return 'Thời gian được lên Chessigma TV: $param';
+    return 'Thời gian được lên Lichess TV: $param';
   }
 
   @override
@@ -3994,7 +4003,7 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String xIsAFreeYLibreOpenSourceChessServer(String param1, String param2) {
+  String xIsAFreeYLibreOpenSourceChessServer(Object param1, Object param2) {
     return '$param1 là một máy chủ cờ vua miễn phí ($param2), có mã nguồn mở và không có quảng cáo.';
   }
 
@@ -4085,7 +4094,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get simulHostExtraTimePerPlayer => 'Thời gian thêm cho người chủ trì theo số người tham gia';
 
   @override
-  String get lichessTournaments => 'Các giải đấu của Chessigma';
+  String get lichessTournaments => 'Các giải đấu của Lichess';
 
   @override
   String get tournamentFAQ => 'Các câu hỏi hay gặp về giải đấu Đấu trường';
@@ -4240,10 +4249,10 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get networkLagBetweenYouAndChessigma => 'Độ trễ mạng giữa bạn và Chessigma';
+  String get networkLagBetweenYouAndLichess => 'Độ trễ mạng giữa bạn và Lichess';
 
   @override
-  String get timeToProcessAMoveOnChessigmaServer => 'Thời gian để tiến hành một nước đi trên máy chủ Chessigma';
+  String get timeToProcessAMoveOnLichessServer => 'Thời gian để tiến hành một nước đi trên máy chủ Lichess';
 
   @override
   String get downloadAnnotated => 'Tải về kèm chú thích';
@@ -4300,8 +4309,8 @@ class AppLocalizationsVi extends AppLocalizations {
   String get kidModeExplanation => 'Điều này là để an toàn. Trong chế độ trẻ em, tất cả mọi giao tiếp trên trang web đều bị tắt. Kích hoạt điều này cho con của bạn và học viên trong lớp để bảo vệ chúng khỏi những người dùng khác trên Internet.';
 
   @override
-  String inKidModeTheChessigmaLogoGetsIconX(String param) {
-    return 'Trong chế độ trẻ em, biểu tượng Chessigma có một biểu tượng $param, từ đó bạn biết con bạn được an toàn.';
+  String inKidModeTheLichessLogoGetsIconX(String param) {
+    return 'Trong chế độ trẻ em, biểu tượng Lichess có một biểu tượng $param, từ đó bạn biết con bạn được an toàn.';
   }
 
   @override
@@ -4608,7 +4617,7 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get showUnreadChessigmaMessage => 'Bạn đã nhận được một tin nhắn riêng từ Chessigma.';
+  String get showUnreadLichessMessage => 'Bạn đã nhận được một tin nhắn riêng từ Lichess.';
 
   @override
   String get clickHereToReadIt => 'Nhấn vào đây để đọc nó';
@@ -4670,7 +4679,7 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get agreementPolicy => 'Tôi đồng ý rằng, tôi sẽ luôn tuân thủ các chính sách của Chessigma.';
+  String get agreementPolicy => 'Tôi đồng ý rằng, tôi sẽ luôn tuân thủ các chính sách của Lichess.';
 
   @override
   String get searchOrStartNewDiscussion => 'Tìm hoặc bắt đầu một cuộc trò chuyện';
@@ -4816,7 +4825,7 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get lostAgainstTOSViolator => 'Bạn đã mất điểm hệ số vào người vi phạm Điều khoản Dịch vụ của Chessigma';
+  String get lostAgainstTOSViolator => 'Bạn đã mất điểm hệ số vào người vi phạm Điều khoản Dịch vụ của Lichess';
 
   @override
   String refundXpointsTimeControlY(String param1, String param2) {
@@ -4981,7 +4990,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get until => 'Cho tới';
 
   @override
-  String get lichessDbExplanation => 'Các ván đấu có xếp hạng được lấy từ tất cả các kỳ thủ trên Chessigma';
+  String get lichessDbExplanation => 'Các ván đấu có xếp hạng được lấy từ tất cả các kỳ thủ trên Lichess';
 
   @override
   String get switchSides => 'Đổi bên';
@@ -4999,7 +5008,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get showMeEverything => 'Cho tôi xem mọi thứ nào';
 
   @override
-  String get lichessPatronInfo => 'Chessigma là một tổ chức phi lợi nhuận và là phần mềm hoàn toàn miễn phí/mã nguồn mở.\nMọi chi phí vận hành, phát triển, và nội dung được tài trợ bởi những đóng góp của người dùng.';
+  String get lichessPatronInfo => 'Lichess là một tổ chức phi lợi nhuận và là phần mềm hoàn toàn miễn phí/mã nguồn mở.\nMọi chi phí vận hành, phát triển, và nội dung được tài trợ bởi những đóng góp của người dùng.';
 
   @override
   String get nothingToSeeHere => 'Không có gì để xem ở đây vào lúc này.';
@@ -5662,7 +5671,7 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get streamerChessigmaStreamers => 'Các Streamer của Chessigma';
+  String get streamerLichessStreamers => 'Các Streamer của Lichess';
 
   @override
   String get studyPrivate => 'Riêng tư';
@@ -5829,7 +5838,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get studyCurrentChapterUrl => 'URL chương hiện tại';
 
   @override
-  String get studyYouCanPasteThisInTheForumToEmbed => 'Bạn có thể dán cái này để nhúng vào diễn đàn hoặc blog Chessigma cá nhân của bạn';
+  String get studyYouCanPasteThisInTheForumToEmbed => 'Bạn có thể dán cái này để nhúng vào diễn đàn hoặc blog Lichess cá nhân của bạn';
 
   @override
   String get studyStartAtInitialPosition => 'Bắt đầu từ thế cờ ban đầu';
@@ -6132,10 +6141,10 @@ class AppLocalizationsVi extends AppLocalizations {
   String get studyGetTheTour => 'Cần giúp đỡ? Khám phá nào!';
 
   @override
-  String get studyWelcomeToChessigmaStudyTitle => 'Chào mừng đến với Chessigma Study!';
+  String get studyWelcomeToLichessStudyTitle => 'Chào mừng đến với Lichess Study!';
 
   @override
-  String get studyWelcomeToChessigmaStudyText => 'Đây là một bàn cờ phân tích được chia sẻ.<br><br><br><br><br><br>Sử dụng nó để phân tích và chú thích các trò chơi,<br>thảo luận về các vị trí với bạn bè, <br>và tất nhiên cho các bài học cờ vua!<br><br>Đó là một công cụ mạnh mẽ, hãy dành một chút thời gian để xem nó hoạt động như thế nào.';
+  String get studyWelcomeToLichessStudyText => 'Đây là một bàn cờ phân tích được chia sẻ.<br><br><br><br><br><br>Sử dụng nó để phân tích và chú thích các trò chơi,<br>thảo luận về các vị trí với bạn bè, <br>và tất nhiên cho các bài học cờ vua!<br><br>Đó là một công cụ mạnh mẽ, hãy dành một chút thời gian để xem nó hoạt động như thế nào.';
 
   @override
   String get studySharedAndSaveTitle => 'Đã lưu và chia sẻ';
@@ -6201,10 +6210,10 @@ class AppLocalizationsVi extends AppLocalizations {
   String get studyCustomPositionText => 'Thiết lập bàn cờ theo cách của bạn.<br>phù hợp để khám phá cờ tàn, tàn cuộc.';
 
   @override
-  String get studyLoadExistingChessigmaGameTitle => 'Tải một ván cờ Chessigma hiện có';
+  String get studyLoadExistingLichessGameTitle => 'Tải một ván cờ Lichess hiện có';
 
   @override
-  String get studyLoadExistingChessigmaGameText => 'Dán URL một ván cờ trên lichess<br>(kiểu như lichess.org/7fhiu0xi)<br>để tải các nước cờ trong chương.';
+  String get studyLoadExistingLichessGameText => 'Dán URL một ván cờ trên lichess<br>(kiểu như lichess.org/7fhiu0xi)<br>để tải các nước cờ trong chương.';
 
   @override
   String get studyFromFenStringTitle => 'Từ một chuỗi FEN';
@@ -6222,7 +6231,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get studyVariantsAreSupportedTitle => 'Nghiên cứu hỗ trợ các biến thể';
 
   @override
-  String get studyVariantsAreSupportedText => 'Có, bạn có thể nghiên cứu Crazyhouse<br>và tất cả các biến thể của Chessigma!';
+  String get studyVariantsAreSupportedText => 'Có, bạn có thể nghiên cứu Crazyhouse<br>và tất cả các biến thể của Lichess!';
 
   @override
   String get studyChapterConclusionText => 'Các chương được lưu mãi mãi.<br>Hãy vui vẻ tổ chức nội dung cờ vua của bạn!';

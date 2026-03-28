@@ -5,7 +5,7 @@ import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
 import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/utils/color_palette.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 const kSliderTheme = SliderThemeData(
   // ignore: deprecated_member_use
   year2023: false,
@@ -101,21 +101,27 @@ ThemeData _makeDefaultTheme(
     seedColor: chessigmaGold,
     brightness: brightness,
   ).copyWith(
-    surface: brightness == Brightness.dark ? const Color(0xFF0A0E1A) : neutralScheme.surface,
+    primary: chessigmaGold,
+    onPrimary: Colors.black,
+    surface: brightness == Brightness.dark ? const Color(0xFF010206) : neutralScheme.surface,
     onSurface: neutralScheme.onSurface,
-    surfaceDim: brightness == Brightness.dark ? const Color(0xFF080B14) : neutralScheme.surfaceDim,
+    surfaceDim: brightness == Brightness.dark ? const Color(0xFF000103) : neutralScheme.surfaceDim,
     surfaceBright: neutralScheme.surfaceBright,
-    surfaceContainer: brightness == Brightness.dark ? const Color(0xFF121828) : neutralScheme.surfaceContainer,
-    surfaceContainerLowest: brightness == Brightness.dark ? const Color(0xFF05070D) : neutralScheme.surfaceContainerLowest,
-    surfaceContainerLow: brightness == Brightness.dark ? const Color(0xFF0F1422) : neutralScheme.surfaceContainerLow,
-    surfaceContainerHigh: brightness == Brightness.dark ? const Color(0xFF1A2138) : neutralScheme.surfaceContainerHigh,
-    surfaceContainerHighest: brightness == Brightness.dark ? const Color(0xFF222B45) : neutralScheme.surfaceContainerHighest,
+    surfaceContainer: brightness == Brightness.dark ? const Color(0xFF04060C) : neutralScheme.surfaceContainer,
+    surfaceContainerLowest: brightness == Brightness.dark ? const Color(0xFF000000) : neutralScheme.surfaceContainerLowest,
+    surfaceContainerLow: brightness == Brightness.dark ? const Color(0xFF020409) : neutralScheme.surfaceContainerLow,
+    surfaceContainerHigh: brightness == Brightness.dark ? const Color(0xFF0A0F1A) : neutralScheme.surfaceContainerHigh,
+    surfaceContainerHighest: brightness == Brightness.dark ? const Color(0xFF101625) : neutralScheme.surfaceContainerHighest,
   );
 
-  final textTheme = isIOS ? kCupertinoDefaultTextTheme : null;
+  final baseTextTheme = isIOS ? kCupertinoDefaultTextTheme : ThemeData(brightness: brightness).textTheme;
+  final textTheme = GoogleFonts.outfitTextTheme(baseTextTheme).apply(
+    bodyColor: boardScheme.onSurface,
+    displayColor: boardScheme.onSurface,
+  );
 
   final theme = hasSystemColors
-      ? ThemeData.from(colorScheme: systemScheme, textTheme: textTheme)
+      ? ThemeData.from(colorScheme: systemScheme!, textTheme: GoogleFonts.outfitTextTheme(baseTextTheme))
       : ThemeData.from(colorScheme: boardScheme, textTheme: textTheme);
 
   return theme.copyWith(
@@ -316,7 +322,10 @@ const _kCupertinoDialogTheme = DialogThemeData(
 const _kCupertinoCardTheme = CardThemeData(
   elevation: 0,
   margin: EdgeInsets.zero,
-  shape: RoundedRectangleBorder(borderRadius: Styles.cardBorderRadius),
+  shape: RoundedRectangleBorder(
+    borderRadius: Styles.cardBorderRadius,
+    side: BorderSide(color: Color(0x1AFFFFFF), width: 1), // Glassmorphism subtle border
+  ),
 );
 
 const _kCupertinoSearchBarTheme = SearchBarThemeData(

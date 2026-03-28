@@ -21,6 +21,7 @@ class RecentGamesWidget extends ConsumerWidget {
     required this.recentGames,
     required this.user,
     required this.nbOfGames,
+    this.title,
     this.maxGamesToShow = kNumberOfRecentGames,
     super.key,
   });
@@ -29,6 +30,7 @@ class RecentGamesWidget extends ConsumerWidget {
   final AsyncValue<IList<LightExportedGameWithPov>> recentGames;
   final int nbOfGames;
   final int maxGamesToShow;
+  final String? title;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -41,7 +43,7 @@ class RecentGamesWidget extends ConsumerWidget {
         }
         final list = data.take(maxGamesToShow);
         return ListSection(
-          header: Text(context.l10n.recentGames),
+          header: Text(title ?? context.l10n.recentGames),
           hasLeading: true,
           onHeaderTap: nbOfGames > list.length
               ? () {

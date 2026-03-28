@@ -107,9 +107,46 @@
 
 ### Done When
 
-- [ ] User can choose `Lichess` or `Chess.com`.
-- [ ] User can enter a username and load public game history.
-- [ ] User can pick any loaded game and open review in the existing analysis flow.
-- [ ] PGN import still works for single-game and multi-game review.
-- [ ] Error states for missing usernames, network failures, and upstream rate limits are handled cleanly.
-- [ ] Validation passes or blockers are recorded in `CURRENT_TASK.md`.
+- [x] User can choose `Lichess` or `Chess.com`.
+- [x] User can enter a username and load public game history.
+- [x] User can pick any loaded game and open review in the existing analysis flow.
+- [x] PGN import still works for single-game and multi-game review.
+- [x] Error states for missing usernames, network failures, and upstream rate limits are handled cleanly.
+- [x] Validation passes or blockers are recorded in `CURRENT_TASK.md`.
+
+## Phase 3: Frontend Overhaul (IN PROGRESS)
+
+**Goal:** Completely redesign the app's frontend using the Stitch "Luminous Grandmaster" design system and "Cyberpunk UI" guidelines. The app must be aesthetically pleasing, premium, and utilize glassmorphism, neon glows, and immersive dark mode layouts.
+
+### Phase 3 Tasks
+
+- [x] `P3-T01` Implement Core Design System (ThemeData, Colors, Typography).
+- [x] `P3-T02` Build Reusable UI Widgets (GlassCard, NeonButton, PulseChip).
+- [x] `P3-T03` Redesign Home Screen & Navigation.
+- [x] `P3-T04` Redesign Game Features & Play Menu.
+- [x] `P3-T05` Redesign History & Analysis Screens.
+- [x] `P3-T06` Redesign Settings & Profile Screens.
+- [x] `P3-T07` UI/UX Polish and Verification.
+
+### Done When
+- [x] The app uses the deep void background and Neon/Glassmorphism styling.
+- [x] Home, Play, History, and Settings screens are fully updated.
+- [x] Dark mode contrast standards (4.5:1 minimum) are met.
+
+## Phase 4: External History & Review Fixes (IN PROGRESS)
+
+**Goal:** Fix bugs in external game history sorting, icon colors, and review board orientation.
+
+### Phase 4 Tasks
+
+- [x] `P4-T01` Fix Lichess date parsing and ensure global sorting in providers.
+- [x] `P4-T02` Fix Chess.com orientation by improving name matching or using API metadata.
+- [x] `P4-T03` Fix win/loss/draw icon logic in history tiles.
+- [x] `P4-T04` Verify fixes across all sources (Lichess, Chess.com, PGN).
+
+### Done When
+
+- [x] Lichess and Chess.com games are sorted most recent first.
+- [x] Chess.com game results show correct colors (Win: Green, Loss: Red, Draw: Grey).
+- [x] Board orientation in review automatically favors the fetched user's side.
+- [x] `flutter analyze` passes.

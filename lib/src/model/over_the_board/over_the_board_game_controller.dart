@@ -15,16 +15,21 @@ import 'package:chessigma_mobile/src/model/game/game.dart';
 import 'package:chessigma_mobile/src/model/game/game_status.dart';
 import 'package:chessigma_mobile/src/model/game/material_diff.dart';
 import 'package:chessigma_mobile/src/model/game/over_the_board_game.dart';
+import 'package:chessigma_mobile/src/model/over_the_board/otb_history_storage.dart';
 
 part 'over_the_board_game_controller.freezed.dart';
 
-final _random = Random();
+final otbHistoryLocalProvider = FutureProvider.autoDispose<List<OverTheBoardGame>>((ref) async {
+  final storage = ref.watch(otbHistoryStorageProvider);
+  return storage.fetchHistory();
+});
 
 final overTheBoardGameControllerProvider =
-    NotifierProvider.autoDispose<OverTheBoardGameController, OverTheBoardGameState>(
-      OverTheBoardGameController.new,
-      name: 'OverTheBoardGameControllerProvider',
-    );
+    NotifierProvider<OverTheBoardGameController, OverTheBoardGameState>(
+  OverTheBoardGameController.new,
+);
+
+final _random = Random();
 
 class OverTheBoardGameController extends Notifier<OverTheBoardGameState> {
   @override
@@ -53,14 +58,23 @@ class OverTheBoardGameController extends Notifier<OverTheBoardGameState> {
     );
   }
 
+  Future<void> _saveToHistory() async {
+    if (state.finished) {
+      await ref.read(otbHistoryStorageProvider).save(state.game);
+      ref.invalidate(otbHistoryLocalProvider);
+    }
+  }
+
   void resign() {
     state = state.copyWith(
       game: state.game.copyWith(status: GameStatus.resign, winner: state.turn.opposite),
     );
+    _saveToHistory();
   }
 
   void draw() {
     state = state.copyWith(game: state.game.copyWith(status: GameStatus.draw));
+    _saveToHistory();
   }
 
   void makeMove(Move move) {
@@ -115,6 +129,10 @@ class OverTheBoardGameController extends Notifier<OverTheBoardGameState> {
         case null:
           state = state.copyWith(game: state.game.copyWith(status: GameStatus.variantEnd));
       }
+    }
+
+    if (state.finished) {
+      _saveToHistory();
     }
 
     _moveFeedback(sanMove);

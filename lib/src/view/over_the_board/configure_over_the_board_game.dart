@@ -12,6 +12,7 @@ import 'package:chessigma_mobile/src/model/settings/over_the_board_preferences.d
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/utils/l10n_context.dart';
 import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/neon_button.dart';
 import 'package:chessigma_mobile/src/widgets/adaptive_choice_picker.dart';
 import 'package:chessigma_mobile/src/widgets/list.dart';
 import 'package:chessigma_mobile/src/widgets/non_linear_slider.dart';
@@ -208,7 +209,7 @@ class _ConfigureOverTheBoardGameSheetState extends ConsumerState<_ConfigureOverT
         ),
         Padding(
           padding: Styles.horizontalBodyPadding,
-          child: FilledButton(
+          child: NeonButton(
             onPressed: () {
               ref.read(overTheBoardClockProvider.notifier).setupClock(timeIncrement);
               ref
@@ -216,7 +217,7 @@ class _ConfigureOverTheBoardGameSheetState extends ConsumerState<_ConfigureOverT
                   .startNewGame(chosenVariant, timeIncrement, initialFen: widget.initialFen);
               Navigator.pop(context);
             },
-            child: Text(context.l10n.play, style: Styles.bold),
+            label: context.l10n.play,
           ),
         ),
       ],

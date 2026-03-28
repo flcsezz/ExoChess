@@ -8,6 +8,8 @@ import 'package:chessigma_mobile/src/utils/l10n_context.dart';
 import 'package:chessigma_mobile/src/widgets/acpl_chart.dart';
 import 'package:chessigma_mobile/src/widgets/feedback.dart';
 import 'package:chessigma_mobile/src/widgets/game_summary_table.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/neon_button.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 
 class ServerAnalysisSummary extends ConsumerWidget {
   const ServerAnalysisSummary(this.options, {super.key});
@@ -35,11 +37,11 @@ class ServerAnalysisSummary extends ConsumerWidget {
               const Spacer(),
               Text(context.l10n.computerAnalysisDisabled),
               if (canShowGameSummary)
-                FilledButton.tonal(
+                NeonButton(
                   onPressed: () {
                     ref.read(analysisPreferencesProvider.notifier).toggleServerAnalysis();
                   },
-                  child: Text(context.l10n.enable),
+                  label: context.l10n.enable,
                 ),
               const Spacer(),
             ],
@@ -101,7 +103,7 @@ class ServerAnalysisSummary extends ConsumerWidget {
                             return FutureBuilder<void>(
                               future: pendingRequest,
                               builder: (context, snapshot) {
-                                return FilledButton.tonal(
+                                return NeonButton(
                                   onPressed: ref.watch(authControllerProvider) == null
                                       ? () {
                                           showSnackBar(
@@ -127,7 +129,7 @@ class ServerAnalysisSummary extends ConsumerWidget {
                                                 });
                                           });
                                         },
-                                  child: Text(context.l10n.requestAComputerAnalysis),
+                                  label: context.l10n.requestAComputerAnalysis,
                                 );
                               },
                             );

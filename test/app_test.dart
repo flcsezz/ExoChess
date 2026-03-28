@@ -76,7 +76,7 @@ void main() {
       // should see welcome message
       expect(
         find.text(
-          'Lichess is a free (really), libre, no-ads, open source chess server.',
+          'Chessigma is a Free and Opensourced Hobby Project XD',
           findRichText: true,
         ),
         findsOneWidget,

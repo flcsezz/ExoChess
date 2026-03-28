@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/utils/l10n_context.dart';
 import 'package:chessigma_mobile/src/widgets/buttons.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 
 /// A platform agnostic list section.
 ///
@@ -84,25 +85,25 @@ class ListSection extends StatelessWidget {
       child: _isLoading
           ? Column(
               children: [
-                (materialFilledCard == true ? Card.filled : Card.new)(
-                  clipBehavior: clipBehavior,
-                  margin: margin ?? Styles.bodySectionPadding,
-                  color: backgroundColor,
-                  child: Column(
-                    children: [
-                      const SizedBox(height: materialVerticalPadding),
-                      if (header != null)
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
-                          child: Container(
-                            width: double.infinity,
-                            height: 25,
-                            decoration: const BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.all(Radius.circular(16)),
+                Padding(
+                  padding: margin ?? Styles.bodySectionPadding,
+                  child: GlassCard(
+                    padding: EdgeInsets.zero,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: materialVerticalPadding),
+                        if (header != null)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
+                            child: Container(
+                              width: double.infinity,
+                              height: 25,
+                              decoration: const BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.all(Radius.circular(16)),
+                              ),
                             ),
                           ),
-                        ),
                       for (int i = 0; i < children.length; i++)
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 16.0),
@@ -116,7 +117,8 @@ class ListSection extends StatelessWidget {
                           ),
                         ),
                       const SizedBox(height: materialVerticalPadding),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -128,10 +130,8 @@ class ListSection extends StatelessWidget {
                 children: [
                   if (header != null)
                     ListSectionHeader(title: header!, onTap: onHeaderTap, trailing: headerTrailing),
-                  (materialFilledCard ? Card.filled : Card.new)(
-                    clipBehavior: clipBehavior,
-                    color: backgroundColor,
-                    margin: EdgeInsets.zero,
+                  GlassCard(
+                    padding: EdgeInsets.zero,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

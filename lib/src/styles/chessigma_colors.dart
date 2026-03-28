@@ -87,4 +87,16 @@ class ChessigmaColors {
   static const cyan = Color(0xFF56B4E9);
   static const blue = Color(0xFF0072B2);
   static const purple = Color(0xFF8572ff);
+
+  // Cyberpunk / Neon Accents
+  static const neonBlue = Color(0xFF00F0FF);
+  static const neonPurple = Color(0xFFB026FF);
+  static const neonPink = Color(0xFFFF007F);
+  static const neonGreen = Color(0xFF39FF14);
+  static const neonGold = Color(0xFFE8B84B);
+
+  // Void Backgrounds
+  static const voidBlack = Color(0xFF000000);
+  static const voidIndigo = Color(0xFF010206);
+  static const voidBackgroundLighter = Color(0xFF0A0E1A);
 }

@@ -10,6 +10,7 @@ environment:
   flutter: ^3.41.0
 
 dependencies:
+  google_fonts: ^6.1.0
   app_links: ^7.0.0
   app_settings: ^7.0.0
   async: ^2.10.0

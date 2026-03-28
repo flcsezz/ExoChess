@@ -25,6 +25,7 @@ import 'package:chessigma_mobile/src/widgets/board_thumbnail.dart';
 import 'package:chessigma_mobile/src/widgets/feedback.dart';
 import 'package:chessigma_mobile/src/widgets/list.dart';
 import 'package:chessigma_mobile/src/widgets/user.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/glass_card.dart';
 import 'package:share_plus/share_plus.dart';
 
 final _dateFormatter = DateFormat.yMMMd().add_Hm();
@@ -61,41 +62,43 @@ class GameListTile extends StatelessWidget {
       rating: opponent.rating,
     );
 
-    return ListTile(
-      onTap: () => openGameScreen(
-        context,
-        game: item.game,
-        orientation: item.pov,
-        loadingFen: game.lastFen,
-        loadingLastMove: game.lastMove,
-        lastMoveAt: game.lastMoveAt,
-      ),
-      onLongPress: () {
-        showModalBottomSheet<void>(
-          context: context,
-          useRootNavigator: true,
-          isDismissible: true,
-          isScrollControlled: true,
-          builder: (context) => GameContextMenu(
-            game: game,
-            mySide: youAre,
-            opponentTitle: opponentTitle,
-            onPressedBookmark: onPressedBookmark,
-          ),
-        );
-      },
-      leading: Icon(game.perf.icon),
-      title: opponentTitle,
-      subtitle: Text(relativeDate(context.l10n, game.lastMoveAt, shortDate: false)),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (me.analysis != null) ...[
-            Icon(CupertinoIcons.chart_bar_alt_fill, color: textShade(context, 0.5)),
-            const SizedBox(width: 5),
+    return GlassCard(
+      child: ListTile(
+        onTap: () => openGameScreen(
+          context,
+          game: item.game,
+          orientation: item.pov,
+          loadingFen: game.lastFen,
+          loadingLastMove: game.lastMove,
+          lastMoveAt: game.lastMoveAt,
+        ),
+        onLongPress: () {
+          showModalBottomSheet<void>(
+            context: context,
+            useRootNavigator: true,
+            isDismissible: true,
+            isScrollControlled: true,
+            builder: (context) => GameContextMenu(
+              game: game,
+              mySide: youAre,
+              opponentTitle: opponentTitle,
+              onPressedBookmark: onPressedBookmark,
+            ),
+          );
+        },
+        leading: Icon(game.perf.icon),
+        title: opponentTitle,
+        subtitle: Text(relativeDate(context.l10n, game.lastMoveAt, shortDate: false)),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (me.analysis != null) ...[
+              Icon(CupertinoIcons.chart_bar_alt_fill, color: textShade(context, 0.5)),
+              const SizedBox(width: 5),
+            ],
+            getResultIcon(game, youAre),
           ],
-          getResultIcon(game, youAre),
-        ],
+        ),
       ),
     );
   }

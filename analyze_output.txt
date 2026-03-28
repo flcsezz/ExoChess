@@ -1,0 +1,491 @@
+Analyzing mobile...                                             
+
+   info • Sort directive sections alphabetically • lib/main.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/app.dart:9:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/app_links.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/binding.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/db/buffered_writer.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/init.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/intl.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/localizations.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/account/account_preferences.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/account/account_repository.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/account/account_service.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/account/flair_provider.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/account/home_preferences.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/account/ongoing_game.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/analysis/analysis_controller.dart:10:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/analysis/analysis_controller.dart:32:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/analysis/analysis_preferences.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/analysis/common_analysis_state.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/analysis/forecast.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/analysis/move_evaluation.dart:2:1 • directives_ordering
+   info • Method invocation or property access on a 'dynamic' target • lib/src/model/analysis/move_evaluation.dart:109:9 • avoid_dynamic_calls
+   info • Method invocation or property access on a 'dynamic' target • lib/src/model/analysis/move_evaluation.dart:109:35 • avoid_dynamic_calls
+   info • Method invocation or property access on a 'dynamic' target • lib/src/model/analysis/move_evaluation.dart:110:29 • avoid_dynamic_calls
+   info • Method invocation or property access on a 'dynamic' target • lib/src/model/analysis/move_evaluation.dart:116:26 • avoid_dynamic_calls
+   info • Method invocation or property access on a 'dynamic' target • lib/src/model/analysis/move_evaluation.dart:117:33 • avoid_dynamic_calls
+   info • Method invocation or property access on a 'dynamic' target • lib/src/model/analysis/move_evaluation.dart:118:30 • avoid_dynamic_calls
+   info • Method invocation or property access on a 'dynamic' target • lib/src/model/analysis/move_evaluation.dart:118:30 • avoid_dynamic_calls
+   info • Method invocation or property access on a 'dynamic' target • lib/src/model/analysis/move_evaluation.dart:136:42 • avoid_dynamic_calls
+   info • Sort directive sections alphabetically • lib/src/model/analysis/opening_service.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/analysis/retro_controller.dart:9:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/analysis/server_analysis_service.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/announce/announce_service.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/auth/auth_controller.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/auth/auth_repository.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/auth/auth_storage.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/auth/bearer.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/board_editor/board_editor_controller.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/challenge/challenge.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/challenge/challenge_preferences.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/challenge/challenge_repository.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/challenge/challenge_service.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/challenge/challenges.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/chat/chat.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/chat/chat_controller.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/clock/clock_tool_controller.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/common/chess.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/common/eval.dart:10:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/common/node.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/common/perf.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/common/preloaded_data.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/common/service/move_feedback.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/common/service/sound_service.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/common/socket_events.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/common/speed.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/common/time_increment.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/common/uci.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/coordinate_training/coordinate_training_controller.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/coordinate_training/coordinate_training_preferences.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/correspondence/correspondence_game_storage.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/correspondence/correspondence_service.dart:9:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/correspondence/offline_correspondence_game.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/engine/engine.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/engine/evaluation_mixin.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/engine/evaluation_preferences.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/engine/evaluation_service.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/engine/nnue_service.dart:9:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/engine/uci_protocol.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/engine/work.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/explorer/opening_explorer.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/explorer/opening_explorer_preferences.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/explorer/opening_explorer_repository.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/explorer/tablebase.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/explorer/tablebase_repository.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/exported_game.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/game.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/game_board_params.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/game_bookmarks.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/game_controller.dart:11:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/game_filter.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/game_history.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/game_preferences.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/game_repository.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/game_repository_providers.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/game_share_service.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/game_socket_events.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/game_storage.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/gif_export.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/offline_computer_game.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/over_the_board_game.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/playable_game.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/game/player.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/lobby/correspondence_seek.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/lobby/create_game_service.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/lobby/game_seek.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/lobby/game_setup_preferences.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/lobby/lobby_numbers.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/lobby/lobby_repository.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/log/app_log_paginator.dart:4:1 • directives_ordering
+warning • Unused import: 'dart:async' • lib/src/model/log/app_log_service.dart:1:8 • unused_import
+   info • Sort directive sections alphabetically • lib/src/model/log/app_log_service.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/log/app_log_storage.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/log/http_log_paginator.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/log/http_log_storage.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/message/conversation_controller.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/message/message.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/message/message_repository.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/message/message_service.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/notifications/notification_service.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/notifications/notifications.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/notifications/notifications.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/offline_computer/computer_analysis.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/offline_computer/offline_computer_game_controller.dart:11:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/offline_computer/offline_computer_game_preferences.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/offline_computer/offline_computer_game_storage.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/offline_computer/practice_comment.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/offline_computer/tablebase_eval.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/over_the_board/otb_history_storage.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/over_the_board/over_the_board_clock.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/over_the_board/over_the_board_game_controller.dart:7:1 • directives_ordering
+   info • Don't make a function 'async' if it doesn't use 'await' • lib/src/model/over_the_board/over_the_board_game_controller.dart:22:90 • unnecessary_async
+   info • Sort directive sections alphabetically • lib/src/model/over_the_board/over_the_board_game_storage.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_activity.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_angle.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_batch_storage.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_controller.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_difficulty.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_opening.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_preferences.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_providers.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_repository.dart:10:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_service.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_session.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_storage.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_streak.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/puzzle_theme.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/storm.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/storm_controller.dart:11:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/puzzle/streak_storage.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/relation/online_friends.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/relation/relation_repository.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/settings/board_preferences.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/settings/brightness.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/settings/general_preferences.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/settings/log_preferences.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/settings/over_the_board_preferences.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/settings/preferences_storage.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/study/study.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/study/study_controller.dart:9:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/study/study_list_paginator.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/study/study_preferences.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/study/study_repository.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/tournament/tournament.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/tournament/tournament_controller.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/tournament/tournament_controller.dart:10:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/tournament/tournament_providers.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/tournament/tournament_repository.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/user/game_history_preferences.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/user/leaderboard.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/user/search_history.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/user/streamer.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/user/user.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/user/user_repository.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/model/user/user_repository_providers.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/network/aggregator.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/network/connectivity.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/network/http.dart:24:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/network/socket.dart:11:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/quick_actions.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/styles/styles.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/tab_scaffold.dart:9:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/tab_scaffold.dart:17:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/tab_scaffold.dart:20:1 • directives_ordering
+warning • The declaration '_CupertinoTabBar' isn't referenced • lib/src/tab_scaffold.dart:511:7 • unused_element
+warning • A value for optional parameter 'onTap' isn't ever given • lib/src/tab_scaffold.dart:517:10 • unused_element_parameter
+warning • A value for optional parameter 'backgroundColor' isn't ever given • lib/src/tab_scaffold.dart:519:10 • unused_element_parameter
+warning • A value for optional parameter 'activeColor' isn't ever given • lib/src/tab_scaffold.dart:520:10 • unused_element_parameter
+warning • A value for optional parameter 'border' isn't ever given • lib/src/tab_scaffold.dart:526:10 • unused_element_parameter
+   info • Missing a newline at the end of the file • lib/src/tab_scaffold.dart:916:2 • eol_at_end_of_file
+   info • Sort directive sections alphabetically • lib/src/theme.dart:3:1 • directives_ordering
+warning • The value of the local variable 'boardTheme' isn't used • lib/src/theme.dart:84:9 • unused_local_variable
+warning • The '!' will have no effect because the receiver can't be null • lib/src/theme.dart:124:49 • unnecessary_non_null_assertion
+   info • Sort directive sections alphabetically • lib/src/utils/gestures_exclusion.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/utils/immersive_mode.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/utils/json.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/utils/l10n.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/utils/l10n_context.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/utils/navigation.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/utils/screen.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/account/account_drawer.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/account/edit_profile_screen.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/account/game_bookmarks_screen.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/account/profile_screen.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/account/rating_pref_aware.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/analysis_board.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/analysis_board.dart:18:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/analysis_layout.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/analysis_screen.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/analysis_settings_screen.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/analysis_share_screen.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/conditional_premoves.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/engine_settings_widget.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/game_analysis_board.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/move_feedback_widget.dart:3:1 • directives_ordering
+   info • Use the constant 'Offset.zero' rather than a constructor returning the same object • lib/src/view/analysis/move_feedback_widget.dart:45:14 • use_named_constants
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/view/analysis/move_feedback_widget.dart:121:49 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/view/analysis/move_feedback_widget.dart:152:47 • deprecated_member_use
+   info • Sort directive sections alphabetically • lib/src/view/analysis/pgn_games_list_screen.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/retro_screen.dart:10:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/retro_settings_screen.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/server_analysis.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/server_analysis.dart:11:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/server_analysis.dart:12:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/analysis/tree_view.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/board_editor/board_editor_filters.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/board_editor/board_editor_positions.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/board_editor/board_editor_screen.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/chat/chat_context_menu.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/chat/chat_screen.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/clock/clock_settings.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/clock/clock_tool_screen.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/clock/custom_clock_settings.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/coordinate_training/coordinate_display.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/coordinate_training/coordinate_training_screen.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/correspondence/offline_correspondence_game_screen.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/engine/engine_button.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/engine/engine_gauge.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/engine/engine_lines.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/explorer/explorer_view.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/explorer/opening_explorer_screen.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/explorer/opening_explorer_settings.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/explorer/opening_explorer_view.dart:4:1 • directives_ordering
+warning • Unused import: 'package:chessigma_mobile/src/model/auth/auth_controller.dart' • lib/src/view/explorer/opening_explorer_view.dart:4:8 • unused_import
+   info • Sort directive sections alphabetically • lib/src/view/explorer/opening_explorer_widgets.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/explorer/tablebase_view.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/correspondence_clock_widget.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/game_body.dart:9:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/game_common_widgets.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/game_list_detail_tile.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/game_list_tile.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/game_list_tile.dart:28:1 • directives_ordering
+   info • Use 'const' with the constructor to improve performance • lib/src/view/game/game_list_tile.dart:49:16 • prefer_const_constructors
+   info • Sort directive sections alphabetically • lib/src/view/game/game_loading_board.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/game_player.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/game_result_dialog.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/game_screen.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/game_screen_providers.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/game_settings.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/gif_export_dialog.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/offline_correspondence_games_screen.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/game/status_l10n.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/home/games_carousel.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/home/home_tab_screen.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/home/home_tab_screen.dart:35:1 • directives_ordering
+warning • Unused import: 'package:chessigma_mobile/src/view/play/play_bottom_sheet.dart' • lib/src/view/home/home_tab_screen.dart:37:8 • unused_import
+warning • Unused import: 'package:url_launcher/url_launcher.dart' • lib/src/view/home/home_tab_screen.dart:46:8 • unused_import
+   info • Use 'const' with the constructor to improve performance • lib/src/view/home/home_tab_screen.dart:139:13 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance • lib/src/view/home/home_tab_screen.dart:201:23 • prefer_const_constructors
+   info • Use 'const' with the constructor to improve performance • lib/src/view/home/home_tab_screen.dart:251:13 • prefer_const_constructors
+warning • The declaration '_SignInWidget' isn't referenced • lib/src/view/home/home_tab_screen.dart:385:7 • unused_element
+   info • Sort directive sections alphabetically • lib/src/view/learn/learn_tab_screen.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/message/contacts_screen.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/message/conversation_screen.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/more/import_pgn_screen.dart:8:1 • directives_ordering
+   info • The import of 'package:flutter/cupertino.dart' is unnecessary because all of the used elements are also provided by the import of 'package:flutter/material.dart' • lib/src/view/more/more_tab_screen.dart:2:8 • unnecessary_import
+   info • Sort directive sections alphabetically • lib/src/view/more/more_tab_screen.dart:6:1 • directives_ordering
+warning • Unused import: 'package:chessigma_mobile/src/styles/styles.dart' • lib/src/view/more/more_tab_screen.dart:9:8 • unused_import
+warning • Unused import: 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart' • lib/src/view/more/more_tab_screen.dart:12:8 • unused_import
+warning • Unused import: 'package:chessigma_mobile/src/view/board_editor/board_editor_screen.dart' • lib/src/view/more/more_tab_screen.dart:13:8 • unused_import
+warning • Unused import: 'package:chessigma_mobile/src/widgets/list.dart' • lib/src/view/more/more_tab_screen.dart:18:8 • unused_import
+warning • Unused import: 'package:chessigma_mobile/src/widgets/settings.dart' • lib/src/view/more/more_tab_screen.dart:21:8 • unused_import
+warning • The value of the local variable 'isOnline' isn't used • lib/src/view/more/more_tab_screen.dart:28:11 • unused_local_variable
+   info • Sort directive sections alphabetically • lib/src/view/offline_computer/offline_computer_game_screen.dart:11:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/offline_computer/offline_computer_game_screen.dart:15:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/over_the_board/configure_over_the_board_game.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/over_the_board/configure_over_the_board_game.dart:16:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/over_the_board/otb_history_screen.dart:3:1 • directives_ordering
+warning • Unused import: 'package:chessigma_mobile/src/utils/l10n_context.dart' • lib/src/view/over_the_board/otb_history_screen.dart:5:8 • unused_import
+   info • Sort directive sections alphabetically • lib/src/view/over_the_board/otb_history_screen.dart:9:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/over_the_board/over_the_board_screen.dart:9:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/play/common_play_widgets.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/play/play_bottom_sheet.dart:3:1 • directives_ordering
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/view/play/play_bottom_sheet.dart:19:45 • deprecated_member_use
+   info • Sort directive sections alphabetically • lib/src/view/play/play_menu.dart:3:1 • directives_ordering
+warning • Unused import: 'package:chessigma_mobile/src/styles/chessigma_colors.dart' • lib/src/view/play/play_menu.dart:3:8 • unused_import
+   info • Sort directive sections alphabetically • lib/src/view/play/play_tab_screen.dart:3:1 • directives_ordering
+warning • Unused import: 'package:chessigma_mobile/src/styles/styles.dart' • lib/src/view/play/play_tab_screen.dart:3:8 • unused_import
+   info • Sort directive sections alphabetically • lib/src/view/play/play_tab_screen.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/play/time_control_modal.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/play/time_control_modal.dart:11:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/play/time_control_modal.dart:12:1 • directives_ordering
+warning • Unused import: 'package:chessigma_mobile/src/styles/chessigma_colors.dart' • lib/src/view/play/time_control_modal.dart:12:8 • unused_import
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/view/play/time_control_modal.dart:304:124 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/view/play/time_control_modal.dart:311:43 • deprecated_member_use
+   info • 'withOpacity' is deprecated and shouldn't be used. Use .withValues() to avoid precision loss • lib/src/view/play/time_control_modal.dart:315:74 • deprecated_member_use
+   info • Sort directive sections alphabetically • lib/src/view/puzzle/dashboard_screen.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/puzzle/opening_screen.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/puzzle/puzzle_error_board_widget.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/puzzle/puzzle_feedback_widget.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/puzzle/puzzle_history_screen.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/puzzle/puzzle_screen.dart:9:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/puzzle/puzzle_session_widget.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/puzzle/puzzle_tab_screen.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/puzzle/puzzle_themes_screen.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/puzzle/storm_clock.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/puzzle/storm_dashboard.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/puzzle/storm_screen.dart:9:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/puzzle/streak_screen.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/settings/account_preferences_screen.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/settings/app_log_settings_screen.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/settings/background_theme_choice_screen.dart:11:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/settings/background_theme_choice_screen.dart:21:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/settings/board_choice_screen.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/settings/board_settings_screen.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/settings/engine_settings_screen.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/settings/http_log_screen.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/settings/piece_set_screen.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/settings/settings_screen.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/settings/sound_settings_screen.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/settings/theme_settings_screen.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/settings/toggle_sound_button.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/study/study_bottom_bar.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/study/study_gamebook.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/study/study_list_screen.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/study/study_screen.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/study/study_settings.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/study/study_tree_view.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/tournament/tournament_faq.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/tournament/tournament_list_screen.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/tournament/tournament_screen.dart:10:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/game_history_screen.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/leaderboard_screen.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/perf_cards.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/perf_cards.dart:11:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/perf_stats_screen.dart:10:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/perf_stats_screen.dart:34:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/recent_games.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/search_screen.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/user_activity.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/user_context_menu.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/user_or_profile_screen.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/user_profile.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/user_profile.dart:19:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/view/user/user_screen.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/acpl_chart.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/adaptive_action_sheet.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/adaptive_choice_picker.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/background.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/board_preview.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/board_thumbnail.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/bottom_bar.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/clock.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/emoji_picker/emoji_item.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/emoji_picker/emoji_picker.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/feedback.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/game_layout.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/game_summary_table.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/list.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/material_diff.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/misc.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/move_list.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/network_image.dart:3:1 • directives_ordering
+warning • Unused import: 'package:dynamic_system_colors/dynamic_system_colors.dart' • lib/src/widgets/pgn.dart:4:8 • unused_import
+   info • Sort directive sections alphabetically • lib/src/widgets/pgn.dart:8:1 • directives_ordering
+warning • Unused import: 'package:chessigma_mobile/src/styles/styles.dart' • lib/src/widgets/pgn.dart:12:8 • unused_import
+   info • Sort directive sections alphabetically • lib/src/widgets/pgn.dart:16:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/platform.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/platform_alert_dialog.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/platform_context_menu_button.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/pockets.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/progression_widget.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/rating.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/settings.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/shimmer.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/stat_card.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/text_badge.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/user.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/user_list_tile.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/variant_app_bar_title.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • lib/src/widgets/yes_no_dialog.dart:2:1 • directives_ordering
+   info • Dependencies not sorted alphabetically • pubspec.yaml:14:3 • sort_pub_dependencies
+   info • Dependencies not sorted alphabetically • pubspec.yaml:87:3 • sort_pub_dependencies
+   info • Sort directive sections alphabetically • test/app_links_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/app_test.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/binding.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/example_data.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/account/account_repository_test.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/analysis/forecast_test.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/analysis/server_analysis_service_test.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/announce/announce_service_test.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/auth/fake_auth_repository.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/clock/chess_clock_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/common/node_test.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/common/time_increment_test.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/common/uci_test.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/correspondence/correspondence_game_storage_test.dart:2:1 • directives_ordering
+   info • The imported package 'firebase_messaging' isn't a dependency of the importing package • test/model/correspondence/correspondence_service_test.dart:2:8 • depend_on_referenced_packages
+  error • Target of URI doesn't exist: 'package:firebase_messaging/firebase_messaging.dart' • test/model/correspondence/correspondence_service_test.dart:2:8 • uri_does_not_exist
+   info • Sort directive sections alphabetically • test/model/correspondence/correspondence_service_test.dart:5:1 • directives_ordering
+  error • The static getter 'onMessage' can't be accessed through an instance • test/model/correspondence/correspondence_service_test.dart:71:37 • instance_access_to_static_member
+  error • The method 'add' isn't defined for the type 'Stream' • test/model/correspondence/correspondence_service_test.dart:71:47 • undefined_method
+  error • The name 'RemoteMessage' isn't a class • test/model/correspondence/correspondence_service_test.dart:72:15 • creation_with_non_type
+  error • The function 'RemoteNotification' isn't defined • test/model/correspondence/correspondence_service_test.dart:79:25 • undefined_function
+  error • The static getter 'onMessage' can't be accessed through an instance • test/model/correspondence/correspondence_service_test.dart:130:37 • instance_access_to_static_member
+  error • The method 'add' isn't defined for the type 'Stream' • test/model/correspondence/correspondence_service_test.dart:130:47 • undefined_method
+  error • The name 'RemoteMessage' isn't a class • test/model/correspondence/correspondence_service_test.dart:131:15 • creation_with_non_type
+   info • Sort directive sections alphabetically • test/model/engine/evaluation_service_test.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/engine/fake_nnue_service.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/engine/nnue_service_test.dart:9:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/explorer/opening_explorer_repository_test.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/explorer/tablebase_repository_test.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/game/game_repository_test.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/game/game_socket_events_test.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/game/game_socket_example_data.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/game/game_status_test.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/game/game_storage_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/game/game_test.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/game/material_diff_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/lobby/create_game_service_test.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/lobby/lobby_repository_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/message/message_repository_test.dart:4:1 • directives_ordering
+   info • The imported package 'firebase_messaging' isn't a dependency of the importing package • test/model/notifications/notification_service_test.dart:4:8 • depend_on_referenced_packages
+  error • Target of URI doesn't exist: 'package:firebase_messaging/firebase_messaging.dart' • test/model/notifications/notification_service_test.dart:4:8 • uri_does_not_exist
+   info • Sort directive sections alphabetically • test/model/notifications/notification_service_test.dart:8:1 • directives_ordering
+  error • The method 'verifyRequestPermissionCalls' isn't defined for the type 'FirebaseMessaging' • test/model/notifications/notification_service_test.dart:54:51 • undefined_method
+  error • The setter 'willGrantPermission' isn't defined for the type 'FirebaseMessaging' • test/model/notifications/notification_service_test.dart:107:39 • undefined_setter
+  error • The static getter 'onMessage' can't be accessed through an instance • test/model/notifications/notification_service_test.dart:171:39 • instance_access_to_static_member
+  error • The method 'add' isn't defined for the type 'Stream' • test/model/notifications/notification_service_test.dart:171:49 • undefined_method
+  error • The name 'RemoteMessage' isn't a class • test/model/notifications/notification_service_test.dart:172:17 • creation_with_non_type
+  error • The function 'RemoteNotification' isn't defined • test/model/notifications/notification_service_test.dart:174:27 • undefined_function
+   info • Sort directive sections alphabetically • test/model/offline_computer/practice_comment_test.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/offline_computer/tablebase_eval_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/puzzle/puzzle_batch_storage_test.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/puzzle/puzzle_repository_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/puzzle/puzzle_service_test.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/puzzle/puzzle_storage_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/puzzle/storm_combo.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/relation/relation_repository_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/study/study_repository_test.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/model/user/user_repository_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/network/aggregator_test.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/network/fake_http_client_factory.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/network/fake_websocket_channel.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/network/http_test.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/network/socket_test.dart:7:1 • directives_ordering
+   info • Unreachable member 'username' in an executable library • test/repro_issue.dart:17:16 • unreachable_from_main
+   info • Unnecessary use of a raw string • test/repro_issue.dart:22:69 • unnecessary_raw_strings
+   info • Don't invoke 'print' in production code • test/repro_issue.dart:47:3 • avoid_print
+   info • Don't invoke 'print' in production code • test/repro_issue.dart:58:5 • avoid_print
+   info • Don't invoke 'print' in production code • test/repro_issue.dart:60:7 • avoid_print
+   info • Don't invoke 'print' in production code • test/repro_issue.dart:71:3 • avoid_print
+   info • Don't invoke 'print' in production code • test/repro_issue.dart:85:5 • avoid_print
+   info • Sort directive sections alphabetically • test/test_container.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/test_provider_scope.dart:12:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/utils/cache_test.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/utils/duration_test.dart:2:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/utils/l10n_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/utils/rate_limit_test.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/analysis/analysis_layout_test.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/analysis/analysis_screen_test.dart:11:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/analysis/retro_screen_test.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/board_editor/board_editor_screen_test.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/coordinate_training/coordinate_training_screen_test.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/engine/engine_button_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/engine/test_engine_app.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/explorer/explorer_view_test.dart:6:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/explorer/opening_explorer_screen_test.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/game/game_screen_test.dart:11:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/home/home_tab_screen_test.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/more/import_pgn_screen_test.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/offline_computer/offline_computer_game_screen_test.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/over_the_board/over_the_board_screen_test.dart:10:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/puzzle/example_data.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/puzzle/puzzle_history_screen_test.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/puzzle/puzzle_screen_test.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/puzzle/puzzle_tab_screen_test.dart:9:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/puzzle/storm_screen_test.dart:7:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/puzzle/streak_screen_test.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/study/study_list_screen_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/study/study_screen_test.dart:8:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/user/leaderboard_screen_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/user/perf_stats_screen_test.dart:5:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/user/search_screen_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/view/user/user_screen_test.dart:3:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/widgets/adaptive_choice_picker_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/widgets/clock_test.dart:4:1 • directives_ordering
+   info • Sort directive sections alphabetically • test/widgets/game_layout_test.dart:7:1 • directives_ordering
+
+487 issues found. (ran in 5.4s)

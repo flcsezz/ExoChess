@@ -106,8 +106,8 @@ enum MoveEvaluation {
   }
 
   static MoveEvaluation? fromAnalysis(dynamic node) {
-    if (node.nags != null && node.nags!.isNotEmpty) {
-      final eval = fromNag(node.nags!.first);
+    if (node.nags is Iterable && (node.nags as Iterable).isNotEmpty) {
+      final eval = fromNag((node.nags as Iterable).first as int);
       if (eval != null) return eval;
     }
     
@@ -115,7 +115,7 @@ enum MoveEvaluation {
     try {
       final serverEval = node.serverEval;
       if (serverEval != null && serverEval.judgment != null) {
-        final name = serverEval.judgment!.name.toLowerCase();
+        final String name = (serverEval.judgment!.name as String).toLowerCase();
         if (name.contains('brilliant')) return MoveEvaluation.brilliant;
         if (name.contains('great')) return MoveEvaluation.great;
         if (name.contains('best')) return MoveEvaluation.best;
@@ -133,10 +133,10 @@ enum MoveEvaluation {
 
     // Check text comments for common labels
     try {
-      final Iterable<String>? comments = node.textComments;
+      final Iterable<String>? comments = node.textComments as Iterable<String>?;
       if (comments != null) {
         for (final comment in comments) {
-          final lowercase = comment.toLowerCase();
+          final String lowercase = comment.toLowerCase();
           if (lowercase.contains('brilliant')) return MoveEvaluation.brilliant;
           if (lowercase.contains('great move')) return MoveEvaluation.great;
           if (lowercase.contains('best move')) return MoveEvaluation.best;

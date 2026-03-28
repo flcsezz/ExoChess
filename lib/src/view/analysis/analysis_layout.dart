@@ -10,6 +10,7 @@ import 'package:chessigma_mobile/src/utils/screen.dart';
 import 'package:chessigma_mobile/src/view/engine/engine_gauge.dart';
 import 'package:chessigma_mobile/src/widgets/adaptive_action_sheet.dart';
 import 'package:chessigma_mobile/src/widgets/buttons.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 import 'package:chessigma_mobile/src/widgets/pockets.dart';
 
 /// The height of the board header or footer in the analysis layout.
@@ -303,9 +304,7 @@ class AnalysisLayout extends StatelessWidget {
                                   ),
                                 ),
                               Expanded(
-                                child: Card(
-                                  clipBehavior: Clip.hardEdge,
-                                  semanticContainer: false,
+                                child: GlassCard(
                                   child: TabBarView(controller: tabController, children: children),
                                 ),
                               ),

@@ -4,6 +4,7 @@ import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
+import 'package:chessigma_mobile/l10n/l10n.dart';
 import 'package:chessigma_mobile/src/constants.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
 import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
@@ -201,7 +202,9 @@ void main() {
       );
       await tester.pumpWidget(app);
 
-      await tester.tap(find.text('Analysis board'));
+      final l10n = AppLocalizations.of(tester.element(find.byType(MoreTabScreen)))!;
+
+      await tester.tap(find.text(l10n.analysis));
       await tester.pumpAndSettle(); // wait for analysis screen to open
 
       await playMove(tester, 'e2', 'e4');
@@ -211,7 +214,7 @@ void main() {
       await tester.pageBack();
       await tester.pump();
 
-      await tester.tap(find.text('Opening explorer'));
+      await tester.tap(find.text(l10n.openingExplorer));
       await tester.pumpAndSettle(); // wait for opening explorer screen to open
 
       // Should not use saved standalone analysis here

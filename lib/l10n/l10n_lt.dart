@@ -12,7 +12,7 @@ class AppLocalizationsLt extends AppLocalizations {
   String get mobileAccountPreferences => 'Account preferences';
 
   @override
-  String get mobileAccountPreferencesHelp => 'These preferences are applied to your Chessigma account and will be used across all devices.';
+  String get mobileAccountPreferencesHelp => 'These preferences are applied to your Lichess account and will be used across all devices.';
 
   @override
   String get mobileAllGames => 'All games';
@@ -242,7 +242,7 @@ class AppLocalizationsLt extends AppLocalizations {
   String get mobileWatchTab => 'Žiūrėk';
 
   @override
-  String get mobileWelcomeToChessigmaApp => 'Welcome to Chessigma app!';
+  String get mobileWelcomeToLichessApp => 'Welcome to Lichess app!';
 
   @override
   String get mobileViewGame => 'View Game';
@@ -282,6 +282,12 @@ class AppLocalizationsLt extends AppLocalizations {
 
   @override
   String get mobileOrImportPgnFile => 'Or import a PGN file';
+
+  @override
+  String get showUnreadChessigmaMessage => 'You have an unread Chessigma message';
+
+  @override
+  String get mobileWelcomeToChessigmaApp => 'Welcome to Chessigma app!';
 
   @override
   String get variantStandardTitle => 'Standard rules of chess (FIDE)';
@@ -325,7 +331,7 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get activitySignedUp => 'Užsiregistravo „Chessigma“';
+  String get activitySignedUp => 'Užsiregistravo „Lichess“';
 
   @override
   String activitySupportedNbMonths(int count, String param2) {
@@ -801,7 +807,7 @@ class AppLocalizationsLt extends AppLocalizations {
   String get broadcastAboutBroadcasts => 'Apie transliacijas';
 
   @override
-  String get broadcastHowToUseChessigmaBroadcasts => 'Kaip naudotis Chessigma transliacijomis.';
+  String get broadcastHowToUseLichessBroadcasts => 'Kaip naudotis Lichess transliacijomis.';
 
   @override
   String get broadcastTheNewRoundHelp => 'Naujajame ture bus tie patys nariai ir bendradarbiai, kaip ir ankstesniame.';
@@ -836,10 +842,10 @@ class AppLocalizationsLt extends AppLocalizations {
   String get broadcastSourceSingleUrl => 'PGN šaltinio URL';
 
   @override
-  String get broadcastSourceUrlHelp => 'URL, į kurį „Chessigma“ kreipsis gauti PGN atnaujinimus. Privalo būti viešai pasiekiamas internete.';
+  String get broadcastSourceUrlHelp => 'URL, į kurį „Lichess“ kreipsis gauti PGN atnaujinimus. Privalo būti viešai pasiekiamas internete.';
 
   @override
-  String get broadcastSourceGameIds => 'Iki 64 Chessigma žaidimo ID, atskirtų tarpais.';
+  String get broadcastSourceGameIds => 'Iki 64 Lichess žaidimo ID, atskirtų tarpais.';
 
   @override
   String broadcastStartDateTimeZone(String param) {
@@ -910,7 +916,7 @@ class AppLocalizationsLt extends AppLocalizations {
   String get broadcastRecentTournaments => 'Neseniai sukurti turnyrai';
 
   @override
-  String get broadcastOpenChessigma => 'Atverti Chessigma-e';
+  String get broadcastOpenLichess => 'Atverti Lichess-e';
 
   @override
   String get broadcastTeams => 'Komandos';
@@ -1202,13 +1208,13 @@ class AppLocalizationsLt extends AppLocalizations {
   String get challengeDeclineOnlyBot => 'Priimu iššūkius tik iš programų.';
 
   @override
-  String get challengeInviteChessigmaUser => 'Arba pakvieskite Chessigma vartotoją:';
+  String get challengeInviteLichessUser => 'Arba pakvieskite Lichess vartotoją:';
 
   @override
   String get contactContact => 'Susisiekite';
 
   @override
-  String get contactContactChessigma => 'Susisiekite su „Chessigma“';
+  String get contactContactLichess => 'Susisiekite su „Lichess“';
 
   @override
   String get coordinatesCoordinates => 'Koordinatės';
@@ -1275,10 +1281,13 @@ class AppLocalizationsLt extends AppLocalizations {
   String get patronDonate => 'Paremti';
 
   @override
-  String get patronChessigmaPatron => 'Chessigma rėmėjas';
+  String get patronChessigmaPatron => 'Chessigma Patron';
 
   @override
-  String get patronBecomePatron => 'Tapkite Chessigma rėmėju';
+  String get patronLichessPatron => 'Lichess rėmėjas';
+
+  @override
+  String get patronBecomePatron => 'Tapkite Lichess rėmėju';
 
   @override
   String perfStatPerfStats(String param) {
@@ -1578,10 +1587,10 @@ class AppLocalizationsLt extends AppLocalizations {
   String get preferencesNotifyTimeAlarm => 'Baigiasi korespondencinės partijos laikmatis';
 
   @override
-  String get preferencesNotifyBell => 'Varpelio pranešimai Chessigma';
+  String get preferencesNotifyBell => 'Varpelio pranešimai Lichess';
 
   @override
-  String get preferencesNotifyPush => 'Pranešimai prietaisuose kai nesate Chessigma';
+  String get preferencesNotifyPush => 'Pranešimai prietaisuose kai nesate Lichess';
 
   @override
   String get preferencesNotifyWeb => 'Naršyklėje';
@@ -1799,7 +1808,7 @@ class AppLocalizationsLt extends AppLocalizations {
   String get puzzleSearchPuzzles => 'Ieškoti galvosūkių';
 
   @override
-  String get puzzleFromMyGamesNone => 'Jūs galvosūkių duomenų bazėje neturite, bet Chessigma vis tiek jus labai myli.\nŽaiskite greituosius ir klasikinius žaidimus ir taip padidinkite šansus, kad bus pridėtas galvosūkis iš jūsų partijos!';
+  String get puzzleFromMyGamesNone => 'Jūs galvosūkių duomenų bazėje neturite, bet Lichess vis tiek jus labai myli.\nŽaiskite greituosius ir klasikinius žaidimus ir taip padidinkite šansus, kad bus pridėtas galvosūkis iš jūsų partijos!';
 
   @override
   String get puzzlePuzzleDashboardDescription => 'Treniruokitės, analizuokite, tobulinkitės';
@@ -2964,13 +2973,13 @@ class AppLocalizationsLt extends AppLocalizations {
   String get error_namePassword => 'Prašome nenaudoti savo vartotojo vardo kaip slaptažodžio.';
 
   @override
-  String get blankedPassword => 'Jūs jau panaudojote šį slaptažodį kitoje svetainėje, kurios saugumas buvo pažeistas. Norėdami užtikrinti jūsų Chessigma paskyros saugumą turime paprašyti nustatyti naują slaptažodį. Dėkojame už supratingumą.';
+  String get blankedPassword => 'Jūs jau panaudojote šį slaptažodį kitoje svetainėje, kurios saugumas buvo pažeistas. Norėdami užtikrinti jūsų Lichess paskyros saugumą turime paprašyti nustatyti naują slaptažodį. Dėkojame už supratingumą.';
 
   @override
-  String get youAreLeavingChessigma => 'Jūs paliekate Chessigma';
+  String get youAreLeavingLichess => 'Jūs paliekate Lichess';
 
   @override
-  String get neverTypeYourPassword => 'Niekada netalpinkite savo Chessigma slaptažodžio kitoje svetainėje!';
+  String get neverTypeYourPassword => 'Niekada netalpinkite savo Lichess slaptažodžio kitoje svetainėje!';
 
   @override
   String proceedToX(String param) {
@@ -3207,7 +3216,7 @@ class AppLocalizationsLt extends AppLocalizations {
   String get ratingFilter => 'Reitingo filtras';
 
   @override
-  String get thisAccountViolatedTos => 'Ši paskyra pažeidė „Chessigma“ naudojimo sąlygas';
+  String get thisAccountViolatedTos => 'Ši paskyra pažeidė „Lichess“ naudojimo sąlygas';
 
   @override
   String get openingExplorerAndTablebase => 'Debiutų naršyklė ir pozicijų duomenų bazė';
@@ -3667,7 +3676,7 @@ class AppLocalizationsLt extends AppLocalizations {
   String get clearSavedMoves => 'Išvalyti ėjimus';
 
   @override
-  String get previouslyOnChessigmaTV => 'Anksčiau per „lichess TV“';
+  String get previouslyOnLichessTV => 'Anksčiau per „lichess TV“';
 
   @override
   String get onlinePlayers => 'Prisijungę žaidėjai';
@@ -4076,7 +4085,7 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String xIsAFreeYLibreOpenSourceChessServer(String param1, String param2) {
+  String xIsAFreeYLibreOpenSourceChessServer(Object param1, Object param2) {
     return '$param1 yra nemokamas ($param2), laisvas, neturintis reklamų, atviro kodo šachmatų serveris.';
   }
 
@@ -4322,10 +4331,10 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get networkLagBetweenYouAndChessigma => 'Tinklo delsa tarp jūsų ir „lichess“';
+  String get networkLagBetweenYouAndLichess => 'Tinklo delsa tarp jūsų ir „lichess“';
 
   @override
-  String get timeToProcessAMoveOnChessigmaServer => 'Laikas, per kurį „lichess“ serveris apdoroja ėjimą';
+  String get timeToProcessAMoveOnLichessServer => 'Laikas, per kurį „lichess“ serveris apdoroja ėjimą';
 
   @override
   String get downloadAnnotated => 'Siųstis anotuotą';
@@ -4382,7 +4391,7 @@ class AppLocalizationsLt extends AppLocalizations {
   String get kidModeExplanation => 'Tai yra dėl saugumo. Vaiko veiksenoje išjungiamas visas bendravimas svetainėje. Įjunkite tai savo vaikams bei moksleiviams, norėdami juos apsaugoti nuo kitų interneto naudotojų.';
 
   @override
-  String inKidModeTheChessigmaLogoGetsIconX(String param) {
+  String inKidModeTheLichessLogoGetsIconX(String param) {
     return 'Vaiko veiksenoje „lichess“ logotipas gauna $param piktogramą tam, kad žinotumėte, jog jūsų vaikai yra saugūs.';
   }
 
@@ -4690,7 +4699,7 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get showUnreadChessigmaMessage => 'Jūs gavote privačią žinutę iš Chessigma.';
+  String get showUnreadLichessMessage => 'Jūs gavote privačią žinutę iš Lichess.';
 
   @override
   String get clickHereToReadIt => 'Spustelėkite čia, kad peržiūrėtumėte';
@@ -4752,7 +4761,7 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get agreementPolicy => 'Pasižadu laikytis visų „Chessigma“ nuostatų.';
+  String get agreementPolicy => 'Pasižadu laikytis visų „Lichess“ nuostatų.';
 
   @override
   String get searchOrStartNewDiscussion => 'Ieškokite, arba pradėkite naują diskusiją';
@@ -4898,7 +4907,7 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get lostAgainstTOSViolator => 'Jūs pralaimėjote prieš žmogų, kuris pažeidė Chessigma taisykles';
+  String get lostAgainstTOSViolator => 'Jūs pralaimėjote prieš žmogų, kuris pažeidė Lichess taisykles';
 
   @override
   String refundXpointsTimeControlY(String param1, String param2) {
@@ -5063,7 +5072,7 @@ class AppLocalizationsLt extends AppLocalizations {
   String get until => 'Iki';
 
   @override
-  String get lichessDbExplanation => 'Reitinguoti žaidimai paimti iš visų Chessigma žaidėjų';
+  String get lichessDbExplanation => 'Reitinguoti žaidimai paimti iš visų Lichess žaidėjų';
 
   @override
   String get switchSides => 'Pakeisti puses';
@@ -5081,7 +5090,7 @@ class AppLocalizationsLt extends AppLocalizations {
   String get showMeEverything => 'Rodyti viską';
 
   @override
-  String get lichessPatronInfo => 'Chessigma yra labdara ir pilnai atviro kodo/libre projektas.\nVisos veikimo išlaidos, programavimas ir turinys yra padengti išskirtinai tik vartotojų parama.';
+  String get lichessPatronInfo => 'Lichess yra labdara ir pilnai atviro kodo/libre projektas.\nVisos veikimo išlaidos, programavimas ir turinys yra padengti išskirtinai tik vartotojų parama.';
 
   @override
   String get nothingToSeeHere => 'Nieko naujo.';
@@ -5882,7 +5891,7 @@ class AppLocalizationsLt extends AppLocalizations {
   }
 
   @override
-  String get streamerChessigmaStreamers => 'Chessigma transliuotojai';
+  String get streamerLichessStreamers => 'Lichess transliuotojai';
 
   @override
   String get studyPrivate => 'Privati';
@@ -6352,10 +6361,10 @@ class AppLocalizationsLt extends AppLocalizations {
   String get studyGetTheTour => 'Need help? Get the tour!';
 
   @override
-  String get studyWelcomeToChessigmaStudyTitle => 'Welcome to Chessigma Study!';
+  String get studyWelcomeToLichessStudyTitle => 'Welcome to Lichess Study!';
 
   @override
-  String get studyWelcomeToChessigmaStudyText => 'This is a shared analysis board.<br><br>Use it to analyse and annotate games,<br>discuss positions with friends,<br>and of course for chess lessons!<br><br>It\'s a powerful tool, let\'s take some time to see how it works.';
+  String get studyWelcomeToLichessStudyText => 'This is a shared analysis board.<br><br>Use it to analyse and annotate games,<br>discuss positions with friends,<br>and of course for chess lessons!<br><br>It\'s a powerful tool, let\'s take some time to see how it works.';
 
   @override
   String get studySharedAndSaveTitle => 'Shared and saved';
@@ -6421,10 +6430,10 @@ class AppLocalizationsLt extends AppLocalizations {
   String get studyCustomPositionText => 'Setup the board your way.<br>Suited to explore endgames.';
 
   @override
-  String get studyLoadExistingChessigmaGameTitle => 'Load an existing lichess game';
+  String get studyLoadExistingLichessGameTitle => 'Load an existing lichess game';
 
   @override
-  String get studyLoadExistingChessigmaGameText => 'Paste a lichess game URL<br>(like lichess.org/7fHIU0XI)<br>to load the game moves in the chapter.';
+  String get studyLoadExistingLichessGameText => 'Paste a lichess game URL<br>(like lichess.org/7fHIU0XI)<br>to load the game moves in the chapter.';
 
   @override
   String get studyFromFenStringTitle => 'From a FEN string';

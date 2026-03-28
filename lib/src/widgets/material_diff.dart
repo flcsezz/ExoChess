@@ -27,11 +27,9 @@ class MaterialDifferenceDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final IMap<Role, int> piecesToRender = materialDiff != null
-        ? (materialDifferenceFormat == MaterialDifferenceFormat.capturedPieces
-              ? materialDiff!.capturedPieces
-              : materialDiff!.pieces)
-        : IMap();
+    // Show captured pieces if format is capturedPieces OR if it's OTB/Analysis (handled by passing this format)
+    // We want to show the full captured set, so we use materialDiff.capturedPieces
+    final IMap<Role, int> piecesToRender = materialDiff?.capturedPieces ?? IMap();
 
     final isShortScreen = isShortVerticalScreen(context);
     final iconSize = isShortScreen ? 11.0 : 13.0;
@@ -40,27 +38,40 @@ class MaterialDifferenceDisplay extends StatelessWidget {
     Icon roleIcon(Role role) =>
         Icon(_iconByRole[role], size: iconSize, color: textShade(context, 0.5));
 
-    return materialDifferenceFormat?.visible ?? true
-        ? Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (final role in Role.values)
-                for (int i = 0; i < (piecesToRender.get(role) ?? 0); i++) roleIcon(role),
-              const SizedBox(width: 3),
-              Text(
-                // a text font size of 14 is used to ensure that the text will take more vertical space
-                // than the icons
-                // this is a trick to make sure the player name widget will not shift, since the text
-                // widget is always present (contrary to the icons)
-                style: TextStyle(fontSize: textSize, color: textShade(context, 0.5)),
-                materialDiff != null && materialDiff!.score > 0 ? '+${materialDiff!.score}' : '',
-              ),
-              if (materialDiff?.checksGiven != null) ...[
-                const SizedBox(width: 3),
-                ...Iterable.generate(materialDiff?.checksGiven ?? 0, (_) => roleIcon(Role.king)),
-              ],
-            ],
-          )
-        : const SizedBox.shrink();
+    if (!(materialDifferenceFormat?.visible ?? true)) {
+      return const SizedBox.shrink();
+    }
+
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        // Captured pieces icons
+        for (final role in Role.values)
+          for (int i = 0; i < (piecesToRender.get(role) ?? 0); i++) 
+            Padding(
+              padding: const EdgeInsets.only(right: 1),
+              child: roleIcon(role),
+            ),
+        
+        if (piecesToRender.isNotEmpty && materialDiff != null && materialDiff!.score > 0)
+          const SizedBox(width: 4),
+
+        // Score difference
+        if (materialDiff != null && materialDiff!.score > 0)
+          Text(
+            '+${materialDiff!.score}',
+            style: TextStyle(
+              fontSize: textSize, 
+              color: textShade(context, 0.5),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+        if (materialDiff?.checksGiven != null) ...[
+          const SizedBox(width: 6),
+          ...Iterable.generate(materialDiff?.checksGiven ?? 0, (_) => roleIcon(Role.king)),
+        ],
+      ],
+    );
   }
 }

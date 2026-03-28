@@ -31,6 +31,7 @@ import 'package:chessigma_mobile/src/widgets/progression_widget.dart';
 import 'package:chessigma_mobile/src/widgets/rating.dart';
 import 'package:chessigma_mobile/src/widgets/stat_card.dart';
 import 'package:chessigma_mobile/src/widgets/user.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 
 final _dateFormatter = DateFormat.yMMMd();
 
@@ -153,7 +154,7 @@ class _Body extends ConsumerWidget {
               if (ratingHistoryPerfData == null || ratingHistoryPerfData.points.length <= 1) {
                 return const SizedBox.shrink();
               }
-              return Card(
+              return GlassCard(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: _EloChart(ratingHistoryPerfData),
@@ -194,7 +195,7 @@ class _Body extends ConsumerWidget {
                 if (ratingHistoryPerfData == null || ratingHistoryPerfData.points.length <= 1) {
                   return const SizedBox.shrink();
                 }
-                return Card(
+                return GlassCard(
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: _EloChart(ratingHistoryPerfData),
@@ -226,7 +227,7 @@ class _Body extends ConsumerWidget {
                   ),
                 ],
               ),
-              Card(
+              GlassCard(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -332,7 +333,7 @@ class _Body extends ConsumerWidget {
                   ),
                 ),
               ),
-              Card(
+              GlassCard(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(

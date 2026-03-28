@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chessigma_mobile/src/model/account/account_repository.dart';
 import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
 import 'package:chessigma_mobile/src/model/game/game_history.dart';
+import 'package:chessigma_mobile/src/model/external_history/external_history_provider.dart';
 import 'package:chessigma_mobile/src/model/user/user.dart';
 import 'package:chessigma_mobile/src/model/user/user_repository.dart';
 import 'package:chessigma_mobile/src/network/http.dart';
@@ -87,41 +88,79 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           final activity = ref.watch(_accountActivityProvider);
           final recentGames = ref.watch(myRecentGamesProvider);
           final nbOfGames = ref.watch(userNumberOfGamesProvider(null)).value ?? 0;
-          return HapticRefreshIndicator(
-            edgeOffset: Theme.of(context).platform == TargetPlatform.iOS
-                ? MediaQuery.paddingOf(context).top + kToolbarHeight
-                : 0.0,
-            key: _refreshIndicatorKey,
-            onRefresh: () => Future.wait([
-              ref.refresh(accountProvider.future),
-              ref.refresh(_accountActivityProvider.future),
-              ref.refresh(myRecentGamesProvider.future),
-            ]),
-            child: ListView(
-              children: [
-                UserProfileWidget(user: user),
-                const AccountPerfCards(),
-                if (user.count != null && user.count!.bookmark > 0)
-                  ListSection(
-                    hasLeading: true,
-                    children: [
-                      ListTile(
-                        title: Text(context.l10n.nbBookmarks(user.count!.bookmark)),
-                        leading: const Icon(Icons.bookmarks_outlined),
-                        onTap: () {
-                          Navigator.of(context).push(
-                            GameBookmarksScreen.buildRoute(
-                              context,
-                              nbBookmarks: user.count!.bookmark,
-                            ),
-                          );
-                        },
-                      ),
+          return DefaultTabController(
+            length: 3,
+            child: HapticRefreshIndicator(
+              edgeOffset: Theme.of(context).platform == TargetPlatform.iOS
+                  ? MediaQuery.paddingOf(context).top + kToolbarHeight
+                  : 0.0,
+              key: _refreshIndicatorKey,
+              onRefresh: () => Future.wait([
+                ref.refresh(accountProvider.future),
+                ref.refresh(_accountActivityProvider.future),
+                ref.refresh(myRecentGamesProvider.future),
+                ref.refresh(lichessRecentConvertedProvider.future),
+                ref.refresh(chesscomRecentConvertedProvider.future),
+              ]),
+              child: ListView(
+                children: [
+                  UserProfileWidget(user: user),
+                  const AccountPerfCards(),
+                  if (user.count != null && user.count!.bookmark > 0)
+                    ListSection(
+                      hasLeading: true,
+                      children: [
+                        ListTile(
+                          title: Text(context.l10n.nbBookmarks(user.count!.bookmark)),
+                          leading: const Icon(Icons.bookmarks_outlined),
+                          onTap: () {
+                            Navigator.of(context).push(
+                              GameBookmarksScreen.buildRoute(
+                                context,
+                                nbBookmarks: user.count!.bookmark,
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  UserActivityWidget(activity: activity, user: user.lightUser),
+                  
+                  const TabBar(
+                    tabs: [
+                      Tab(text: 'Local', icon: Icon(Icons.phone_android)),
+                      Tab(text: 'Lichess', icon: Icon(Icons.api)),
+                      Tab(text: 'Chess.com', icon: Icon(Icons.person_search)),
                     ],
                   ),
-                UserActivityWidget(activity: activity, user: user.lightUser),
-                RecentGamesWidget(recentGames: recentGames, nbOfGames: nbOfGames, user: null),
-              ],
+                  
+                  SizedBox(
+                    height: 500, // Fixed height or use a sliver approach
+                    child: TabBarView(
+                      children: [
+                        RecentGamesWidget(
+                          recentGames: recentGames,
+                          nbOfGames: nbOfGames,
+                          user: null,
+                          title: 'Local Game History',
+                        ),
+                        RecentGamesWidget(
+                          recentGames: ref.watch(lichessRecentConvertedProvider),
+                          nbOfGames: 0,
+                          user: null,
+                          title: 'Lichess Game History',
+                        ),
+                        RecentGamesWidget(
+                          recentGames: ref.watch(chesscomRecentConvertedProvider),
+                          nbOfGames: 0,
+                          user: null,
+                          title: 'Chess.com Game History',
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         },

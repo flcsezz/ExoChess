@@ -12,7 +12,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get mobileAccountPreferences => 'Fiókbeállítások';
 
   @override
-  String get mobileAccountPreferencesHelp => 'Ezek a beállítások a Chessigma-profilodhoz tartoznak, és minden eszközön érvényesek.';
+  String get mobileAccountPreferencesHelp => 'Ezek a beállítások a Lichess-profilodhoz tartoznak, és minden eszközön érvényesek.';
 
   @override
   String get mobileAllGames => 'Összes játszma';
@@ -61,7 +61,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get mobileHomeTab => 'Kezdőlap';
 
   @override
-  String get mobileLiveStreamers => 'Chessigma-közvetítések';
+  String get mobileLiveStreamers => 'Lichess-közvetítések';
 
   @override
   String get mobileMustBeLoggedIn => 'Az oldal megtekintéséhez be kell jelentkezned.';
@@ -242,7 +242,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get mobileWatchTab => 'Néznivaló';
 
   @override
-  String get mobileWelcomeToChessigmaApp => 'Üdvözlünk a Chessigma-alkalmazásban!';
+  String get mobileWelcomeToLichessApp => 'Üdvözlünk a Lichess-alkalmazásban!';
 
   @override
   String get mobileViewGame => 'View Game';
@@ -282,6 +282,12 @@ class AppLocalizationsHu extends AppLocalizations {
 
   @override
   String get mobileOrImportPgnFile => 'Or import a PGN file';
+
+  @override
+  String get showUnreadChessigmaMessage => 'You have an unread Chessigma message';
+
+  @override
+  String get mobileWelcomeToChessigmaApp => 'Welcome to Chessigma app!';
 
   @override
   String get variantStandardTitle => 'Standard rules of chess (FIDE)';
@@ -761,7 +767,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get broadcastAboutBroadcasts => 'A közvetítésekről';
 
   @override
-  String get broadcastHowToUseChessigmaBroadcasts => 'A Chessigma-közvetítések használata.';
+  String get broadcastHowToUseLichessBroadcasts => 'A Lichess-közvetítések használata.';
 
   @override
   String get broadcastTheNewRoundHelp => 'Új forduló: ugyanazok lesznek a tagok és a közreműködők.';
@@ -796,10 +802,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get broadcastSourceSingleUrl => 'PGN forrás URL';
 
   @override
-  String get broadcastSourceUrlHelp => 'URL, amit a Chessigma időnként PGN frissítésekért ellenőriz. Ennek nyilvános internetcímnek kell lennie.';
+  String get broadcastSourceUrlHelp => 'URL, amit a Lichess időnként PGN frissítésekért ellenőriz. Ennek nyilvános internetcímnek kell lennie.';
 
   @override
-  String get broadcastSourceGameIds => 'Maximum 64 Chessigma játszma ID, szóközzel elválasztva.';
+  String get broadcastSourceGameIds => 'Maximum 64 Lichess játszma ID, szóközzel elválasztva.';
 
   @override
   String broadcastStartDateTimeZone(String param) {
@@ -870,7 +876,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get broadcastRecentTournaments => 'Legutóbbi versenyek';
 
   @override
-  String get broadcastOpenChessigma => 'Nyisd meg a Chessigma-ben';
+  String get broadcastOpenLichess => 'Nyisd meg a Lichess-ben';
 
   @override
   String get broadcastTeams => 'Csapatok';
@@ -1158,13 +1164,13 @@ class AppLocalizationsHu extends AppLocalizations {
   String get challengeDeclineOnlyBot => 'Csak botoktól fogadok el kihívást.';
 
   @override
-  String get challengeInviteChessigmaUser => 'Vagy hívj meg egy Chessigma -felhasználót:';
+  String get challengeInviteLichessUser => 'Vagy hívj meg egy Lichess -felhasználót:';
 
   @override
   String get contactContact => 'Kapcsolat';
 
   @override
-  String get contactContactChessigma => 'Lépj kapcsolatba velünk';
+  String get contactContactLichess => 'Lépj kapcsolatba velünk';
 
   @override
   String get coordinatesCoordinates => 'Koordináták';
@@ -1234,7 +1240,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get patronChessigmaPatron => 'Chessigma Patron';
 
   @override
-  String get patronBecomePatron => 'Támogasd a Chessigmat';
+  String get patronLichessPatron => 'Lichess Patron';
+
+  @override
+  String get patronBecomePatron => 'Támogasd a Lichesst';
 
   @override
   String perfStatPerfStats(String param) {
@@ -1390,7 +1399,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get preferencesShowFlairs => 'Játékosjelvények';
 
   @override
-  String get preferencesExplainShowPlayerRatings => 'Ez a beállítás elrejti az összes értékszámot a Chessigma-ről, hogy könnyebb legyen a játékra koncentrálni. A játszmák ettől még lehetnek értékeltek, ez csak a megjelenítésre vonatkozik.';
+  String get preferencesExplainShowPlayerRatings => 'Ez a beállítás elrejti az összes értékszámot a Lichess-ről, hogy könnyebb legyen a játékra koncentrálni. A játszmák ettől még lehetnek értékeltek, ez csak a megjelenítésre vonatkozik.';
 
   @override
   String get preferencesDisplayBoardResizeHandle => 'Átméretező sarok mutatása';
@@ -1534,10 +1543,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get preferencesNotifyTimeAlarm => 'Hamarosan lejár az idő levelezős játszmában';
 
   @override
-  String get preferencesNotifyBell => 'Hangjelzés a Chessigmaen belül';
+  String get preferencesNotifyBell => 'Hangjelzés a Lichessen belül';
 
   @override
-  String get preferencesNotifyPush => 'Értesítés mobileszközön, amikor nem vagy fenn Chessigmaen';
+  String get preferencesNotifyPush => 'Értesítés mobileszközön, amikor nem vagy fenn Lichessen';
 
   @override
   String get preferencesNotifyWeb => 'Böngésző';
@@ -2910,13 +2919,13 @@ class AppLocalizationsHu extends AppLocalizations {
   String get error_namePassword => 'Kérjük, ne a felhasználónevedet add meg jelszónak.';
 
   @override
-  String get blankedPassword => 'Ugyanezt a jelszót már használtad egy másik webhelyen, ami veszélybe került. A Chessigma fiókod biztonsága érdekében új jelszót kell megadnod. Köszönjük megértésed.';
+  String get blankedPassword => 'Ugyanezt a jelszót már használtad egy másik webhelyen, ami veszélybe került. A Lichess fiókod biztonsága érdekében új jelszót kell megadnod. Köszönjük megértésed.';
 
   @override
-  String get youAreLeavingChessigma => 'Elhagyod a Chessigma-t';
+  String get youAreLeavingLichess => 'Elhagyod a Lichess-t';
 
   @override
-  String get neverTypeYourPassword => 'Soha ne írd be Chessigma jelszavad más oldalon!';
+  String get neverTypeYourPassword => 'Soha ne írd be Lichess jelszavad más oldalon!';
 
   @override
   String proceedToX(String param) {
@@ -3153,7 +3162,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get ratingFilter => 'Értékszámszűrő';
 
   @override
-  String get thisAccountViolatedTos => 'Ez a fiók megsértette a Chessigma Felhasználási Feltételeit';
+  String get thisAccountViolatedTos => 'Ez a fiók megsértette a Lichess Felhasználási Feltételeit';
 
   @override
   String get openingExplorerAndTablebase => 'Megnyitás- és állásböngésző';
@@ -3613,7 +3622,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get clearSavedMoves => 'Lépések törlése';
 
   @override
-  String get previouslyOnChessigmaTV => 'A Chessigma TV korábbi műsorai';
+  String get previouslyOnLichessTV => 'A Lichess TV korábbi műsorai';
 
   @override
   String get onlinePlayers => 'Online játékosok';
@@ -4022,7 +4031,7 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String xIsAFreeYLibreOpenSourceChessServer(String param1, String param2) {
+  String xIsAFreeYLibreOpenSourceChessServer(Object param1, Object param2) {
     return 'A $param1 egy ingyenes ($param2), szabad, reklámmentes, nyílt forráskódú sakkszerver.';
   }
 
@@ -4113,7 +4122,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get simulHostExtraTimePerPlayer => 'Játékosonként extra idő az órához';
 
   @override
-  String get lichessTournaments => 'Chessigma versenyek';
+  String get lichessTournaments => 'Lichess versenyek';
 
   @override
   String get tournamentFAQ => 'Aréna verseny GYIK';
@@ -4268,10 +4277,10 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get networkLagBetweenYouAndChessigma => 'Hálózati késleltetés a számítógéped és a Chessigma szervere között';
+  String get networkLagBetweenYouAndLichess => 'Hálózati késleltetés a számítógéped és a Lichess szervere között';
 
   @override
-  String get timeToProcessAMoveOnChessigmaServer => 'Az az idő, amíg a Chessigma szerver egy lépést feldolgoz';
+  String get timeToProcessAMoveOnLichessServer => 'Az az idő, amíg a Lichess szerver egy lépést feldolgoz';
 
   @override
   String get downloadAnnotated => 'Letöltés elemzéssel';
@@ -4328,8 +4337,8 @@ class AppLocalizationsHu extends AppLocalizations {
   String get kidModeExplanation => 'A Gyereküzemmód a biztonságról szól. A mód bekapcsolásával az összes kommunikáció megszűnik a többi játékossal, így megvédheted a gyermekeid vagy a diákjaid a többi felhasználó elől.';
 
   @override
-  String inKidModeTheChessigmaLogoGetsIconX(String param) {
-    return 'Gyereküzemmódban a Chessigma logón megjelenik egy $param ikon, így tudhatod, hogy gyermekeid biztonságos felületen játszanak.';
+  String inKidModeTheLichessLogoGetsIconX(String param) {
+    return 'Gyereküzemmódban a Lichess logón megjelenik egy $param ikon, így tudhatod, hogy gyermekeid biztonságos felületen játszanak.';
   }
 
   @override
@@ -4636,7 +4645,7 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get showUnreadChessigmaMessage => 'Üzeneted jött Chessigmatől!';
+  String get showUnreadLichessMessage => 'Üzeneted jött Lichesstől!';
 
   @override
   String get clickHereToReadIt => 'Kattints ide az olvasáshoz';
@@ -4698,7 +4707,7 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get agreementPolicy => 'Elfogadom, hogy követni fogom a Chessigma szabályait.';
+  String get agreementPolicy => 'Elfogadom, hogy követni fogom a Lichess szabályait.';
 
   @override
   String get searchOrStartNewDiscussion => 'Keresés, vagy új beszélgetés indítása';
@@ -4844,7 +4853,7 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get lostAgainstTOSViolator => 'Vesztettél valaki ellen, aki megszegte a Chessigma szabályait';
+  String get lostAgainstTOSViolator => 'Vesztettél valaki ellen, aki megszegte a Lichess szabályait';
 
   @override
   String refundXpointsTimeControlY(String param1, String param2) {
@@ -5009,7 +5018,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get until => 'Eddig';
 
   @override
-  String get lichessDbExplanation => 'A Chessigma játékosok értékelt játszmáiból összeállítva';
+  String get lichessDbExplanation => 'A Lichess játékosok értékelt játszmáiból összeállítva';
 
   @override
   String get switchSides => 'Oldal megfordítása';
@@ -5027,7 +5036,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get showMeEverything => 'Az összes parancs megjelenítése';
 
   @override
-  String get lichessPatronInfo => 'A Chessigma egy jótékonysági szervezet és teljesen ingyenes/szabad nyílt forrású szoftver.\nMinden működési költséget, fejlesztést és tartalmat felhasználói adományokból fedezünk.';
+  String get lichessPatronInfo => 'A Lichess egy jótékonysági szervezet és teljesen ingyenes/szabad nyílt forrású szoftver.\nMinden működési költséget, fejlesztést és tartalmat felhasználói adományokból fedezünk.';
 
   @override
   String get nothingToSeeHere => 'Itt nincs semmi látnivaló jelenleg.';
@@ -5736,7 +5745,7 @@ class AppLocalizationsHu extends AppLocalizations {
   }
 
   @override
-  String get streamerChessigmaStreamers => 'Chessigma streamerek';
+  String get streamerLichessStreamers => 'Lichess streamerek';
 
   @override
   String get studyPrivate => 'Privát';
@@ -5903,7 +5912,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get studyCurrentChapterUrl => 'URL erre a fejezetre';
 
   @override
-  String get studyYouCanPasteThisInTheForumToEmbed => 'Ezzel a linkkel beágyazhatod a fejezetet a Chessigma blogodban vagy a fórumon';
+  String get studyYouCanPasteThisInTheForumToEmbed => 'Ezzel a linkkel beágyazhatod a fejezetet a Lichess blogodban vagy a fórumon';
 
   @override
   String get studyStartAtInitialPosition => 'Kezdés a kiinduló állásból';
@@ -6206,10 +6215,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get studyGetTheTour => 'Segítség kell? Indítsd el a bemutatót!';
 
   @override
-  String get studyWelcomeToChessigmaStudyTitle => 'Üdvözöl a Chessigma Tanulmányok!';
+  String get studyWelcomeToLichessStudyTitle => 'Üdvözöl a Lichess Tanulmányok!';
 
   @override
-  String get studyWelcomeToChessigmaStudyText => 'Ez egy megosztott elemző tábla.<br><br>\nHasználd játszmák elemzésére és jegyzetek készítésére,<br>beszélgess állásokról barátaiddal,<br>és természetesen sakkleckékhez is jó!<br><br>Ez egy erőteljes eszköz, szánjunk rá időt, hogy lássuk, hogy működik.';
+  String get studyWelcomeToLichessStudyText => 'Ez egy megosztott elemző tábla.<br><br>\nHasználd játszmák elemzésére és jegyzetek készítésére,<br>beszélgess állásokról barátaiddal,<br>és természetesen sakkleckékhez is jó!<br><br>Ez egy erőteljes eszköz, szánjunk rá időt, hogy lássuk, hogy működik.';
 
   @override
   String get studySharedAndSaveTitle => 'Megosztva és elmentve';
@@ -6275,10 +6284,10 @@ class AppLocalizationsHu extends AppLocalizations {
   String get studyCustomPositionText => 'Állítsd be a táblát neked megfelelően!<br>Ideális mattvégjátékok felfedezéséhez.';
 
   @override
-  String get studyLoadExistingChessigmaGameTitle => 'Tölts be egy létező Chessigma játszmát';
+  String get studyLoadExistingLichessGameTitle => 'Tölts be egy létező Lichess játszmát';
 
   @override
-  String get studyLoadExistingChessigmaGameText => 'Illessz be egy Chessigma parti URL-jét<br>(például lichess.org/7fHIU0XI)<br>A lépések betöltődnek a fejezetbe.';
+  String get studyLoadExistingLichessGameText => 'Illessz be egy Lichess parti URL-jét<br>(például lichess.org/7fHIU0XI)<br>A lépések betöltődnek a fejezetbe.';
 
   @override
   String get studyFromFenStringTitle => 'Egy FEN karakterláncból';
@@ -6296,7 +6305,7 @@ class AppLocalizationsHu extends AppLocalizations {
   String get studyVariantsAreSupportedTitle => 'Tanulmányok támasztják alá a változatokat';
 
   @override
-  String get studyVariantsAreSupportedText => 'Igen, tanulhatsz crazyhouse-t<br>és minden Chessigma játéktípust!';
+  String get studyVariantsAreSupportedText => 'Igen, tanulhatsz crazyhouse-t<br>és minden Lichess játéktípust!';
 
   @override
   String get studyChapterConclusionText => 'A fejezeteket örökre elmentjük.<br>Jó szórakozást a sakktartalom rendszerezéséhez!';

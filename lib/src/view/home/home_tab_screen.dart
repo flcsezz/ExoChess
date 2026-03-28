@@ -17,6 +17,7 @@ import 'package:chessigma_mobile/src/model/correspondence/offline_correspondence
 import 'package:chessigma_mobile/src/model/engine/evaluation_preferences.dart';
 import 'package:chessigma_mobile/src/model/engine/nnue_service.dart';
 import 'package:chessigma_mobile/src/model/game/game_history.dart';
+import 'package:chessigma_mobile/src/model/external_history/external_history_provider.dart';
 import 'package:chessigma_mobile/src/model/message/message_repository.dart';
 import 'package:chessigma_mobile/src/model/user/user.dart';
 import 'package:chessigma_mobile/src/network/connectivity.dart';
@@ -136,10 +137,10 @@ class _HomeScreenState extends ConsumerState<HomeTabScreen> {
               shouldShow: true,
               child: _GreetingWidget(),
             ),
-            _EditableWidget(
+            const _EditableWidget(
               widget: HomeEditableWidget.externalFetch,
               shouldShow: true,
-              child: const ExternalGameFetchWidget(),
+              child: ExternalGameFetchWidget(),
             ),
             if (!widget.editModeEnabled) ...[
               Padding(
@@ -198,10 +199,10 @@ class _HomeScreenState extends ConsumerState<HomeTabScreen> {
                     children: [
                       const SizedBox(height: 8.0),
                       const _TabletCreateAGameSection(),
-                      _EditableWidget(
+                      const _EditableWidget(
                         widget: HomeEditableWidget.externalFetch,
                         shouldShow: true,
-                        child: const ExternalGameFetchWidget(),
+                        child: ExternalGameFetchWidget(),
                         ),
 
                       _OfflineCorrespondencePreview(offlineCorresGames, maxGamesToShow: 5),
@@ -248,16 +249,36 @@ class _HomeScreenState extends ConsumerState<HomeTabScreen> {
               shouldShow: hasOngoingGames,
               child: _OfflineCorrespondenceCarousel(offlineCorresGames, maxGamesToShow: 20),
             ),
-            _EditableWidget(
+            const _EditableWidget(
               widget: HomeEditableWidget.externalFetch,
               shouldShow: true,
-              child: const ExternalGameFetchWidget(),
+              child: ExternalGameFetchWidget(),
               ),
 
             _EditableWidget(
               widget: HomeEditableWidget.recentGames,
               shouldShow: true,
               child: RecentGamesWidget(recentGames: recentGames, nbOfGames: nbOfGames, user: null),
+            ),
+            _EditableWidget(
+              widget: HomeEditableWidget.lichessRecentGames,
+              shouldShow: true,
+              child: RecentGamesWidget(
+                recentGames: ref.watch(lichessRecentConvertedProvider),
+                nbOfGames: 0,
+                user: null,
+                title: 'Lichess Archive',
+              ),
+            ),
+            _EditableWidget(
+              widget: HomeEditableWidget.chesscomRecentGames,
+              shouldShow: true,
+              child: RecentGamesWidget(
+                recentGames: ref.watch(chesscomRecentConvertedProvider),
+                nbOfGames: 0,
+                user: null,
+                title: 'Chess.com Archive',
+              ),
             ),
           ];
         }
@@ -383,6 +404,7 @@ class _ChessigmaMessageBanner extends ConsumerWidget {
     );
   }
 }
+
 
 class _SignInWidget extends ConsumerWidget {
   const _SignInWidget();

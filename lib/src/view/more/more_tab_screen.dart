@@ -1,6 +1,7 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
 import 'package:chessigma_mobile/src/model/common/chess.dart';
@@ -13,6 +14,7 @@ import 'package:chessigma_mobile/src/view/board_editor/board_editor_screen.dart'
 import 'package:chessigma_mobile/src/view/clock/clock_tool_screen.dart';
 import 'package:chessigma_mobile/src/view/explorer/opening_explorer_screen.dart';
 import 'package:chessigma_mobile/src/view/more/import_pgn_screen.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/glass_card.dart';
 import 'package:chessigma_mobile/src/widgets/list.dart';
 import 'package:chessigma_mobile/src/widgets/misc.dart';
 import 'package:chessigma_mobile/src/widgets/platform.dart';
@@ -30,110 +32,160 @@ class MoreTabScreen extends ConsumerWidget {
         title: Text(context.l10n.more),
         leading: const SettingsIconButton(),
       ),
-      body: ListView(
-        children: [
-          ListSection(
-            header: SettingsSectionTitle(context.l10n.puzzles),
-            hasLeading: true,
-            children: [
-              ListTile(
-                leading: const Icon(Icons.auto_graph),
-                title: const Text('Puzzles Dashboard'), // TODO: l10n
-                enabled: isOnline,
-                trailing: Theme.of(context).platform == TargetPlatform.iOS
-                    ? const CupertinoListTileChevron()
-                    : null,
-                onTap: () {
-                  // TODO
-                },
-              ),
-            ],
-          ),
-          ListSection(
-            header: SettingsSectionTitle(context.l10n.tools),
-            hasLeading: true,
-            children: [
-              ListTile(
-                leading: const Icon(Icons.analytics_outlined),
-                title: Text(context.l10n.analysis),
-                trailing: Theme.of(context).platform == TargetPlatform.iOS
-                    ? const CupertinoListTileChevron()
-                    : null,
-                onTap: () {
-                  Navigator.of(context, rootNavigator: true).push(
-                    AnalysisScreen.buildRoute(
-                      context,
-                      const AnalysisOptions.standalone(
-                        variant: Variant.standard,
-                        orientation: Side.white,
-                      ),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.edit_note),
-                title: Text(context.l10n.boardEditor),
-                trailing: Theme.of(context).platform == TargetPlatform.iOS
-                    ? const CupertinoListTileChevron()
-                    : null,
-                onTap: () {
-                  Navigator.of(context, rootNavigator: true).push(
-                    BoardEditorScreen.buildRoute(
-                      context,
-                      const (initialVariant: Variant.standard, initialFen: null),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.upload_file_outlined),
-                title: Text(context.l10n.importPgn),
-                trailing: Theme.of(context).platform == TargetPlatform.iOS
-                    ? const CupertinoListTileChevron()
-                    : null,
-                onTap: () {
-                  Navigator.of(context, rootNavigator: true).push(ImportPgnScreen.buildRoute(context));
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.explore_outlined),
-                title: Text(context.l10n.openingExplorer),
-                trailing: Theme.of(context).platform == TargetPlatform.iOS
-                    ? const CupertinoListTileChevron()
-                    : null,
-                onTap: () {
-                  Navigator.of(context, rootNavigator: true).push(
-                    OpeningExplorerScreen.buildRoute(
-                      context,
-                      const AnalysisOptions.standalone(
-                        variant: Variant.standard,
-                        orientation: Side.white,
-                      ),
-                    ),
-                  );
-                },
-              ),
-              ListTile(
-                leading: const Icon(Icons.hourglass_bottom_outlined),
-                title: const Text('Chess Clock'), // TODO: l10n
-                trailing: Theme.of(context).platform == TargetPlatform.iOS
-                    ? const CupertinoListTileChevron()
-                    : null,
-                onTap: () {
-                  Navigator.of(
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 24.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            _MoreCard(
+              title: context.l10n.importPgn,
+              subtitle: 'Import and analyze PGN files',
+              icon: Icons.upload_file_outlined,
+              glowColor: const Color(0xFFE8B84B),
+              onTap: () {
+                Navigator.of(context, rootNavigator: true).push(ImportPgnScreen.buildRoute(context));
+              },
+            ),
+            const SizedBox(height: 16),
+            _MoreCard(
+              title: context.l10n.openingExplorer,
+              subtitle: 'Master the openings with Lichess DB',
+              icon: Icons.explore_outlined,
+              glowColor: const Color(0xFFE8B84B),
+              onTap: () {
+                Navigator.of(context, rootNavigator: true).push(
+                  OpeningExplorerScreen.buildRoute(
                     context,
-                    rootNavigator: true,
-                  ).push(ClockToolScreen.buildRoute(context));
-                },
+                    const AnalysisOptions.standalone(
+                      variant: Variant.standard,
+                      orientation: Side.white,
+                    ),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+            _MoreCard(
+              title: context.l10n.analysis,
+              subtitle: 'Free-form analysis with engine',
+              icon: Icons.analytics_outlined,
+              glowColor: const Color(0xFFE8B84B),
+              onTap: () {
+                Navigator.of(context, rootNavigator: true).push(
+                  AnalysisScreen.buildRoute(
+                    context,
+                    const AnalysisOptions.standalone(
+                      variant: Variant.standard,
+                      orientation: Side.white,
+                    ),
+                  ),
+                );
+              },
+            ),
+            const SizedBox(height: 16),
+            _MoreCard(
+              title: 'Chess Clock',
+              subtitle: 'Professional clock for OTB games',
+              icon: Icons.hourglass_bottom_outlined,
+              glowColor: const Color(0xFFE8B84B),
+              onTap: () {
+                Navigator.of(context, rootNavigator: true).push(ClockToolScreen.buildRoute(context));
+              },
+            ),
+            const SizedBox(height: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: ChessigmaMessage(
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                  color: Colors.white.withValues(alpha: 0.5),
+                  fontStyle: FontStyle.italic,
+                ),
+                textAlign: TextAlign.center,
               ),
-            ],
-          ),
-          Padding(
-            padding: Styles.bodySectionPadding,
-            child: ChessigmaMessage(style: TextTheme.of(context).bodyMedium),
-          ),
-        ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _MoreCard extends StatelessWidget {
+  const _MoreCard({
+    required this.title,
+    required this.subtitle,
+    required this.icon,
+    required this.glowColor,
+    required this.onTap,
+  });
+
+  final String title;
+  final String subtitle;
+  final IconData icon;
+  final Color glowColor;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return GlassCard(
+      onTap: () {
+        HapticFeedback.lightImpact();
+        onTap();
+      },
+      padding: EdgeInsets.zero,
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          border: Border.all(color: glowColor.withValues(alpha: 0.1)),
+          borderRadius: BorderRadius.circular(16),
+        ),
+        child: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: glowColor.withValues(alpha: 0.05),
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: glowColor.withValues(alpha: 0.1),
+                    blurRadius: 12,
+                    spreadRadius: 2,
+                  ),
+                ],
+              ),
+              child: Icon(icon, color: glowColor, size: 28),
+            ),
+            const SizedBox(width: 20),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.5),
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.chevron_right,
+              color: Colors.white.withValues(alpha: 0.2),
+            ),
+          ],
+        ),
       ),
     );
   }

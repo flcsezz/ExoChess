@@ -8,6 +8,7 @@ import 'package:chessigma_mobile/src/view/account/rating_pref_aware.dart';
 import 'package:chessigma_mobile/src/view/puzzle/storm_dashboard.dart';
 import 'package:chessigma_mobile/src/view/user/perf_stats_screen.dart';
 import 'package:chessigma_mobile/src/widgets/rating.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 
 /// A widget that displays the performance cards of a user.
 class PerfCards extends StatelessWidget {
@@ -78,59 +79,54 @@ class PerfCards extends StatelessWidget {
                 return SizedBox(
                   height: 100,
                   width: 100,
-                  child: Card(
-                    shape: const RoundedRectangleBorder(borderRadius: _kCardBorderRadius),
-                    child: InkWell(
-                      borderRadius: _kCardBorderRadius,
-                      onTap: isPerfWithoutStats ? null : () => _handlePerfCardTap(context, perf),
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  child: GlassCard(
+                    padding: const EdgeInsets.all(6.0),
+                    borderRadius: _kCardBorderRadius,
+                    onTap: isPerfWithoutStats ? null : () => _handlePerfCardTap(context, perf),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(perf.shortTitle, style: TextStyle(color: textShade(context, 0.7))),
+                        Icon(perf.icon, color: textShade(context, 0.6)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
                           children: [
-                            Text(perf.shortTitle, style: TextStyle(color: textShade(context, 0.7))),
-                            Icon(perf.icon, color: textShade(context, 0.6)),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.baseline,
-                              textBaseline: TextBaseline.alphabetic,
-                              children: [
-                                RatingWidget(
-                                  rating: userPerf.rating,
-                                  deviation: userPerf.ratingDeviation,
-                                  provisional: userPerf.provisional,
-                                  style: Styles.bold,
-                                ),
-                                const SizedBox(width: 3),
-                                if (userPerf.progression != 0) ...[
-                                  Icon(
-                                    userPerf.progression > 0
-                                        ? ChessigmaIcons.arrow_full_upperright
-                                        : ChessigmaIcons.arrow_full_lowerright,
+                            RatingWidget(
+                              rating: userPerf.rating,
+                              deviation: userPerf.ratingDeviation,
+                              provisional: userPerf.provisional,
+                              style: Styles.bold,
+                            ),
+                            const SizedBox(width: 3),
+                            if (userPerf.progression != 0) ...[
+                              Icon(
+                                userPerf.progression > 0
+                                    ? ChessigmaIcons.arrow_full_upperright
+                                    : ChessigmaIcons.arrow_full_lowerright,
+                                color: userPerf.progression > 0
+                                    ? context.chessigmaColors.good
+                                    : context.chessigmaColors.error,
+                                size: 12,
+                              ),
+                              Flexible(
+                                child: Text(
+                                  userPerf.progression.abs().toString(),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: TextStyle(
                                     color: userPerf.progression > 0
                                         ? context.chessigmaColors.good
                                         : context.chessigmaColors.error,
-                                    size: 12,
+                                    fontSize: 11,
                                   ),
-                                  Flexible(
-                                    child: Text(
-                                      userPerf.progression.abs().toString(),
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                      style: TextStyle(
-                                        color: userPerf.progression > 0
-                                            ? context.chessigmaColors.good
-                                            : context.chessigmaColors.error,
-                                        fontSize: 11,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ],
-                            ),
+                                ),
+                              ),
+                            ],
                           ],
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 );

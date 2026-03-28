@@ -45,7 +45,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(
-        find.textContaining('libre, no-ads, open source chess server.', findRichText: true),
+        find.textContaining('Opensourced Hobby Project XD', findRichText: true),
         findsOneWidget,
       );
       expect(find.text('Sign in'), findsOneWidget);
@@ -172,7 +172,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(
-        find.textContaining('libre, no-ads, open source chess server.', findRichText: true),
+        find.textContaining('Opensourced Hobby Project XD', findRichText: true),
         findsOneWidget,
       );
       expect(find.text('Sign in'), findsOneWidget);

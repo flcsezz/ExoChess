@@ -13,6 +13,7 @@ import 'package:chessigma_mobile/src/view/game/game_common_widgets.dart';
 import 'package:chessigma_mobile/src/view/game/game_list_tile.dart';
 import 'package:chessigma_mobile/src/view/game/status_l10n.dart';
 import 'package:chessigma_mobile/src/widgets/board_thumbnail.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/glass_card.dart';
 import 'package:chessigma_mobile/src/widgets/user.dart';
 
 /// A list tile that shows more detailed game info than [GameListTile].
@@ -46,193 +47,195 @@ class GameListDetailTile extends StatelessWidget {
 
     final scaledTitleFontSize = MediaQuery.of(context).textScaler.scale(titleFontSize);
 
-    return InkWell(
-      onLongPress: () {
-        showModalBottomSheet<void>(
-          context: context,
-          useRootNavigator: true,
-          isDismissible: true,
-          isScrollControlled: true,
-          builder: (context) => GameContextMenu(
-            opponentTitle: UserFullNameWidget.player(
-              user: opponent.user,
-              aiLevel: opponent.aiLevel,
-              rating: opponent.rating,
+    return GlassCard(
+      child: InkWell(
+        onLongPress: () {
+          showModalBottomSheet<void>(
+            context: context,
+            useRootNavigator: true,
+            isDismissible: true,
+            isScrollControlled: true,
+            builder: (context) => GameContextMenu(
+              opponentTitle: UserFullNameWidget.player(
+                user: opponent.user,
+                aiLevel: opponent.aiLevel,
+                rating: opponent.rating,
+              ),
+              game: game,
+              mySide: mySide,
+              onPressedBookmark: onPressedBookmark,
             ),
-            game: game,
-            mySide: mySide,
-            onPressedBookmark: onPressedBookmark,
-          ),
-        );
-      },
-      onTap: () => openGameScreen(
-        context,
-        game: item.game,
-        orientation: item.pov,
-        loadingLastMove: game.lastMove,
-        lastMoveAt: game.lastMoveAt,
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            final boardSize = constraints.maxWidth / 3;
-            return Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                if (game.lastFen != null)
-                  BoardThumbnail(
-                    size: boardSize,
-                    fen: game.lastFen!,
-                    orientation: mySide,
-                    lastMove: game.lastMove,
-                  ),
-                Expanded(
-                  child: SizedBox(
-                    height: boardSize,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    relativeDate(context.l10n, game.lastMoveAt).toUpperCase(),
-                                    style: dateStyle,
-                                  ),
-                                  Row(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      if (me.analysis != null) ...[
+          );
+        },
+        onTap: () => openGameScreen(
+          context,
+          game: item.game,
+          orientation: item.pov,
+          loadingLastMove: game.lastMove,
+          lastMoveAt: game.lastMoveAt,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final boardSize = constraints.maxWidth / 3;
+              return Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  if (game.lastFen != null)
+                    BoardThumbnail(
+                      size: boardSize,
+                      fen: game.lastFen!,
+                      orientation: mySide,
+                      lastMove: game.lastMove,
+                    ),
+                  Expanded(
+                    child: SizedBox(
+                      height: boardSize,
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      relativeDate(context.l10n, game.lastMoveAt).toUpperCase(),
+                                      style: dateStyle,
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        if (me.analysis != null) ...[
+                                          Icon(
+                                            CupertinoIcons.chart_bar_alt_fill,
+                                            size: subtitleFontSize + 3,
+                                            color: textShade(context, 0.7),
+                                          ),
+                                          const SizedBox(width: 2),
+                                        ],
                                         Icon(
-                                          CupertinoIcons.chart_bar_alt_fill,
+                                          game.perf.icon,
                                           size: subtitleFontSize + 3,
                                           color: textShade(context, 0.7),
                                         ),
-                                        const SizedBox(width: 2),
                                       ],
-                                      Icon(
-                                        game.perf.icon,
-                                        size: subtitleFontSize + 3,
-                                        color: textShade(context, 0.7),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              const SizedBox(height: 2),
-                              UserFullNameWidget(
-                                user: opponent.user,
-                                rating: opponent.rating,
-                                style: TextStyle(
-                                  fontSize: titleFontSize,
-                                  fontWeight: FontWeight.w600,
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
-                          ),
-                          if (game.lastFen != null)
-                            Consumer(
-                              builder: (context, ref, child) {
-                                final showRatingAsync = ref.watch(showRatingsPrefProvider);
-                                return Text.rich(
-                                  TextSpan(
-                                    text: gameStatusL10n(
-                                      context,
-                                      variant: game.variant,
-                                      status: game.status,
-                                      lastPosition: Position.setupPosition(
-                                        game.variant.rule,
-                                        Setup.parseFen(game.lastFen!),
-                                      ),
-                                      winner: game.winner,
-                                    ),
-                                    style: TextStyle(
-                                      fontSize: subtitleFontSize,
-                                      color: game.winner == null
-                                          ? context.chessigmaColors.brag
-                                          : game.winner == mySide
-                                          ? context.chessigmaColors.good
-                                          : context.chessigmaColors.error,
-                                    ),
-                                    children: [
-                                      if (me.ratingDiff != null)
-                                        switch (showRatingAsync) {
-                                          AsyncData(value: ShowRatings.yes) => TextSpan(
-                                            text:
-                                                ' (${me.ratingDiff == 0
-                                                    ? '±'
-                                                    : me.ratingDiff! > 0
-                                                    ? '+'
-                                                    : ''}${me.ratingDiff})',
-                                          ),
-
-                                          _ => const TextSpan(),
-                                        },
-                                    ],
+                                const SizedBox(height: 2),
+                                UserFullNameWidget(
+                                  user: opponent.user,
+                                  rating: opponent.rating,
+                                  style: TextStyle(
+                                    fontSize: titleFontSize,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                );
-                              },
-                            ),
-                          if (isTablet || scaledTitleFontSize <= 26)
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                if (game.opening != null || moveList?.isNotEmpty == true)
-                                  Text.rich(
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      color: textShade(context, Styles.subtitleOpacity),
-                                      fontSize: subtitleFontSize,
-                                    ),
-                                    TextSpan(
-                                      text: game.opening?.name,
-                                      style: const TextStyle(fontWeight: FontWeight.w600),
-                                      children: [
-                                        if (moveList != null && moveList.length > 1) ...[
-                                          const TextSpan(text: '\n'),
-                                          ...moveList
-                                              .take(isTablet ? 6 : 4)
-                                              .toList()
-                                              .asMap()
-                                              .entries
-                                              .slices(2)
-                                              .mapIndexed((index, moves) {
-                                                return TextSpan(
-                                                  text:
-                                                      '${index + 1}. ${moves.map((e) => '${e.value} ').join()}',
-                                                  style: const TextStyle(
-                                                    fontWeight: FontWeight.normal,
-                                                  ),
-                                                );
-                                              }),
-                                          TextSpan(
-                                            text: '\u2026 ${(moveList.length / 2).ceil()} moves',
-                                            style: const TextStyle(fontWeight: FontWeight.normal),
-                                          ),
-                                        ],
-                                      ],
-                                    ),
-                                  ),
+                                ),
                               ],
                             ),
-                        ],
+                            if (game.lastFen != null)
+                              Consumer(
+                                builder: (context, ref, child) {
+                                  final showRatingAsync = ref.watch(showRatingsPrefProvider);
+                                  return Text.rich(
+                                    TextSpan(
+                                      text: gameStatusL10n(
+                                        context,
+                                        variant: game.variant,
+                                        status: game.status,
+                                        lastPosition: Position.setupPosition(
+                                          game.variant.rule,
+                                          Setup.parseFen(game.lastFen!),
+                                        ),
+                                        winner: game.winner,
+                                      ),
+                                      style: TextStyle(
+                                        fontSize: subtitleFontSize,
+                                        color: game.winner == null
+                                            ? context.chessigmaColors.brag
+                                            : game.winner == mySide
+                                            ? context.chessigmaColors.good
+                                            : context.chessigmaColors.error,
+                                      ),
+                                      children: [
+                                        if (me.ratingDiff != null)
+                                          switch (showRatingAsync) {
+                                            AsyncData(value: ShowRatings.yes) => TextSpan(
+                                              text:
+                                                  ' (${me.ratingDiff == 0
+                                                      ? '±'
+                                                      : me.ratingDiff! > 0
+                                                      ? '+'
+                                                      : ''}${me.ratingDiff})',
+                                            ),
+  
+                                            _ => const TextSpan(),
+                                          },
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            if (isTablet || scaledTitleFontSize <= 26)
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (game.opening != null || moveList?.isNotEmpty == true)
+                                    Text.rich(
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: textShade(context, Styles.subtitleOpacity),
+                                        fontSize: subtitleFontSize,
+                                      ),
+                                      TextSpan(
+                                        text: game.opening?.name,
+                                        style: const TextStyle(fontWeight: FontWeight.w600),
+                                        children: [
+                                          if (moveList != null && moveList.length > 1) ...[
+                                            const TextSpan(text: '\n'),
+                                            ...moveList
+                                                .take(isTablet ? 6 : 4)
+                                                .toList()
+                                                .asMap()
+                                                .entries
+                                                .slices(2)
+                                                .mapIndexed((index, moves) {
+                                                  return TextSpan(
+                                                    text:
+                                                        '${index + 1}. ${moves.map((e) => '${e.value} ').join()}',
+                                                    style: const TextStyle(
+                                                      fontWeight: FontWeight.normal,
+                                                    ),
+                                                  );
+                                                }),
+                                            TextSpan(
+                                              text: '\u2026 ${(moveList.length / 2).ceil()} moves',
+                                              style: const TextStyle(fontWeight: FontWeight.normal),
+                                            ),
+                                          ],
+                                        ],
+                                      ),
+                                    ),
+                                ],
+                              ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            );
-          },
+                ],
+              );
+            },
+          ),
         ),
       ),
     );

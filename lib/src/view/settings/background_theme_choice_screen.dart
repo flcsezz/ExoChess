@@ -18,6 +18,7 @@ import 'package:chessigma_mobile/src/utils/navigation.dart';
 import 'package:chessigma_mobile/src/widgets/background.dart';
 import 'package:chessigma_mobile/src/widgets/list.dart';
 import 'package:chessigma_mobile/src/widgets/settings.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 import 'package:material_color_utilities/score/score.dart';
 import 'package:path/path.dart';
 
@@ -449,10 +450,8 @@ class _ConfirmImageBackgroundScreenState extends State<ConfirmImageBackgroundScr
               left: widget.viewportOrientation == Orientation.portrait ? 0 : null,
               right: 0,
               child: Center(
-                child: Card(
-                  shape: const RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                  ),
+                child: GlassCard(
+                  borderRadius: const BorderRadius.all(Radius.circular(16.0)),
                   margin: const EdgeInsets.all(16.0),
                   child: InkWell(
                     borderRadius: const BorderRadius.all(Radius.circular(16.0)),

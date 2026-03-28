@@ -16,6 +16,7 @@ import 'package:chessigma_mobile/src/utils/lichess_assets.dart';
 import 'package:chessigma_mobile/src/view/user/countries.dart';
 import 'package:chessigma_mobile/src/widgets/network_image.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 
 const _userNameStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.w500);
 
@@ -34,7 +35,7 @@ class UserProfileWidget extends ConsumerWidget {
         ? Text(user.profile!.realName!, style: _userNameStyle)
         : null;
 
-    return Card(
+    return GlassCard(
       margin: Styles.horizontalBodyPadding.add(Styles.sectionTopPadding),
       child: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -284,6 +284,14 @@ class _BottomBar extends ConsumerWidget {
     return BottomBar(
       children: [
         BottomBarButton(
+          key: const Key('play-button'),
+          label: 'Play',
+          onTap: pieceCount > 0 && pieceCount <= 32
+              ? () => _showContinueFromHereMenu(context, editorState.variant, editorState.fen)
+              : null,
+          icon: Icons.play_arrow,
+        ),
+        BottomBarButton(
           icon: Icons.menu,
           label: context.l10n.menu,
           onTap: () => showAdaptiveActionSheet<void>(
@@ -407,9 +415,20 @@ class _BottomBar extends ConsumerWidget {
         ),
         BottomSheetAction(
           makeLabel: (context) => Text(context.l10n.mobileOverTheBoard),
-          onPressed: () => Navigator.of(
-            context,
-          ).push(OverTheBoardScreen.buildRoute(context, initialVariant: variant, initialFen: fen)),
+          onPressed: () {
+            // Validate position
+            try {
+              final setup = Setup.parseFen(fen);
+              final pos = Position.setupPosition(variant.rule, setup);
+              if (pos.isGameOver) {
+                showSnackBar(context, 'Cannot start game: Position is already over.', type: SnackBarType.error);
+                return;
+              }
+              Navigator.of(context).push(OverTheBoardScreen.buildRoute(context, initialVariant: variant, initialFen: fen));
+            } catch (e) {
+              showSnackBar(context, 'Invalid position: $e', type: SnackBarType.error);
+            }
+          },
         ),
       ],
     );

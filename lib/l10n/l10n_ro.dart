@@ -12,7 +12,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get mobileAccountPreferences => 'Preferințe cont';
 
   @override
-  String get mobileAccountPreferencesHelp => 'Aceste preferințe sunt aplicate contului dvs. Chessigma și vor fi utilizate pe toate dispozitivele.';
+  String get mobileAccountPreferencesHelp => 'Aceste preferințe sunt aplicate contului dvs. Lichess și vor fi utilizate pe toate dispozitivele.';
 
   @override
   String get mobileAllGames => 'Toate jocurile';
@@ -242,7 +242,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get mobileWatchTab => 'Vizionează';
 
   @override
-  String get mobileWelcomeToChessigmaApp => 'Bine ai venit în aplicația Chessigma!';
+  String get mobileWelcomeToLichessApp => 'Bine ai venit în aplicația Lichess!';
 
   @override
   String get mobileViewGame => 'Vezi joc';
@@ -282,6 +282,12 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get mobileOrImportPgnFile => 'Sau încarcă un fișier PGN';
+
+  @override
+  String get showUnreadChessigmaMessage => 'You have an unread Chessigma message';
+
+  @override
+  String get mobileWelcomeToChessigmaApp => 'Welcome to Chessigma app!';
 
   @override
   String get variantStandardTitle => 'Reguli de șah standard (FIDE)';
@@ -781,7 +787,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get broadcastAboutBroadcasts => 'Despre emisiuni';
 
   @override
-  String get broadcastHowToUseChessigmaBroadcasts => 'Cum să utilizați emisiunile Chessigma.';
+  String get broadcastHowToUseLichessBroadcasts => 'Cum să utilizați emisiunile Lichess.';
 
   @override
   String get broadcastTheNewRoundHelp => 'Runda noua va avea aceiași membri și contribuitori ca cea anterioară.';
@@ -816,10 +822,10 @@ class AppLocalizationsRo extends AppLocalizations {
   String get broadcastSourceSingleUrl => 'URL sursă PGN';
 
   @override
-  String get broadcastSourceUrlHelp => 'URL-ul pe care Chessigma îl va verifica pentru a obține actualizări al PGN-ului. Trebuie să fie public accesibil pe Internet.';
+  String get broadcastSourceUrlHelp => 'URL-ul pe care Lichess îl va verifica pentru a obține actualizări al PGN-ului. Trebuie să fie public accesibil pe Internet.';
 
   @override
-  String get broadcastSourceGameIds => 'Până la 64 de ID-uri de joc Chessigma, separate prin spații.';
+  String get broadcastSourceGameIds => 'Până la 64 de ID-uri de joc Lichess, separate prin spații.';
 
   @override
   String broadcastStartDateTimeZone(String param) {
@@ -890,7 +896,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get broadcastRecentTournaments => 'Turnee recente';
 
   @override
-  String get broadcastOpenChessigma => 'Deschide în Chessigma';
+  String get broadcastOpenLichess => 'Deschide în Lichess';
 
   @override
   String get broadcastTeams => 'Echipe';
@@ -1180,13 +1186,13 @@ class AppLocalizationsRo extends AppLocalizations {
   String get challengeDeclineOnlyBot => 'Accept doar provocări de la roboți.';
 
   @override
-  String get challengeInviteChessigmaUser => 'Sau invitați un utilizator Chessigma:';
+  String get challengeInviteLichessUser => 'Sau invitați un utilizator Lichess:';
 
   @override
   String get contactContact => 'Contact';
 
   @override
-  String get contactContactChessigma => 'Contactează Chessigma';
+  String get contactContactLichess => 'Contactează Lichess';
 
   @override
   String get coordinatesCoordinates => 'Coordonate';
@@ -1253,10 +1259,13 @@ class AppLocalizationsRo extends AppLocalizations {
   String get patronDonate => 'Donează';
 
   @override
-  String get patronChessigmaPatron => 'Patron Chessigma';
+  String get patronChessigmaPatron => 'Chessigma Patron';
 
   @override
-  String get patronBecomePatron => 'Devino un Patron Chessigma';
+  String get patronLichessPatron => 'Patron Lichess';
+
+  @override
+  String get patronBecomePatron => 'Devino un Patron Lichess';
 
   @override
   String perfStatPerfStats(String param) {
@@ -1556,10 +1565,10 @@ class AppLocalizationsRo extends AppLocalizations {
   String get preferencesNotifyTimeAlarm => 'Timpul rămas la jocurile prin corespondență e scurt';
 
   @override
-  String get preferencesNotifyBell => 'Notificare în Chessigma';
+  String get preferencesNotifyBell => 'Notificare în Lichess';
 
   @override
-  String get preferencesNotifyPush => 'Notificare dispozitiv când nu ești în Chessigma';
+  String get preferencesNotifyPush => 'Notificare dispozitiv când nu ești în Lichess';
 
   @override
   String get preferencesNotifyWeb => 'Browser';
@@ -1777,7 +1786,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get puzzleSearchPuzzles => 'Caută puzzle-uri';
 
   @override
-  String get puzzleFromMyGamesNone => 'Nu ai nici o problemă în baza de date, dar Chessigma tot te apreciază foarte mult.\nJoacă jocuri rapide și clasice pentru a crește șansele de a vedea adăugată o problemă extrasă din partidele tale!';
+  String get puzzleFromMyGamesNone => 'Nu ai nici o problemă în baza de date, dar Lichess tot te apreciază foarte mult.\nJoacă jocuri rapide și clasice pentru a crește șansele de a vedea adăugată o problemă extrasă din partidele tale!';
 
   @override
   String get puzzlePuzzleDashboardDescription => 'Antreneaza-te, analizează, fii mai bun';
@@ -2938,13 +2947,13 @@ class AppLocalizationsRo extends AppLocalizations {
   String get error_namePassword => 'Te rugăm să nu folosești numele tău de utilizator ca parolă.';
 
   @override
-  String get blankedPassword => 'Ați folosit aceeași parolă pe un alt site, iar acel site a fost compromis. Pentru a asigura siguranța contului dvs. Chessigma, trebuie să setați o parolă nouă. Vă mulțumim pentru înțelegere.';
+  String get blankedPassword => 'Ați folosit aceeași parolă pe un alt site, iar acel site a fost compromis. Pentru a asigura siguranța contului dvs. Lichess, trebuie să setați o parolă nouă. Vă mulțumim pentru înțelegere.';
 
   @override
-  String get youAreLeavingChessigma => 'Părăsești Chessigma';
+  String get youAreLeavingLichess => 'Părăsești Lichess';
 
   @override
-  String get neverTypeYourPassword => 'Nu introduceți niciodată parola Chessigma pe un alt site!';
+  String get neverTypeYourPassword => 'Nu introduceți niciodată parola Lichess pe un alt site!';
 
   @override
   String proceedToX(String param) {
@@ -3181,7 +3190,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get ratingFilter => 'Filtru de rating';
 
   @override
-  String get thisAccountViolatedTos => 'Acest cont a încălcat condițiile de utilizare ale site-ului Chessigma';
+  String get thisAccountViolatedTos => 'Acest cont a încălcat condițiile de utilizare ale site-ului Lichess';
 
   @override
   String get openingExplorerAndTablebase => 'Deschide exploratorul și baza de finaluri';
@@ -3641,7 +3650,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get clearSavedMoves => 'Șterge mutările';
 
   @override
-  String get previouslyOnChessigmaTV => 'Anterior pe Chessigma TV';
+  String get previouslyOnLichessTV => 'Anterior pe Lichess TV';
 
   @override
   String get onlinePlayers => 'Jucători conectați';
@@ -4050,7 +4059,7 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String xIsAFreeYLibreOpenSourceChessServer(String param1, String param2) {
+  String xIsAFreeYLibreOpenSourceChessServer(Object param1, Object param2) {
     return '$param1 este un server de șah gratuit ($param2), fără reclame și open-source.';
   }
 
@@ -4141,7 +4150,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get simulHostExtraTimePerPlayer => 'Timp suplimentar pentru ceasul gazdei, pentru fiecare jucător';
 
   @override
-  String get lichessTournaments => 'Turnee Chessigma';
+  String get lichessTournaments => 'Turnee Lichess';
 
   @override
   String get tournamentFAQ => 'Întrebări și răspunsuri pentru turneu';
@@ -4296,10 +4305,10 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String get networkLagBetweenYouAndChessigma => 'Rețea lentă între tine și Chessigma';
+  String get networkLagBetweenYouAndLichess => 'Rețea lentă între tine și Lichess';
 
   @override
-  String get timeToProcessAMoveOnChessigmaServer => 'Timpul necesar procesării unei mutări pe serverul Chessigma';
+  String get timeToProcessAMoveOnLichessServer => 'Timpul necesar procesării unei mutări pe serverul Lichess';
 
   @override
   String get downloadAnnotated => 'Descarcă cu note';
@@ -4356,7 +4365,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get kidModeExplanation => 'În modul „copil”, toate modalitățile de comunicare sunt dezactivate. Activează asta pentru copilul tău sau pentru școlari, pentru a-i proteja de alți utilizatori ai internetului.';
 
   @override
-  String inKidModeTheChessigmaLogoGetsIconX(String param) {
+  String inKidModeTheLichessLogoGetsIconX(String param) {
     return 'În modul „copil”, sigla paginii va avea iconița $param, în felul acesta vei ști când copiii tăi sunt în siguranță.';
   }
 
@@ -4664,7 +4673,7 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String get showUnreadChessigmaMessage => 'Ați primit un mesaj privat de la Chessigma.';
+  String get showUnreadLichessMessage => 'Ați primit un mesaj privat de la Lichess.';
 
   @override
   String get clickHereToReadIt => 'Click aici pentru a-l citi';
@@ -4726,7 +4735,7 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String get agreementPolicy => 'Sunt de acord cu respectarea tuturor politicilor Chessigma.';
+  String get agreementPolicy => 'Sunt de acord cu respectarea tuturor politicilor Lichess.';
 
   @override
   String get searchOrStartNewDiscussion => 'Caută sau începe o nouă conversație';
@@ -4872,7 +4881,7 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String get lostAgainstTOSViolator => 'Ai pierdut în fața cuiva care a încălcat Termenii și Condițiile Chessigma';
+  String get lostAgainstTOSViolator => 'Ai pierdut în fața cuiva care a încălcat Termenii și Condițiile Lichess';
 
   @override
   String refundXpointsTimeControlY(String param1, String param2) {
@@ -5037,7 +5046,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get until => 'Până la';
 
   @override
-  String get lichessDbExplanation => 'Partide evaluate obținute de la toți jucătorii Chessigma';
+  String get lichessDbExplanation => 'Partide evaluate obținute de la toți jucătorii Lichess';
 
   @override
   String get switchSides => 'Întoarce tabla';
@@ -5055,7 +5064,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get showMeEverything => 'Afișează-mi tot';
 
   @override
-  String get lichessPatronInfo => 'Chessigma este o asociație non-profit și un software gratuit și open-source.\nToate costurile de operare și de dezvoltare sunt finanțate doar din donațiile utilizatorilor.';
+  String get lichessPatronInfo => 'Lichess este o asociație non-profit și un software gratuit și open-source.\nToate costurile de operare și de dezvoltare sunt finanțate doar din donațiile utilizatorilor.';
 
   @override
   String get nothingToSeeHere => 'Nimic de văzut aici momentan.';
@@ -5810,7 +5819,7 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
-  String get streamerChessigmaStreamers => 'Chessigma streameri';
+  String get streamerLichessStreamers => 'Lichess streameri';
 
   @override
   String get studyPrivate => 'Privat';
@@ -6280,10 +6289,10 @@ class AppLocalizationsRo extends AppLocalizations {
   String get studyGetTheTour => 'Ai nevoie de ajutor? Urmează turul!';
 
   @override
-  String get studyWelcomeToChessigmaStudyTitle => 'Bine ai venit în Studiile Chessigma!';
+  String get studyWelcomeToLichessStudyTitle => 'Bine ai venit în Studiile Lichess!';
 
   @override
-  String get studyWelcomeToChessigmaStudyText => 'Aceasta este tabla de analiză comună.<br><br> Folosește-o pentru analiza si adnotarea jocurilor, <br>discuții pe poziții cu prieteni<br> si desigur pentru lecții de șah.<br><br> Este o unealtă puternică, hai să vedem cum funcționează.';
+  String get studyWelcomeToLichessStudyText => 'Aceasta este tabla de analiză comună.<br><br> Folosește-o pentru analiza si adnotarea jocurilor, <br>discuții pe poziții cu prieteni<br> si desigur pentru lecții de șah.<br><br> Este o unealtă puternică, hai să vedem cum funcționează.';
 
   @override
   String get studySharedAndSaveTitle => 'Distribuit și salvat';
@@ -6349,10 +6358,10 @@ class AppLocalizationsRo extends AppLocalizations {
   String get studyCustomPositionText => 'Aranjați tabla cum vreți.<br>Potrivită pentru explorarea finalurilor de joc.';
 
   @override
-  String get studyLoadExistingChessigmaGameTitle => 'Încarcă un joc existent din Chessigma';
+  String get studyLoadExistingLichessGameTitle => 'Încarcă un joc existent din Lichess';
 
   @override
-  String get studyLoadExistingChessigmaGameText => 'Lipește un URL pentru joc din Chessigma<br>(de exemplu lichess.org/7fHIU0XI)<br>pentru a încărca mutările jocului în capitol.';
+  String get studyLoadExistingLichessGameText => 'Lipește un URL pentru joc din Lichess<br>(de exemplu lichess.org/7fHIU0XI)<br>pentru a încărca mutările jocului în capitol.';
 
   @override
   String get studyFromFenStringTitle => 'Dintr-un text FEN';
@@ -6370,7 +6379,7 @@ class AppLocalizationsRo extends AppLocalizations {
   String get studyVariantsAreSupportedTitle => 'Studiile suportă variante de șah';
 
   @override
-  String get studyVariantsAreSupportedText => 'Da, poți studia Crazyhouse<br>și toate variantele de șah de pe Chessigma!';
+  String get studyVariantsAreSupportedText => 'Da, poți studia Crazyhouse<br>și toate variantele de șah de pe Lichess!';
 
   @override
   String get studyChapterConclusionText => 'Capitolele sunt salvate pentru totdeauna.<br>Distracție plăcută organizând conținutul tău de șah!';

@@ -8,6 +8,8 @@ import 'package:chessigma_mobile/src/utils/l10n_context.dart';
 import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
 import 'package:chessigma_mobile/src/widgets/non_linear_slider.dart';
 import 'package:chessigma_mobile/src/widgets/settings.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
+import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
 
 class TimeControlModal extends StatelessWidget {
   const TimeControlModal({
@@ -68,9 +70,9 @@ class TimeControlModal extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 4.0),
-        Card.filled(
-          margin: Styles.horizontalBodyPadding.add(Styles.sectionBottomPadding),
-          child: Padding(
+        Padding(
+          padding: Styles.horizontalBodyPadding.add(Styles.sectionBottomPadding),
+          child: GlassCard(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 16.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -126,9 +128,9 @@ class TimeControlModal extends StatelessWidget {
             ),
           ),
         ),
-        Card.filled(
-          margin: _horizontalPadding,
-          child: Padding(
+        Padding(
+          padding: _horizontalPadding,
+          child: GlassCard(
             padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 16.0),
             child: Theme(
               data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
@@ -298,17 +300,19 @@ class _ChoiceChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final glowColor = selected ? context.chessigmaColors.neonBlue : Colors.transparent;
+    final bgColor = selected ? context.chessigmaColors.voidBackgroundLighter : ColorScheme.of(context).surfaceContainerLow.withOpacity(0.3);
+
     return Container(
       decoration: BoxDecoration(
-        color: selected
-            ? ColorScheme.of(context).secondaryContainer
-            : ColorScheme.of(context).surfaceContainerLow,
+        color: bgColor,
         borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+        boxShadow: selected
+            ? [BoxShadow(color: glowColor.withOpacity(0.5), blurRadius: 8, spreadRadius: 1)]
+            : null,
         border: Border.fromBorderSide(
           BorderSide(
-            color: selected
-                ? ColorScheme.of(context).secondaryContainer
-                : Theme.of(context).dividerColor,
+            color: selected ? glowColor : Theme.of(context).dividerColor.withOpacity(0.3),
             width: 1.0,
           ),
         ),
@@ -322,7 +326,7 @@ class _ChoiceChip extends StatelessWidget {
             child: DefaultTextStyle.merge(
               style: Styles.timeControl.copyWith(
                 color: selected
-                    ? ColorScheme.of(context).onPrimaryContainer
+                    ? glowColor
                     : ColorScheme.of(context).onSurfaceVariant,
               ),
               child: label,

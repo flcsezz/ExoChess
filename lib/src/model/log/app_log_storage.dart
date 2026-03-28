@@ -1,3 +1,4 @@
+import 'package:chessigma_mobile/src/db/buffered_writer.dart';
 import 'package:collection/collection.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,8 +20,9 @@ const kAppLogStorageTable = 'app_log';
 
 /// Manages the storage of app logs in a SQLite database.
 class AppLogStorage {
-  const AppLogStorage(this._db);
+  AppLogStorage(this._db) : _writer = BufferedWriter(_db);
   final Database _db;
+  final BufferedWriter _writer;
 
   /// Retrieves a paginated list of [AppLogEntry] entries from the database.
   ///
@@ -44,15 +46,18 @@ class AppLogStorage {
   }
 
   /// Saves an [AppLogEntry] to the database.
-  Future<void> save(AppLogEntry entry) async {
-    await _db.insert(kAppLogStorageTable, {
-      ...entry.toJson(),
-      'lastModified': DateTime.now().toIso8601String(),
-    }, conflictAlgorithm: ConflictAlgorithm.replace);
+  void save(AppLogEntry entry) {
+    _writer.add((batch) {
+      batch.insert(kAppLogStorageTable, {
+        ...entry.toJson(),
+        'lastModified': DateTime.now().toIso8601String(),
+      }, conflictAlgorithm: ConflictAlgorithm.replace);
+    });
   }
 
   /// Deletes all app log entries from the database.
   Future<void> deleteAll() async {
+    await _writer.dispose();
     await _db.delete(kAppLogStorageTable);
   }
 }

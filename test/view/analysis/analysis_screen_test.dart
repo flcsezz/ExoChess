@@ -1303,7 +1303,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify we're back at More tab
-    expect(find.text('Tools'), findsOneWidget);
+    expect(find.text('More'), findsOneWidget);
 
     // Navigate to board analysis again
     await tester.tap(find.text('Analysis board'));
@@ -1364,7 +1364,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify we're back at More tab
-    expect(find.text('Tools'), findsOneWidget);
+    expect(find.text('More'), findsOneWidget);
 
     // Navigate to board analysis again
     await tester.tap(find.text('Analysis board'));
@@ -1409,7 +1409,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verify we're back at More tab
-    expect(find.text('Tools'), findsOneWidget);
+    expect(find.text('More'), findsOneWidget);
 
     // Navigate to board editor
     await tester.tap(find.text('Board editor'));

@@ -16,6 +16,7 @@ import 'package:chessigma_mobile/src/model/tournament/tournament_controller.dart
 import 'package:chessigma_mobile/src/utils/l10n_context.dart';
 import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
 import 'package:chessigma_mobile/src/view/game/status_l10n.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/glass_card.dart';
 
 class GameResultDialog extends ConsumerStatefulWidget {
   const GameResultDialog({required this.id, required this.onNewOpponentCallback, super.key});
@@ -232,41 +233,79 @@ class OverTheBoardGameResultDialog extends StatelessWidget {
   const OverTheBoardGameResultDialog({super.key, required this.game, required this.onRematch});
 
   final OverTheBoardGame game;
-
   final void Function() onRematch;
 
   @override
   Widget build(BuildContext context) {
-    final content = Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        GameResult(game: game),
-        FilledButton(
-          onPressed: onRematch,
-          child: Text(context.l10n.rematch, textAlign: TextAlign.center),
-        ),
-        FilledButton.tonal(
-          onPressed: () {
-            Navigator.of(context).push(
-              AnalysisScreen.buildRoute(
-                context,
-                AnalysisOptions.pgn(
-                  id: const StringId('otb_finished_game_analysis'),
-                  orientation: Side.white,
-                  pgn: game.makePgn(),
-                  isComputerAnalysisAllowed: true,
-                  variant: game.meta.variant,
-                ),
+    const gold = Color(0xFFE8B84B);
+    
+    return Dialog(
+      backgroundColor: Colors.transparent,
+      insetPadding: const EdgeInsets.symmetric(horizontal: 24),
+      child: GlassCard(
+        padding: const EdgeInsets.all(24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Icon(Icons.emoji_events_outlined, color: gold, size: 48),
+            const SizedBox(height: 16),
+            Text(
+              context.l10n.gameOver,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 2,
               ),
-            );
-          },
-          child: Text(context.l10n.analysis, textAlign: TextAlign.center),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 8),
+            GameResult(game: game),
+            const SizedBox(height: 32),
+            FilledButton(
+              onPressed: onRematch,
+              style: FilledButton.styleFrom(
+                backgroundColor: gold,
+                foregroundColor: Colors.black,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+              child: Text(
+                context.l10n.rematch.toUpperCase(),
+                style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2),
+              ),
+            ),
+            const SizedBox(height: 12),
+            OutlinedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  AnalysisScreen.buildRoute(
+                    context,
+                    AnalysisOptions.pgn(
+                      id: const StringId('otb_finished_game_analysis'),
+                      orientation: Side.white,
+                      pgn: game.makePgn(),
+                      isComputerAnalysisAllowed: true,
+                      variant: game.meta.variant,
+                    ),
+                  ),
+                );
+              },
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: Colors.white.withValues(alpha: 0.3)),
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              ),
+              child: Text(
+                context.l10n.analysis.toUpperCase(),
+                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, letterSpacing: 1.2),
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
-
-    return _ResultDialog(child: content);
   }
 }
 
@@ -285,19 +324,35 @@ class GameResult extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (game.status.value >= GameStatus.mate.value)
-          Text(
-            game.winner == null
-                ? '½-½'
-                : game.winner == Side.white
-                ? '1-0'
-                : '0-1',
-            style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-            textAlign: TextAlign.center,
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.05),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              game.winner == null
+                  ? '½-½'
+                  : game.winner == Side.white
+                  ? '1-0'
+                  : '0-1',
+              style: const TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 2,
+                color: Color(0xFFE8B84B),
+              ),
+              textAlign: TextAlign.center,
+            ),
           ),
-        const SizedBox(height: 6.0),
+        const SizedBox(height: 12.0),
         Text(
           '${gameStatusL10n(context, variant: game.meta.variant, status: game.status, lastPosition: game.lastPosition, winner: game.winner, isThreefoldRepetition: game.isThreefoldRepetition)}$showWinner',
-          style: const TextStyle(fontStyle: FontStyle.italic),
+          style: TextStyle(
+            color: Colors.white.withValues(alpha: 0.7),
+            fontSize: 14,
+            height: 1.4,
+          ),
           textAlign: TextAlign.center,
         ),
       ],

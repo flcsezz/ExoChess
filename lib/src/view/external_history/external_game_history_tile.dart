@@ -1,13 +1,13 @@
-import 'package:dartchess/dartchess.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
 import 'package:chessigma_mobile/src/model/external_history/external_history.dart';
 import 'package:chessigma_mobile/src/model/game/game_status.dart';
 import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
 import 'package:chessigma_mobile/src/styles/styles.dart';
 import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:dartchess/dartchess.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 final _dateFormatter = DateFormat.yMMMd().add_Hm();
 
@@ -29,7 +29,7 @@ class ExternalGameHistoryTile extends StatelessWidget {
         return const Icon(CupertinoIcons.xmark_square_fill, color: ChessigmaColors.grey);
       } else {
         return item.winner == null
-            ? Icon(CupertinoIcons.equal_square_fill, color: context.chessigmaColors.brag)
+            ? const Icon(CupertinoIcons.equal_square_fill, color: ChessigmaColors.grey)
             : item.winner == pov
                 ? Icon(CupertinoIcons.plus_square_fill, color: context.chessigmaColors.good)
                 : Icon(CupertinoIcons.minus_square_fill, color: context.chessigmaColors.error);

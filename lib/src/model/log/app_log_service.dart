@@ -70,15 +70,13 @@ class AppLogService {
 
       _logs.put(record);
 
-      // Persist to database asynchronously (fire-and-forget).
-      // The try-catch guards against ref being invalid (e.g. disposed ProviderScope in tests).
-      scheduleMicrotask(() {
-        try {
-          ref
-              .read(appLogStorageProvider.future)
-              .then((storage) => storage.save(AppLogEntry.fromLogRecord(record)), onError: (_) {});
-        } catch (_) {}
-      });
+      // Persist to database (internally buffered by storage).
+      try {
+        final storage = ref.read(appLogStorageProvider).asData?.value;
+        if (storage != null) {
+          storage.save(AppLogEntry.fromLogRecord(record));
+        }
+      } catch (_) {}
     });
   }
 

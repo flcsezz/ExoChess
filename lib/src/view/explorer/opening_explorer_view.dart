@@ -56,11 +56,6 @@ class _OpeningExplorerState extends ConsumerState<OpeningExplorerView> {
       return Center(child: Text(context.l10n.maxDepthReached));
     }
 
-    final isLoggedIn = ref.watch(isLoggedInProvider);
-    if (!isLoggedIn) {
-      return Center(child: Text(context.l10n.youNeedAnAccountToDoThat));
-    }
-
     final prefs = ref.watch(openingExplorerPreferencesProvider);
 
     if (prefs.db == OpeningDatabase.player && prefs.playerDb.username == null) {

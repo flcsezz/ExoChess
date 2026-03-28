@@ -34,17 +34,27 @@ class ImportPgnScreen extends StatelessWidget {
       if (games.length == 1) {
         final game = games.first;
         final rule = Rule.fromPgn(game.headers['Variant']);
+        
+        // Try to detect orientation if a username is provided (e.g. from external fetch)
+        // Or if we can find a likely "user" in headers
+        Side orientation = Side.white;
+        final white = game.headers['White']?.toLowerCase() ?? '';
+        final black = game.headers['Black']?.toLowerCase() ?? '';
+        
+        // This is a bit of a heuristic if we don't have a specific user context
+        // in this static method, but we can check if one of the names looks like a "user"
+        // In local PGN imports, we might not know who's who, so white is a safe default.
 
         Navigator.of(context, rootNavigator: true).push(
           AnalysisScreen.buildRoute(
             context,
             AnalysisOptions.pgn(
               id: const StringId('pgn_import_single_game'),
-              orientation: .white,
+              orientation: orientation,
               pgn: text,
               isComputerAnalysisAllowed: true,
               initialMoveCursor: game.moves.mainline().isEmpty ? 0 : 1,
-              variant: rule != null ? Variant.fromRule(rule) : .standard,
+              variant: rule != null ? Variant.fromRule(rule) : Variant.standard,
             ),
           ),
         );

@@ -11,6 +11,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
 import 'package:chessigma_mobile/src/model/common/chess.dart';
 import 'package:chessigma_mobile/src/model/game/game_board_params.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/neon_button.dart';
 import 'package:chessigma_mobile/src/model/game/offline_computer_game.dart';
 import 'package:chessigma_mobile/src/model/offline_computer/offline_computer_game_controller.dart';
 import 'package:chessigma_mobile/src/model/offline_computer/offline_computer_game_preferences.dart';
@@ -31,6 +32,7 @@ import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
 import 'package:chessigma_mobile/src/widgets/adaptive_choice_picker.dart';
 import 'package:chessigma_mobile/src/widgets/board_preview.dart';
 import 'package:chessigma_mobile/src/widgets/bottom_bar.dart';
+import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 import 'package:chessigma_mobile/src/widgets/feedback.dart';
 import 'package:chessigma_mobile/src/widgets/game_layout.dart';
 import 'package:chessigma_mobile/src/widgets/list.dart';
@@ -928,7 +930,7 @@ class _NewGameSheetState extends ConsumerState<_NewGameSheet> {
         ),
         Padding(
           padding: Styles.horizontalBodyPadding,
-          child: FilledButton(
+          child: NeonButton(
             onPressed: _isPlayEnabled
                 ? () {
                     final effectiveFen =
@@ -950,7 +952,7 @@ class _NewGameSheetState extends ConsumerState<_NewGameSheet> {
                     Navigator.pop(context);
                   }
                 : null,
-            child: Text(context.l10n.play, style: Styles.bold),
+            label: context.l10n.play,
           ),
         ),
       ],

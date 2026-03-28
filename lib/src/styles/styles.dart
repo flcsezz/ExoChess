@@ -17,7 +17,7 @@ abstract class Styles {
   static const formLabel = TextStyle(fontWeight: FontWeight.bold);
   static const formError = TextStyle(color: ChessigmaColors.red);
   static const formDescription = TextStyle(fontSize: 12);
-  static const linkStyle = TextStyle(color: Colors.blueAccent, decoration: TextDecoration.none);
+  static const linkStyle = TextStyle(color: Color(0xFFE8B84B), decoration: TextDecoration.none);
   static const noResultTextStyle = TextStyle(color: Colors.grey, fontSize: 20.0);
 
   // padding
@@ -68,6 +68,13 @@ class LichessCustomColors extends ThemeExtension<LichessCustomColors> {
     required this.fancy,
     required this.purple,
     required this.primary,
+    required this.neonBlue,
+    required this.neonPurple,
+    required this.neonPink,
+    required this.neonGreen,
+    required this.voidBlack,
+    required this.voidIndigo,
+    required this.voidBackgroundLighter,
   });
 
   final Color cyan;
@@ -77,6 +84,13 @@ class LichessCustomColors extends ThemeExtension<LichessCustomColors> {
   final Color fancy;
   final Color purple;
   final Color primary;
+  final Color neonBlue;
+  final Color neonPurple;
+  final Color neonPink;
+  final Color neonGreen;
+  final Color voidBlack;
+  final Color voidIndigo;
+  final Color voidBackgroundLighter;
 
   @override
   LichessCustomColors copyWith({
@@ -87,6 +101,13 @@ class LichessCustomColors extends ThemeExtension<LichessCustomColors> {
     Color? fancy,
     Color? purple,
     Color? primary,
+    Color? neonBlue,
+    Color? neonPurple,
+    Color? neonPink,
+    Color? neonGreen,
+    Color? voidBlack,
+    Color? voidIndigo,
+    Color? voidBackgroundLighter,
   }) {
     return LichessCustomColors(
       cyan: cyan ?? this.cyan,
@@ -96,6 +117,13 @@ class LichessCustomColors extends ThemeExtension<LichessCustomColors> {
       fancy: fancy ?? this.fancy,
       purple: purple ?? this.purple,
       primary: primary ?? this.primary,
+      neonBlue: neonBlue ?? this.neonBlue,
+      neonPurple: neonPurple ?? this.neonPurple,
+      neonPink: neonPink ?? this.neonPink,
+      neonGreen: neonGreen ?? this.neonGreen,
+      voidBlack: voidBlack ?? this.voidBlack,
+      voidIndigo: voidIndigo ?? this.voidIndigo,
+      voidBackgroundLighter: voidBackgroundLighter ?? this.voidBackgroundLighter,
     );
   }
 
@@ -112,6 +140,13 @@ class LichessCustomColors extends ThemeExtension<LichessCustomColors> {
       fancy: Color.lerp(fancy, other.fancy, t) ?? fancy,
       purple: Color.lerp(purple, other.purple, t) ?? purple,
       primary: Color.lerp(primary, other.primary, t) ?? primary,
+      neonBlue: Color.lerp(neonBlue, other.neonBlue, t) ?? neonBlue,
+      neonPurple: Color.lerp(neonPurple, other.neonPurple, t) ?? neonPurple,
+      neonPink: Color.lerp(neonPink, other.neonPink, t) ?? neonPink,
+      neonGreen: Color.lerp(neonGreen, other.neonGreen, t) ?? neonGreen,
+      voidBlack: Color.lerp(voidBlack, other.voidBlack, t) ?? voidBlack,
+      voidIndigo: Color.lerp(voidIndigo, other.voidIndigo, t) ?? voidIndigo,
+      voidBackgroundLighter: Color.lerp(voidBackgroundLighter, other.voidBackgroundLighter, t) ?? voidBackgroundLighter,
     );
   }
 
@@ -135,7 +170,14 @@ const lichessCustomColors = LichessCustomColors(
   error: ChessigmaColors.error,
   fancy: ChessigmaColors.fancy,
   purple: ChessigmaColors.purple,
-  primary: ChessigmaColors.primary,
+  primary: Color(0xFFE8B84B),
+  neonBlue: ChessigmaColors.neonBlue,
+  neonPurple: ChessigmaColors.neonPurple,
+  neonPink: ChessigmaColors.neonPink,
+  neonGreen: ChessigmaColors.neonGreen,
+  voidBlack: ChessigmaColors.voidBlack,
+  voidIndigo: ChessigmaColors.voidIndigo,
+  voidBackgroundLighter: ChessigmaColors.voidBackgroundLighter,
 );
 
 extension CustomColorsBuildContext on BuildContext {

@@ -212,14 +212,8 @@ class _BodyState extends ConsumerState<_Body> {
               )
             : ListView.separated(
                 controller: _scrollController,
-                separatorBuilder: (context, index) =>
-                    Theme.of(context).platform == TargetPlatform.iOS
-                    ? PlatformDivider(
-                        height: 1,
-                        cupertinoHasLeading: true,
-                        indent: displayMode == GameHistoryDisplayMode.detail ? 0 : null,
-                      )
-                    : const SizedBox.shrink(),
+                padding: const EdgeInsets.all(8.0),
+                separatorBuilder: (context, index) => const SizedBox(height: 8.0),
                 itemCount: list.length + (state.isLoading ? 1 : 0),
                 itemBuilder: (context, index) {
                   if (state.isLoading && index == list.length) {

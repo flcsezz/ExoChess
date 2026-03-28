@@ -68,7 +68,7 @@ Future<Database> openAppDatabase(DatabaseFactory dbFactory, String path) {
   return dbFactory.openDatabase(
     path,
     options: OpenDatabaseOptions(
-      version: 5,
+      version: 6,
       onConfigure: (db) async {
         final version = await _getDatabaseVersion(db);
         _logger.info('SQLite version: $version');
@@ -85,6 +85,8 @@ Future<Database> openAppDatabase(DatabaseFactory dbFactory, String path) {
           _deleteOldEntries(db, 'chat_read_messages', chatReadMessagesTTL),
           _deleteOldEntries(db, 'http_log', httpLogTTL),
           _deleteOldEntries(db, 'app_log', appLogTTL),
+          _deleteOldEntries(db, 'external_game_history', gameTTL),
+          _deleteOldEntries(db, 'otb_game_history', gameTTL),
         ]);
       },
       onCreate: (db, version) async {
@@ -96,6 +98,8 @@ Future<Database> openAppDatabase(DatabaseFactory dbFactory, String path) {
         _createGameTableV2(batch);
         _createHttpLogTableV4(batch);
         _createAppLogTableV5(batch);
+        _createExternalGameHistoryTableV6(batch);
+        _createOtbGameHistoryTableV6(batch);
         await batch.commit();
       },
       onUpgrade: (db, oldVersion, newVersion) async {
@@ -112,11 +116,41 @@ Future<Database> openAppDatabase(DatabaseFactory dbFactory, String path) {
         if (oldVersion < 5) {
           _createAppLogTableV5(batch);
         }
+        if (oldVersion < 6) {
+          _createExternalGameHistoryTableV6(batch);
+          _createOtbGameHistoryTableV6(batch);
+        }
         await batch.commit();
       },
       onDowngrade: onDatabaseDowngradeDelete,
     ),
   );
+}
+
+void _createExternalGameHistoryTableV6(Batch batch) {
+  batch.execute('DROP TABLE IF EXISTS external_game_history');
+  batch.execute('''
+    CREATE TABLE external_game_history(
+    id TEXT NOT NULL,
+    source TEXT NOT NULL,
+    username TEXT NOT NULL,
+    lastModified TEXT NOT NULL,
+    data TEXT NOT NULL,
+    PRIMARY KEY (id, source)
+  )
+    ''');
+}
+
+void _createOtbGameHistoryTableV6(Batch batch) {
+  batch.execute('DROP TABLE IF EXISTS otb_game_history');
+  batch.execute('''
+    CREATE TABLE otb_game_history(
+    id TEXT NOT NULL,
+    lastModified TEXT NOT NULL,
+    data TEXT NOT NULL,
+    PRIMARY KEY (id)
+  )
+    ''');
 }
 
 void _createPuzzleBatchTableV3(Batch batch) {

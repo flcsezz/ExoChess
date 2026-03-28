@@ -119,13 +119,18 @@ class _PgnGamesListScreenState extends State<PgnGamesListScreen> {
             title: Text(gameData.title, maxLines: 2, overflow: .ellipsis),
             subtitle: Text(gameData.subtitle, overflow: .ellipsis, maxLines: 1),
             onTap: () {
+              // Try to detect orientation based on player names
+              // This is a list from PGN import, so we don't have a specific "user"
+              // but we can at least look for common names or just default to white.
+              Side orientation = Side.white;
+              
               Navigator.of(context, rootNavigator: true).push(
                 AnalysisScreen.buildRoute(
                   context,
                   AnalysisOptions.pgn(
                     // TODO generate unique id for each game, maybe based on the PGN headers?
                     id: const StringId('pgn_import_game'),
-                    orientation: .white,
+                    orientation: orientation,
                     pgn: game.makePgn(),
                     variant: gameData.variant,
                     isComputerAnalysisAllowed: true,

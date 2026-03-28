@@ -12,7 +12,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mobileAccountPreferences => '账户设置';
 
   @override
-  String get mobileAccountPreferencesHelp => '这些设置将应用于您的 Chessigma 账户，并在所有设备上生效。';
+  String get mobileAccountPreferencesHelp => '这些设置将应用于您的 Lichess 账户，并在所有设备上生效。';
 
   @override
   String get mobileAllGames => '所有对局';
@@ -242,7 +242,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mobileWatchTab => '观战';
 
   @override
-  String get mobileWelcomeToChessigmaApp => '欢迎使用 Chessigma 应用！';
+  String get mobileWelcomeToLichessApp => '欢迎使用 Lichess 应用！';
 
   @override
   String get mobileViewGame => '查看对局';
@@ -282,6 +282,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get mobileOrImportPgnFile => '或者导入 PGN 文件';
+
+  @override
+  String get showUnreadChessigmaMessage => 'You have an unread Chessigma message';
+
+  @override
+  String get mobileWelcomeToChessigmaApp => 'Welcome to Chessigma app!';
 
   @override
   String get variantStandardTitle => '国际象棋标准规则（国际棋联）';
@@ -741,7 +747,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get broadcastAboutBroadcasts => '关于转播';
 
   @override
-  String get broadcastHowToUseChessigmaBroadcasts => '如何使用 Chessigma 转播。';
+  String get broadcastHowToUseLichessBroadcasts => '如何使用 Lichess 转播。';
 
   @override
   String get broadcastTheNewRoundHelp => '新轮次将继承上一轮次的成员与贡献者。';
@@ -776,10 +782,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get broadcastSourceSingleUrl => 'PGN 源文件链接';
 
   @override
-  String get broadcastSourceUrlHelp => 'Chessigma 将检查此链接以获取 PGN 更新。它必须能在互联网上公开访问。';
+  String get broadcastSourceUrlHelp => 'Lichess 将检查此链接以获取 PGN 更新。它必须能在互联网上公开访问。';
 
   @override
-  String get broadcastSourceGameIds => '最多 64 个 Chessigma 对局 ID，以空格分隔。';
+  String get broadcastSourceGameIds => '最多 64 个 Lichess 对局 ID，以空格分隔。';
 
   @override
   String broadcastStartDateTimeZone(String param) {
@@ -850,7 +856,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get broadcastRecentTournaments => '近期锦标赛';
 
   @override
-  String get broadcastOpenChessigma => '在 Chessigma 中打开';
+  String get broadcastOpenLichess => '在 Lichess 中打开';
 
   @override
   String get broadcastTeams => '团队';
@@ -1136,13 +1142,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get challengeDeclineOnlyBot => '我只接受来自机器人的挑战';
 
   @override
-  String get challengeInviteChessigmaUser => '或邀请一位 Chessigma 用户：';
+  String get challengeInviteLichessUser => '或邀请一位 Lichess 用户：';
 
   @override
   String get contactContact => '联系我们';
 
   @override
-  String get contactContactChessigma => '联系 Chessigma';
+  String get contactContactLichess => '联系 Lichess';
 
   @override
   String get coordinatesCoordinates => '坐标';
@@ -1209,10 +1215,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get patronDonate => '赞助';
 
   @override
-  String get patronChessigmaPatron => 'Chessigma 赞助者';
+  String get patronChessigmaPatron => 'Chessigma Patron';
 
   @override
-  String get patronBecomePatron => '成为 Chessigma 赞助者';
+  String get patronLichessPatron => 'Lichess 赞助者';
+
+  @override
+  String get patronBecomePatron => '成为 Lichess 赞助者';
 
   @override
   String perfStatPerfStats(String param) {
@@ -1368,7 +1377,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get preferencesShowFlairs => '显示棋手图标';
 
   @override
-  String get preferencesExplainShowPlayerRatings => '此功能将隐藏 Chessigma 上的所有等级分，以帮助您专注于对局。排位对局仍会影响您的等级分，这只是关于您所看到的内容。';
+  String get preferencesExplainShowPlayerRatings => '此功能将隐藏 Lichess 上的所有等级分，以帮助您专注于对局。排位对局仍会影响您的等级分，这只是关于您所看到的内容。';
 
   @override
   String get preferencesDisplayBoardResizeHandle => '调整棋盘大小';
@@ -1512,10 +1521,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get preferencesNotifyTimeAlarm => '通讯棋即将超时';
 
   @override
-  String get preferencesNotifyBell => 'Chessigma 内的铃声通知';
+  String get preferencesNotifyBell => 'Lichess 内的铃声通知';
 
   @override
-  String get preferencesNotifyPush => 'Chessigma 外的设备通知';
+  String get preferencesNotifyPush => 'Lichess 外的设备通知';
 
   @override
   String get preferencesNotifyWeb => '浏览器通知';
@@ -1733,7 +1742,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get puzzleSearchPuzzles => '搜索谜题';
 
   @override
-  String get puzzleFromMyGamesNone => '您的对局数据库中暂无谜题，但 Chessigma 依然记得您走过的每一着。\n\n多进行快棋和慢棋对局，会增加您的对局被收录为谜题的机会！';
+  String get puzzleFromMyGamesNone => '您的对局数据库中暂无谜题，但 Lichess 依然记得您走过的每一着。\n\n多进行快棋和慢棋对局，会增加您的对局被收录为谜题的机会！';
 
   @override
   String get puzzlePuzzleDashboardDescription => '训练、分析、进步';
@@ -2882,13 +2891,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get error_namePassword => '请不要使用您的用户名作为密码。';
 
   @override
-  String get blankedPassword => '您在另一个网站上使用了相同的密码，而该网站已遭泄露。为确保您 Chessigma 账户的安全，我们需要您设置一个新密码。感谢您的理解。';
+  String get blankedPassword => '您在另一个网站上使用了相同的密码，而该网站已遭泄露。为确保您 Lichess 账户的安全，我们需要您设置一个新密码。感谢您的理解。';
 
   @override
-  String get youAreLeavingChessigma => '您正在离开 Chessigma';
+  String get youAreLeavingLichess => '您正在离开 Lichess';
 
   @override
-  String get neverTypeYourPassword => '切勿在其他网站上输入您的 Chessigma 密码！';
+  String get neverTypeYourPassword => '切勿在其他网站上输入您的 Lichess 密码！';
 
   @override
   String proceedToX(String param) {
@@ -3125,7 +3134,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get ratingFilter => '等级分筛选';
 
   @override
-  String get thisAccountViolatedTos => '该账户违反了 Chessigma 服务条款';
+  String get thisAccountViolatedTos => '该账户违反了 Lichess 服务条款';
 
   @override
   String get openingExplorerAndTablebase => '开局探索器和残局数据库';
@@ -3585,7 +3594,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get clearSavedMoves => '清空着法记录';
 
   @override
-  String get previouslyOnChessigmaTV => 'Chessigma TV 近期对局';
+  String get previouslyOnLichessTV => 'Lichess TV 近期对局';
 
   @override
   String get onlinePlayers => '在线棋手';
@@ -3967,7 +3976,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String tpTimeSpentOnTV(String param) {
-    return '在 Chessigma TV 上的总时长：$param';
+    return '在 Lichess TV 上的总时长：$param';
   }
 
   @override
@@ -3994,7 +4003,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String xIsAFreeYLibreOpenSourceChessServer(String param1, String param2) {
+  String xIsAFreeYLibreOpenSourceChessServer(Object param1, Object param2) {
     return '$param1 是一个$param2免费、开源共享、绝无广告的国际象棋平台。';
   }
 
@@ -4085,7 +4094,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get simulHostExtraTimePerPlayer => '每加入位对手时获得的额外时间';
 
   @override
-  String get lichessTournaments => 'Chessigma 锦标赛';
+  String get lichessTournaments => 'Lichess 锦标赛';
 
   @override
   String get tournamentFAQ => '竞技场锦标赛常见问题';
@@ -4240,10 +4249,10 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get networkLagBetweenYouAndChessigma => '您与 Chessigma 之间的网络延迟';
+  String get networkLagBetweenYouAndLichess => '您与 Lichess 之间的网络延迟';
 
   @override
-  String get timeToProcessAMoveOnChessigmaServer => '在 Chessigma 服务器上处理一步棋的时间';
+  String get timeToProcessAMoveOnLichessServer => '在 Lichess 服务器上处理一步棋的时间';
 
   @override
   String get downloadAnnotated => '下载有评注的 PGN';
@@ -4300,8 +4309,8 @@ class AppLocalizationsZh extends AppLocalizations {
   String get kidModeExplanation => '安全第一。在儿童模式下，所有网站通信功能都被禁用。为您的孩子或学生启用此模式，以保护他们免受其他用户的影响。';
 
   @override
-  String inKidModeTheChessigmaLogoGetsIconX(String param) {
-    return '在儿童模式下，Chessigma 徽标会显示一个 $param 图标，这样您就知道您的孩子是安全的。';
+  String inKidModeTheLichessLogoGetsIconX(String param) {
+    return '在儿童模式下，Lichess 徽标会显示一个 $param 图标，这样您就知道您的孩子是安全的。';
   }
 
   @override
@@ -4608,7 +4617,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get showUnreadChessigmaMessage => '您收到了一条来自 Chessigma 的私信。';
+  String get showUnreadLichessMessage => '您收到了一条来自 Lichess 的私信。';
 
   @override
   String get clickHereToReadIt => '点击此处阅读';
@@ -4670,7 +4679,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get agreementPolicy => '我同意我将遵守所有 Chessigma 规范。';
+  String get agreementPolicy => '我同意我将遵守所有 Lichess 规范。';
 
   @override
   String get searchOrStartNewDiscussion => '搜索或开始新对话';
@@ -4816,7 +4825,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get lostAgainstTOSViolator => '您输给了违反 Chessigma 服务条款的用户，从而失去了等级分';
+  String get lostAgainstTOSViolator => '您输给了违反 Lichess 服务条款的用户，从而失去了等级分';
 
   @override
   String refundXpointsTimeControlY(String param1, String param2) {
@@ -4981,7 +4990,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get until => '至';
 
   @override
-  String get lichessDbExplanation => '来自 Chessigma 的排位对局';
+  String get lichessDbExplanation => '来自 Lichess 的排位对局';
 
   @override
   String get switchSides => '更换所持颜色';
@@ -4999,7 +5008,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get showMeEverything => '显示全部内容';
 
   @override
-  String get lichessPatronInfo => 'Chessigma 是一家非营利机构，其软件是完全免费的自由开源软件。\n该网站的所有运营成本、开发工作以及内容产出，都完全依赖于用户的赞助。';
+  String get lichessPatronInfo => 'Lichess 是一家非营利机构，其软件是完全免费的自由开源软件。\n该网站的所有运营成本、开发工作以及内容产出，都完全依赖于用户的赞助。';
 
   @override
   String get nothingToSeeHere => '目前这里什么都没有。';
@@ -5662,7 +5671,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get streamerChessigmaStreamers => 'Chessigma 主播';
+  String get streamerLichessStreamers => 'Lichess 主播';
 
   @override
   String get studyPrivate => '私人';
@@ -5829,7 +5838,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get studyCurrentChapterUrl => '当前章节链接';
 
   @override
-  String get studyYouCanPasteThisInTheForumToEmbed => '您可以将此链接粘贴到论坛或您的 Chessigma 博客中以嵌入';
+  String get studyYouCanPasteThisInTheForumToEmbed => '您可以将此链接粘贴到论坛或您的 Lichess 博客中以嵌入';
 
   @override
   String get studyStartAtInitialPosition => '从初始局面开始';
@@ -6132,10 +6141,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get studyGetTheTour => '需要帮助？开始引导！';
 
   @override
-  String get studyWelcomeToChessigmaStudyTitle => '欢迎来到 Chessigma 研习！';
+  String get studyWelcomeToLichessStudyTitle => '欢迎来到 Lichess 研习！';
 
   @override
-  String get studyWelcomeToChessigmaStudyText => '这是一个共享分析棋盘。<br><br>用它来分析和对局评注，<br>与朋友讨论局面，<br>当然，还可以用于象棋课程！<br><br>这是一个强大的工具，让我们花点时间看看它是如何工作的。';
+  String get studyWelcomeToLichessStudyText => '这是一个共享分析棋盘。<br><br>用它来分析和对局评注，<br>与朋友讨论局面，<br>当然，还可以用于象棋课程！<br><br>这是一个强大的工具，让我们花点时间看看它是如何工作的。';
 
   @override
   String get studySharedAndSaveTitle => '共享与保存';
@@ -6201,10 +6210,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get studyCustomPositionText => '按您的方式设置棋盘。<br>适合探索残局。';
 
   @override
-  String get studyLoadExistingChessigmaGameTitle => '加载已有的 Chessigma 对局';
+  String get studyLoadExistingLichessGameTitle => '加载已有的 Lichess 对局';
 
   @override
-  String get studyLoadExistingChessigmaGameText => '粘贴一个 Chessigma 对局链接<br>（例如 lichess.org/7fHIU0XI）<br>以将对局着法加载到章节中。';
+  String get studyLoadExistingLichessGameText => '粘贴一个 Lichess 对局链接<br>（例如 lichess.org/7fHIU0XI）<br>以将对局着法加载到章节中。';
 
   @override
   String get studyFromFenStringTitle => '导入 FEN 代码';
@@ -6222,7 +6231,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get studyVariantsAreSupportedTitle => '研习支持变体';
 
   @override
-  String get studyVariantsAreSupportedText => '是的，您可以研习 Crazyhouse<br>以及所有 Chessigma 变体！';
+  String get studyVariantsAreSupportedText => '是的，您可以研习 Crazyhouse<br>以及所有 Lichess 变体！';
 
   @override
   String get studyChapterConclusionText => '章节会被永久保存。<br>祝您愉快地组织您的象棋内容！';
@@ -6519,7 +6528,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get mobileHomeTab => '首頁';
 
   @override
-  String get mobileLiveStreamers => 'Chessigma 實況主';
+  String get mobileLiveStreamers => 'Lichess 實況主';
 
   @override
   String get mobileMustBeLoggedIn => '您必須登入才能查看此頁面。';
@@ -6700,7 +6709,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get mobileWatchTab => '觀戰';
 
   @override
-  String get mobileWelcomeToChessigmaApp => '歡迎使用 Chessigma 應用程式！';
+  String get mobileWelcomeToLichessApp => '歡迎使用 Lichess 應用程式！';
 
   @override
   String get mobileViewGame => '查看對局';
@@ -7136,7 +7145,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get broadcastAboutBroadcasts => '關於直播';
 
   @override
-  String get broadcastHowToUseChessigmaBroadcasts => '如何使用 Chessigma 比賽直播';
+  String get broadcastHowToUseLichessBroadcasts => '如何使用 Lichess 比賽直播';
 
   @override
   String get broadcastTheNewRoundHelp => '新的一局會有跟上一局相同的成員與貢獻者';
@@ -7171,10 +7180,10 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get broadcastSourceSingleUrl => 'PGN 來源網址';
 
   @override
-  String get broadcastSourceUrlHelp => 'Chessigma 將以該網址更新PGN數據，網址必須公開';
+  String get broadcastSourceUrlHelp => 'Lichess 將以該網址更新PGN數據，網址必須公開';
 
   @override
-  String get broadcastSourceGameIds => '最多 64 個以空格分開的 Chessigma 棋局序號。';
+  String get broadcastSourceGameIds => '最多 64 個以空格分開的 Lichess 棋局序號。';
 
   @override
   String broadcastStartDateTimeZone(String param) {
@@ -7242,7 +7251,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get broadcastRecentTournaments => '最近錦標賽';
 
   @override
-  String get broadcastOpenChessigma => '在 lichess 中開啟';
+  String get broadcastOpenLichess => '在 lichess 中開啟';
 
   @override
   String get broadcastTeams => '團隊';
@@ -7439,13 +7448,13 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get challengeDeclineOnlyBot => '我目前只接受機器人的對弈。';
 
   @override
-  String get challengeInviteChessigmaUser => '或邀請一位 Chessigma 用户：';
+  String get challengeInviteLichessUser => '或邀請一位 Lichess 用户：';
 
   @override
   String get contactContact => '聯繫我們';
 
   @override
-  String get contactContactChessigma => '聯繫 Chessigma';
+  String get contactContactLichess => '聯繫 Lichess';
 
   @override
   String get coordinatesCoordinates => '座標';
@@ -7512,10 +7521,10 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get patronDonate => '捐款';
 
   @override
-  String get patronChessigmaPatron => 'Chessigma 贊助者';
+  String get patronLichessPatron => 'Lichess 贊助者';
 
   @override
-  String get patronBecomePatron => '成為 Chessigma 贊助者';
+  String get patronBecomePatron => '成為 Lichess 贊助者';
 
   @override
   String perfStatPerfStats(String param) {
@@ -7812,10 +7821,10 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get preferencesNotifyTimeAlarm => '長期對局的時間即將耗盡';
 
   @override
-  String get preferencesNotifyBell => 'Chessigma 內的鈴聲通知';
+  String get preferencesNotifyBell => 'Lichess 內的鈴聲通知';
 
   @override
-  String get preferencesNotifyPush => 'Chessigma 外的設備通知';
+  String get preferencesNotifyPush => 'Lichess 外的設備通知';
 
   @override
   String get preferencesNotifyWeb => '瀏覽器通知';
@@ -8027,7 +8036,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get puzzleSearchPuzzles => '尋找謎題';
 
   @override
-  String get puzzleFromMyGamesNone => '你在資料庫中沒有謎題，但 Chessigma 仍然非常愛你。\n遊玩一些快速和經典遊戲，以增加從你的棋局中生成謎題的機會！';
+  String get puzzleFromMyGamesNone => '你在資料庫中沒有謎題，但 Lichess 仍然非常愛你。\n遊玩一些快速和經典遊戲，以增加從你的棋局中生成謎題的機會！';
 
   @override
   String get puzzlePuzzleDashboardDescription => '訓練、分析、改進';
@@ -9046,13 +9055,13 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get error_namePassword => '請不要把密碼設為使用者名稱。';
 
   @override
-  String get blankedPassword => '你在其他站點使用過相同的密碼，並且這些站點已經失效。為確保你的 Chessigma 帳戶安全，你需要設置新密碼。感謝你的理解。';
+  String get blankedPassword => '你在其他站點使用過相同的密碼，並且這些站點已經失效。為確保你的 Lichess 帳戶安全，你需要設置新密碼。感謝你的理解。';
 
   @override
-  String get youAreLeavingChessigma => '你正要離開 Chessigma';
+  String get youAreLeavingLichess => '你正要離開 Lichess';
 
   @override
-  String get neverTypeYourPassword => '不要在其他網站輸入你的 Chessigma 密碼！';
+  String get neverTypeYourPassword => '不要在其他網站輸入你的 Lichess 密碼！';
 
   @override
   String proceedToX(String param) {
@@ -9283,7 +9292,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get exportGames => '導出棋局';
 
   @override
-  String get thisAccountViolatedTos => '此帳號違反了Chessigma的使用規定';
+  String get thisAccountViolatedTos => '此帳號違反了Lichess的使用規定';
 
   @override
   String get openingExplorerAndTablebase => '開局瀏覽器 & 總局資料庫';
@@ -9731,7 +9740,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get clearSavedMoves => '清空著法儲存';
 
   @override
-  String get previouslyOnChessigmaTV => '過去的Chessigma TV直播';
+  String get previouslyOnLichessTV => '過去的Lichess TV直播';
 
   @override
   String get onlinePlayers => '在線棋手';
@@ -10104,7 +10113,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
 
   @override
   String tpTimeSpentOnTV(String param) {
-    return '花在Chessigma TV的時間：$param';
+    return '花在Lichess TV的時間：$param';
   }
 
   @override
@@ -10131,7 +10140,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   }
 
   @override
-  String xIsAFreeYLibreOpenSourceChessServer(String param1, String param2) {
+  String xIsAFreeYLibreOpenSourceChessServer(Object param1, Object param2) {
     return '$param1是一個完全免費($param2)、開放性、無廣告、並且開源的網站';
   }
 
@@ -10219,7 +10228,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get simulHostExtraTimePerPlayer => '於每位玩家加入後棋鐘增加的額外時間';
 
   @override
-  String get lichessTournaments => 'Chessigma 錦標賽';
+  String get lichessTournaments => 'Lichess 錦標賽';
 
   @override
   String get tournamentFAQ => '競技場錦標賽常見問題';
@@ -10360,10 +10369,10 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   }
 
   @override
-  String get networkLagBetweenYouAndChessigma => '您和 Chessigma 之間的網路停滯';
+  String get networkLagBetweenYouAndLichess => '您和 Lichess 之間的網路停滯';
 
   @override
-  String get timeToProcessAMoveOnChessigmaServer => 'lichess 伺服器上處理走棋的時間';
+  String get timeToProcessAMoveOnLichessServer => 'lichess 伺服器上處理走棋的時間';
 
   @override
   String get downloadAnnotated => '下載含有棋子走動方向的棋局';
@@ -10417,8 +10426,8 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get kidModeExplanation => '考量安全，在兒童模式中，網站上全部的文字交流將會被關閉。開啟此模式來保護你的孩子及學生不被網路上的人傷害。';
 
   @override
-  String inKidModeTheChessigmaLogoGetsIconX(String param) {
-    return '在兒童模式下，Chessigma的標誌會有一個$param圖示，讓你知道你的孩子是安全的。';
+  String inKidModeTheLichessLogoGetsIconX(String param) {
+    return '在兒童模式下，Lichess的標誌會有一個$param圖示，讓你知道你的孩子是安全的。';
   }
 
   @override
@@ -10712,7 +10721,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   }
 
   @override
-  String get showUnreadChessigmaMessage => '你收到一個來自 Chessigma 的私訊。';
+  String get showUnreadLichessMessage => '你收到一個來自 Lichess 的私訊。';
 
   @override
   String get clickHereToReadIt => '點擊以閱讀';
@@ -10774,7 +10783,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   }
 
   @override
-  String get agreementPolicy => '我同意我將會遵守Chessigma的規則';
+  String get agreementPolicy => '我同意我將會遵守Lichess的規則';
 
   @override
   String get searchOrStartNewDiscussion => '尋找或開始聊天';
@@ -11077,7 +11086,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get until => '直到';
 
   @override
-  String get lichessDbExplanation => '來自 Chessigma 用戶的所有評分遊戲';
+  String get lichessDbExplanation => '來自 Lichess 用戶的所有評分遊戲';
 
   @override
   String get switchSides => '更換所持顏色';
@@ -11095,7 +11104,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get showMeEverything => '全部顯示';
 
   @override
-  String get lichessPatronInfo => 'Chessigma是個慈善、完全免費且開源的軟體。\n一切營運成本、開發和內容皆來自用戶之捐贈。';
+  String get lichessPatronInfo => 'Lichess是個慈善、完全免費且開源的軟體。\n一切營運成本、開發和內容皆來自用戶之捐贈。';
 
   @override
   String get nothingToSeeHere => '目前這裡沒有什麼好看的。';
@@ -11741,7 +11750,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   }
 
   @override
-  String get streamerChessigmaStreamers => 'Chessigma 實況主';
+  String get streamerLichessStreamers => 'Lichess 實況主';
 
   @override
   String get studyPrivate => '私人的';
@@ -12208,7 +12217,7 @@ class AppLocalizationsZhTw extends AppLocalizationsZh {
   String get studyGetTheTour => '需要幫助？查看導覽！';
 
   @override
-  String get studyWelcomeToChessigmaStudyTitle => '歡迎來到 Chessigma 研究區！';
+  String get studyWelcomeToLichessStudyTitle => '歡迎來到 Lichess 研究區！';
 
   @override
   String get studyBlackDefeatWhiteCanNotWin => '黑敗，但白無法取勝';

@@ -1,3 +1,4 @@
+import 'package:chessigma_mobile/src/db/buffered_writer.dart';
 import 'package:collection/collection.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,8 +19,9 @@ const kHttpLogStorageTable = 'http_log';
 
 /// Manages the storage of HTTP logs in a SQLite database.
 class HttpLogStorage {
-  const HttpLogStorage(this._db);
+  HttpLogStorage(this._db) : _writer = BufferedWriter(_db);
   final Database _db;
+  final BufferedWriter _writer;
 
   /// Retrieves a paginated list of [HttpLogEntry] entries from the database.
   Future<HttpLog> page({int? cursor, int limit = 100}) async {
@@ -36,46 +38,53 @@ class HttpLogStorage {
   }
 
   /// Saves an [HttpLogEntry] entry to the database.
-  Future<void> save(HttpLogEntry httpLog) async {
-    await _db.insert(kHttpLogStorageTable, {
-      ...httpLog.toJson(),
-      'lastModified': DateTime.now().toIso8601String(),
-    }, conflictAlgorithm: ConflictAlgorithm.replace);
+  void save(HttpLogEntry httpLog) {
+    _writer.add((batch) {
+      batch.insert(kHttpLogStorageTable, {
+        ...httpLog.toJson(),
+        'lastModified': DateTime.now().toIso8601String(),
+      }, conflictAlgorithm: ConflictAlgorithm.replace);
+    });
   }
 
-  Future<void> updateWithResponse(
+  void updateWithResponse(
     String httpLogId, {
     required int responseCode,
     required DateTime responseDateTime,
-  }) async {
-    await _db.update(
-      kHttpLogStorageTable,
-      {
-        'responseCode': responseCode,
-        'responseDateTime': responseDateTime.toIso8601String(),
-        'lastModified': DateTime.now().toIso8601String(),
-      },
-      where: 'httpLogId = ?',
-      whereArgs: [httpLogId],
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+  }) {
+    _writer.add((batch) {
+      batch.update(
+        kHttpLogStorageTable,
+        {
+          'responseCode': responseCode,
+          'responseDateTime': responseDateTime.toIso8601String(),
+          'lastModified': DateTime.now().toIso8601String(),
+        },
+        where: 'httpLogId = ?',
+        whereArgs: [httpLogId],
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    });
   }
 
-  Future<void> updateWithError(String httpLogId, {String? errorMessage}) async {
-    await _db.update(
-      kHttpLogStorageTable,
-      {
-        'responseCode': 0,
-        'lastModified': DateTime.now().toIso8601String(),
-        'errorMessage': errorMessage,
-      },
-      where: 'httpLogId = ?',
-      whereArgs: [httpLogId],
-      conflictAlgorithm: ConflictAlgorithm.replace,
-    );
+  void updateWithError(String httpLogId, {String? errorMessage}) {
+    _writer.add((batch) {
+      batch.update(
+        kHttpLogStorageTable,
+        {
+          'responseCode': 0,
+          'lastModified': DateTime.now().toIso8601String(),
+          'errorMessage': errorMessage,
+        },
+        where: 'httpLogId = ?',
+        whereArgs: [httpLogId],
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    });
   }
 
   Future<void> deleteAll() async {
+    await _writer.dispose();
     await _db.delete(kHttpLogStorageTable);
   }
 }

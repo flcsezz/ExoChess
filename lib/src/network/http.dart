@@ -87,38 +87,44 @@ final httpClientFactoryProvider = Provider<HttpClientFactory>((Ref ref) {
   return HttpClientFactory(
     wrapper: (client) => _RegisterCallbackClient(
       client,
-      onRequest: (request) async {
+      onRequest: (request) {
         if (request.method == 'HEAD') return;
-        final httpLogStorage = await ref.read(httpLogStorageProvider.future);
-        httpLogStorage.save(
-          HttpLogEntry(
-            httpLogId: request.hashCode.toString(),
-            requestDateTime: DateTime.now(),
-            requestMethod: request.method,
-            requestUrl: request.url,
-          ),
-        );
-      },
-      onResponse: (response) async {
-        if (response.request != null) {
-          final httpLogStorage = await ref.read(httpLogStorageProvider.future);
-          httpLogStorage.updateWithResponse(
-            response.request!.hashCode.toString(),
-            responseCode: response.statusCode,
-            responseDateTime: DateTime.now(),
+        final httpLogStorage = ref.read(httpLogStorageProvider).asData?.value;
+        if (httpLogStorage != null) {
+          httpLogStorage.save(
+            HttpLogEntry(
+              httpLogId: request.hashCode.toString(),
+              requestDateTime: DateTime.now(),
+              requestMethod: request.method,
+              requestUrl: request.url,
+            ),
           );
         }
       },
-      onError: (request, error, [st]) async {
+      onResponse: (response) {
+        if (response.request != null) {
+          final httpLogStorage = ref.read(httpLogStorageProvider).asData?.value;
+          if (httpLogStorage != null) {
+            httpLogStorage.updateWithResponse(
+              response.request!.hashCode.toString(),
+              responseCode: response.statusCode,
+              responseDateTime: DateTime.now(),
+            );
+          }
+        }
+      },
+      onError: (request, error, [st]) {
         if (request.method == 'HEAD') return;
-        final httpLogStorage = await ref.read(httpLogStorageProvider.future);
-        if (error is ClientException) {
-          httpLogStorage.updateWithError(request.hashCode.toString(), errorMessage: error.message);
-        } else {
-          httpLogStorage.updateWithError(
-            request.hashCode.toString(),
-            errorMessage: error.toString(),
-          );
+        final httpLogStorage = ref.read(httpLogStorageProvider).asData?.value;
+        if (httpLogStorage != null) {
+          if (error is ClientException) {
+            httpLogStorage.updateWithError(request.hashCode.toString(), errorMessage: error.message);
+          } else {
+            httpLogStorage.updateWithError(
+              request.hashCode.toString(),
+              errorMessage: error.toString(),
+            );
+          }
         }
       },
     ),

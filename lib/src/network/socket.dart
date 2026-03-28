@@ -53,23 +53,21 @@ final _globalStreamController = StreamController<SocketEvent>.broadcast();
 final socketGlobalStream = _globalStreamController.stream;
 
 /// Creates a WebSocket URI for the lichess server.
-Uri lichessWSUri(String unencodedPath, [Map<String, String>? queryParameters]) =>
-    kLichessWSHost.startsWith('localhost') ||
-        kLichessWSHost.startsWith('10.') ||
-        kLichessWSHost.startsWith('192.168.')
-    ? Uri(
-        scheme: 'ws',
-        host: kLichessWSHost.split(':')[0],
-        port: int.parse(kLichessWSHost.split(':')[1]),
-        path: unencodedPath,
-        queryParameters: queryParameters,
-      )
-    : Uri(
-        scheme: 'wss',
-        host: kLichessWSHost,
-        path: unencodedPath,
-        queryParameters: queryParameters,
-      );
+Uri lichessWSUri(String unencodedPath, [Map<String, String>? queryParameters]) {
+  final isLocal = kLichessWSHost.startsWith('localhost') ||
+      kLichessWSHost.startsWith('127.0.0.1') ||
+      kLichessWSHost.startsWith('10.') ||
+      kLichessWSHost.startsWith('192.168.');
+
+  // If kLichessWSHost contains a protocol (ws/wss), use it; otherwise, default based on isLocal.
+  final protocol = kLichessWSHost.contains('://') ? '' : (isLocal ? 'ws://' : 'wss://');
+  final baseUri = Uri.parse('$protocol$kLichessWSHost');
+
+  return baseUri.replace(
+    path: unencodedPath,
+    queryParameters: queryParameters,
+  );
+}
 
 /// A lichess WebSocket client.
 ///
