@@ -6,6 +6,7 @@ import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:chessigma_mobile/src/model/analysis/analysis_feedback.dart';
 import 'package:chessigma_mobile/src/model/analysis/common_analysis_state.dart';
 import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
 import 'package:chessigma_mobile/src/model/chat/chat_controller.dart';
@@ -667,6 +668,7 @@ sealed class StudyCurrentNode with _$StudyCurrentNode implements AnalysisCurrent
     IList<PgnComment>? comments,
     IList<int>? nags,
     ClientEval? eval,
+    AnalysisFeedback? feedback,
   }) = _StudyCurrentNode;
 
   factory StudyCurrentNode.illegalPosition() {
@@ -682,6 +684,7 @@ sealed class StudyCurrentNode with _$StudyCurrentNode implements AnalysisCurrent
         isRoot: false,
         children: children,
         eval: node.eval,
+        feedback: node.feedback is AnalysisFeedback ? node.feedback as AnalysisFeedback : null,
         startingComments: IList(node.startingComments),
         comments: IList(node.comments),
         nags: IList(node.nags),

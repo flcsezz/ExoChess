@@ -9,7 +9,7 @@ import 'package:chessigma_mobile/src/model/explorer/opening_explorer_preferences
 part 'opening_explorer.freezed.dart';
 part 'opening_explorer.g.dart';
 
-enum OpeningDatabase { master, lichess, player }
+enum OpeningDatabase { master, lichess, player, chessdb }
 
 @Freezed(fromJson: true)
 sealed class OpeningExplorerEntry with _$OpeningExplorerEntry {
@@ -46,6 +46,7 @@ sealed class OpeningMove with _$OpeningMove {
     int? averageRating,
     int? averageOpponentRating,
     int? performance,
+    int? score,
     OpeningExplorerGame? game,
   }) = _OpeningMove;
 

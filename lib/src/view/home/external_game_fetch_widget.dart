@@ -63,7 +63,7 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
                 Expanded(
                   child: _SourceCard(
                     title: 'Chess.com',
-                    icon: Icons.person, 
+                    icon: Icons.person,
                     isSelected: !_isPgnSelected && _selectedSource == ExternalSource.chesscom,
                     onTap: () => setState(() {
                       _isPgnSelected = false;
@@ -101,13 +101,18 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
             if (!_isPgnSelected) ...[
               Text(
                 '${_selectedSource.displayName} username',
-                style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, color: Colors.white70),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white70,
+                ),
               ),
               const SizedBox(height: 8),
               TextField(
                 controller: _usernameController,
                 decoration: InputDecoration(
-                  hintText: _selectedSource == ExternalSource.chesscom ? 'MagnusCarlsen' : 'DrNykterstein',
+                  hintText: _selectedSource == ExternalSource.chesscom
+                      ? 'MagnusCarlsen'
+                      : 'DrNykterstein',
                   hintStyle: const TextStyle(color: Colors.white38),
                   filled: true,
                   fillColor: inputBgColor,
@@ -130,7 +135,10 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
             ] else ...[
               Text(
                 'Username',
-                style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, color: Colors.white70),
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white70,
+                ),
               ),
               const SizedBox(height: 8),
               TextField(
@@ -153,7 +161,10 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
                 children: [
                   Text(
                     'PGN Content',
-                    style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold, color: Colors.white70),
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white70,
+                    ),
                   ),
                   TextButton.icon(
                     onPressed: _pickPgnFile,
@@ -198,13 +209,18 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
               children: [
                 Text(
                   'Recent History',
-                  style: theme.textTheme.titleSmall?.copyWith(color: const Color(0xFFE8B84B), fontWeight: FontWeight.bold),
+                  style: theme.textTheme.titleSmall?.copyWith(
+                    color: const Color(0xFFE8B84B),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 TextButton(
                   onPressed: () {
-                    ref.invalidate(externalGameHistorySourceLocalProvider(
-                      _isPgnSelected ? ExternalSource.pgn : _selectedSource,
-                    ));
+                    ref.invalidate(
+                      externalGameHistorySourceLocalProvider(
+                        _isPgnSelected ? ExternalSource.pgn : _selectedSource,
+                      ),
+                    );
                   },
                   child: const Icon(Icons.refresh, color: Colors.white70, size: 20),
                 ),
@@ -215,10 +231,7 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
 
             const SizedBox(height: 24),
             if (!_isPgnSelected)
-              const Text(
-                'Try it out:',
-                style: TextStyle(color: Colors.white38, fontSize: 12),
-              )
+              const Text('Try it out:', style: TextStyle(color: Colors.white38, fontSize: 12))
             else
               const Text(
                 'You can paste one or multiple PGN games to import them',
@@ -258,7 +271,29 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
   }
 
   void _handleFetch() {
-    final username = _usernameController.text.trim().isEmpty ? 'Anonymous' : _usernameController.text.trim();
+    final username = _usernameController.text.trim();
+
+    if (username.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Row(
+            children: [
+              const Icon(Icons.warning_amber_rounded, color: Colors.white),
+              const SizedBox(width: 12),
+              Text(
+                'Please enter a username',
+                style: TextStyle(color: Colors.white.withValues(alpha: 0.9)),
+              ),
+            ],
+          ),
+          backgroundColor: Colors.red.shade700,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          margin: const EdgeInsets.all(16),
+        ),
+      );
+      return;
+    }
 
     Navigator.of(context).push(
       ExternalGameHistoryScreen.buildRoute(
@@ -301,9 +336,11 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
           await storage.save(item);
         }
         final finalUsername = username.isEmpty ? 'Anonymous' : username;
-        ref.invalidate(externalGameHistoryLocalProvider(
-          ExternalUserHistoryParams(source: ExternalSource.pgn, username: finalUsername),
-        ));
+        ref.invalidate(
+          externalGameHistoryLocalProvider(
+            ExternalUserHistoryParams(source: ExternalSource.pgn, username: finalUsername),
+          ),
+        );
       }
     } catch (e) {
       debugPrint('Error saving PGN history: $e');
@@ -330,13 +367,14 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Error loading file: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Error loading file: $e')));
       }
     }
   }
 }
+
 class _GameHistoryList extends ConsumerWidget {
   const _GameHistoryList({required this.source});
 
@@ -357,18 +395,13 @@ class _GameHistoryList extends ConsumerWidget {
               border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
             ),
             child: const Center(
-              child: Text(
-                'No recent games',
-                style: TextStyle(color: Colors.white24, fontSize: 13),
-              ),
+              child: Text('No recent games', style: TextStyle(color: Colors.white24, fontSize: 13)),
             ),
           );
         }
 
         final displayGames = games.take(15).toList();
-        return Column(
-          children: displayGames.map((game) => _GameHistoryItem(game: game)).toList(),
-        );
+        return Column(children: displayGames.map((game) => _GameHistoryItem(game: game)).toList());
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (e, _) => Text('Error loading history: $e'),
@@ -390,8 +423,8 @@ class _GameHistoryItem extends StatelessWidget {
     final resultColor = isWinner
         ? Colors.greenAccent
         : isDraw
-            ? Colors.white54
-            : Colors.redAccent;
+        ? Colors.white54
+        : Colors.redAccent;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
@@ -408,11 +441,7 @@ class _GameHistoryItem extends StatelessWidget {
                 color: resultColor.withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
-                Symbols.chess_pawn_rounded,
-                color: resultColor,
-                size: 20,
-              ),
+              child: Icon(Symbols.chess_pawn_rounded, color: resultColor, size: 20),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -432,19 +461,12 @@ class _GameHistoryItem extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     '${game.username} • ${_formatDate(game.createdAt)}',
-                    style: TextStyle(
-                      color: Colors.white.withValues(alpha: 0.4),
-                      fontSize: 11,
-                    ),
+                    style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 11),
                   ),
                 ],
               ),
             ),
-            Icon(
-              Icons.chevron_right,
-              color: Colors.white.withValues(alpha: 0.2),
-              size: 16,
-            ),
+            Icon(Icons.chevron_right, color: Colors.white.withValues(alpha: 0.2), size: 16),
           ],
         ),
       ),
@@ -477,9 +499,13 @@ class _SourceCard extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isSelected ? accentColor.withValues(alpha: 0.1) : Colors.white.withValues(alpha: 0.02),
+          color: isSelected
+              ? accentColor.withValues(alpha: 0.1)
+              : Colors.white.withValues(alpha: 0.02),
           borderRadius: BorderRadius.circular(12),
-          border: isSelected ? Border.all(color: accentColor, width: 2.5) : Border.all(color: Colors.white.withValues(alpha: 0.1)),
+          border: isSelected
+              ? Border.all(color: accentColor, width: 2.5)
+              : Border.all(color: Colors.white.withValues(alpha: 0.1)),
         ),
         child: Stack(
           children: [
@@ -507,10 +533,7 @@ class _SourceCard extends StatelessWidget {
                 child: Container(
                   width: 6,
                   height: 6,
-                  decoration: const BoxDecoration(
-                    color: accentColor,
-                    shape: BoxShape.circle,
-                  ),
+                  decoration: const BoxDecoration(color: accentColor, shape: BoxShape.circle),
                 ),
               ),
           ],
@@ -521,11 +544,7 @@ class _SourceCard extends StatelessWidget {
 }
 
 class _TryItOutAvatar extends StatelessWidget {
-  const _TryItOutAvatar({
-    required this.name,
-    required this.imageUrl,
-    required this.onTap,
-  });
+  const _TryItOutAvatar({required this.name, required this.imageUrl, required this.onTap});
 
   final String name;
   final String imageUrl;
@@ -545,14 +564,15 @@ class _TryItOutAvatar extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircleAvatar(
-              radius: 10,
-              backgroundImage: AssetImage(imageUrl),
-            ),
+            CircleAvatar(radius: 10, backgroundImage: AssetImage(imageUrl)),
             const SizedBox(width: 8),
             Text(
               name,
-              style: const TextStyle(fontSize: 12, color: Colors.white70, fontWeight: FontWeight.w500),
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.white70,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ],
         ),

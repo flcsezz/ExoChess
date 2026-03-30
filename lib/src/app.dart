@@ -28,18 +28,45 @@ import 'package:chessigma_mobile/src/tab_scaffold.dart';
 import 'package:chessigma_mobile/src/theme.dart';
 import 'package:chessigma_mobile/src/utils/screen.dart';
 import 'package:chessigma_mobile/src/view/more/import_pgn_screen.dart';
-import 'package:chessigma_mobile/src/view/splash/splash_screen.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 /// Application initialization and main entry point.
-class AppInitializationScreen extends ConsumerWidget {
+class AppInitializationScreen extends ConsumerStatefulWidget {
   const AppInitializationScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<AppInitializationScreen> createState() => _AppInitializationScreenState();
+}
+
+class _AppInitializationScreenState extends ConsumerState<AppInitializationScreen>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _fadeController;
+  late final Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _fadeController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+    _fadeAnimation = CurvedAnimation(parent: _fadeController, curve: Curves.easeIn);
+  }
+
+  @override
+  void dispose() {
+    _fadeController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     ref.listen<AsyncValue<PreloadedData>>(preloadedDataProvider, (_, state) {
       if (state.hasValue || state.hasError) {
         FlutterNativeSplash.remove();
+        if (state.hasValue) {
+          _fadeController.forward();
+        }
       }
     });
 
@@ -50,9 +77,14 @@ class AppInitializationScreen extends ConsumerWidget {
       debugPrint('SEVERE: [App] could not initialize app; $error\n$stackTrace');
     }
 
-    return ChessigmaSplashScreen(
-      isReady: isReady,
-      child: isReady ? const Application() : const SizedBox.expand(),
+    return Container(
+      color: const Color(0xFF0B162A), // Dark brand color matching splash
+      child: isReady
+          ? FadeTransition(
+              opacity: _fadeAnimation,
+              child: const Application(),
+            )
+          : const SizedBox.expand(),
     );
   }
 }
@@ -91,6 +123,8 @@ class _AppState extends ConsumerState<Application> {
 
     // Listen for connectivity changes and perform actions accordingly.
     ref.listenManual(connectivityChangesProvider, (prev, current) async {
+      if (!mounted) return;
+
       final prevWasOffline = prev?.value?.isOnline == false;
       final currentIsOnline = current.value?.isOnline == true;
 

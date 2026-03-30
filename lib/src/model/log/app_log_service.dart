@@ -14,7 +14,11 @@ const _loggersToShowInTerminal = {'HttpClient', 'Socket', 'EvaluationService'};
 
 /// Provides an instance of [AppLogService] using Riverpod.
 final appLogServiceProvider = Provider<AppLogService>(
-  (Ref ref) => AppLogService(ref),
+  (Ref ref) {
+    final service = AppLogService(ref);
+    ref.onDispose(service.dispose);
+    return service;
+  },
   name: 'AppLogServiceProvider',
 );
 
@@ -27,6 +31,7 @@ class AppLogService {
 
   final Ref ref;
   final _logs = LRUList<LogRecord>(capacity: 1024);
+  StreamSubscription<LogRecord>? _subscription;
 
   /// Currently stored log entries, ordered from oldest to newest.
   Iterable<LogRecord> get logs => _logs.values;
@@ -42,7 +47,7 @@ class AppLogService {
       }, fireImmediately: true);
     }
 
-    Logger.root.onRecord.listen((record) {
+    _subscription = Logger.root.onRecord.listen((record) {
       if (kDebugMode) {
         developer.log(
           record.message,
@@ -57,14 +62,6 @@ class AppLogService {
             record.level >= Level.FINE &&
             !Platform.environment.containsKey('FLUTTER_TEST')) {
           debugPrint('[${record.loggerName}] ${record.message}');
-        }
-      } else {
-        if (record.loggerName == 'Stockfish' && record.level >= Level.SEVERE) {
-          // help debugging engine in error state issues in production
-          ChessigmaBinding.instance.firebaseCrashlytics.recordError(
-            record.message,
-            record.stackTrace,
-          );
         }
       }
 
@@ -82,6 +79,10 @@ class AppLogService {
 
   void clear() {
     _logs.clear();
+  }
+
+  void dispose() {
+    _subscription?.cancel();
   }
 }
 

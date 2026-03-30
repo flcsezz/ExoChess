@@ -348,7 +348,15 @@ class ChessigmaClient implements Client {
     final authUser = _ref.read(authControllerProvider);
 
     if (authUser != null && !request.headers.containsKey('Authorization')) {
-      final bearer = signBearerToken(authUser.token);
+      // The HMAC-signed bearer (token:digest) is only understood by the main
+      // lichess server (kLichessHost) and its WebSocket endpoints.
+      // Other Lichess-operated services (e.g. explorer.lichess.ovh,
+      // tablebase.lichess.org) require a standard OAuth2 Bearer token.
+      final isMainLichessHost =
+          request.url.host == kLichessHost || request.url.host.isEmpty;
+      final bearer = isMainLichessHost
+          ? signBearerToken(authUser.token)
+          : authUser.token;
       request.headers['Authorization'] = 'Bearer $bearer';
     }
     request.headers['User-Agent'] = makeUserAgent(

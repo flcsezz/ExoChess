@@ -139,7 +139,7 @@ class AnalysisLayout extends StatelessWidget {
     this.engineLines,
     this.bottomBar,
     this.pockets,
-    this.loading = false,
+    this.loadingOverlay,
     super.key,
   });
 
@@ -187,14 +187,14 @@ class AnalysisLayout extends StatelessWidget {
   /// If not null, will render a [PocketsMenu] for each player.
   final Pockets? pockets;
 
-  /// Whether to show a loading indicator.
-  final bool loading;
+  /// A widget to show as a loading overlay (e.g. engine warmup).
+  final Widget? loadingOverlay;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (loading) const LinearProgressIndicator(minHeight: 2.0),
+        if (loadingOverlay != null) loadingOverlay!,
         Expanded(
           child: SafeArea(
             bottom: false,

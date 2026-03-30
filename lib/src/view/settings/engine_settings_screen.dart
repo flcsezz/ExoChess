@@ -170,6 +170,9 @@ class _EngineSettingsScreenState extends ConsumerState<EngineSettingsScreen> {
               ],
             ),
           EngineSettingsWidget(
+            onToggleLichessCloudEval: () {
+              ref.read(engineEvaluationPreferencesProvider.notifier).toggleLichessCloudEval();
+            },
             onSetEngineSearchTime: (value) {
               ref.read(engineEvaluationPreferencesProvider.notifier).setEngineSearchTime(value);
             },

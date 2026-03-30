@@ -10,6 +10,7 @@ import 'package:chessigma_mobile/src/model/account/ongoing_game.dart';
 import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
 import 'package:chessigma_mobile/src/model/auth/bearer.dart';
 import 'package:chessigma_mobile/src/model/common/id.dart';
+import 'package:chessigma_mobile/src/model/common/preloaded_data.dart';
 import 'package:chessigma_mobile/src/model/common/socket.dart';
 import 'package:chessigma_mobile/src/model/correspondence/correspondence_game_storage.dart';
 import 'package:chessigma_mobile/src/model/correspondence/offline_correspondence_game.dart';
@@ -40,22 +41,8 @@ class CorrespondenceService {
   final Logger _log;
 
   StreamSubscription<ParsedLocalNotification>? _notificationResponseSubscription;
-  StreamSubscription<ReceivedFcmMessage>? _fcmSubscription;
 
   void start() {
-    _fcmSubscription = NotificationService.fcmMessageStream.listen((data) {
-      final (message: fcmMessage, fromBackground: fromBackground) = data;
-      switch (fcmMessage) {
-        case CorresGameUpdateFcmMessage(fullId: final fullId, game: final game):
-          if (game != null) {
-            _onServerUpdateEvent(fullId, game, fromBackground: fromBackground);
-          }
-
-        case _:
-          break;
-      }
-    });
-
     _notificationResponseSubscription = NotificationService.responseStream.listen((data) {
       final (_, notification) = data;
       switch (notification) {
@@ -68,7 +55,6 @@ class CorrespondenceService {
   }
 
   void dispose() {
-    _fcmSubscription?.cancel();
     _notificationResponseSubscription?.cancel();
   }
 
@@ -146,11 +132,13 @@ class CorrespondenceService {
 
     int movesPlayed = 0;
 
+    final sri = ref.read(preloadedDataProvider).requireValue.sri;
+
     for (final gameToSync in games) {
       if (gameToSync.registeredMoveAtPgn == null) {
         continue;
       }
-      final uri = lichessWSUri('/play/${gameToSync.fullId}/v6');
+      final uri = lichessWSUri('/play/${gameToSync.fullId}/v6', sri: sri);
       WebSocket? socket;
       StreamSubscription<SocketEvent>? streamSubscription;
       try {
@@ -213,15 +201,6 @@ class CorrespondenceService {
     }
 
     return movesPlayed;
-  }
-
-  /// Handles a game update event from the server.
-  Future<void> _onServerUpdateEvent(
-    GameFullId fullId,
-    PlayableGame game, {
-    required bool fromBackground,
-  }) async {
-    await updateStoredGame(fullId, game);
   }
 
   /// Updates a stored correspondence game.

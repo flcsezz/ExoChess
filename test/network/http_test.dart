@@ -36,7 +36,7 @@ void main() {
         requests.first,
         isA<http.BaseRequest>()
             .having((r) => r.url.path, 'path', '/test')
-            .having((r) => r.url.host, 'host', 'lichess.dev')
+            .having((r) => r.url.host, 'host', 'lichess.org')
             .having((r) => r.url.scheme, 'scheme', 'https'),
       );
     });
@@ -50,14 +50,14 @@ void main() {
         },
       );
       final client = container.read(lichessClientProvider);
-      final response = await client.get(Uri.https('explorer.lichess.org', '/test'));
+      final response = await client.get(Uri.https('explorer.lichess.ovh', '/test'));
       expect(response.statusCode, 200);
       final requests = FakeClient.verifyRequests();
       expect(
         requests.first,
         isA<http.BaseRequest>()
             .having((r) => r.url.path, 'path', '/test')
-            .having((r) => r.url.host, 'host', 'explorer.lichess.org')
+            .having((r) => r.url.host, 'host', 'explorer.lichess.ovh')
             .having((r) => r.url.scheme, 'scheme', 'https'),
       );
     });
@@ -71,13 +71,13 @@ void main() {
         },
       );
       final client = container.read(lichessClientProvider);
-      final response = await client.get(Uri.https('explorer.lichess.org', '/test', {'foo': 'bar'}));
+      final response = await client.get(Uri.https('explorer.lichess.ovh', '/test', {'foo': 'bar'}));
       expect(response.statusCode, 200);
       final requests = FakeClient.verifyRequests();
       expect(
         requests.first,
         isA<http.BaseRequest>()
-            .having((r) => r.url.host, 'host', 'explorer.lichess.org')
+            .having((r) => r.url.host, 'host', 'explorer.lichess.ovh')
             .having((r) => r.url.queryParameters['foo'], 'query param', 'bar'),
       );
     });
@@ -98,7 +98,7 @@ void main() {
         isA<http.BaseRequest>().having(
           (r) => r.headers['User-Agent'],
           'User-Agent',
-          'Lichess Mobile/0.0.0 as:anon sri:test-sri',
+          'Chessigma Mobile/0.0.0 as:anon sri:test-sri',
         ),
       );
     });
@@ -123,7 +123,7 @@ void main() {
         isA<http.BaseRequest>().having(
           (r) => r.headers['User-Agent'],
           'User-Agent',
-          'Lichess Mobile/0.0.0 as:test-user-id sri:test-sri',
+          'Chessigma Mobile/0.0.0 as:test-user-id sri:test-sri',
         ),
       );
     });
@@ -287,7 +287,7 @@ void main() {
                   }
                   return http.Response('', 404);
                 }),
-                userAgent: 'Lichess Mobile/0.0.0 as:test-user-id sri:test-sri',
+                userAgent: 'Chessigma Mobile/0.0.0 as:test-user-id sri:test-sri',
               );
             }),
           },
@@ -345,7 +345,7 @@ void main() {
                 }
                 return http.Response('', 404);
               }),
-              userAgent: 'Lichess Mobile/0.0.0 as:test-user-id sri:test-sri',
+              userAgent: 'Chessigma Mobile/0.0.0 as:test-user-id sri:test-sri',
             );
           }),
         },

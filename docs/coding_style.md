@@ -62,3 +62,12 @@ In general it is good to respect these rules:
 
 - don't write a private function (or private class) for a widget that is used only once, just write it directly
 - write a `StatelessWidget` for a reusable widget, even if it's scope is limited to a single screen
+
+## Analysis board state
+
+For analysis-board work:
+
+- keep analysis result models immutable
+- derive move labels, icons, and loading states from state objects
+- prefer one shared contract for imported PGNs, external history, and live analysis
+- keep widget-local mutation out of board annotations

@@ -6,7 +6,8 @@
         android:icon="@mipmap/launcher_icon"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:enableOnBackInvokedCallback="true"
-        android:fullBackupContent="@xml/backup_rules">
+        android:fullBackupContent="@xml/backup_rules"
+        android:usesCleartextTraffic="true">
 
         <meta-data android:name="io.flutter.embedding.android.EnableImpeller" android:value="false" />
 

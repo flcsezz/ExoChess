@@ -1,6 +1,6 @@
 # Setting up the development environment
 
-The following instructions outline how to set up your development environment for starting development on Lichess mobile.
+The following instructions outline how to set up your development environment for starting development on Chessigma Mobile.
 
 If you get stuck during the installation process the most suitable place to seek help is the `#lichess-dev-onboarding` channel on Discord (https://discord.gg/lichess).
 
@@ -149,6 +149,8 @@ flutter analyze --watch
 ```
 
 It will run analysis continuously, watching the filesystem for changes. It is important to always check for analysis errors.
+
+If you are working on analysis-board intelligence, run `flutter analyze` and `flutter test` before handing the task back. Board overlays, loading states, and Stockfish preload code tend to regress together.
 
 ## Run
 

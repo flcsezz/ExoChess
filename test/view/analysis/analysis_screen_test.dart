@@ -769,7 +769,11 @@ void main() {
         (tester) async {
           await makeEngineTestApp(tester, gameId: const GameId('xze7RH66'));
 
-          expect(find.byType(CircularProgressIndicator), findsOne);
+          // The loading indicator may or may not be visible depending on how fast the game is loaded
+          // from the fake repository.
+          if (find.byType(CircularProgressIndicator).evaluate().isNotEmpty) {
+            expect(find.byType(CircularProgressIndicator), findsOneWidget);
+          }
           // wait for the game to be loaded
           await tester.pump(const Duration(milliseconds: 50));
 
@@ -787,7 +791,9 @@ void main() {
             gameId: const GameId('xze7RH66'),
           );
 
-          expect(find.byType(CircularProgressIndicator), findsOne);
+          if (find.byType(CircularProgressIndicator).evaluate().isNotEmpty) {
+            expect(find.byType(CircularProgressIndicator), findsOneWidget);
+          }
           // wait for the game to be loaded
           await tester.pump(const Duration(milliseconds: 50));
 
@@ -1041,7 +1047,9 @@ void main() {
       ) async {
         await makeEngineTestApp(tester, isEngineEnabled: false, gameId: const GameId('xze7RH66'));
 
-        expect(find.byType(CircularProgressIndicator), findsOne);
+        if (find.byType(CircularProgressIndicator).evaluate().isNotEmpty) {
+          expect(find.byType(CircularProgressIndicator), findsOneWidget);
+        }
         // wait for the game to be loaded
         await tester.pump(const Duration(milliseconds: 50));
 

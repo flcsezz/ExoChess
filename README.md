@@ -1,6 +1,13 @@
 # Chessigma Mobile
 
-Chessigma mobile app. Focused on local play, puzzles, and learning.
+Chessigma Mobile is a Flutter chess app focused on local play, puzzles, learning, and analysis.
+The next product push is analysis-board intelligence: move-quality labels, piece badges, and preloaded Stockfish review with explicit loading states.
+
+## Roadmap
+
+- Canonical plan: [docs/PLAN.md](./docs/PLAN.md)
+- Feature backlog: [docs/New_features.md](./docs/New_features.md)
+- Active task: [CURRENT_TASK.md](./CURRENT_TASK.md)
 
 ## How to contribute
 

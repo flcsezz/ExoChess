@@ -1,36 +1,21 @@
-# Current Task: Analysis Board Intelligence Roadmap
+# Current Task
 
-## Status
+**Status:** COMPLETED
+**Task ID:** Opening Explorer & Startup FIX
 
-- P5-T01: [x] DONE (Analysis feedback + preload roadmap)
-- P5-T02: [x] DONE (Move feedback taxonomy and cache contract)
-- P5-T03: [x] DONE (Background Stockfish preload and cache warmup)
-- P5-T04: [x] DONE (Board badges/icons and loading UI)
-- P5-T05: [x] DONE (Verification and rollout notes)
+## Description
 
-## Owner
+Stabilized the application startup and restored the Opening Explorer functionality.
 
-- Codex
+## Fixes Applied
 
-## Verification Run
+1. **Splash Screen Recovery**: Deleted the crash-prone `ChessigmaSplashScreen` and transitioned to `flutter_native_splash`. Implemented a 500ms `FadeTransition` for smooth app entry.
+2. **Branding Correction**: Replaced the white-box logo with a high-quality transparent version (`chessigma-logo-new.png`) in the app bar.
+3. **Opening Explorer Restoration**: Integrated **ChessDB.cn** as an unauthenticated alternative to the restricted Lichess API.
+   - Added support for engine evaluations (CP score).
+   - Updated UI table for score visualization.
+   - Defaulted to ChessDB for immediate functionality.
 
-- [x] `git diff --check`
-- [x] Markdown spot-check for `docs/PLAN.md`, `docs/New_features.md`, and `docs/plans/2026-03-28-analysis-board-intelligence.md`
+## Blockers
 
-## Files Changed
-
-- `AGENTS.md`
-- `CONTRIBUTING.md`
-- `CURRENT_TASK.md`
-- `README.md`
-- `docs/KNOWN-BUGS.md`
-- `docs/New_features.md`
-- `docs/PLAN.md`
-- `docs/coding_style.md`
-- `docs/internationalisation.md`
-- `docs/setting_dev_env.md`
-- `docs/plans/2026-03-28-analysis-board-intelligence.md`
-
-## Blockers / Follow-ups
-
-- None
+- None.

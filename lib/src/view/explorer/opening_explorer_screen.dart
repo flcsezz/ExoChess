@@ -261,6 +261,7 @@ class _BottomBar extends ConsumerWidget {
     final dbLabel = switch (db) {
       OpeningDatabase.master => 'Masters',
       OpeningDatabase.lichess => 'Chessigma',
+      OpeningDatabase.chessdb => 'ChessDB',
       OpeningDatabase.player => context.l10n.player,
     };
 

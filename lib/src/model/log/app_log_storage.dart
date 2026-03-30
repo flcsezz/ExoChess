@@ -13,16 +13,21 @@ part 'app_log_storage.freezed.dart';
 /// Provides an instance of [AppLogStorage] using Riverpod.
 final appLogStorageProvider = FutureProvider<AppLogStorage>((Ref ref) async {
   final db = await ref.watch(databaseProvider.future);
-  return AppLogStorage(db);
+  final writer = await ref.watch(bufferedWriterProvider.future);
+  return AppLogStorage(db, writer);
 }, name: 'AppLogStorageProvider');
 
 const kAppLogStorageTable = 'app_log';
 
 /// Manages the storage of app logs in a SQLite database.
 class AppLogStorage {
-  AppLogStorage(this._db) : _writer = BufferedWriter(_db);
+  AppLogStorage(this._db, this._writer);
   final Database _db;
   final BufferedWriter _writer;
+
+  void dispose() {
+    // Shared writer is disposed by its own provider
+  }
 
   /// Retrieves a paginated list of [AppLogEntry] entries from the database.
   ///

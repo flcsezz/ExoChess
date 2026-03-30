@@ -12,24 +12,32 @@ class BufferedWriter {
   final Duration interval;
   final List<DbOperation> _queue = [];
   Timer? _timer;
+  bool _isFlushing = false;
   final _logger = Logger('BufferedWriter');
 
   /// Adds an operation to the buffer.
   void add(DbOperation op) {
     _queue.add(op);
-    _timer ??= Timer(interval, _flush);
+    _scheduleFlush();
+  }
+
+  void _scheduleFlush() {
+    if (_isFlushing || _timer != null) return;
+    _timer = Timer(interval, _flush);
   }
 
   /// Flushes all buffered operations in a single transaction.
   Future<void> _flush() async {
-    if (_queue.isEmpty) {
+    if (_queue.isEmpty || _isFlushing) {
       _timer = null;
       return;
     }
 
+    _isFlushing = true;
+    _timer = null;
+
     final ops = List<DbOperation>.from(_queue);
     _queue.clear();
-    _timer = null;
 
     try {
       await _db.transaction((txn) async {
@@ -41,6 +49,11 @@ class BufferedWriter {
       });
     } catch (e, st) {
       _logger.severe('Failed to flush buffered database operations', e, st);
+    } finally {
+      _isFlushing = false;
+      if (_queue.isNotEmpty) {
+        _scheduleFlush();
+      }
     }
   }
 

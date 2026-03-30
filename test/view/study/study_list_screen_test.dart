@@ -129,15 +129,15 @@ void main() {
       expect(find.textContaining('tom-anders'), findsOneWidget);
 
       expect(requestedUrls, [
-        'https://lichess.dev/study/all/hot?page=1',
-        'https://lichess.dev/study/search?page=1&q=Magnus&order=hot',
+        'https://lichess.org/study/all/hot?page=1',
+        'https://lichess.org/study/search?page=1&q=Magnus&order=hot',
       ]);
     });
   });
 }
 
 // Output based on the following command (with some modifications):
-// curl -X GET 'https://lichess.dev/study/all/hot' -H "Accept: application/json" 2> /dev/null | jq
+// curl -X GET 'https://lichess.org/study/all/hot' -H "Accept: application/json" 2> /dev/null | jq
 const kStudyAllHotPage1Response = '''
 {
   "paginator": {

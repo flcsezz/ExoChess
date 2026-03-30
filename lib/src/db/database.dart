@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:chessigma_mobile/src/db/buffered_writer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart';
@@ -28,6 +29,14 @@ final databaseProvider = FutureProvider<Database>((Ref ref) async {
   final dbPath = await _databasePath;
   return openAppDatabase(databaseFactory, dbPath);
 }, name: 'DatabaseProvider');
+
+/// A provider for a shared [BufferedWriter] instance.
+final bufferedWriterProvider = FutureProvider<BufferedWriter>((Ref ref) async {
+  final db = await ref.watch(databaseProvider.future);
+  final writer = BufferedWriter(db);
+  ref.onDispose(writer.dispose);
+  return writer;
+}, name: 'BufferedWriterProvider');
 
 /// Returns the database path including filename.
 Future<String> get _databasePath async {

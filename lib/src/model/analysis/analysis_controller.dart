@@ -143,7 +143,7 @@ class AnalysisController extends AsyncNotifier<AnalysisState>
 
   @override
   @protected
-  late SocketClient socketClient;
+  SocketClient? socketClient;
 
   @override
   @protected
@@ -156,7 +156,7 @@ class AnalysisController extends AsyncNotifier<AnalysisState>
     final serverAnalysisService = ref.watch(serverAnalysisServiceProvider);
 
     if (options.gameId case final gameId?) {
-      ref.read(analysisPreloadServiceProvider(gameId).notifier).preload();
+      Future.microtask(() => ref.read(analysisPreloadServiceProvider(gameId).notifier).preload());
     }
 
     ref.onDispose(() {
@@ -166,11 +166,11 @@ class AnalysisController extends AsyncNotifier<AnalysisState>
 
     socketClient = ref.watch(socketPoolProvider).open(AnalysisController.socketUri);
     _socketSubscription?.cancel();
-    _socketSubscription = socketClient.stream.listen(_handleSocketEvent);
+    _socketSubscription = socketClient!.stream.listen(_handleSocketEvent);
 
     isOnline(ref.read(defaultClientProvider)).then((online) {
       if (!online) {
-        socketClient.close();
+        socketClient?.close();
       }
     });
 
@@ -308,7 +308,6 @@ class AnalysisController extends AsyncNotifier<AnalysisState>
     final currentPath = switch (options) {
       Standalone() when _savedStandalone != null => _savedStandalone!.path,
       Standalone() => UciPath.empty,
-      Pgn() => options.initialMoveCursor == null ? UciPath.empty : path,
       _ => options.initialMoveCursor == null ? _root.mainlinePath : path,
     };
     final currentNode = _root.nodeAt(currentPath);
@@ -382,14 +381,14 @@ class AnalysisController extends AsyncNotifier<AnalysisState>
     state = AsyncData(analysisState);
     _currentPath = analysisState.currentPath;
 
-    socketClient.firstConnection
+    socketClient?.firstConnection
         .timeout(const Duration(seconds: 3))
         .onError((_, _) {})
         .whenComplete(() {
           if (state.requireValue.isEngineAvailable(evaluationPrefs)) {
             requestEval();
           } else if (options case ActiveCorrespondenceGame(:final gameFullId)) {
-            socketClient.send('startWatching', gameFullId.gameId.value);
+            socketClient?.send('startWatching', gameFullId.gameId.value);
           }
         });
 
@@ -465,7 +464,77 @@ class AnalysisController extends AsyncNotifier<AnalysisState>
 
   @override
   void onCurrentPathEvalChanged(bool isSameEvalString) {
+    _updateMoveFeedback(state.requireValue.currentPath);
     _refreshCurrentNode(recomputeRootView: !isSameEvalString);
+  }
+
+  void _updateMoveFeedback(UciPath path) {
+    if (path.isEmpty) return;
+
+    final node = _root.nodeAt(path);
+    if (node is! Branch) return;
+
+    final parent = _root.nodeAt(path.penultimate);
+
+    // If the move delivered checkmate on the board, it is evaluated as a best move
+    if (node.position.isCheckmate) {
+      node.feedback = const AnalysisFeedback(
+        quality: AnalysisQuality.best,
+        severity: AnalysisSeverity.info,
+        label: 'Best',
+        badgeKey: 'best_move',
+      );
+      return;
+    }
+
+    final parentEval = parent.eval;
+    if (parentEval == null) return;
+    
+    final mover = parent.position.turn;
+    final winningChancesBefore = parentEval.winningChances(mover);
+    
+    double? winningChancesAfter;
+    bool isBestMove = false;
+
+    // Fast path: if parent eval has PVs, try to find the played move
+    final variant = _variant;
+    final uci = node.sanMove.normalizeUci(variant);
+    final bestPv = parentEval.pvs.firstOrNull;
+    
+    if (bestPv != null && bestPv.moves.isNotEmpty) {
+      if (bestPv.moves.first == uci) {
+        isBestMove = true;
+        // When best PV matches played move precisely
+        winningChancesAfter = bestPv.winningChances(mover);
+      } else {
+        final matchingPv = parentEval.pvs.firstWhereOrNull(
+          (pv) => pv.moves.isNotEmpty && pv.moves.first == uci,
+        );
+        if (matchingPv != null) {
+          winningChancesAfter = matchingPv.winningChances(mover);
+        }
+      }
+    }
+
+    // Slow path: use the current node's eval if available
+    final nodeEval = node.eval;
+    if (winningChancesAfter == null) {
+      if (nodeEval != null) {
+        // Evaluate from the mover's perspective
+        winningChancesAfter = nodeEval.winningChances(mover);
+        
+        // Anti-flicker: if the evaluation is shallow, don't update feedback yet, 
+        // UNLESS there is no feedback at all.
+        if (node.feedback != null && nodeEval.depth < 14) {
+           return; 
+        }
+      } else {
+        return; 
+      }
+    }
+
+    final shift = winningChancesBefore - winningChancesAfter;
+    node.feedback = AnalysisFeedback.fromShift(shift, isBestMove: isBestMove);
   }
 
   void _refreshCurrentNode({bool recomputeRootView = false}) {
@@ -1073,6 +1142,7 @@ sealed class AnalysisCurrentNode
         hasChild: node.children.isNotEmpty,
         opening: node.opening,
         eval: node.eval,
+        feedback: node.feedback is AnalysisFeedback ? node.feedback as AnalysisFeedback : null,
         lichessAnalysisComments: IList(node.lichessAnalysisComments),
         startingComments: IList(node.startingComments),
         comments: IList(node.comments),
@@ -1085,6 +1155,7 @@ sealed class AnalysisCurrentNode
         isRoot: node is Root,
         opening: node.opening,
         eval: node.eval,
+        feedback: node.feedback is AnalysisFeedback ? node.feedback as AnalysisFeedback : null,
       );
     }
   }

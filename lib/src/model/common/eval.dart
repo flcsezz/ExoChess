@@ -190,13 +190,8 @@ sealed class PvData with _$PvData {
       final move = Move.parse(uciMove);
       final movesString = moves.join(' ');
       if (move == null) {
-        ChessigmaBinding.instance.firebaseCrashlytics.recordError(
+        _logger.severe(
           'Invalid UCI move: "$uciMove" in PV: $movesString for position: ${pos.fen} rule: ${pos.rule}',
-          null,
-          reason: 'Failed to parse UCI move from PV',
-        );
-        _logger.warning(
-          'Invalid UCI move: "$uciMove" in PV: $movesString for position: ${pos.fen}',
         );
         break;
       }

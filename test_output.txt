@@ -1,0 +1,320 @@
+00:00 +0: loading /home/flcsezz/mobile/test/view/analysis/analysis_screen_test.dart
+00:00 +0: Analysis Screen displays correct move and position
+00:01 +1: Analysis Screen move backwards and forward
+00:01 +2: Analysis Screen change variant in standalone analysis
+00:02 +3: Analysis Screen Cannot change variant in PGN analysis
+00:02 +4: Analysis Screen Crazyhouse support DropMoves for both sides
+00:02 +5: Analysis Screen Continue against computer
+00:03 +6: Analysis Screen Continue OTB
+00:03 +7: Analysis Tree View PgnTreeDisplayMode.inlineNotation inline notation displays short sideline as inline
+00:04 +8: Analysis Tree View PgnTreeDisplayMode.inlineNotation inline notation displays long sideline on its own line
+00:04 +9: Analysis Tree View PgnTreeDisplayMode.inlineNotation inline notation displays sideline with branching on its own line
+00:04 +10: Analysis Tree View PgnTreeDisplayMode.inlineNotation multiple sidelines
+00:04 +11: Analysis Tree View PgnTreeDisplayMode.inlineNotation collapses lines with nesting > 2
+00:04 +12: Analysis Tree View PgnTreeDisplayMode.inlineNotation Expanding one line does not expand the following one (regression test)
+00:05 +13: Analysis Tree View PgnTreeDisplayMode.inlineNotation subtrees not part of the current mainline part are cached
+00:05 +14: Analysis Tree View PgnTreeDisplayMode.inlineNotation Select first move of sideline if mainline part has only one move (regression test)
+00:05 +15: Analysis Tree View PgnTreeDisplayMode.twoColumn two column view does NOT display short sideline on its own line
+00:05 +16: Analysis Tree View PgnTreeDisplayMode.twoColumn two column view adds "..." if mainline part starts with black move
+00:05 +17: Analysis Tree View Displays conditional premove lines saved on server
+00:05 +18: Analysis Tree View Regaining focus refreshes correspondence moves
+00:05 +19: Engine evaluation: in move tree evals are displayed
+00:06 +20: Engine evaluation: in move tree computer variations are displayed in the move tree when server analysis is enabled
+Pending timers:
+Timer (duration: 0:00:00.600000, periodic: false), created:
+#0      new FakeTimer._ (package:fake_async/fake_async.dart:342:62)
+#1      FakeAsync._createTimer (package:fake_async/fake_async.dart:260:29)
+#2      FakeAsync.run.<anonymous closure> (package:fake_async/fake_async.dart:185:15)
+#6      AnalysisPreloadNotifier._runPreload (package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart:61:13)
+#7      AnalysisPreloadNotifier.preload (package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart:54:5)
+#8      AnalysisController.build.<anonymous closure> (package:chessigma_mobile/src/model/analysis/analysis_controller.dart:159:88)
+#19     FakeAsync.run.<anonymous closure>.<anonymous closure> (package:fake_async/fake_async.dart:189:18)
+#20     FakeAsync.flushMicrotasks (package:fake_async/fake_async.dart:200:32)
+#21     AutomatedTestWidgetsFlutterBinding.pump.<anonymous closure> (package:flutter_test/src/binding.dart:1962:26)
+#24     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#25     AutomatedTestWidgetsFlutterBinding.pump (package:flutter_test/src/binding.dart:1949:27)
+#26     WidgetTester.pumpWidget.<anonymous closure> (package:flutter_test/src/widget_tester.dart:598:22)
+#29     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#30     WidgetTester.pumpWidget (package:flutter_test/src/widget_tester.dart:595:27)
+#31     makeEngineTestApp (file:///home/flcsezz/mobile/test/view/engine/test_engine_app.dart:125:16)
+<asynchronous suspension>
+#32     main.<anonymous closure>.<anonymous closure>.<anonymous closure> (file:///home/flcsezz/mobile/test/view/analysis/analysis_screen_test.dart:770:11)
+<asynchronous suspension>
+#33     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#34     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 18 frames from dart:async and package:stack_trace)
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+A Timer is still pending even after the widget tree was disposed.
+'package:flutter_test/src/binding.dart':
+Failed assertion: line 2242 pos 12: '!timersPending'
+
+When the exception was thrown, this was the stack:
+#2      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:2242:12)
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1703:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from class _AssertionError and package:stack_trace)
+
+The test description was:
+  computer variations are displayed in the move tree when server analysis is enabled
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:06 +20 -1: Engine evaluation: in move tree computer variations are displayed in the move tree when server analysis is enabled [E]
+  Test failed. See exception logs above.
+  The test description was: computer variations are displayed in the move tree when server analysis is enabled
+  
+00:06 +20 -1: Engine evaluation: in move tree computer variations are not displayed in the move tree when server analysis is disabled
+Pending timers:
+Timer (duration: 0:00:00.600000, periodic: false), created:
+#0      new FakeTimer._ (package:fake_async/fake_async.dart:342:62)
+#1      FakeAsync._createTimer (package:fake_async/fake_async.dart:260:29)
+#2      FakeAsync.run.<anonymous closure> (package:fake_async/fake_async.dart:185:15)
+#6      AnalysisPreloadNotifier._runPreload (package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart:61:13)
+#7      AnalysisPreloadNotifier.preload (package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart:54:5)
+#8      AnalysisController.build.<anonymous closure> (package:chessigma_mobile/src/model/analysis/analysis_controller.dart:159:88)
+#19     FakeAsync.run.<anonymous closure>.<anonymous closure> (package:fake_async/fake_async.dart:189:18)
+#20     FakeAsync.flushMicrotasks (package:fake_async/fake_async.dart:200:32)
+#21     AutomatedTestWidgetsFlutterBinding.pump.<anonymous closure> (package:flutter_test/src/binding.dart:1962:26)
+#24     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#25     AutomatedTestWidgetsFlutterBinding.pump (package:flutter_test/src/binding.dart:1949:27)
+#26     WidgetTester.pumpWidget.<anonymous closure> (package:flutter_test/src/widget_tester.dart:598:22)
+#29     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#30     WidgetTester.pumpWidget (package:flutter_test/src/widget_tester.dart:595:27)
+#31     makeEngineTestApp (file:///home/flcsezz/mobile/test/view/engine/test_engine_app.dart:125:16)
+<asynchronous suspension>
+#32     main.<anonymous closure>.<anonymous closure>.<anonymous closure> (file:///home/flcsezz/mobile/test/view/analysis/analysis_screen_test.dart:788:11)
+<asynchronous suspension>
+#33     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#34     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 18 frames from dart:async and package:stack_trace)
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+A Timer is still pending even after the widget tree was disposed.
+'package:flutter_test/src/binding.dart':
+Failed assertion: line 2242 pos 12: '!timersPending'
+
+When the exception was thrown, this was the stack:
+#2      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:2242:12)
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1703:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from class _AssertionError and package:stack_trace)
+
+The test description was:
+  computer variations are not displayed in the move tree when server analysis is disabled
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:06 +20 -2: Engine evaluation: in move tree computer variations are not displayed in the move tree when server analysis is disabled [E]
+  Test failed. See exception logs above.
+  The test description was: computer variations are not displayed in the move tree when server analysis is disabled
+  
+00:06 +20 -2: Engine evaluation: in move tree eval is updated in move tree when it corresponds to current path
+00:07 +21 -2: Engine evaluation: in move tree different positions show different evals in move tree
+00:07 +22 -2: Engine evaluation: Engine analysis on move navigation evaluation is debounced when jumping quickly between moves
+00:07 +23 -2: Engine evaluation: Engine lines are displayed
+00:07 +24 -2: Engine evaluation: Engine lines are not displayed if computer analysis is not allowed
+00:07 +25 -2: Engine evaluation: Engine lines are not displayed if computer analysis is not enabled (on an analysed game)
+Pending timers:
+Timer (duration: 0:00:00.600000, periodic: false), created:
+#0      new FakeTimer._ (package:fake_async/fake_async.dart:342:62)
+#1      FakeAsync._createTimer (package:fake_async/fake_async.dart:260:29)
+#2      FakeAsync.run.<anonymous closure> (package:fake_async/fake_async.dart:185:15)
+#6      AnalysisPreloadNotifier._runPreload (package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart:61:13)
+#7      AnalysisPreloadNotifier.preload (package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart:54:5)
+#8      AnalysisController.build.<anonymous closure> (package:chessigma_mobile/src/model/analysis/analysis_controller.dart:159:88)
+#19     FakeAsync.run.<anonymous closure>.<anonymous closure> (package:fake_async/fake_async.dart:189:18)
+#20     FakeAsync.flushMicrotasks (package:fake_async/fake_async.dart:200:32)
+#21     AutomatedTestWidgetsFlutterBinding.pump.<anonymous closure> (package:flutter_test/src/binding.dart:1962:26)
+#24     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#25     AutomatedTestWidgetsFlutterBinding.pump (package:flutter_test/src/binding.dart:1949:27)
+#26     WidgetTester.pumpWidget.<anonymous closure> (package:flutter_test/src/widget_tester.dart:598:22)
+#29     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#30     WidgetTester.pumpWidget (package:flutter_test/src/widget_tester.dart:595:27)
+#31     makeEngineTestApp (file:///home/flcsezz/mobile/test/view/engine/test_engine_app.dart:125:16)
+<asynchronous suspension>
+#32     main.<anonymous closure>.<anonymous closure>.<anonymous closure> (file:///home/flcsezz/mobile/test/view/analysis/analysis_screen_test.dart:930:9)
+<asynchronous suspension>
+#33     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#34     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 18 frames from dart:async and package:stack_trace)
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+A Timer is still pending even after the widget tree was disposed.
+'package:flutter_test/src/binding.dart':
+Failed assertion: line 2242 pos 12: '!timersPending'
+
+When the exception was thrown, this was the stack:
+#2      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:2242:12)
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1703:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from class _AssertionError and package:stack_trace)
+
+The test description was:
+  are not displayed if computer analysis is not enabled (on an analysed game)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:07 +25 -3: Engine evaluation: Engine lines are not displayed if computer analysis is not enabled (on an analysed game) [E]
+  Test failed. See exception logs above.
+  The test description was: are not displayed if computer analysis is not enabled (on an analysed game)
+  
+00:07 +25 -3: Engine evaluation: Engine lines are not displayed if engine is disabled by user preferences
+00:07 +26 -3: Engine evaluation: Engine lines are not displayed if they are disabled by user preferences
+00:08 +27 -3: Engine evaluation: Engine lines can be tapped to play a drop move in crazyhouse
+00:08 +28 -3: Engine evaluation: Engine gauge is not displayed if computer analysis is not allowed
+00:08 +29 -3: Engine evaluation: Engine gauge is not displayed if computer analysis is not enabled (on an analysed game)
+Pending timers:
+Timer (duration: 0:00:00.600000, periodic: false), created:
+#0      new FakeTimer._ (package:fake_async/fake_async.dart:342:62)
+#1      FakeAsync._createTimer (package:fake_async/fake_async.dart:260:29)
+#2      FakeAsync.run.<anonymous closure> (package:fake_async/fake_async.dart:185:15)
+#6      AnalysisPreloadNotifier._runPreload (package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart:61:13)
+#7      AnalysisPreloadNotifier.preload (package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart:54:5)
+#8      AnalysisController.build.<anonymous closure> (package:chessigma_mobile/src/model/analysis/analysis_controller.dart:159:88)
+#19     FakeAsync.run.<anonymous closure>.<anonymous closure> (package:fake_async/fake_async.dart:189:18)
+#20     FakeAsync.flushMicrotasks (package:fake_async/fake_async.dart:200:32)
+#21     AutomatedTestWidgetsFlutterBinding.pump.<anonymous closure> (package:flutter_test/src/binding.dart:1962:26)
+#24     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#25     AutomatedTestWidgetsFlutterBinding.pump (package:flutter_test/src/binding.dart:1949:27)
+#26     WidgetTester.pumpWidget.<anonymous closure> (package:flutter_test/src/widget_tester.dart:598:22)
+#29     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#30     WidgetTester.pumpWidget (package:flutter_test/src/widget_tester.dart:595:27)
+#31     makeEngineTestApp (file:///home/flcsezz/mobile/test/view/engine/test_engine_app.dart:125:16)
+<asynchronous suspension>
+#32     main.<anonymous closure>.<anonymous closure>.<anonymous closure> (file:///home/flcsezz/mobile/test/view/analysis/analysis_screen_test.dart:1019:9)
+<asynchronous suspension>
+#33     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#34     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 18 frames from dart:async and package:stack_trace)
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+A Timer is still pending even after the widget tree was disposed.
+'package:flutter_test/src/binding.dart':
+Failed assertion: line 2242 pos 12: '!timersPending'
+
+When the exception was thrown, this was the stack:
+#2      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:2242:12)
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1703:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from class _AssertionError and package:stack_trace)
+
+The test description was:
+  is not displayed if computer analysis is not enabled (on an analysed game)
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:08 +29 -4: Engine evaluation: Engine gauge is not displayed if computer analysis is not enabled (on an analysed game) [E]
+  Test failed. See exception logs above.
+  The test description was: is not displayed if computer analysis is not enabled (on an analysed game)
+  
+00:08 +29 -4: Engine evaluation: Engine gauge is not displayed if engine is disabled by user preferences
+00:08 +30 -4: Engine evaluation: Engine gauge is displayed if engine is available
+00:08 +31 -4: Engine evaluation: Engine gauge is displayed on an analysed game, even if engine eval is disabled
+Pending timers:
+Timer (duration: 0:00:00.600000, periodic: false), created:
+#0      new FakeTimer._ (package:fake_async/fake_async.dart:342:62)
+#1      FakeAsync._createTimer (package:fake_async/fake_async.dart:260:29)
+#2      FakeAsync.run.<anonymous closure> (package:fake_async/fake_async.dart:185:15)
+#6      AnalysisPreloadNotifier._runPreload (package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart:61:13)
+#7      AnalysisPreloadNotifier.preload (package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart:54:5)
+#8      AnalysisController.build.<anonymous closure> (package:chessigma_mobile/src/model/analysis/analysis_controller.dart:159:88)
+#19     FakeAsync.run.<anonymous closure>.<anonymous closure> (package:fake_async/fake_async.dart:189:18)
+#20     FakeAsync.flushMicrotasks (package:fake_async/fake_async.dart:200:32)
+#21     AutomatedTestWidgetsFlutterBinding.pump.<anonymous closure> (package:flutter_test/src/binding.dart:1962:26)
+#24     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#25     AutomatedTestWidgetsFlutterBinding.pump (package:flutter_test/src/binding.dart:1949:27)
+#26     WidgetTester.pumpWidget.<anonymous closure> (package:flutter_test/src/widget_tester.dart:598:22)
+#29     TestAsyncUtils.guard (package:flutter_test/src/test_async_utils.dart:74:41)
+#30     WidgetTester.pumpWidget (package:flutter_test/src/widget_tester.dart:595:27)
+#31     makeEngineTestApp (file:///home/flcsezz/mobile/test/view/engine/test_engine_app.dart:125:16)
+<asynchronous suspension>
+#32     main.<anonymous closure>.<anonymous closure>.<anonymous closure> (file:///home/flcsezz/mobile/test/view/analysis/analysis_screen_test.dart:1048:9)
+<asynchronous suspension>
+#33     testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#34     TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 18 frames from dart:async and package:stack_trace)
+
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+A Timer is still pending even after the widget tree was disposed.
+'package:flutter_test/src/binding.dart':
+Failed assertion: line 2242 pos 12: '!timersPending'
+
+When the exception was thrown, this was the stack:
+#2      AutomatedTestWidgetsFlutterBinding._verifyInvariants (package:flutter_test/src/binding.dart:2242:12)
+#3      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1703:7)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided 3 frames from class _AssertionError and package:stack_trace)
+
+The test description was:
+  is displayed on an analysed game, even if engine eval is disabled
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:08 +31 -5: Engine evaluation: Engine gauge is displayed on an analysed game, even if engine eval is disabled [E]
+  Test failed. See exception logs above.
+  The test description was: is displayed on an analysed game, even if engine eval is disabled
+  
+00:08 +31 -5: Engine evaluation: Engine best move arrow is not displayed if best move arrow is disabled
+00:09 +32 -5: Engine evaluation: Engine best move arrow is not displayed if computer analysis is not allowed
+00:09 +33 -5: Engine evaluation: Engine best move arrow is not displayed if engine is disabled by user preferences
+00:09 +34 -5: Engine evaluation: Engine best move arrow is displayed if engine is available
+00:09 +35 -5: Engine evaluation: show threat button is visible when engine is available and position is normal
+00:09 +36 -5: Engine evaluation: show threat button is hidden when king is in check
+00:09 +37 -5: Engine evaluation: show threat button is hidden when position is checkmate
+00:09 +38 -5: Engine evaluation: show threat button is hidden when opponent would be in stalemate
+00:09 +39 -5: Engine evaluation: show threat button is hidden when position is stalemate for both sides
+00:09 +40 -5: Engine evaluation: show threat button is visible when position is stalemate but opponent can move
+00:10 +41 -5: Castling respect castling preference (CastlingMethod.kingOverRook)
+00:10 +42 -5: Castling respect castling preference (CastlingMethod.kingTwoSquares)
+00:10 +43 -5: Castling Chess960 castling: CastlingMethod.kingOverRook
+00:10 +44 -5: Castling Chess960 castling: CastlingMethod.kingTwoSquares
+00:10 +45 -5: saves and restores root and path when navigating away and back
+00:10 +46 -5: Clear moves clears standalone analysis
+00:11 +47 -5: Opening a position from board editor overwrites saved standalone analysis
+══╡ EXCEPTION CAUGHT BY FLUTTER TEST FRAMEWORK ╞════════════════════════════════════════════════════
+The following assertion was thrown running a test:
+The finder "Found 0 widgets with text "Board editor": []" (used in a call to "tap()") could not find
+any matching widgets.
+
+When the exception was thrown, this was the stack:
+#0      WidgetController._getElementPoint (package:flutter_test/src/controller.dart:2090:7)
+#1      WidgetController.getCenter (package:flutter_test/src/controller.dart:1942:12)
+#2      WidgetController.tap (package:flutter_test/src/controller.dart:1075:7)
+#3      main.<anonymous closure> (file:///home/flcsezz/mobile/test/view/analysis/analysis_screen_test.dart:1423:18)
+<asynchronous suspension>
+#4      testWidgets.<anonymous closure>.<anonymous closure> (package:flutter_test/src/widget_tester.dart:192:15)
+<asynchronous suspension>
+#5      TestWidgetsFlutterBinding._runTestBody (package:flutter_test/src/binding.dart:1682:5)
+<asynchronous suspension>
+<asynchronous suspension>
+(elided one frame from package:stack_trace)
+
+The test description was:
+  Opening a position from board editor overwrites saved standalone analysis
+════════════════════════════════════════════════════════════════════════════════════════════════════
+00:11 +47 -6: Opening a position from board editor overwrites saved standalone analysis [E]
+  Test failed. See exception logs above.
+  The test description was: Opening a position from board editor overwrites saved standalone analysis
+  
+00:11 +47 -6: conditional premoves no conditional premove tab for standalone analysis
+00:11 +48 -6: conditional premoves Can add and remove premove lines on opponent's turn
+00:11 +49 -6: conditional premoves Can add premove lines on our turn
+00:12 +50 -6: conditional premoves Tapping a premove line jumps to its final position
+00:12 +51 -6: conditional premoves New move by opponent updates premove lines
+00:12 +52 -6: Some tests failed.

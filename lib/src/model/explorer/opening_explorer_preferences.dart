@@ -30,7 +30,14 @@ class OpeningExplorerPreferences extends Notifier<OpeningExplorerPrefs>
 
   @override
   OpeningExplorerPrefs build() {
-    return fetch();
+    final prefs = fetch();
+    // One-time forced migration for stability (legacy Lichess without auth was broken)
+    if (prefs.db != OpeningDatabase.chessdb) {
+      final updated = prefs.copyWith(db: OpeningDatabase.chessdb);
+      save(updated);
+      return updated;
+    }
+    return prefs;
   }
 
   Future<void> setDatabase(OpeningDatabase db) => save(state.copyWith(db: db));
@@ -103,7 +110,7 @@ sealed class OpeningExplorerPrefs with _$OpeningExplorerPrefs implements Seriali
   }) = _OpeningExplorerPrefs;
 
   factory OpeningExplorerPrefs.defaults({LightUser? user}) => OpeningExplorerPrefs(
-    db: OpeningDatabase.master,
+    db: OpeningDatabase.chessdb, // Set as default for now to solve the "could not load data" issue
     masterDb: MasterDb.defaults,
     lichessDb: LichessDb.defaults,
     playerDb: PlayerDb.defaults(user: user),

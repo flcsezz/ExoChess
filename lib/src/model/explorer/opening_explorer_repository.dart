@@ -8,6 +8,7 @@ import 'package:chessigma_mobile/src/constants.dart';
 import 'package:chessigma_mobile/src/model/common/speed.dart';
 import 'package:chessigma_mobile/src/model/explorer/opening_explorer.dart';
 import 'package:chessigma_mobile/src/model/explorer/opening_explorer_preferences.dart';
+import 'package:chessigma_mobile/src/model/explorer/chessdb_client.dart';
 import 'package:chessigma_mobile/src/network/http.dart';
 import 'package:chessigma_mobile/src/utils/riverpod.dart';
 
@@ -16,6 +17,8 @@ final openingExplorerProvider = AsyncNotifierProvider.autoDispose
       OpeningExplorer.new,
       name: 'OpeningExplorerProvider',
     );
+
+final chessDBClientProvider = Provider<ChessDBClient>((ref) => ChessDBClient());
 
 class OpeningExplorer extends AsyncNotifier<({OpeningExplorerEntry entry, bool isIndexing})?> {
   OpeningExplorer(this.fen);
@@ -69,19 +72,26 @@ class OpeningExplorer extends AsyncNotifier<({OpeningExplorerEntry entry, bool i
                 ),
         );
         return null;
+      case OpeningDatabase.chessdb:
+        final openingExplorer = await repository.getChessDB(fen);
+        return (entry: openingExplorer, isIndexing: false);
     }
   }
 }
 
 /// A provider for [OpeningExplorerRepository].
 final openingExplorerRepositoryProvider = Provider<OpeningExplorerRepository>((Ref ref) {
-  return OpeningExplorerRepository(ref.watch(lichessClientProvider));
+  return OpeningExplorerRepository(
+    ref.watch(lichessClientProvider),
+    ref.watch(chessDBClientProvider),
+  );
 }, name: 'OpeningExplorerRepositoryProvider');
 
 class OpeningExplorerRepository {
-  const OpeningExplorerRepository(this.client);
+  const OpeningExplorerRepository(this.client, this.chessDBClient);
 
   final Client client;
+  final ChessDBClient chessDBClient;
 
   Future<OpeningExplorerEntry> getMasterDatabase(String fen, {int? since}) {
     return client.readJson(
@@ -131,6 +141,50 @@ class OpeningExplorerRepository {
         if (since != null) 'since': '${since.year}-${since.month}',
       }),
       mapper: OpeningExplorerEntry.fromJson,
+    );
+  }
+
+  Future<OpeningExplorerEntry> getChessDB(String fen) async {
+    final response = await chessDBClient.queryAll(fen);
+
+    if (response.startsWith('unknown')) {
+      return OpeningExplorerEntry.empty();
+    }
+
+    final moves = response.split('|').map((moveStr) {
+      // move:e2e4,score:31,rank:0,winrate:50.0,count:14972,note:?
+      final parts = moveStr.split(',');
+      final data = <String, String>{};
+      for (final part in parts) {
+        final kv = part.split(':');
+        if (kv.length == 2) {
+          data[kv[0]] = kv[1];
+        }
+      }
+
+      final uci = data['move'] ?? '';
+      // Remove piece prefix if present (e.g. Pe2e4 -> e2e4)
+      final cleanUci = uci.length > 4 ? uci.substring(uci.length - 4) : uci;
+      final score = int.tryParse(data['score'] ?? '');
+      int.tryParse(data['count'] ?? '') ?? 0;
+
+      return OpeningMove(
+        uci: cleanUci,
+        san: cleanUci, // Will be updated by chessground/dartchess later if needed
+        white: 0,
+        draws: 0,
+        black: 0,
+        score: score,
+        // We use winrate/count to fake the stats bar if needed, 
+        // but ChessDB is more for evaluation than statistics.
+      );
+    }).toIList();
+
+    return OpeningExplorerEntry(
+      white: 0,
+      draws: 0,
+      black: 0,
+      moves: moves,
     );
   }
 }

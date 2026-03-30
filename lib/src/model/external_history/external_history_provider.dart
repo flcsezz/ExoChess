@@ -450,7 +450,7 @@ class ExternalUserHistoryNotifier extends AsyncNotifier<IList<ExternalGameHistor
 
     final pgnText = response.body;
     if (pgnText.trim().isEmpty) {
-      return [];
+      throw Exception('User not found: $username');
     }
 
     final pgnGames = PgnGame.parseMultiGamePgn(pgnText);

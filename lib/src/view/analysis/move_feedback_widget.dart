@@ -24,39 +24,34 @@ class _MoveFeedbackWidgetState extends State<MoveFeedbackWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _opacityAnimation;
-  late Animation<Offset> _offsetAnimation;
   late Animation<double> _scaleAnimation;
+  late Animation<Offset> _offsetAnimation;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 1000),
-      vsync: this,
-    );
+    _controller = AnimationController(duration: const Duration(milliseconds: 350), vsync: this);
 
-    _opacityAnimation = TweenSequence<double>([
-      TweenSequenceItem(tween: Tween(begin: 0.0, end: 1.0), weight: 20),
-      TweenSequenceItem(tween: ConstantTween(1.0), weight: 60),
-      TweenSequenceItem(tween: Tween(begin: 1.0, end: 0.0), weight: 20),
-    ]).animate(_controller);
-
-    _offsetAnimation = Tween<Offset>(
-      begin: const Offset(0, 0),
-      end: const Offset(0, -0.5),
-    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOut));
+    _opacityAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeIn));
 
     _scaleAnimation = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween(begin: 0.0, end: 1.2).chain(CurveTween(curve: Curves.easeOut)),
-        weight: 30,
+        tween: Tween(begin: 0.0, end: 1.3).chain(CurveTween(curve: Curves.easeOutCubic)),
+        weight: 60,
       ),
       TweenSequenceItem(
-        tween: Tween(begin: 1.2, end: 1.0).chain(CurveTween(curve: Curves.easeIn)),
-        weight: 20,
+        tween: Tween(begin: 1.3, end: 1.0).chain(CurveTween(curve: Curves.easeInCubic)),
+        weight: 40,
       ),
-      TweenSequenceItem(tween: ConstantTween(1.0), weight: 50),
     ]).animate(_controller);
+
+    _offsetAnimation = Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(0, -0.5),
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic));
 
     _controller.forward();
   }
@@ -80,18 +75,38 @@ class _MoveFeedbackWidgetState extends State<MoveFeedbackWidget>
   Widget build(BuildContext context) {
     final squareSize = widget.boardSize / 8;
     final squareIndex = widget.square;
-    
+
     // Calculate file and rank (0-7)
     final int file = squareIndex % 8;
     final int rank = squareIndex ~/ 8;
-    
-    // Adjust for orientation
-    final double left = widget.orientation == Side.white
-        ? file * squareSize
-        : (7 - file) * squareSize;
-    final double bottom = widget.orientation == Side.white
-        ? rank * squareSize
-        : (7 - rank) * squareSize;
+
+    // Adjust for orientation to map logical square to physical screen metrics
+    final bool isWhiteOrientation = widget.orientation == Side.white;
+    final double left = isWhiteOrientation ? file * squareSize : (7 - file) * squareSize;
+    final double bottom = isWhiteOrientation ? rank * squareSize : (7 - rank) * squareSize;
+
+    final double physicalFile = isWhiteOrientation ? file.toDouble() : (7 - file).toDouble();
+    final double physicalRank = isWhiteOrientation ? rank.toDouble() : (7 - rank).toDouble();
+
+    // The badge floats at the top-right corner of the target square
+    final double badgeSize = squareSize * 0.55;
+    final double overlap = badgeSize * 0.35;
+
+    // Flush the badge to the internal edges to prevent outside board clipping
+    final double rightOffset = physicalFile == 7 ? 0 : -overlap;
+    final double topOffset = physicalRank == 7 ? 0 : -overlap;
+
+    // Labels needs to avoid edges so they aren't physically clipped.
+    final bool isRightEdge = physicalFile >= 6;
+    final bool isTopEdge = physicalRank >= 6;
+    final bool isLeftEdge = physicalFile <= 1;
+
+    final double? labelTop = isTopEdge ? null : -24.0;
+    final double? labelBottom = isTopEdge ? -24.0 : null;
+
+    // Adjust label horizontal position to prevent side clipping
+    final double labelLeft = isLeftEdge ? -10.0 : -40.0;
+    final double labelRight = isRightEdge ? -10.0 : -40.0;
 
     return Positioned(
       left: left,
@@ -103,61 +118,103 @@ class _MoveFeedbackWidgetState extends State<MoveFeedbackWidget>
           child: Stack(
             clipBehavior: Clip.none,
             children: [
-              // Evaluation Icon
-              Align(
-                alignment: Alignment.topRight,
-                child: Transform.translate(
-                  offset: const Offset(5, -5),
-                  child: ScaleTransition(
-                    scale: _scaleAnimation,
+              Positioned(
+                right: rightOffset,
+                top: topOffset,
+                child: ScaleTransition(
+                  scale: _scaleAnimation,
+                  child: FadeTransition(
+                    opacity: _opacityAnimation,
                     child: Container(
-                      padding: const EdgeInsets.all(2),
+                      width: badgeSize,
+                      height: badgeSize,
                       decoration: BoxDecoration(
-                        color: widget.evaluation.color,
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            widget.evaluation.color.withValues(alpha: 0.8),
+                            widget.evaluation.color,
+                          ],
+                        ),
                         shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 1.5),
+                        border: Border.all(color: Colors.white, width: 2.5),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 4,
-                            offset: const Offset(0, 2),
+                            color: widget.evaluation.color.withValues(alpha: 0.6),
+                            blurRadius: 8,
+                            spreadRadius: 2,
+                            offset: Offset.zero,
+                          ),
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.4),
+                            blurRadius: 6,
+                            spreadRadius: 1,
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
-                      child: Text(
-                        widget.evaluation.symbol,
-                        style: const TextStyle(
+                      child: Center(
+                        child: Icon(
+                          widget.evaluation.icon,
                           color: Colors.white,
-                          fontSize: 10,
-                          fontWeight: FontWeight.bold,
+                          size: badgeSize * 0.65,
+                          shadows: [
+                            Shadow(
+                              color: Colors.black.withValues(alpha: 0.4),
+                              blurRadius: 2,
+                              offset: const Offset(0, 1),
+                            ),
+                          ],
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-              // Feedback Label
               Positioned(
-                top: -20,
-                left: -20,
-                right: -20,
+                top: labelTop,
+                bottom: labelBottom,
+                left: labelLeft,
+                right: labelRight,
                 child: SlideTransition(
                   position: _offsetAnimation,
                   child: FadeTransition(
                     opacity: _opacityAnimation,
                     child: Center(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(0.7),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Text(
-                          widget.evaluation.label(context),
-                          style: TextStyle(
-                            color: widget.evaluation.color,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(11),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.black.withValues(alpha: 0.75),
+                            borderRadius: BorderRadius.circular(11),
+                            border: Border.all(
+                              color: widget.evaluation.color.withValues(alpha: 0.8),
+                              width: 1.0,
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: widget.evaluation.color.withValues(alpha: 0.3),
+                                blurRadius: 8,
+                                spreadRadius: 1,
+                              ),
+                            ],
+                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          child: Text(
+                            widget.evaluation.label(context).toUpperCase(),
+                            style: TextStyle(
+                              color: widget.evaluation.color,
+                              fontSize: 8.5,
+                              fontWeight: FontWeight.w900,
+                              letterSpacing: 1.0,
+                              shadows: [
+                                Shadow(
+                                  color: widget.evaluation.color.withValues(alpha: 1.0),
+                                  blurRadius: 6,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),

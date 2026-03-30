@@ -9,20 +9,24 @@ class AppBarChessigmaTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text.rich(
-      TextSpan(
+    return Center(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
-          WidgetSpan(
-            alignment: PlaceholderAlignment.middle,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.asset('assets/images/home_logo.png', height: 24),
-            ),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12.0),
+            child: Image.asset('assets/images/home_logo.png', height: 48),
           ),
-          const TextSpan(text: ' Chessigma'),
+          const SizedBox(width: 12),
+          Text(
+            'CHESSIGMA',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 1.5,
+                ),
+          ),
         ],
       ),
-      maxLines: 1,
     );
   }
 }

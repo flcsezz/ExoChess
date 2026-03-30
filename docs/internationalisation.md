@@ -1,6 +1,6 @@
 # Internationalisation
 
-We're using the official Flutter way of internationalising our app, as desbribed in the
+We're using the official Flutter way of internationalising Chessigma Mobile, as described in the
 [documentation](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#setting-up).
 
 What is specific to this project is the way the ARB files are generated.
@@ -55,9 +55,11 @@ You should see the new strings in the `lib/l10n/app_*.arb` and `lib/l10n/app_*.d
 > When working on a new feature, you should start with hardcoding English texts first. Once the feature is done,
 > released and even used for a while, we can add translations, in order to avoid useless translating work.
 
+For analysis-board intelligence, start with hardcoded English labels for great, good, inaccuracy, mistake, blunder, and the loading copy. Add translations only after the thresholds and UI have stabilized.
+
 There are some strings that appear only in this app, but not on lichess.org.
 
-If you have a new string to be translated, add it to `translations/source/mobile.xml`. Make sure to include a `comment`
+If you have a new string to be translated, add it to `translation/source/mobile.xml`. Make sure to include a `comment`
 attribute, describing the usage of the string and its contents (e.g. placeholders). Some strings also must not exceed a
 certain width due to UI constraints, use the `maxLength` attribute for that.
 
@@ -75,4 +77,3 @@ described above, they can be used like the other translations, however a `mobile
 > **Note**
 > Do not translate names such as "Puzzle Storm" and "Puzzle Streak". If such names appear in a translation string,
 > add a comment that they should not be translated.
-

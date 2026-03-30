@@ -53,7 +53,12 @@ final _globalStreamController = StreamController<SocketEvent>.broadcast();
 final socketGlobalStream = _globalStreamController.stream;
 
 /// Creates a WebSocket URI for the lichess server.
-Uri lichessWSUri(String unencodedPath, [Map<String, String>? queryParameters]) {
+Uri lichessWSUri(
+  String unencodedPath, {
+  required String sri,
+  int? version,
+  Map<String, String>? queryParameters,
+}) {
   final isLocal = kLichessWSHost.startsWith('localhost') ||
       kLichessWSHost.startsWith('127.0.0.1') ||
       kLichessWSHost.startsWith('10.') ||
@@ -63,10 +68,33 @@ Uri lichessWSUri(String unencodedPath, [Map<String, String>? queryParameters]) {
   final protocol = kLichessWSHost.contains('://') ? '' : (isLocal ? 'ws://' : 'wss://');
   final baseUri = Uri.parse('$protocol$kLichessWSHost');
 
-  return baseUri.replace(
+  // Dart's Uri.port returns 0 for ws/wss schemes by default, which can cause
+  // connection failures on some platforms/servers if explicitly included as :0.
+  // We provide sensible defaults for these schemes.
+  int? port = baseUri.hasPort ? baseUri.port : null;
+  if (port == null || port == 0) {
+    if (baseUri.scheme == 'wss' || baseUri.scheme == 'https') {
+      port = 443;
+    } else if (baseUri.scheme == 'ws' || baseUri.scheme == 'http') {
+      port = 80;
+    }
+  }
+
+  final finalUri = Uri(
+    scheme: baseUri.scheme == 'https' ? 'wss' : (baseUri.scheme == 'http' ? 'ws' : baseUri.scheme),
+    host: baseUri.host,
+    port: port,
     path: unencodedPath,
-    queryParameters: queryParameters,
+    queryParameters: {
+      'sri': sri,
+      if (version != null) 'v': version.toString(),
+      ...?queryParameters,
+    },
   );
+
+  _logger.info('lichessWSUri result: $finalUri');
+
+  return finalUri;
 }
 
 /// A lichess WebSocket client.
@@ -210,7 +238,12 @@ class SocketClient {
     _ackResendTimer = Timer.periodic(resendAckDelay, (_) => _resendAcks());
 
     final authUser = getSession();
-    final uri = lichessWSUri(route.path, version != null ? {'v': version.toString()} : null);
+    final uri = lichessWSUri(
+      route.path,
+      sri: sri,
+      version: version,
+      queryParameters: route.queryParameters.isNotEmpty ? route.queryParameters : null,
+    );
     final Map<String, String> headers = authUser != null
         ? {'Authorization': 'Bearer ${signBearerToken(authUser.token)}'}
         : {};
@@ -378,11 +411,6 @@ class SocketClient {
           onEventGapFailure?.call();
           _logger.severe(
             'Cannot solve event gap: version incoming ${event.version} vs current $version',
-          );
-          ChessigmaBinding.instance.firebaseCrashlytics.recordError(
-            'Cannot solve event gap: version incoming ${event.version} vs current $version',
-            null,
-            information: ['socket.route: $route', 'event.topic: ${event.topic}'],
           );
         }
         return;

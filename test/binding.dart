@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/firebase_stubs.dart';
 import 'package:chessigma_mobile/src/binding.dart';
 import 'package:multistockfish/multistockfish.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -81,38 +80,9 @@ class TestChessigmaBinding extends ChessigmaBinding {
   ///
   /// Should be called using [addTearDown] in tests.
   void reset() {
-    _firebaseMessaging = null;
     _sharedPreferences = null;
     numAppStarts = 1;
   }
-
-  FirebaseCrashlytics? _firebaseCrashlytics;
-  FirebaseMessaging? _firebaseMessaging;
-
-  @override
-  Future<void> initializeFirebase() async {}
-
-  @override
-  FirebaseCrashlytics get firebaseCrashlytics {
-    return _firebaseCrashlytics ??= FirebaseCrashlytics.instance;
-  }
-
-  @override
-  FirebaseMessaging get firebaseMessaging {
-    return _firebaseMessaging ??= FirebaseMessaging.instance;
-  }
-
-  @override
-  void firebaseMessagingOnBackgroundMessage(BackgroundMessageHandler handler) {
-    FirebaseMessaging.onBackgroundMessage(handler);
-  }
-
-  @override
-  Stream<RemoteMessage> get firebaseMessagingOnMessage => FirebaseMessaging.onMessage;
-
-  @override
-  Stream<RemoteMessage> get firebaseMessagingOnMessageOpenedApp =>
-      FirebaseMessaging.onMessageOpenedApp;
 
   Stockfish _stockfish = FakeStockfish();
 
@@ -211,33 +181,3 @@ class FakeSharedPreferences implements SharedPreferencesWithCache {
     return Future.value();
   }
 }
-
-typedef FirebaseMessagingRequestPermissionCall = ({
-  bool alert,
-  bool announcement,
-  bool badge,
-  bool carPlay,
-  bool criticalAlert,
-  bool provisional,
-  bool sound,
-});
-
-/*
-class FakeFirebaseCrashlytics extends Fake implements FirebaseCrashlytics {
-  @override
-  Future<void> recordError(
-    dynamic exception,
-    StackTrace? stack, {
-    dynamic reason,
-    Iterable<Object> information = const [],
-    bool? printDetails,
-    bool fatal = false,
-  }) async {}
-}
-*/
-
-/*
-class FakeFirebaseMessaging extends Fake implements FirebaseMessaging {
-... (truncated)
-}
-*/

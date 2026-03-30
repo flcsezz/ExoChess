@@ -44,23 +44,49 @@ enum MoveEvaluation implements FeedbackData {
   Color get color {
     switch (this) {
       case MoveEvaluation.brilliant:
-        return const Color(0xFF26C2A3);
+        return const Color(0xFF00F2FF); // Luminous Cyan
       case MoveEvaluation.great:
-        return const Color(0xFF5C8BB0);
+        return const Color(0xFF00FF88); // Luminous Green
       case MoveEvaluation.best:
       case MoveEvaluation.excellent:
       case MoveEvaluation.good:
-        return const Color(0xFF95B83C);
+        return const Color(0xFFAAFF00); // Luminous Lime
       case MoveEvaluation.book:
         return const Color(0xFFD5A47D);
       case MoveEvaluation.inaccuracy:
-        return const Color(0xFFF0C15C);
+        return const Color(0xFFFFE600); // Luminous Yellow
       case MoveEvaluation.mistake:
-        return const Color(0xFFE6912C);
+        return const Color(0xFFFF9500); // Luminous Orange
       case MoveEvaluation.blunder:
-        return const Color(0xFFB33430);
+        return const Color(0xFFFF0055); // Luminous Pink/Red
       case MoveEvaluation.forced:
         return const Color(0xFFB7B3B0);
+    }
+  }
+
+  @override
+  IconData get icon {
+    switch (this) {
+      case MoveEvaluation.brilliant:
+        return Icons.auto_awesome;
+      case MoveEvaluation.great:
+        return Icons.stars;
+      case MoveEvaluation.best:
+        return Icons.verified;
+      case MoveEvaluation.excellent:
+        return Icons.thumb_up;
+      case MoveEvaluation.good:
+        return Icons.check_circle;
+      case MoveEvaluation.book:
+        return Icons.menu_book;
+      case MoveEvaluation.inaccuracy:
+        return Icons.help_outline;
+      case MoveEvaluation.mistake:
+        return Icons.warning_amber;
+      case MoveEvaluation.blunder:
+        return Icons.dangerous;
+      case MoveEvaluation.forced:
+        return Icons.link;
     }
   }
 

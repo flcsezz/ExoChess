@@ -1349,21 +1349,17 @@ class InlineMove extends ConsumerWidget {
                   ),
                 ),
                 if (evaluation != null && params.shouldShowAnnotations) ...[
-                  const SizedBox(width: 4),
-                  Container(
-                    padding: const EdgeInsets.all(1),
-                    decoration: BoxDecoration(
-                      color: evaluation.color,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Text(
-                      evaluation.symbol,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 8,
-                        fontWeight: FontWeight.bold,
+                  const SizedBox(width: 2),
+                  Icon(
+                    evaluation.icon,
+                    color: evaluation.color,
+                    size: 14,
+                    shadows: [
+                      Shadow(
+                        color: evaluation.color.withOpacity(0.5),
+                        blurRadius: 4,
                       ),
-                    ),
+                    ],
                   ),
                 ],
               ],

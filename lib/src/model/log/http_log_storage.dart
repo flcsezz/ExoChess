@@ -12,14 +12,15 @@ part 'http_log_storage.freezed.dart';
 /// Provides an instance of [HttpLogStorage] using Riverpod.
 final httpLogStorageProvider = FutureProvider<HttpLogStorage>((Ref ref) async {
   final db = await ref.watch(databaseProvider.future);
-  return HttpLogStorage(db);
+  final writer = await ref.watch(bufferedWriterProvider.future);
+  return HttpLogStorage(db, writer);
 }, name: 'HttpLogStorageProvider');
 
 const kHttpLogStorageTable = 'http_log';
 
 /// Manages the storage of HTTP logs in a SQLite database.
 class HttpLogStorage {
-  HttpLogStorage(this._db) : _writer = BufferedWriter(_db);
+  HttpLogStorage(this._db, this._writer);
   final Database _db;
   final BufferedWriter _writer;
 

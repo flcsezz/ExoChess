@@ -949,10 +949,9 @@ void main() {
       await tester.tap(find.text('Analysis board'));
       await tester.pumpAndSettle(); // wait for analysis screen to open
       expect(
-        find.widgetWithText(AppBar, 'Analysis board'),
+        find.descendant(of: find.byType(AppBar), matching: find.text('Analysis board')),
         findsOneWidget,
-      ); // analysis screen is now open
-      expect(find.byKey(const Key('f3-whitequeen')), findsOneWidget);
+      ); // analysis screen is now open      expect(find.byKey(const Key('f3-whitequeen')), findsOneWidget);
       expect(find.byKey(const Key('d3-whitebishop')), findsOneWidget);
       expect(find.byKey(const Key('b5-lastMove')), findsOneWidget);
       expect(find.byKey(const Key('d3-lastMove')), findsOneWidget);
@@ -973,10 +972,9 @@ void main() {
       await tester.tap(find.text('Analysis board'));
       await tester.pumpAndSettle(); // wait for analysis screen to open
       expect(
-        find.widgetWithText(AppBar, 'Analysis board'),
+        find.descendant(of: find.byType(AppBar), matching: find.text('Analysis board')),
         findsOneWidget,
-      ); // analysis screen is now open
-      expect(find.byType(Chessboard), findsOneWidget);
+      ); // analysis screen is now open      expect(find.byType(Chessboard), findsOneWidget);
       expect(find.byKey(const Key('e6-whitequeen')), findsOneWidget);
       expect(find.byKey(const Key('d5-lastMove')), findsOneWidget);
       expect(find.byKey(const Key('e6-lastMove')), findsOneWidget);

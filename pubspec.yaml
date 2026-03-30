@@ -81,6 +81,7 @@ dependencies:
   visibility_detector: ^0.4.0
   wakelock_plus: ^1.1.1
   web_socket_channel: ^3.0.0
+  video_player: ^2.11.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
@@ -122,6 +123,7 @@ flutter:
     - assets/board-thumbnails/
     - assets/positions.json
     - assets/endgames.json
+    - assets/videos/
 
   fonts:
     - family: ChessigmaIcons
@@ -141,15 +143,15 @@ flutter:
   generate: true
 
 flutter_native_splash:
-  android: false
+  android: true
   ios: true
   web: false
 
-  color: "#ffffff"
-  image: assets/images/logo-black.png
+  color: "#0b162a"
+  image: assets/images/home_logo.png
 
-  color_dark: "#000000"
-  image_dark: assets/images/logo-white.png
+  color_dark: "#0b162a"
+  image_dark: assets/images/home_logo.png
 
 flutter_launcher_icons:
   android: "launcher_icon"

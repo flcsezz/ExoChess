@@ -1,10 +1,6 @@
 import 'dart:async';
 
-import 'package:dartchess/dartchess.dart';
-import 'package:deep_pick/deep_pick.dart';
-import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:chessigma_mobile/src/model/analysis/lichess_cloud_eval_service.dart';
 import 'package:chessigma_mobile/src/model/common/chess.dart';
 import 'package:chessigma_mobile/src/model/common/eval.dart';
 import 'package:chessigma_mobile/src/model/common/id.dart';
@@ -18,6 +14,11 @@ import 'package:chessigma_mobile/src/model/engine/work.dart';
 import 'package:chessigma_mobile/src/network/socket.dart';
 import 'package:chessigma_mobile/src/utils/json.dart';
 import 'package:chessigma_mobile/src/utils/rate_limit.dart';
+import 'package:dartchess/dartchess.dart';
+import 'package:deep_pick/deep_pick.dart';
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'evaluation_mixin.freezed.dart';
 
@@ -176,6 +177,13 @@ mixin EngineEvaluationMixin<T extends EvaluationMixinState<T>> on AnyNotifier<As
     requestEval();
   }
 
+  @mustCallSuper
+  void toggleLichessCloudEval() {
+    _evaluationPreferencesNotifier.toggleLichessCloudEval();
+
+    requestEval();
+  }
+
   /// Requests an engine evaluation if available.
   ///
   /// This must be called after the AsyncNotifier's[state] has been initialized.
@@ -287,6 +295,8 @@ mixin EngineEvaluationMixin<T extends EvaluationMixinState<T>> on AnyNotifier<As
     if (curPosition == null) return;
     final numEvalLines = evaluationPrefs.numEvalLines;
 
+    _fetchLichessCloudEval();
+
     socketClient?.send('evalGet', {
       'fen': curPosition.fen,
       'path': state.requireValue.currentPath.value,
@@ -294,6 +304,37 @@ mixin EngineEvaluationMixin<T extends EvaluationMixinState<T>> on AnyNotifier<As
       if (curPosition.rule != Rule.chess) 'variant': Variant.fromRule(curPosition.rule).name,
       'up': true,
     });
+  }
+
+  Future<void> _fetchLichessCloudEval() async {
+    if (!evaluationPrefs.enableLichessCloudEval) return;
+    if (!_canCloudEval()) return;
+
+    final curPosition = state.requireValue.currentPosition;
+    if (curPosition == null) return;
+    final path = state.requireValue.currentPath;
+    final numEvalLines = evaluationPrefs.numEvalLines;
+
+    final cloudEval =
+        await ref.read(lichessCloudEvalServiceProvider).fetchEval(curPosition, multiPv: numEvalLines);
+
+    if (cloudEval != null && ref.mounted) {
+      bool isSameEvalString = true;
+      positionTree.updateAt(path, (node) {
+        final nodeEval = node.eval;
+        if (nodeEval is CloudEval && nodeEval.depth >= cloudEval.depth) {
+          return;
+        }
+        isSameEvalString = cloudEval.evalString == nodeEval?.evalString;
+        node.eval = cloudEval;
+      });
+
+      if (!ref.mounted) return;
+
+      if (path == state.requireValue.currentPath) {
+        onCurrentPathEvalChanged(isSameEvalString);
+      }
+    }
   }
 
   void _startEngineEval({bool goDeeper = false}) {

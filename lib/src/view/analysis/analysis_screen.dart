@@ -16,6 +16,7 @@ import 'package:chessigma_mobile/src/utils/l10n_context.dart';
 import 'package:chessigma_mobile/src/utils/navigation.dart';
 import 'package:chessigma_mobile/src/utils/share.dart';
 import 'package:chessigma_mobile/src/view/analysis/analysis_layout.dart';
+import 'package:chessigma_mobile/src/view/analysis/analysis_loading_overlay.dart';
 import 'package:chessigma_mobile/src/view/analysis/analysis_settings_screen.dart';
 import 'package:chessigma_mobile/src/view/analysis/analysis_share_screen.dart';
 import 'package:chessigma_mobile/src/view/analysis/conditional_premoves.dart';
@@ -135,6 +136,7 @@ class _AnalysisScreenState extends ConsumerState<_AnalysisScreen>
           ),
         );
       case AsyncError(:final error, :final stackTrace):
+        print('CRASH IN ASYNC ERROR! error: $error\nstack: $stackTrace');
         _logger.severe('Cannot load analysis: $error', stackTrace);
         return FullScreenRetryRequest(onRetry: () => ref.invalidate(ctrlProvider));
       case _:
@@ -297,6 +299,14 @@ class _Body extends ConsumerWidget {
         ? ref.watch(analysisPreloadServiceProvider(options.gameId!))
         : null;
 
+    final loadingOverlay = preloadState != null
+        ? AnalysisLoadingOverlay(
+            state: preloadState,
+            onRetry: () =>
+                ref.read(analysisPreloadServiceProvider(options.gameId!).notifier).retry(),
+          )
+        : null;
+
     return FocusDetector(
       onFocusRegained: () {
         if (context.mounted) {
@@ -304,7 +314,7 @@ class _Body extends ConsumerWidget {
         }
       },
       child: AnalysisLayout(
-        loading: preloadState?.status == PreloadStatus.loading,
+        loadingOverlay: loadingOverlay,
         tabController: controller,
         pov: pov,
         sideToMove: analysisState.currentPosition.turn,

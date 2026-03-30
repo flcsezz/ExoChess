@@ -90,6 +90,9 @@ class AnalysisSettingsScreen extends ConsumerWidget {
                   ],
                 ),
                 EngineSettingsWidget(
+                  onToggleLichessCloudEval: () {
+                    ref.read(ctrlProvider.notifier).toggleLichessCloudEval();
+                  },
                   onSetEngineSearchTime: (value) {
                     ref.read(ctrlProvider.notifier).setEngineSearchTime(value);
                   },

@@ -9,6 +9,7 @@ import 'package:chessigma_mobile/src/widgets/settings.dart';
 class EngineSettingsWidget extends ConsumerWidget {
   const EngineSettingsWidget({
     this.onToggleLocalEvaluation,
+    this.onToggleLichessCloudEval,
     required this.onSetEngineSearchTime,
     this.onSetNumEvalLines,
     required this.onSetEngineCores,
@@ -16,6 +17,7 @@ class EngineSettingsWidget extends ConsumerWidget {
   });
 
   final VoidCallback? onToggleLocalEvaluation;
+  final VoidCallback? onToggleLichessCloudEval;
   final void Function(Duration) onSetEngineSearchTime;
   final void Function(int)? onSetNumEvalLines;
   final void Function(int) onSetEngineCores;
@@ -27,16 +29,25 @@ class EngineSettingsWidget extends ConsumerWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (onToggleLocalEvaluation != null)
+        if (onToggleLocalEvaluation != null || onToggleLichessCloudEval != null)
           ListSection(
             children: [
-              SwitchSettingTile(
-                title: Text(context.l10n.toggleLocalEvaluation),
-                value: prefs.isEnabled,
-                onChanged: (_) {
-                  onToggleLocalEvaluation!.call();
-                },
-              ),
+              if (onToggleLocalEvaluation != null)
+                SwitchSettingTile(
+                  title: Text(context.l10n.toggleLocalEvaluation),
+                  value: prefs.isEnabled,
+                  onChanged: (_) {
+                    onToggleLocalEvaluation!.call();
+                  },
+                ),
+              if (onToggleLichessCloudEval != null)
+                SwitchSettingTile(
+                  title: const Text('Lichess cloud evaluation'),
+                  value: prefs.enableLichessCloudEval,
+                  onChanged: (_) {
+                    onToggleLichessCloudEval!.call();
+                  },
+                ),
             ],
           ),
         ListSection(

@@ -1,12 +1,19 @@
 # Contributing
 
-## I want to contribute code to Lichess Mobile
+## I want to contribute code to Chessigma Mobile
 
 - [Set up your development environment](https://github.com/lichess-org/mobile/blob/main/docs/setting_dev_env.md);
 - Communicate with other devs on [Discord](https://discord.gg/lichess).
-- check the [docs](https://github.com/lichess-org/mobile/tree/main/docs) for more documentation
+- Check the [docs](https://github.com/lichess-org/mobile/tree/main/docs) for more documentation.
+- Read [docs/PLAN.md](/home/flcsezz/mobile/docs/PLAN.md) and [CURRENT_TASK.md](/home/flcsezz/mobile/CURRENT_TASK.md) before starting work.
+- If you are using an agent, claim the task first and keep the scope narrow.
 
 ### What to work on
+
+The project is now focused on local play, analysis, puzzles, and learn.
+
+For product ideas, use [docs/New_features.md](/home/flcsezz/mobile/docs/New_features.md).
+For execution plans, use [docs/plans/](/home/flcsezz/mobile/docs/plans).
 
 To find a task to work on, you can check the [good first issue](https://github.com/lichess-org/mobile/labels/%22good%20first%20issue%22)
 and [help wanted](https://github.com/lichess-org/mobile/labels/%22help%20wanted%22)
@@ -24,6 +31,7 @@ Most appreciated contributions are those that:
 - **Fix bugs**
 - **Add missing tests**. Flutter widget tests are easy to write and very useful to
   test the UI. They are reliable and fast. You can already find examples in the `test/` directory, but the project is still lacking a lot of tests.
+- **Improve analysis/review UX** without breaking the existing review path.
 
 We don't assign issues to contributors, so feel free to work on any issue you
 like, but check the existing pull requests to avoid duplicated work. Once you
@@ -35,6 +43,7 @@ mode if it's not ready yet) to let others know that you're working on it.
 - Make sure your code follows the [coding style guide](https://github.com/lichess-org/mobile/blob/main/docs/coding_style.md)
 - Don't manually edit the `app_en.arb` file! See the [internalizations docs](https://github.com/lichess-org/mobile/blob/main/docs/internationalisation.md) for instructions on how to add new translations.
 - If possible, write a new widget test for your bugfix or new feature.
+- If your change affects analysis-board behavior, include a note on preload, loading, and move-feedback behavior.
 - Consider adding a screenshot and/or screen recording to the PR description.
 - Run the linter and tests:
 ```sh

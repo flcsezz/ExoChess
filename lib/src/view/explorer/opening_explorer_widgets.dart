@@ -58,6 +58,7 @@ class OpeningExplorerMoveTable extends ConsumerWidget {
     required this.blackWins,
     this.onMoveSelected,
     this.isIndexing = false,
+    this.database = OpeningDatabase.lichess,
   }) : _isLoading = false;
 
   const OpeningExplorerMoveTable.loading()
@@ -67,6 +68,7 @@ class OpeningExplorerMoveTable extends ConsumerWidget {
       draws = 0,
       blackWins = 0,
       isIndexing = false,
+      database = OpeningDatabase.lichess,
       onMoveSelected = null;
 
   final IList<OpeningMove> moves;
@@ -75,6 +77,7 @@ class OpeningExplorerMoveTable extends ConsumerWidget {
   final int blackWins;
   final void Function(Move)? onMoveSelected;
   final bool isIndexing;
+  final OpeningDatabase database;
 
   final bool _isLoading;
 
@@ -106,7 +109,10 @@ class OpeningExplorerMoveTable extends ConsumerWidget {
             ),
             Padding(
               padding: kExplorerTableRowPadding,
-              child: Text(context.l10n.games, style: kHeaderTextStyle),
+              child: Text(
+                database == OpeningDatabase.chessdb ? 'Eval' : context.l10n.games,
+                style: kHeaderTextStyle,
+              ),
             ),
             Padding(
               padding: kExplorerTableRowPadding,
@@ -139,22 +145,32 @@ class OpeningExplorerMoveTable extends ConsumerWidget {
                 onTap: () => onMoveSelected?.call(Move.parse(move.uci)!),
                 child: Padding(padding: kExplorerTableRowPadding, child: Text(move.san)),
               ),
-              TableRowInkWell(
+               TableRowInkWell(
                 onTap: () => onMoveSelected?.call(Move.parse(move.uci)!),
                 child: Padding(
                   padding: kExplorerTableRowPadding,
-                  child: Text('${formatNum(move.games)} ($percentGames%)'),
+                  child: Text(
+                    () {
+                      if (database == OpeningDatabase.chessdb && move.score != null) {
+                        final s = (move.score! / 100).toStringAsFixed(2);
+                        return s.startsWith('-') ? s : '+$s';
+                      }
+                      return '${formatNum(move.games)} ($percentGames%)';
+                    }(),
+                  ),
                 ),
               ),
-              TableRowInkWell(
+               TableRowInkWell(
                 onTap: () => onMoveSelected?.call(Move.parse(move.uci)!),
                 child: Padding(
                   padding: kExplorerTableRowPadding,
-                  child: _WinPercentageChart(
-                    whiteWins: move.white,
-                    draws: move.draws,
-                    blackWins: move.black,
-                  ),
+                  child: database == OpeningDatabase.chessdb
+                      ? const SizedBox.shrink()
+                      : _WinPercentageChart(
+                          whiteWins: move.white,
+                          draws: move.draws,
+                          blackWins: move.black,
+                        ),
                 ),
               ),
             ],
@@ -174,13 +190,15 @@ class OpeningExplorerMoveTable extends ConsumerWidget {
                 child: const Icon(Icons.functions),
               ),
               Padding(padding: kExplorerTableRowPadding, child: Text('${formatNum(games)} (100%)')),
-              Padding(
+               Padding(
                 padding: kExplorerTableRowPadding,
-                child: _WinPercentageChart(
-                  whiteWins: whiteWins,
-                  draws: draws,
-                  blackWins: blackWins,
-                ),
+                child: database == OpeningDatabase.chessdb
+                    ? const SizedBox.shrink()
+                    : _WinPercentageChart(
+                        whiteWins: whiteWins,
+                        draws: draws,
+                        blackWins: blackWins,
+                      ),
               ),
             ],
           )

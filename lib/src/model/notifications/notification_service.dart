@@ -1,19 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:chessigma_mobile/firebase_stubs.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/binding.dart';
 import 'package:chessigma_mobile/src/localizations.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/preloaded_data.dart';
 import 'package:chessigma_mobile/src/model/notifications/notifications.dart';
-import 'package:chessigma_mobile/src/network/connectivity.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/utils/badge_service.dart';
 import 'package:logging/logging.dart';
 
 final _logger = Logger('NotificationService');
@@ -32,30 +25,16 @@ final notificationServiceProvider = Provider<NotificationService>((Ref ref) {
   return service;
 });
 
-/// Received FCM message and whether it was from the background.
-typedef ReceivedFcmMessage = ({FcmMessage message, bool fromBackground});
-
 /// A [NotificationResponse] and the associated [LocalNotification].
 typedef ParsedLocalNotification = (NotificationResponse response, LocalNotification notification);
 
 /// A service that manages notifications.
 ///
-/// This service is responsible for handling incoming messages from the Firebase
-/// Cloud Messaging service and showing notifications.
-///
-/// It broadcasts the parsed incoming FCM messages to the [fcmMessageStream].
-///
-/// It also listens for notification interaction responses and dispatches them to the [responseStream].
+/// This service is responsible for showing local notifications.
 class NotificationService {
   NotificationService(this._ref);
 
   final Ref _ref;
-
-  /// The Firebase Cloud Messaging token refresh subscription.
-  StreamSubscription<String>? _fcmTokenRefreshSubscription;
-
-  /// The connectivity changes stream subscription.
-  ProviderSubscription<AsyncValue<ConnectivityStatus>>? _connectivitySubscription;
 
   /// The stream controller for notification responses.
   static final StreamController<ParsedLocalNotification> _responseStreamController =
@@ -66,20 +45,8 @@ class NotificationService {
   /// A notification response is dispatched when a notification has been interacted with.
   static Stream<ParsedLocalNotification> get responseStream => _responseStreamController.stream;
 
-  /// The stream controller for FCM messages.
-  static final StreamController<ReceivedFcmMessage> _fcmMessageStreamController =
-      StreamController.broadcast();
-
-  /// The stream of FCM messages.
-  ///
-  /// A FCM message is dispatched when a message is received from the Firebase Cloud Messaging service.
-  static Stream<ReceivedFcmMessage> get fcmMessageStream => _fcmMessageStreamController.stream;
-
   /// The stream subscription for notification responses.
   StreamSubscription<NotificationResponse>? _responseStreamSubscription;
-
-  /// Whether the device has been registered for push notifications.
-  bool _registeredDevice = false;
 
   AppLocalizations get _l10n => _ref.read(localizationsProvider).strings;
 
@@ -88,69 +55,9 @@ class NotificationService {
 
   /// Starts the notification service.
   ///
-  /// This method listens for incoming messages and updates the application state
-  /// accordingly.
-  /// It also registers the device for push notifications once the app is online.
-  ///
-  /// This method should be called once the app is ready to receive notifications,
-  /// and after [ChessigmaBinding.initializeNotifications] has been called.
+  /// This method should be called once the app is ready to receive notifications.
   Future<void> start() async {
     if (defaultTargetPlatform == TargetPlatform.linux) return;
-
-    // Listen for incoming messages while the app is in the foreground.
-    ChessigmaBinding.instance.firebaseMessagingOnMessage.listen((RemoteMessage message) {
-      _processFcmMessage(message, fromBackground: false);
-    });
-
-    // Listen for incoming messages while the app is in the background.
-    ChessigmaBinding.instance.firebaseMessagingOnBackgroundMessage(
-      _firebaseMessagingBackgroundHandler,
-    );
-
-    // Request permission to receive notifications. Pop-up will appear only
-    // once.
-    await ChessigmaBinding.instance.firebaseMessaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-      announcement: false,
-      carPlay: false,
-      criticalAlert: false,
-      provisional: false,
-    );
-
-    // Listen for token refresh and update the token on the server accordingly.
-    _fcmTokenRefreshSubscription = ChessigmaBinding.instance.firebaseMessaging.onTokenRefresh.listen((
-      String token,
-    ) {
-      _registerToken(token);
-    });
-
-    // listen for connectivity changes to register device once the app is online
-    // This needs to be done *after* via have gotten permission, otherwise on iOS
-    // getAPNSToken() might still return null.
-    _connectivitySubscription = _ref.listen(connectivityChangesProvider, (prev, current) async {
-      if (current.value?.isOnline == true && !_registeredDevice) {
-        try {
-          final success = await registerDevice();
-          if (success) _registeredDevice = true;
-        } catch (e, st) {
-          _logger.severe('Could not setup push notifications; $e\n$st');
-        }
-      }
-    });
-
-    // Get any messages which caused the application to open from
-    // a terminated state.
-    final RemoteMessage? initialMessage = await ChessigmaBinding.instance.firebaseMessaging
-        .getInitialMessage();
-
-    if (initialMessage != null) {
-      _handleFcmMessageOpenedApp(initialMessage);
-    }
-
-    // Handle any other interaction that caused the app to open when in background.
-    ChessigmaBinding.instance.firebaseMessagingOnMessageOpenedApp.listen(_handleFcmMessageOpenedApp);
   }
 
   /// Shows a notification.
@@ -179,8 +86,6 @@ class NotificationService {
   }
 
   void _dispose() {
-    _fcmTokenRefreshSubscription?.cancel();
-    _connectivitySubscription?.close();
     _responseStreamSubscription?.cancel();
   }
 
@@ -201,200 +106,11 @@ class NotificationService {
     _responseStreamController.add((response, notification));
   }
 
-  /// Handle an FCM message that caused the application to open
-  void _handleFcmMessageOpenedApp(RemoteMessage message) {
-    final parsedMessage = FcmMessage.fromRemoteMessage(message);
-
-    switch (parsedMessage) {
-      case final ChallengeCreateFcmMessage challengeCreateMessage:
-        final notification = ChallengeCreatedNotification.fromFcmMessage(challengeCreateMessage);
-        _responseStreamController.add((
-          NotificationResponse(
-            notificationResponseType: NotificationResponseType.selectedNotification,
-            id: notification.id,
-            payload: jsonEncode(notification.payload),
-          ),
-          notification,
-        ));
-
-      case final ChallengeAcceptFcmMessage challengeAcceptMessage:
-        final notification = ChallengeAcceptedNotification.fromFcmMessage(challengeAcceptMessage);
-        _responseStreamController.add((
-          NotificationResponse(
-            notificationResponseType: NotificationResponseType.selectedNotification,
-            id: notification.id,
-            payload: jsonEncode(notification.payload),
-          ),
-          notification,
-        ));
-
-      case final CorresGameUpdateFcmMessage corresMessage:
-        final notification = CorresGameUpdateNotification.fromFcmMessage(corresMessage);
-        _responseStreamController.add((
-          NotificationResponse(
-            notificationResponseType: NotificationResponseType.selectedNotification,
-            id: notification.id,
-            payload: jsonEncode(notification.payload),
-          ),
-          notification,
-        ));
-
-      case final NewMessageFcmMessage newMessage:
-        final notification = NewMessageNotification.fromFcmMessage(newMessage);
-        _responseStreamController.add((
-          NotificationResponse(
-            notificationResponseType: NotificationResponseType.selectedNotification,
-            id: notification.id,
-            payload: jsonEncode(notification.payload),
-          ),
-          notification,
-        ));
-
-      // TODO: handle other notification types
-      case UnhandledFcmMessage(data: final data):
-        _logger.warning('Received unhandled FCM notification type: ${data['lichess.type']}');
-
-      case MalformedFcmMessage(data: final data):
-        _logger.severe('Received malformed FCM message: $data');
-    }
-  }
-
-  /// Process a message received from the Firebase Cloud Messaging service.
-  ///
-  /// If the message contains a [RemoteMessage.notification] field and if it is
-  /// received while the app was in foreground, the notification is by default not
-  /// shown to the user.
-  /// Depending on the message type, we may as well show a local notification.
-  ///
-  /// Some messages (whether or not they have an associated notification), have
-  /// a [RemoteMessage.data] field used to update the application state according
-  /// to the message type.
-  ///
-  /// A special data field, 'lichess.iosBadge', is used to update the iOS app's
-  /// badge count according to the value held by the server.
-  Future<void> _processFcmMessage(
-    RemoteMessage message, {
-
-    /// Whether the message was received while the app was in the background.
-    required bool fromBackground,
-  }) async {
-    _logger.fine(
-      'Processing a FCM message from ${fromBackground ? 'background' : 'foreground'}: ${message.data}',
-    );
-
-    final parsedMessage = FcmMessage.fromRemoteMessage(message);
-
-    _fcmMessageStreamController.add((message: parsedMessage, fromBackground: fromBackground));
-
-    switch (parsedMessage) {
-      case CorresGameUpdateFcmMessage(fullId: final fullId, notification: final notification):
-        if (fromBackground == false && notification != null) {
-          await show(CorresGameUpdateNotification(fullId, notification.title!, notification.body!));
-        }
-
-      case NewMessageFcmMessage(conversationId: final userId, notification: final notification):
-        if (fromBackground == false && notification != null) {
-          await show(NewMessageNotification(userId, notification.title!, notification.body!));
-        }
-
-      case ChallengeCreateFcmMessage():
-        // nothing to do here in foreground as it should be handled by the socket
-        break;
-
-      case ChallengeAcceptFcmMessage(fullId: final fullId, notification: final notification):
-        if (fromBackground == false && notification != null) {
-          await show(
-            ChallengeAcceptedNotification(fullId, notification.title!, notification.body!),
-          );
-        }
-
-      case UnhandledFcmMessage(data: final data):
-        _logger.warning('Received unhandled FCM notification type: ${data['lichess.type']}');
-
-      case MalformedFcmMessage(data: final data):
-        _logger.severe('Received malformed FCM message: $data');
-    }
-
-    // update badge
-    final badge = message.data['lichess.iosBadge'] as String?;
-    if (badge != null) {
-      try {
-        await BadgeService.instance.setBadge(int.parse(badge));
-      } catch (e) {
-        _logger.severe('Could not parse badge: $badge');
-      }
-    }
-  }
-
   /// Register the device for push notifications.
-  ///
-  /// Returns true if the device was successfully registered, false otherwise.
   Future<bool> registerDevice() async {
-    // For apple platforms, make sure the APNS token is available before making any FCM plugin API calls
-    if (defaultTargetPlatform == TargetPlatform.iOS) {
-      final apnsToken = await ChessigmaBinding.instance.firebaseMessaging.getAPNSToken();
-      if (apnsToken == null) {
-        _logger.warning('APNS token is null');
-        return false;
-      }
-    }
-    final token = await ChessigmaBinding.instance.firebaseMessaging.getToken();
-    if (token == null) {
-      _logger.warning('FCM token is null');
-      return false;
-    }
-    return await _registerToken(token);
+    return false;
   }
 
   /// Unregister the device from push notifications.
-  Future<void> unregister() async {
-    _logger.info('will unregister');
-    final authUser = _ref.read(authControllerProvider);
-    if (authUser == null) {
-      return;
-    }
-    try {
-      await _ref.withClient((client) => client.post(Uri(path: '/mobile/unregister')));
-    } catch (e, st) {
-      _logger.severe('could not unregister device; $e', e, st);
-    }
-  }
-
-  Future<bool> _registerToken(String token) async {
-    final settings = await ChessigmaBinding.instance.firebaseMessaging.getNotificationSettings();
-    if (settings.authorizationStatus == AuthorizationStatus.denied) {
-      return false;
-    }
-    _logger.info('will register fcmToken: $token');
-    final authUser = _ref.read(authControllerProvider);
-    if (authUser == null) {
-      return false;
-    }
-    try {
-      await _ref.withClient((client) => client.post(Uri(path: '/mobile/register/firebase/$token')));
-      return true;
-    } catch (e, st) {
-      _logger.severe('could not register device; $e', e, st);
-      return false;
-    }
-  }
-
-  @pragma('vm:entry-point')
-  static Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    // create a new provider scope for the background isolate
-    final ref = ProviderContainer();
-
-    final lichessBinding = AppChessigmaBinding.ensureInitialized();
-    await lichessBinding.preloadSharedPreferences();
-    await ref.read(preloadedDataProvider.future);
-
-    try {
-      await ref.read(notificationServiceProvider)._processFcmMessage(message, fromBackground: true);
-
-      ref.dispose();
-    } catch (e) {
-      _logger.severe('Error when processing an FCM background message: $e');
-      ref.dispose();
-    }
-  }
+  Future<void> unregister() async {}
 }

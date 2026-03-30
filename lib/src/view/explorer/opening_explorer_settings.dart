@@ -231,6 +231,13 @@ class OpeningExplorerSettings extends ConsumerWidget {
                     .setDatabase(OpeningDatabase.lichess),
               ),
               ChoiceChip(
+                label: const Text('ChessDB (Free)'),
+                selected: prefs.db == OpeningDatabase.chessdb,
+                onSelected: (_) => ref
+                    .read(openingExplorerPreferencesProvider.notifier)
+                    .setDatabase(OpeningDatabase.chessdb),
+              ),
+              ChoiceChip(
                 label: Text(context.l10n.player),
                 selected: prefs.db == OpeningDatabase.player,
                 onSelected: (_) => ref
@@ -244,6 +251,7 @@ class OpeningExplorerSettings extends ConsumerWidget {
           OpeningDatabase.master => masterDbSettings,
           OpeningDatabase.lichess => lichessDbSettings,
           OpeningDatabase.player => playerDbSettings,
+          OpeningDatabase.chessdb => [],
         },
       ],
     );

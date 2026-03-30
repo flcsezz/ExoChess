@@ -1,7 +1,7 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:chessigma_mobile/src/model/engine/engine.dart';
 import 'package:chessigma_mobile/src/model/settings/preferences_storage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:multistockfish/multistockfish.dart';
 
 part 'evaluation_preferences.freezed.dart';
@@ -40,6 +40,10 @@ class EngineEvaluationPreferences extends Notifier<EngineEvaluationPrefState>
 
   Future<void> toggle() {
     return save(state.copyWith(isEnabled: !state.isEnabled));
+  }
+
+  Future<void> toggleLichessCloudEval() {
+    return save(state.copyWith(enableLichessCloudEval: !state.enableLichessCloudEval));
   }
 
   Future<void> setNumEvalLines(int numEvalLines) {
@@ -103,6 +107,7 @@ sealed class EngineEvaluationPrefState with _$EngineEvaluationPrefState implemen
     required Duration engineSearchTime,
     @JsonKey(defaultValue: ChessEnginePref.sf16, unknownEnumValue: ChessEnginePref.sf16)
     required ChessEnginePref enginePref,
+    @JsonKey(defaultValue: true) required bool enableLichessCloudEval,
   }) = _EngineEvaluationPrefState;
 
   static const defaults = EngineEvaluationPrefState(
@@ -111,6 +116,7 @@ sealed class EngineEvaluationPrefState with _$EngineEvaluationPrefState implemen
     numEngineCores: 1,
     engineSearchTime: Duration(seconds: 4),
     enginePref: ChessEnginePref.sf16,
+    enableLichessCloudEval: true,
   );
 
   factory EngineEvaluationPrefState.fromJson(Map<String, dynamic> json) {

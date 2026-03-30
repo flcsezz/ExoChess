@@ -76,6 +76,8 @@ class StudySettingsScreen extends ConsumerWidget {
           ),
           if (isComputerAnalysisAllowed)
             EngineSettingsWidget(
+              onToggleLichessCloudEval: () =>
+                  ref.read(studyController.notifier).toggleLichessCloudEval(),
               onSetEngineSearchTime: (value) =>
                   ref.read(studyController.notifier).setEngineSearchTime(value),
               onSetNumEvalLines: (value) =>

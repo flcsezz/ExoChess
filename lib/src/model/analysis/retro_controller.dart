@@ -6,6 +6,7 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:chessigma_mobile/src/model/analysis/analysis_feedback.dart';
 import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
 import 'package:chessigma_mobile/src/model/analysis/common_analysis_state.dart';
 import 'package:chessigma_mobile/src/model/analysis/server_analysis_service.dart';
@@ -563,6 +564,7 @@ sealed class RetroCurrentNode with _$RetroCurrentNode implements AnalysisCurrent
     ClientEval? eval,
     ExternalEval? serverEval,
     IList<int>? nags,
+    AnalysisFeedback? feedback,
   }) = _RetroCurrentNode;
 
   factory RetroCurrentNode.fromNode(Node node) {
@@ -573,6 +575,7 @@ sealed class RetroCurrentNode with _$RetroCurrentNode implements AnalysisCurrent
         isRoot: node is Root,
         eval: node.eval,
         serverEval: node.externalEval,
+        feedback: node.feedback is AnalysisFeedback ? node.feedback as AnalysisFeedback : null,
         nags: IList(node.nags),
         hasChild: node.children.isNotEmpty,
       );
@@ -581,6 +584,7 @@ sealed class RetroCurrentNode with _$RetroCurrentNode implements AnalysisCurrent
         position: node.position,
         isRoot: node is Root,
         eval: node.eval,
+        feedback: node.feedback is AnalysisFeedback ? node.feedback as AnalysisFeedback : null,
         hasChild: node.children.isNotEmpty,
       );
     }

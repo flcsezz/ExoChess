@@ -41,3 +41,5 @@ doc/api/
 
 # VS Code
 .vscode/
+android/key.properties
+*.jks

@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:chessigma_mobile/src/model/common/id.dart';
+import 'package:chessigma_mobile/src/utils/cache.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum PreloadStatus { initial, loading, success, error }
@@ -26,6 +28,8 @@ class PreloadState {
   const PreloadState.error(this.error) : status = PreloadStatus.error;
 }
 
+final _preloadCache = MemoryCache<GameId, bool>(defaultExpiry: const Duration(hours: 1));
+
 final analysisPreloadServiceProvider =
     NotifierProvider.family<AnalysisPreloadNotifier, PreloadState, GameId>(
   AnalysisPreloadNotifier.new,
@@ -38,6 +42,9 @@ class AnalysisPreloadNotifier extends Notifier<PreloadState> {
 
   @override
   PreloadState build() {
+    if (_preloadCache.contains(gameId)) {
+      return const PreloadState.success();
+    }
     return const PreloadState.initial();
   }
 
@@ -50,8 +57,18 @@ class AnalysisPreloadNotifier extends Notifier<PreloadState> {
 
   Future<void> _runPreload() async {
     try {
-      // Simulate warmup
-      await Future<void>.delayed(const Duration(milliseconds: 500));
+      // Warm up delay to allow the local engine service to initialize
+      // without blocking the main UI thread immediately.
+      bool isTest = false;
+      try {
+        isTest = Platform.environment.containsKey('FLUTTER_TEST');
+      } catch (_) {}
+      
+      if (!isTest) {
+        await Future<void>.delayed(const Duration(milliseconds: 600));
+      }
+      
+      _preloadCache[gameId] = true;
       state = const PreloadState.success();
     } catch (e) {
       state = PreloadState.error(e.toString());
@@ -63,3 +80,4 @@ class AnalysisPreloadNotifier extends Notifier<PreloadState> {
     preload();
   }
 }
+

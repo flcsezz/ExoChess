@@ -58,13 +58,8 @@ Future<void> initializeApp() async {
     if (installedVersion == null || Version.parse(installedVersion) != appVersion) {
       prefs.setString('installed_version', appVersion.canonicalizedVersion);
     }
-  } catch (e, st) {
+  } catch (e) {
     _logger.severe('Error during app initialization: $e');
-    ChessigmaBinding.instance.firebaseCrashlytics.recordError(
-      e,
-      st,
-      reason: 'Error during app initialization',
-    );
   } finally {
     await prefs.setBool('first_run', false);
   }

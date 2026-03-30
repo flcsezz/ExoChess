@@ -1,32 +1,30 @@
 # Agent Workflow
 
-All agents must read [docs/PLAN.md](/home/flcsezz/mobile/docs/PLAN.md) and [CURRENT_TASK.md](/home/flcsezz/mobile/CURRENT_TASK.md) before making changes.
+All agents must read [docs/PLAN.md](/home/flcsezz/mobile/docs/PLAN.md), [CURRENT_TASK.md](/home/flcsezz/mobile/CURRENT_TASK.md), and the active plan in [docs/plans/](/home/flcsezz/mobile/docs/plans) before making changes.
+
+## Package Manager
+Use **Flutter**: `flutter pub get`, `dart run build_runner watch`, `flutter analyze`, `flutter test`.
+
+## File-Scoped Commands
+| Task | Command |
+|------|---------|
+| Format | `dart format --output=none --set-exit-if-changed path/to/file.dart` |
+| Analyze | `flutter analyze` |
+| Test | `flutter test test/path/to/file_test.dart` |
 
 ## Rules
 - Work only on one assigned task at a time from `docs/PLAN.md`.
 - Claim the task first by updating `CURRENT_TASK.md`.
-- Keep changes inside the claimed scope. Do not expand scope silently.
-- Preserve all features listed as keepers in `docs/PLAN.md`.
-- If a task uncovers a blocker, stop, document it in `CURRENT_TASK.md`, and do not improvise a broad refactor.
-- When a task is complete, update both `CURRENT_TASK.md` and the matching checkbox in `docs/PLAN.md`.
+- Keep changes inside the claimed scope.
+- Preserve keeper features listed in `docs/PLAN.md`.
+- If blocked, record the blocker in `CURRENT_TASK.md` and stop.
+- Mark the task complete in `docs/PLAN.md` only after verification.
 
-## Required Update Steps
-1. Read `docs/PLAN.md`.
-2. Open `CURRENT_TASK.md` and claim an unassigned task.
-3. Implement only that task.
-4. Run the relevant verification for that task.
-5. Record:
-   - task id
-   - owner
-   - files changed
-   - verification run
-   - blockers or follow-ups
-6. Mark the task complete in `docs/PLAN.md` only after verification.
-
-## Coordination Format
+## Coordination
 - Task IDs must stay exactly as written in `docs/PLAN.md`.
-- If multiple agents work in parallel, they must choose non-overlapping files when possible.
-- If a file is already being modified by another agent, do not overwrite their work. Rebase your task scope or wait.
+- If multiple agents work in parallel, choose non-overlapping files when possible.
+- If a file is already being modified by another agent, do not overwrite their work.
 
-## Completion Standard
-A task is not complete because code was written. It is complete only when the task-specific verification in `docs/PLAN.md` has been run and recorded.
+## Commit Attribution
+AI commits MUST include:
+`Co-Authored-By: <agent model and byline>`

@@ -304,10 +304,12 @@ void main() {
         await tester.tap(find.text('Customize'));
         await tester.pumpAndSettle(); // wait for settings screen to open
 
-        expect(find.widgetWithText(PlatformAppBar, 'Home widgets'), findsOneWidget);
+        expect(
+          find.descendant(of: find.byType(PlatformAppBar), matching: find.text('Home widgets')),
+          findsOneWidget,
+        );
 
-        await tester.tap(find.widgetWithText(TextButton, 'OK'));
-        await tester.pumpAndSettle(); // wait for home screen to re-appear
+        await tester.tap(find.widgetWithText(TextButton, 'OK'));        await tester.pumpAndSettle(); // wait for home screen to re-appear
 
         expect(find.text(customizeTip), findsNothing);
       });

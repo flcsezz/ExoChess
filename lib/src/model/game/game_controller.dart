@@ -188,13 +188,7 @@ class GameController extends AsyncNotifier<GameState> {
     try {
       sanResult = curState.game.lastPosition.makeSan(move);
     } on PlayException catch (e) {
-      ChessigmaBinding.instance.firebaseCrashlytics.recordError(
-        'Invalid user move: $e',
-        null,
-        reason: 'PlayException thrown when making SAN of user move',
-        information: ['move: $move', 'position: ${curState.game.lastPosition}'],
-      );
-      _logger.warning('Invalid user move: $e');
+      _logger.severe('Invalid user move: $e', e);
       return;
     }
     final (newPos, newSan) = sanResult;
@@ -271,13 +265,7 @@ class GameController extends AsyncNotifier<GameState> {
     try {
       sanResult = curState.game.lastPosition.makeSan(moveToConfirm);
     } on PlayException catch (e) {
-      ChessigmaBinding.instance.firebaseCrashlytics.recordError(
-        'Invalid confirm move: $e',
-        null,
-        reason: 'PlayException thrown when making SAN of confirm move',
-        information: ['move: $moveToConfirm', 'position: ${curState.game.lastPosition}'],
-      );
-      _logger.warning('Invalid confirm move: $e');
+      _logger.severe('Invalid confirm move: $e', e);
       state = AsyncValue.data(curState.copyWith(moveToConfirm: null));
       return;
     }
@@ -580,14 +568,7 @@ class GameController extends AsyncNotifier<GameState> {
   void _handleSocketEvent(SocketEvent event, [bool hasRetried = false]) {
     if (!state.hasValue) {
       if (event.version != null) {
-        _logger.warning('received $event while game state not yet available');
-        // not sure whether this can happen so log it
-        ChessigmaBinding.instance.firebaseCrashlytics.recordError(
-          'received $event while game state not yet available',
-          null,
-          reason: 'versioned socket event received before game state available',
-          information: ['event.type: ${event.topic}'],
-        );
+        _logger.severe('received $event while game state not yet available');
       }
       return;
     }

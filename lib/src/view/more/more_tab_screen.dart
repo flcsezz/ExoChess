@@ -84,6 +84,16 @@ class MoreTabScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
             _MoreCard(
+              title: context.l10n.boardEditor,
+              subtitle: 'Set up custom positions',
+              icon: Icons.dashboard_customize_outlined,
+              glowColor: const Color(0xFFE8B84B),
+              onTap: () {
+                Navigator.of(context, rootNavigator: true).push(BoardEditorScreen.buildRoute(context, null));
+              },
+            ),
+            const SizedBox(height: 16),
+            _MoreCard(
               title: 'Chess Clock',
               subtitle: 'Professional clock for OTB games',
               icon: Icons.hourglass_bottom_outlined,

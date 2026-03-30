@@ -58,6 +58,38 @@ class _OpeningExplorerState extends ConsumerState<OpeningExplorerView> {
 
     final prefs = ref.watch(openingExplorerPreferencesProvider);
 
+    // The Lichess Opening Explorer now requires authentication (anti-DDoS).
+    // Show a friendly prompt instead of a cryptic network error.
+    // NOTE: ChessDB (openingdatabase.chessdb) does NOT require login.
+    final isLoggedIn = ref.watch(isLoggedInProvider);
+    if (!isLoggedIn && prefs.db != OpeningDatabase.chessdb) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.lock_outline, size: 40),
+              const SizedBox(height: 12),
+              Text(
+                'Sign in to use the Opening Explorer',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              const SizedBox(height: 6),
+              Text(
+                'Lichess requires a free account to access the opening database.',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // final prefs = ref.watch(openingExplorerPreferencesProvider); // Already watched above
+
     if (prefs.db == OpeningDatabase.player && prefs.playerDb.username == null) {
       return const Center(
         // TODO: l10n
@@ -114,6 +146,7 @@ class _OpeningExplorerState extends ConsumerState<OpeningExplorerView> {
             blackWins: value.entry.black,
             onMoveSelected: widget.onMoveSelected,
             isIndexing: value.isIndexing,
+            database: prefs.db,
           ),
           if (widget.shouldDisplayGames && topGames != null && topGames.isNotEmpty) ...[
             OpeningExplorerHeaderTile(
@@ -158,7 +191,7 @@ class _OpeningExplorerState extends ConsumerState<OpeningExplorerView> {
         debugPrint('SEVERE: [OpeningExplorerView] could not load opening explorer data; $error');
         final connectivity = ref.watch(connectivityChangesProvider);
         final message = connectivity.whenIs(
-          online: () => 'Could not load opening explorer data.',
+          online: () => 'Could not reach the opening explorer. Please try again.',
           offline: () => context.l10n.mobileOpeningExplorerNotAvailableOffline,
         );
         return Center(
