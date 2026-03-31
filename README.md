@@ -1,10 +1,16 @@
 # ♟️ ExoChess Mobile
 
-[![Flutter](https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white)](https://flutter.dev)
-[![Material Design 3](https://img.shields.io/badge/Material--Design-3-%23757575.svg?style=for-the-badge&logo=material-design&logoColor=white)](https://m3.material.io)
-[![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](./LICENSE)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/flcsezz/ExoChess/main/assets/images/exochess-logo.png" width="200" alt="ExoChess Logo">
+</p>
 
-**ExoChess** is a high-performance, professional chess application built with Flutter. It focuses on providing a world-class experience for local play, advanced analysis, and tactical training, powered by the latest Stockfish engines.
+<p align="center">
+  <a href="https://flutter.dev"><img src="https://img.shields.io/badge/Flutter-%2302569B.svg?style=for-the-badge&logo=Flutter&logoColor=white" alt="Flutter"></a>
+  <a href="https://m3.material.io"><img src="https://img.shields.io/badge/Material--Design-3-%23757575.svg?style=for-the-badge&logo=material-design&logoColor=white" alt="Material Design 3"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="License"></a>
+</p>
+
+**ExoChess** is a high-performance, professional chess application built with Flutter. It focuses on providing a world-class experience for local play, advanced analysis, and tactical training, powered by the latest Stockfish engines and a modern Material 3 interface.
 
 ---
 
@@ -27,19 +33,32 @@
 
 ---
 
-## 📱 Getting Started
+## 📱 Visuals (Material 3)
 
-### 📥 Download the App
-You can download the latest optimized APKs directly from our GitHub Releases page:
+The app features a clean, professional interface following the latest **Material 3** guidelines, including dynamic color support and a professional card-based layout.
 
-- **[Latest Stable Release (APKs)](https://github.com/flcsezz/Chessigma/releases/latest)**
-  - `exochess-arm64.apk`: Optimized for modern 64-bit devices (Recommended).
-  - `exochess-armv7.apk`: Support for older 32-bit devices.
-  - `exochess-x86_64.apk`: For emulators and specific Intel-based tablets.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/flcsezz/ExoChess/main/assets/images/broadcast_image.png" width="600" alt="ExoChess Analysis Board">
+</p>
+
+---
+
+## 📥 Getting Started
+
+### Download the App
+You can download the latest optimized APKs directly from our GitHub Releases page. We use **ABI Splitting** to ensure you get the smallest possible file for your device.
+
+👉 **[Download Latest Stable Release (v0.22.7)](https://github.com/flcsezz/ExoChess/releases/latest)**
+
+| Architecture | Device Type | Size |
+|--------------|-------------|------|
+| **[arm64-v8a](https://github.com/flcsezz/ExoChess/releases/download/v0.22.7/exochess-arm64.apk)** | Modern 64-bit devices (**Recommended**) | ~113 MB |
+| **[armeabi-v7a](https://github.com/flcsezz/ExoChess/releases/download/v0.22.7/exochess-armv7.apk)** | Older 32-bit devices | ~111 MB |
+| **[x86_64](https://github.com/flcsezz/ExoChess/releases/download/v0.22.7/exochess-x86_64.apk)** | Emulators & Intel Tablets | ~115 MB |
 
 ### 🛠️ Development Setup
 1. **Prerequisites**: Install [Flutter SDK](https://docs.flutter.dev/get-started/install).
-2. **Clone**: `git clone https://github.com/flcsezz/Chessigma.git`
+2. **Clone**: `git clone https://github.com/flcsezz/ExoChess.git`
 3. **Init**:
    ```bash
    flutter pub get

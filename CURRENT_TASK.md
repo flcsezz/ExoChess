@@ -1,25 +1,29 @@
-# Current Task: Home Screen Refinement
+# Current Task: PGN/FEN Share Extension
 
 **Status:** IN_PROGRESS
-**Task ID:** HOME-REFINEMENT
+**Task ID:** SHARE-EXTENSION
 **Agent:** Antigravity (Gemini 3 Flash)
 
 ## Description
 
-Refining the Home Screen UI based on user feedback:
-1. Adding "Show More" and "Collapse" functionality to the External Game History section.
-2. Fixing the "Could not load recent games" error message at the bottom of the screen.
-3. Restoring the "ExoChess is a Free and Opensourced Hobby Project XD" footer text.
+Implementing a native iOS/Android share extension for ExoChess to handle incoming PGN and FEN strings/files.
 
 ## Tasks
 
-- [x] `REF-01`: External Game History Show More/Collapse in `external_game_fetch_widget.dart`.
-- [x] `REF-02`: Handle "Could not load recent games" error gracefully on the home screen.
-- [x] `REF-03`: Restore footer branding text ("ExoChess is a Free and Opensourced Hobby Project XD").
-- [x] `REF-04`: Final verification and cleanup.
+- [ ] `SHR-01`: Update `AnalysisOptions` in `analysis_controller.dart` to support FEN.
+- [ ] `SHR-02`: Handle `AnalysisOptions.fen` in `AnalysisController.build`.
+- [ ] `SHR-03`: Run `dart run build_runner build` to regenerate freezed files.
+- [ ] `SHR-04`: Update `AndroidManifest.xml` with `SEND` intent filters for text and PGN.
+- [ ] `SHR-05`: Update `Info.plist` with PGN/FEN document types.
+- [ ] `SHR-06`: Refactor `ImportPgnScreen.handlePgnText` to `handleIncomingChessData`.
+- [ ] `SHR-07`: Implement text sharing intent handling in `lib/src/app.dart`.
+- [ ] `SHR-08`: Verify with `flutter analyze` and existing tests.
 
 ## Files to Change
 
-- `lib/src/view/home/external_game_fetch_widget.dart`
-- `lib/src/view/user/recent_games.dart`
-- `lib/src/view/home/home_tab_screen.dart`
+- `lib/src/model/analysis/analysis_controller.dart`
+- `android/app/src/main/AndroidManifest.xml`
+- `ios/Runner/Info.plist`
+- `lib/src/view/more/import_pgn_screen.dart`
+- `lib/src/app.dart`
+

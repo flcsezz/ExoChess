@@ -1,10 +1,5 @@
 # ExoChess Refactoring Plan
 
-## Phase 1: Rebrand + Feature Removal (COMPLETED)
-
-- **Goal:** Rebrand the app as ExoChess and remove online/watch/blog surfaces while keeping local play, puzzles, and learn stable.
-- **Done:** Rebranded to ExoChess, removed navigation tabs, updated constants.
-
 ## Phase 2: Analysis Architecture (COMPLETED)
 
 - **Goal:** Unify Stockfish and Fairy-Stockfish under a single `AnalysisController`.
@@ -55,16 +50,16 @@
   - Settings gets a "Replay app tour" reset button
 - [ ] `OB-T01` Add `onboarding` to `PrefCategory` enum in `preferences_storage.dart`
 - [ ] `OB-T02` Create `OnboardingPrefs` model + `OnboardingNotifier` (`lib/src/model/onboarding/onboarding_preferences.dart`)
-- [ ] `OB-T03` Run `dart run build_runner build` to generate `.freezed.dart` and `.g.dart` files
-- [ ] `OB-T04` Create `OnboardingScreen` with `PageController` scaffolding (`lib/src/view/onboarding/onboarding_screen.dart`)
-- [ ] `OB-T05` Create stub `WelcomePage` (name input + Next)
-- [ ] `OB-T06` Create stub `FeaturePage` template (icon + title + body + Next) — 4 instances covering Play, Puzzles, Analysis, Learn; Learn slide includes Lichess disclaimer banner stub
-- [ ] `OB-T07` Create stub `FinishPage` (personalised CTA: "Welcome, {name ?? 'User'}!" + Get Started)
+- [ ] `OB-T03` Run `dart run build_runner build` to generate `.freezed.dart` and `.g.dart` ted)
 - [ ] `OB-T08` Wire `_AppRouter` navigation guard into `app.dart` (`Application.build()`)
 - [ ] `OB-T09` Verify: `flutter analyze` — zero errors
 - [ ] `OB-T10` Verify: first launch → onboarding; subsequent launches → `MainTabScaffold` directly
 - [ ] `OB-T11` Mark complete in `PLAN.md` + update `CURRENT_TASK.md`
-- [ ] `OB-T12` Add "Replay app tour" button to Settings screen (`more_tab_screen.dart`) that resets `OnboardingPrefs.hasCompleted`
+- [ ] `OB-T12`files
+- [ ] `OB-T04` Create `OnboardingScreen` with `PageController` scaffolding (`lib/src/view/onboarding/onboarding_screen.dart`)
+- [ ] `OB-T05` Create stub `WelcomePage` (name input + Next)
+- [ ] `OB-T06` Create stub `FeaturePage` template (icon + title + body + Next) — 4 instances covering Play, Puzzles, Analysis, Learn; Learn slide includes Lichess disclaimer banner stub
+- [ ] `OB-T07` Create stub `FinishPage` (personalised CTA: "Welcome, {name ?? 'User'}!" + Get Star Add "Replay app tour" button to Settings screen (`more_tab_screen.dart`) that resets `OnboardingPrefs.hasCompleted`
 
 ## Phase 8: Lichess Online Play (PENDING)
 

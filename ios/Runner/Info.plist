@@ -113,6 +113,45 @@
 				</array>
 			</dict>
 		</array>
+		<key>CFBundleDocumentTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleTypeIconFiles</key>
+				<array/>
+				<key>CFBundleTypeName</key>
+				<string>Chess PGN</string>
+				<key>CFBundleTypeRole</key>
+				<string>Viewer</string>
+				<key>LSHandlerRank</key>
+				<string>Owner</string>
+				<key>LSItemContentTypes</key>
+				<array>
+					<string>org.exochess.pgn</string>
+					<string>com.chess.pgn</string>
+					<string>public.text</string>
+				</array>
+			</dict>
+			<dict>
+				<key>CFBundleTypeIconFiles</key>
+				<array/>
+				<key>CFBundleTypeName</key>
+				<string>Chess FEN</string>
+				<key>CFBundleTypeRole</key>
+				<string>Viewer</string>
+				<key>LSHandlerRank</key>
+				<string>Owner</string>
+				<key>LSItemContentTypes</key>
+				<array>
+					<string>org.exochess.fen</string>
+					<string>com.chess.fen</string>
+					<string>public.text</string>
+				</array>
+			</dict>
+		</array>
+		<key>LSSupportsOpeningDocumentsInPlace</key>
+		<true/>
+		<key>UIFileSharingEnabled</key>
+		<true/>
 		<key>CFBundleVersion</key>
 		<string>$(FLUTTER_BUILD_NUMBER)</string>
 		<key>FlutterDeepLinkingEnabled</key>
