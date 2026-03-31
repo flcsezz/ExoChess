@@ -1,7 +1,7 @@
 # ♟️ ExoChess Mobile
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/flcsezz/ExoChess/main/assets/images/home_logo.png" width="200" alt="ExoChess Logo">
+  <img src="https://raw.githubusercontent.com/flcsezz/ExoChess/main/assets/images/home_logo.png" width="200" alt="ExoChess Logo">  
 </p>
 
 <p align="center">
@@ -41,7 +41,7 @@
 The app features a clean, professional interface following the latest **Material 3** guidelines, including dynamic color support and a professional card-based layout.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/flcsezz/ExoChess/main/assets/images/broadcast_image.png" width="600" alt="ExoChess Analysis Board">
+  <img src="https://github.com/flcsezz/ExoChess/blob/main/assets/videos/m3.mp4" width="600" alt="ExoChess Analysis Board">
 </p>
 
 ---
