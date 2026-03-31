@@ -110,6 +110,7 @@ class _AppState extends ConsumerState<Application> {
 
   StreamSubscription<Uri>? _linkSubscription;
   StreamSubscription<List<SharedMediaFile>>? _intentSub;
+  StreamSubscription<String?>? _textSub;
 
   @override
   void initState() {
@@ -163,6 +164,7 @@ class _AppState extends ConsumerState<Application> {
   void dispose() {
     _linkSubscription?.cancel();
     _intentSub?.cancel();
+    _textSub?.cancel();
     super.dispose();
   }
 
@@ -217,18 +219,40 @@ class _AppState extends ConsumerState<Application> {
     final platform = Theme.of(context).platform;
     if (platform != TargetPlatform.android && platform != TargetPlatform.iOS) return;
 
-    // Warm start
+    // Files (Warm start)
     _intentSub = ReceiveSharingIntent.instance.getMediaStream().listen((
       List<SharedMediaFile> value,
     ) {
       _processSharedFiles(value);
     });
 
-    // Cold start
+    // Files (Cold start)
     ReceiveSharingIntent.instance.getInitialMedia().then((List<SharedMediaFile> value) {
-      _processSharedFiles(value);
-      ReceiveSharingIntent.instance.reset();
+      if (value.isNotEmpty) {
+        _processSharedFiles(value);
+        ReceiveSharingIntent.instance.reset();
+      }
     });
+
+    // Text (Warm start)
+    _textSub = ReceiveSharingIntent.instance.getAnyTextStream().listen((String value) {
+      _processSharedText(value);
+    });
+
+    // Text (Cold start)
+    ReceiveSharingIntent.instance.getInitialText().then((String? value) {
+      if (value != null) {
+        _processSharedText(value);
+        ReceiveSharingIntent.instance.reset();
+      }
+    });
+  }
+
+  void _processSharedText(String text) {
+    final context = _navigatorKey.currentContext;
+    if (context != null && context.mounted) {
+      ImportPgnScreen.handleIncomingChessData(context, text);
+    }
   }
 
   Future<void> _processSharedFiles(List<SharedMediaFile> files) async {
@@ -239,10 +263,10 @@ class _AppState extends ConsumerState<Application> {
       if (context == null || !context.mounted) return;
 
       final file = File(filePath);
-      final pgnText = await file.readAsString();
+      final content = await file.readAsString();
 
       if (context.mounted) {
-        ImportPgnScreen.handlePgnText(context, pgnText);
+        ImportPgnScreen.handleIncomingChessData(context, content);
       }
     } catch (e) {
       debugPrint('Failed to process incoming file: $e');

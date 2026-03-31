@@ -61,6 +61,13 @@ sealed class AnalysisOptions with _$AnalysisOptions {
     required bool isComputerAnalysisAllowed,
   }) = Pgn;
 
+  const factory AnalysisOptions.fen({
+    required StringId id,
+    required String fen,
+    required Variant variant,
+    @Default(Side.white) Side orientation,
+  }) = Fen;
+
   const factory AnalysisOptions.archivedGame({
     required Side orientation,
     int? initialMoveCursor,
@@ -77,7 +84,7 @@ sealed class AnalysisOptions with _$AnalysisOptions {
 
   GameId? get gameId => switch (this) {
     ArchivedGame(:final gameId) => gameId,
-    Pgn() || Standalone() => null,
+    Pgn() || Standalone() || Fen() => null,
     ActiveCorrespondenceGame(:final gameFullId) => gameFullId.gameId,
   };
 
@@ -85,6 +92,7 @@ sealed class AnalysisOptions with _$AnalysisOptions {
     ArchivedGame(:final gameId) => gameId,
     Pgn(:final id) => id,
     Standalone() => const StringId('standalone'),
+    Fen(:final id) => id,
     ActiveCorrespondenceGame(:final gameFullId) => gameFullId.gameId,
   };
 }
@@ -202,6 +210,15 @@ class AnalysisController extends AsyncNotifier<AnalysisState>
           division = null;
           activeCorrespondenceGame = null;
         }
+      case Fen(:final variant, fen: final gameFen):
+        {
+          _variant = variant;
+          pgn = ''; // Initialize tree from FEN instead
+          opening = null;
+          serverAnalysis = null;
+          division = null;
+          activeCorrespondenceGame = null;
+        }
       case Standalone(:final variant):
         {
           _variant = _savedStandalone != null ? _savedStandalone!.variant : variant;
@@ -259,7 +276,7 @@ class AnalysisController extends AsyncNotifier<AnalysisState>
     final isComputerAnalysisAllowed = switch (options) {
       Pgn(:final isComputerAnalysisAllowed) => isComputerAnalysisAllowed,
       ArchivedGame() => isGameFinished,
-      Standalone() => true,
+      Standalone() || Fen() => true,
       ActiveCorrespondenceGame() => false,
     };
 
@@ -267,6 +284,10 @@ class AnalysisController extends AsyncNotifier<AnalysisState>
 
     _root = switch (options) {
       Standalone() when _savedStandalone != null => _savedStandalone!.root,
+      Fen(fen: final gameFen) => Root.fromFen(
+        gameFen,
+        variant: _variant,
+      ),
       _ => Root.fromPgnGame(
         game,
         isLichessAnalysis: options.isLichessGameAnalysis,
@@ -307,7 +328,7 @@ class AnalysisController extends AsyncNotifier<AnalysisState>
 
     final currentPath = switch (options) {
       Standalone() when _savedStandalone != null => _savedStandalone!.path,
-      Standalone() => UciPath.empty,
+      Standalone() || Fen() => UciPath.empty,
       _ => options.initialMoveCursor == null ? _root.mainlinePath : path,
     };
     final currentNode = _root.nodeAt(currentPath);
@@ -352,7 +373,7 @@ class AnalysisController extends AsyncNotifier<AnalysisState>
       gameId: options.gameId,
       archivedGame: archivedGame,
       currentPath: currentPath,
-      pathToLiveMove: isGameFinished || options is Standalone || options is Pgn
+      pathToLiveMove: isGameFinished || options is Standalone || options is Pgn || options is Fen
           ? null
           : currentPath,
       forecast: forecast,

@@ -2,8 +2,6 @@
 
 The following instructions outline how to set up your development environment for starting development on ExoChess Mobile.
 
-If you get stuck during the installation process the most suitable place to seek help is the `#lichess-dev-onboarding` channel on Discord (https://discord.gg/lichess).
-
 ## Installing Flutter
 
 This project uses the latest **Flutter stable** release. The minimum required version is defined in `pubspec.yaml`.
@@ -12,10 +10,6 @@ This project uses the latest **Flutter stable** release. The minimum required ve
    This project is meant to run on iOS and Android, so you need to follow the "Platform setup" section of that guide to
    install the iOS and/or Android platform.
    Make sure to install the latest Flutter stable release.
-
-> [!WARNING]
-> Installing on Linux using `snapd` might cause some [problems](https://github.com/lichess-org/mobile/issues/123) building stockfish.
-> Installing flutter manually is a known workaround.
 
 2. Ensure Flutter is correctly configured by running `flutter doctor`
 
@@ -237,7 +231,7 @@ flutter run \
 
 > [!NOTE]
 > The ports above are the default ones for lila, if you have changed them, you
-will need to adjust the commands accordingly.
+> will need to adjust the commands accordingly.
 
 ### Logging
 

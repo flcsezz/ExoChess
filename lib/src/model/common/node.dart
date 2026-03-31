@@ -583,6 +583,12 @@ class Root extends Node {
     }
     return root;
   }
+
+  factory Root.fromFen(String fen, {Variant variant = Variant.standard}) {
+    final setup = Setup.parseFen(fen);
+    final position = Position.setupPosition(variant.rule, setup);
+    return Root(position: position);
+  }
 }
 
 /// An immutable view of a [Node].

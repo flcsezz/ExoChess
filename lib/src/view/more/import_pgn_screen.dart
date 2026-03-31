@@ -22,12 +22,34 @@ class ImportPgnScreen extends StatelessWidget {
     return buildScreenRoute(context, screen: const ImportPgnScreen());
   }
 
-  static void handlePgnText(BuildContext context, String text) {
+  static void handleIncomingChessData(BuildContext context, String rawText) {
+    final text = rawText.trim();
+    if (text.isEmpty) return;
+
+    // 1. Try FEN
+    try {
+      final setup = Setup.parseFen(text);
+      Position.setupPosition(Rule.chess, setup);
+      const variant = Variant.standard;
+      Navigator.of(context, rootNavigator: true).push(
+        AnalysisScreen.buildRoute(
+          context,
+          AnalysisOptions.fen(
+            id: const StringId('fen_import'),
+            fen: text,
+            variant: variant,
+          ),
+        ),
+      );
+      return;
+    } catch (_) {}
+
+    // 2. Try PGN parsing
     try {
       final games = PgnGame.parseMultiGamePgn(text);
 
       if (games.isEmpty) {
-        showSnackBar(context, context.l10n.invalidPgn, type: .error);
+        showSnackBar(context, context.l10n.invalidPgn, type: SnackBarType.error);
         return;
       }
 
@@ -35,15 +57,9 @@ class ImportPgnScreen extends StatelessWidget {
         final game = games.first;
         final rule = Rule.fromPgn(game.headers['Variant']);
         
-        // Try to detect orientation if a username is provided (e.g. from external fetch)
-        // Or if we can find a likely "user" in headers
-        Side orientation = Side.white;
-        final white = game.headers['White']?.toLowerCase() ?? '';
-        final black = game.headers['Black']?.toLowerCase() ?? '';
-        
-        // This is a bit of a heuristic if we don't have a specific user context
-        // in this static method, but we can check if one of the names looks like a "user"
-        // In local PGN imports, we might not know who's who, so white is a safe default.
+        const orientation = Side.white;
+        // Basic heuristic: if the PGN contains player names, we might want to flip the board,
+        // but for a general import, white is the safest default.
 
         Navigator.of(context, rootNavigator: true).push(
           AnalysisScreen.buildRoute(
@@ -65,7 +81,7 @@ class ImportPgnScreen extends StatelessWidget {
         ).push(PgnGamesListScreen.buildRoute(context, games.lock));
       }
     } catch (_) {
-      showSnackBar(context, context.l10n.invalidPgn, type: .error);
+      showSnackBar(context, context.l10n.invalidPgn, type: SnackBarType.error);
     }
   }
 
@@ -131,7 +147,7 @@ class _BodyState extends State<_Body> {
     final text = data!.text!.trim();
     if (text.isEmpty) return;
 
-    ImportPgnScreen.handlePgnText(context, text);
+    ImportPgnScreen.handleIncomingChessData(context, text);
   }
 
   Future<void> _pickPgnFile() async {
@@ -145,7 +161,7 @@ class _BodyState extends State<_Body> {
       if (result != null && result.files.single.bytes != null) {
         final content = utf8.decode(result.files.single.bytes!);
         if (mounted) {
-          ImportPgnScreen.handlePgnText(context, content);
+          ImportPgnScreen.handleIncomingChessData(context, content);
         }
       }
     } catch (e) {
