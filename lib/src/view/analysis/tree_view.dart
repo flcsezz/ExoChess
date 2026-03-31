@@ -1,8 +1,8 @@
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_preferences.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart';
-import 'package:chessigma_mobile/src/view/game/game_result_dialog.dart';
-import 'package:chessigma_mobile/src/widgets/pgn.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_preferences.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_preload_service.dart';
+import 'package:exochess_mobile/src/view/game/game_result_dialog.dart';
+import 'package:exochess_mobile/src/widgets/pgn.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

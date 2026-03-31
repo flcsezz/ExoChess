@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_activity.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_angle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_theme.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_screen.dart';
-import 'package:chessigma_mobile/src/widgets/board_thumbnail.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/platform.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_activity.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_angle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_theme.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_screen.dart';
+import 'package:exochess_mobile/src/widgets/board_thumbnail.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/platform.dart';
 
 final _dateFormatter = DateFormat.yMMMd();
 
@@ -231,8 +231,8 @@ class _PuzzleResult extends StatelessWidget {
   Widget build(BuildContext context) {
     return ColoredBox(
       color: entry.win
-          ? context.chessigmaColors.good.withValues(alpha: 0.7)
-          : context.chessigmaColors.error.withValues(alpha: 0.7),
+          ? context.exochessColors.good.withValues(alpha: 0.7)
+          : context.exochessColors.error.withValues(alpha: 0.7),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 1, horizontal: 3),
         child: Row(

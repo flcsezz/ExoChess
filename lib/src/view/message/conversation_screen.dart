@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/src/app_links.dart';
-import 'package:chessigma_mobile/src/model/message/conversation_controller.dart';
-import 'package:chessigma_mobile/src/model/message/message.dart';
-import 'package:chessigma_mobile/src/model/message/message_repository.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/tab_scaffold.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/chat/chat_context_menu.dart';
-import 'package:chessigma_mobile/src/view/user/user_or_profile_screen.dart';
-import 'package:chessigma_mobile/src/widgets/user.dart';
+import 'package:exochess_mobile/src/app_links.dart';
+import 'package:exochess_mobile/src/model/message/conversation_controller.dart';
+import 'package:exochess_mobile/src/model/message/message.dart';
+import 'package:exochess_mobile/src/model/message/message_repository.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/tab_scaffold.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/chat/chat_context_menu.dart';
+import 'package:exochess_mobile/src/view/user/user_or_profile_screen.dart';
+import 'package:exochess_mobile/src/widgets/user.dart';
 
 sealed class DisplayItem {}
 
@@ -366,7 +366,7 @@ class _MessageBubble extends StatelessWidget {
             children: [
               Linkify(
                 onOpen: (link) => onLinkifyOpen(context, link),
-                linkifiers: kChessigmaLinkifiers,
+                linkifiers: kExoChessLinkifiers,
                 text: message.text,
                 style: TextStyle(color: _textColor(context)),
                 linkStyle: Styles.linkStyle,

@@ -2,9 +2,9 @@ import 'package:chessground/chessground.dart';
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
 
 /// A board preview with a description.
 class SmallBoardPreview extends ConsumerWidget {
@@ -45,6 +45,8 @@ class SmallBoardPreview extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final boardPrefs = ref.watch(boardPreferencesProvider);
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     final content = LayoutBuilder(
       builder: (context, constraints) {
@@ -54,91 +56,88 @@ class SmallBoardPreview extends ConsumerWidget {
           padding:
               padding ??
               Styles.horizontalBodyPadding.add(const EdgeInsets.symmetric(vertical: 8.0)),
-          child: SizedBox(
-            height: boardSize,
-            child: Row(
-              children: [
-                if (_showLoadingPlaceholder)
-                  Container(
-                    width: boardSize,
-                    height: boardSize,
-                    decoration: const BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: Styles.boardBorderRadius,
-                    ),
-                  )
-                else
-                  StaticChessboard(
-                    size: boardSize,
-                    fen: fen,
-                    orientation: orientation,
-                    lastMove: lastMove,
-                    pieceAssets: boardPrefs.pieceSet.assets,
-                    colorScheme: boardPrefs.boardTheme.colors,
-                    brightness: boardPrefs.brightness,
-                    hue: boardPrefs.hue,
-                    enableCoordinates: false,
-                    borderRadius: Styles.boardBorderRadius,
-                    boxShadow: boardShadows,
-                    animationDuration: const Duration(milliseconds: 150),
-                  ),
-                const SizedBox(width: 10.0),
-                if (_showLoadingPlaceholder)
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: SizedBox(
+                height: boardSize,
+                child: Row(
+                  children: [
+                    if (_showLoadingPlaceholder)
+                      Container(
+                        width: boardSize,
+                        height: boardSize,
+                        decoration: BoxDecoration(
+                          color: isDark ? Colors.white10 : Colors.black12,
+                          borderRadius: Styles.boardBorderRadius,
+                        ),
+                      )
+                    else
+                      StaticChessboard(
+                        size: boardSize,
+                        fen: fen,
+                        orientation: orientation,
+                        lastMove: lastMove,
+                        pieceAssets: boardPrefs.pieceSet.assets,
+                        colorScheme: boardPrefs.boardTheme.colors,
+                        brightness: boardPrefs.brightness,
+                        hue: boardPrefs.hue,
+                        enableCoordinates: false,
+                        borderRadius: Styles.boardBorderRadius,
+                        boxShadow: boardShadows,
+                        animationDuration: const Duration(milliseconds: 150),
+                      ),
+                    const SizedBox(width: 16.0),
+                    if (_showLoadingPlaceholder)
+                      Expanded(
+                        child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  height: 16.0,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: isDark ? Colors.white10 : Colors.black12,
+                                    borderRadius: Styles.boardBorderRadius,
+                                  ),
+                                ),
+                                const SizedBox(height: 8.0),
+                                Container(
+                                  height: 16.0,
+                                  width: MediaQuery.sizeOf(context).width / 3,
+                                  decoration: BoxDecoration(
+                                    color: isDark ? Colors.white10 : Colors.black12,
+                                    borderRadius: Styles.boardBorderRadius,
+                                  ),
+                                ),
+                              ],
+                            ),
                             Container(
                               height: 16.0,
                               width: double.infinity,
-                              decoration: const BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: Styles.boardBorderRadius,
-                              ),
-                            ),
-                            const SizedBox(height: 4.0),
-                            Container(
-                              height: 16.0,
-                              width: MediaQuery.sizeOf(context).width / 3,
-                              decoration: const BoxDecoration(
-                                color: Colors.black,
+                              decoration: BoxDecoration(
+                                color: isDark ? Colors.white10 : Colors.black12,
                                 borderRadius: Styles.boardBorderRadius,
                               ),
                             ),
                           ],
                         ),
-                        Container(
-                          height: 44.0,
-                          width: 44.0,
-                          decoration: const BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: Styles.boardBorderRadius,
-                          ),
-                        ),
-                        Container(
-                          height: 16.0,
-                          width: double.infinity,
-                          decoration: const BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: Styles.boardBorderRadius,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                else
-                  Expanded(child: description),
-              ],
+                      )
+                    else
+                      Expanded(child: description),
+                  ],
+                ),
+              ),
             ),
           ),
         );
       },
     );
 
-    return onTap != null ? InkWell(onTap: onTap, child: content) : content;
+    return onTap != null ? InkWell(onTap: onTap, borderRadius: Styles.cardBorderRadius, child: content) : content;
   }
 }

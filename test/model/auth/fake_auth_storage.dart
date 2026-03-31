@@ -1,7 +1,7 @@
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_storage.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/auth/auth_storage.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
 
 class FakeAuthStorage implements AuthStorage {
   FakeAuthStorage([AuthUser? initial]) : _authUser = initial;

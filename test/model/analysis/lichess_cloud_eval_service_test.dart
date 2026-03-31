@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
-import 'package:chessigma_mobile/src/model/analysis/lichess_cloud_eval_service.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/analysis/lichess_cloud_eval_service.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 class MockClient extends Mock implements DefaultClient {}
 

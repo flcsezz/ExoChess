@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 class PuzzleIcons {
   PuzzleIcons._();
 
-  static const _kFontFam = 'ChessigmaPuzzleIcons';
+  static const _kFontFam = 'ExoChessPuzzleIcons';
   static const String? _kFontPkg = null;
 
   // dart format off

@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_preload_service.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
 
 void main() {
   group('AnalysisPreloadService', () {

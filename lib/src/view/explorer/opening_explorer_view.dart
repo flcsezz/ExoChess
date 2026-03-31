@@ -1,16 +1,16 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/explorer/opening_explorer.dart';
-import 'package:chessigma_mobile/src/model/explorer/opening_explorer_preferences.dart';
-import 'package:chessigma_mobile/src/model/explorer/opening_explorer_repository.dart';
-import 'package:chessigma_mobile/src/network/connectivity.dart';
-import 'package:chessigma_mobile/src/theme.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/view/explorer/opening_explorer_widgets.dart';
-import 'package:chessigma_mobile/src/widgets/shimmer.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/explorer/opening_explorer.dart';
+import 'package:exochess_mobile/src/model/explorer/opening_explorer_preferences.dart';
+import 'package:exochess_mobile/src/model/explorer/opening_explorer_repository.dart';
+import 'package:exochess_mobile/src/network/connectivity.dart';
+import 'package:exochess_mobile/src/theme.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/view/explorer/opening_explorer_widgets.dart';
+import 'package:exochess_mobile/src/widgets/shimmer.dart';
 
 /// Displays an opening explorer for the given position.
 ///
@@ -93,7 +93,7 @@ class _OpeningExplorerState extends ConsumerState<OpeningExplorerView> {
     if (prefs.db == OpeningDatabase.player && prefs.playerDb.username == null) {
       return const Center(
         // TODO: l10n
-        child: Text('Select a Chessigma player in the settings.'),
+        child: Text('Select a ExoChess player in the settings.'),
       );
     }
 

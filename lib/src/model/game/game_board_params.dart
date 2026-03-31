@@ -1,7 +1,7 @@
 import 'package:chessground/chessground.dart';
 import 'package:dartchess/dartchess.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
 
 part 'game_board_params.freezed.dart';
 

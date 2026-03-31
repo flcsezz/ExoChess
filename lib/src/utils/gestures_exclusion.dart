@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:chessigma_mobile/src/utils/focus_detector.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/utils/focus_detector.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
 
 final _deviceInfoPlugin = DeviceInfoPlugin();
 

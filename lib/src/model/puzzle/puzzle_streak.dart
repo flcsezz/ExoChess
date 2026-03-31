@@ -1,14 +1,14 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/service/sound_service.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_repository.dart';
-import 'package:chessigma_mobile/src/model/puzzle/streak_storage.dart';
-import 'package:chessigma_mobile/src/tab_scaffold.dart' show currentNavigatorKeyProvider;
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/service/sound_service.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_repository.dart';
+import 'package:exochess_mobile/src/model/puzzle/streak_storage.dart';
+import 'package:exochess_mobile/src/tab_scaffold.dart' show currentNavigatorKeyProvider;
+import 'package:exochess_mobile/src/widgets/feedback.dart';
 
 part 'puzzle_streak.freezed.dart';
 part 'puzzle_streak.g.dart';

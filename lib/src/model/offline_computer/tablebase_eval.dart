@@ -1,8 +1,8 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/eval.dart';
-import 'package:chessigma_mobile/src/model/explorer/tablebase.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/eval.dart';
+import 'package:exochess_mobile/src/model/explorer/tablebase.dart';
 
 /// Converts a [TablebaseEntry] to a [CloudEval].
 ///

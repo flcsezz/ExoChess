@@ -4,19 +4,19 @@ import 'dart:math';
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/game/game.dart';
-import 'package:chessigma_mobile/src/model/game/game_controller.dart';
-import 'package:chessigma_mobile/src/model/game/game_status.dart';
-import 'package:chessigma_mobile/src/model/game/over_the_board_game.dart';
-import 'package:chessigma_mobile/src/model/game/playable_game.dart';
-import 'package:chessigma_mobile/src/model/tournament/tournament_controller.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/game/status_l10n.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/glass_card.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/game/game.dart';
+import 'package:exochess_mobile/src/model/game/game_controller.dart';
+import 'package:exochess_mobile/src/model/game/game_status.dart';
+import 'package:exochess_mobile/src/model/game/over_the_board_game.dart';
+import 'package:exochess_mobile/src/model/game/playable_game.dart';
+import 'package:exochess_mobile/src/model/tournament/tournament_controller.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/game/status_l10n.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/glass_card.dart';
 
 class GameResultDialog extends ConsumerStatefulWidget {
   const GameResultDialog({required this.id, required this.onNewOpponentCallback, super.key});
@@ -237,72 +237,67 @@ class OverTheBoardGameResultDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const gold = Color(0xFFE8B84B);
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final accentColor = theme.colorScheme.primary;
     
     return Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: const EdgeInsets.symmetric(horizontal: 24),
-      child: GlassCard(
-        padding: const EdgeInsets.all(24),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Icon(Icons.emoji_events_outlined, color: gold, size: 48),
-            const SizedBox(height: 16),
-            Text(
-              context.l10n.gameOver,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.w900,
-                letterSpacing: 2,
+      child: Card(
+        color: isDark ? null : Colors.white,
+        elevation: 0,
+        child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Icon(Icons.emoji_events_outlined, color: accentColor, size: 64),
+              const SizedBox(height: 24),
+              const Text(
+                'GAME OVER',
+                style: TextStyle(
+                  fontFamily: 'NDot',
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.5,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 8),
-            GameResult(game: game),
-            const SizedBox(height: 32),
-            FilledButton(
-              onPressed: onRematch,
-              style: FilledButton.styleFrom(
-                backgroundColor: gold,
-                foregroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+              const SizedBox(height: 16),
+              GameResult(game: game),
+              const SizedBox(height: 32),
+              FilledButton(
+                onPressed: onRematch,
+                child: Text(
+                  context.l10n.rematch.toUpperCase(),
+                  style: const TextStyle(fontFamily: 'SpaceMono', fontWeight: FontWeight.bold),
+                ),
               ),
-              child: Text(
-                context.l10n.rematch.toUpperCase(),
-                style: const TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2),
-              ),
-            ),
-            const SizedBox(height: 12),
-            OutlinedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  AnalysisScreen.buildRoute(
-                    context,
-                    AnalysisOptions.pgn(
-                      id: const StringId('otb_finished_game_analysis'),
-                      orientation: Side.white,
-                      pgn: game.makePgn(),
-                      isComputerAnalysisAllowed: true,
-                      variant: game.meta.variant,
+              const SizedBox(height: 12),
+              OutlinedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    AnalysisScreen.buildRoute(
+                      context,
+                      AnalysisOptions.pgn(
+                        id: const StringId('otb_finished_game_analysis'),
+                        orientation: Side.white,
+                        pgn: game.makePgn(),
+                        isComputerAnalysisAllowed: true,
+                        variant: game.meta.variant,
+                      ),
                     ),
-                  ),
-                );
-              },
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(color: Colors.white.withValues(alpha: 0.3)),
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  );
+                },
+                child: Text(
+                  context.l10n.analysis.toUpperCase(),
+                  style: const TextStyle(fontFamily: 'SpaceMono', fontWeight: FontWeight.bold),
+                ),
               ),
-              child: Text(
-                context.l10n.analysis.toUpperCase(),
-                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, letterSpacing: 1.2),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -316,6 +311,10 @@ class GameResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final accentColor = theme.colorScheme.primary;
+
     final showWinner = game.winner != null
         ? ' • ${game.winner == Side.white ? context.l10n.whiteIsVictorious : context.l10n.blackIsVictorious}'
         : '';
@@ -325,10 +324,11 @@ class GameResult extends StatelessWidget {
       children: [
         if (game.status.value >= GameStatus.mate.value)
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.05),
-              borderRadius: BorderRadius.circular(8),
+              color: isDark ? Colors.white.withOpacity(0.05) : Colors.black.withOpacity(0.05),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: accentColor.withOpacity(0.3)),
             ),
             child: Text(
               game.winner == null
@@ -336,21 +336,24 @@ class GameResult extends StatelessWidget {
                   : game.winner == Side.white
                   ? '1-0'
                   : '0-1',
-              style: const TextStyle(
-                fontSize: 20.0,
+              style: TextStyle(
+                fontFamily: 'SpaceMono',
+                fontSize: 24.0,
                 fontWeight: FontWeight.w900,
                 letterSpacing: 2,
-                color: Color(0xFFE8B84B),
+                color: accentColor,
               ),
               textAlign: TextAlign.center,
             ),
           ),
-        const SizedBox(height: 12.0),
+        const SizedBox(height: 16.0),
         Text(
-          '${gameStatusL10n(context, variant: game.meta.variant, status: game.status, lastPosition: game.lastPosition, winner: game.winner, isThreefoldRepetition: game.isThreefoldRepetition)}$showWinner',
+          '${gameStatusL10n(context, variant: game.meta.variant, status: game.status, lastPosition: game.lastPosition, winner: game.winner, isThreefoldRepetition: game.isThreefoldRepetition)}$showWinner'.toUpperCase(),
           style: TextStyle(
-            color: Colors.white.withValues(alpha: 0.7),
-            fontSize: 14,
+            fontFamily: 'SpaceMono',
+            color: isDark ? Colors.white70 : Colors.black87,
+            fontSize: 13,
+            fontWeight: FontWeight.bold,
             height: 1.4,
           ),
           textAlign: TextAlign.center,

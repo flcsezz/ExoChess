@@ -1,16 +1,16 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_angle.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_screen.dart';
-import 'package:chessigma_mobile/src/view/study/study_screen.dart';
-import 'package:chessigma_mobile/src/view/tournament/tournament_screen.dart';
-import 'package:chessigma_mobile/src/view/user/user_or_profile_screen.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_angle.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_screen.dart';
+import 'package:exochess_mobile/src/view/study/study_screen.dart';
+import 'package:exochess_mobile/src/view/tournament/tournament_screen.dart';
+import 'package:exochess_mobile/src/view/user/user_or_profile_screen.dart';
 import 'package:linkify/linkify.dart';
 import 'package:logging/logging.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -67,7 +67,7 @@ void handleAppLink(BuildContext context, Uri uri) {
   }
 }
 
-const kChessigmaLinkifiers = [UrlLinkifier(), EmailLinkifier(), UserTagLinkifier()];
+const kExoChessLinkifiers = [UrlLinkifier(), EmailLinkifier(), UserTagLinkifier()];
 
 /// Handles link clicks in Linkify widgets throughout the app.
 void onLinkifyOpen(BuildContext context, LinkableElement link) {

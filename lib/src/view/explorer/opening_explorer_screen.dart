@@ -2,27 +2,27 @@ import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/explorer/opening_explorer.dart';
-import 'package:chessigma_mobile/src/model/explorer/opening_explorer_preferences.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/immersive_mode.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/utils/share.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_share_screen.dart';
-import 'package:chessigma_mobile/src/view/analysis/game_analysis_board.dart';
-import 'package:chessigma_mobile/src/view/explorer/opening_explorer_settings.dart';
-import 'package:chessigma_mobile/src/view/explorer/opening_explorer_view.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_action_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/bottom_bar.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/move_list.dart';
-import 'package:chessigma_mobile/src/widgets/platform.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/explorer/opening_explorer.dart';
+import 'package:exochess_mobile/src/model/explorer/opening_explorer_preferences.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/immersive_mode.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/utils/share.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_share_screen.dart';
+import 'package:exochess_mobile/src/view/analysis/game_analysis_board.dart';
+import 'package:exochess_mobile/src/view/explorer/opening_explorer_settings.dart';
+import 'package:exochess_mobile/src/view/explorer/opening_explorer_view.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_action_sheet.dart';
+import 'package:exochess_mobile/src/widgets/bottom_bar.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/move_list.dart';
+import 'package:exochess_mobile/src/widgets/platform.dart';
 import 'package:share_plus/share_plus.dart';
 
 class OpeningExplorerScreen extends ConsumerWidget {
@@ -260,7 +260,7 @@ class _BottomBar extends ConsumerWidget {
 
     final dbLabel = switch (db) {
       OpeningDatabase.master => 'Masters',
-      OpeningDatabase.lichess => 'Chessigma',
+      OpeningDatabase.lichess => 'ExoChess',
       OpeningDatabase.chessdb => 'ChessDB',
       OpeningDatabase.player => context.l10n.player,
     };

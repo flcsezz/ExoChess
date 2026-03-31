@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/platform_context_menu_button.dart';
+import 'package:exochess_mobile/src/model/settings/general_preferences.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/platform_context_menu_button.dart';
 
 /// A button that toggles the sound on and off.
 class ToggleSoundButton extends ConsumerWidget {

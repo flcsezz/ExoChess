@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/app.dart';
-import 'package:chessigma_mobile/src/model/engine/evaluation_preferences.dart';
-import 'package:chessigma_mobile/src/model/engine/nnue_service.dart';
-import 'package:chessigma_mobile/src/model/game/game_storage.dart';
-import 'package:chessigma_mobile/src/model/settings/preferences_storage.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/view/game/game_list_tile.dart';
-import 'package:chessigma_mobile/src/view/home/home_tab_screen.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/platform.dart';
+import 'package:exochess_mobile/src/app.dart';
+import 'package:exochess_mobile/src/model/engine/evaluation_preferences.dart';
+import 'package:exochess_mobile/src/model/engine/nnue_service.dart';
+import 'package:exochess_mobile/src/model/game/game_storage.dart';
+import 'package:exochess_mobile/src/model/settings/preferences_storage.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/view/game/game_list_tile.dart';
+import 'package:exochess_mobile/src/view/home/home_tab_screen.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/platform.dart';
 
 import '../../binding.dart';
 import '../../example_data.dart';
@@ -272,7 +272,7 @@ void main() {
       testWidgets('Not shown if already dismissed', (tester) async {
         final app = await makeTestProviderScope(tester, child: const Application());
 
-        TestChessigmaBinding.instance.sharedPreferences.setBool(
+        TestExoChessBinding.instance.sharedPreferences.setBool(
           'app_hide_home_widget_customization_tip',
           true,
         );
@@ -319,7 +319,7 @@ void main() {
       ) async {
         final app = await makeTestProviderScope(tester, child: const Application());
 
-        TestChessigmaBinding.instance.numAppStarts = kColdAppStartsHideCustomizationTipThreshold + 1;
+        TestExoChessBinding.instance.numAppStarts = kColdAppStartsHideCustomizationTipThreshold + 1;
 
         await tester.pumpWidget(app);
 

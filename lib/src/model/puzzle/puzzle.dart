@@ -1,11 +1,11 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/node.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_theme.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/node.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_theme.dart';
 
 part 'puzzle.freezed.dart';
 part 'puzzle.g.dart';

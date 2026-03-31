@@ -5,11 +5,11 @@ import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/auth/bearer.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/auth/bearer.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 import '../test_container.dart';
 import 'fake_http_client_factory.dart';
@@ -19,7 +19,7 @@ void main() {
     FakeClient.reset();
   });
 
-  group('ChessigmaClient', () {
+  group('ExoChessClient', () {
     test('sends requests to lichess host when only path is provided', () async {
       final container = await makeContainer(
         overrides: {
@@ -98,7 +98,7 @@ void main() {
         isA<http.BaseRequest>().having(
           (r) => r.headers['User-Agent'],
           'User-Agent',
-          'Chessigma Mobile/0.0.0 as:anon sri:test-sri',
+          'ExoChess Mobile/0.0.0 as:anon sri:test-sri',
         ),
       );
     });
@@ -123,7 +123,7 @@ void main() {
         isA<http.BaseRequest>().having(
           (r) => r.headers['User-Agent'],
           'User-Agent',
-          'Chessigma Mobile/0.0.0 as:test-user-id sri:test-sri',
+          'ExoChess Mobile/0.0.0 as:test-user-id sri:test-sri',
         ),
       );
     });
@@ -287,7 +287,7 @@ void main() {
                   }
                   return http.Response('', 404);
                 }),
-                userAgent: 'Chessigma Mobile/0.0.0 as:test-user-id sri:test-sri',
+                userAgent: 'ExoChess Mobile/0.0.0 as:test-user-id sri:test-sri',
               );
             }),
           },
@@ -345,7 +345,7 @@ void main() {
                 }
                 return http.Response('', 404);
               }),
-              userAgent: 'Chessigma Mobile/0.0.0 as:test-user-id sri:test-sri',
+              userAgent: 'ExoChess Mobile/0.0.0 as:test-user-id sri:test-sri',
             );
           }),
         },

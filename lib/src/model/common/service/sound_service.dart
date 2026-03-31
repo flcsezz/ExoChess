@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/binding.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
-import 'package:chessigma_mobile/src/model/settings/preferences_storage.dart';
+import 'package:exochess_mobile/src/binding.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/settings/general_preferences.dart';
+import 'package:exochess_mobile/src/model/settings/preferences_storage.dart';
 import 'package:logging/logging.dart';
 import 'package:sound_effect/sound_effect.dart';
 
@@ -77,7 +77,7 @@ class SoundService {
   /// This should be called once when the app starts.
   static Future<void> initialize() async {
     try {
-      final stored = ChessigmaBinding.instance.sharedPreferences.getString(
+      final stored = ExoChessBinding.instance.sharedPreferences.getString(
         PrefCategory.general.storageKey,
       );
       final theme =

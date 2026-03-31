@@ -6,33 +6,33 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_providers.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_repository.dart';
-import 'package:chessigma_mobile/src/model/puzzle/storm.dart';
-import 'package:chessigma_mobile/src/model/puzzle/storm_controller.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/gestures_exclusion.dart';
-import 'package:chessigma_mobile/src/utils/immersive_mode.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_error_board_widget.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_history_screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/storm_clock.dart';
-import 'package:chessigma_mobile/src/view/puzzle/storm_dashboard.dart';
-import 'package:chessigma_mobile/src/view/settings/toggle_sound_button.dart';
-import 'package:chessigma_mobile/src/widgets/board.dart';
-import 'package:chessigma_mobile/src/widgets/bottom_bar.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/platform_alert_dialog.dart';
-import 'package:chessigma_mobile/src/widgets/yes_no_dialog.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_providers.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_repository.dart';
+import 'package:exochess_mobile/src/model/puzzle/storm.dart';
+import 'package:exochess_mobile/src/model/puzzle/storm_controller.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/gestures_exclusion.dart';
+import 'package:exochess_mobile/src/utils/immersive_mode.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_error_board_widget.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_history_screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/storm_clock.dart';
+import 'package:exochess_mobile/src/view/puzzle/storm_dashboard.dart';
+import 'package:exochess_mobile/src/view/settings/toggle_sound_button.dart';
+import 'package:exochess_mobile/src/widgets/board.dart';
+import 'package:exochess_mobile/src/widgets/bottom_bar.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/platform_alert_dialog.dart';
+import 'package:exochess_mobile/src/widgets/yes_no_dialog.dart';
 
 class StormScreen extends ConsumerStatefulWidget {
   const StormScreen({super.key});
@@ -255,7 +255,7 @@ class _BodyState extends ConsumerState<_Body> {
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 Icon(
-                                                  ChessigmaIcons.storm,
+                                                  ExoChessIcons.storm,
                                                   size: 150.0,
                                                   color: ColorScheme.of(context).primary,
                                                 ),
@@ -485,7 +485,7 @@ class _TopTable extends ConsumerWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    Icon(ChessigmaIcons.storm, size: 50.0, color: ColorScheme.of(context).primary),
+                    Icon(ExoChessIcons.storm, size: 50.0, color: ColorScheme.of(context).primary),
                     const SizedBox(width: 8),
                     Text(
                       stormState.numSolved.toString().padRight(2),
@@ -700,7 +700,7 @@ class _BottomBar extends ConsumerWidget {
         ),
         if (stormState.mode == StormMode.running)
           BottomBarButton(
-            icon: ChessigmaIcons.flag,
+            icon: ExoChessIcons.flag,
             label: context.l10n.stormEndRun.split('(').first.trimRight(),
             showLabel: true,
             onTap: stormState.puzzleIndex >= 1
@@ -769,7 +769,7 @@ class _RunStatsPopupState extends ConsumerState<_RunStatsPopup> {
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: ListTile(
                   leading: Icon(
-                    ChessigmaIcons.storm,
+                    ExoChessIcons.storm,
                     size: 46,
                     color: ColorScheme.of(context).primary,
                   ),

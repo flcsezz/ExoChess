@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:chessigma_mobile/src/db/buffered_writer.dart';
+import 'package:exochess_mobile/src/db/buffered_writer.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:path/path.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/view/study/study_list_screen.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/view/study/study_list_screen.dart';
 
 import '../../test_helpers.dart';
 import '../../test_provider_scope.dart';
@@ -30,7 +30,7 @@ void main() {
         home: const StudyListScreen(),
         overrides: {
           lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-            return ChessigmaClient(mockClient, ref);
+            return ExoChessClient(mockClient, ref);
           }),
         },
       );
@@ -100,7 +100,7 @@ void main() {
         home: const StudyListScreen(),
         overrides: {
           lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-            return ChessigmaClient(mockClient, ref);
+            return ExoChessClient(mockClient, ref);
           }),
         },
       );

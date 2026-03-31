@@ -1,11 +1,11 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/user/leaderboard.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/model/user/user_repository.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/user/leaderboard.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/model/user/user_repository.dart';
 
 import '../../test_container.dart';
 import '../../test_helpers.dart';

@@ -1,8 +1,8 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/lobby/correspondence_seek.dart';
-import 'package:chessigma_mobile/src/model/lobby/game_seek.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/lobby/correspondence_seek.dart';
+import 'package:exochess_mobile/src/model/lobby/game_seek.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 final correspondenceSeeksProvider = FutureProvider.autoDispose<IList<CorrespondenceSeek>>((
   Ref ref,
@@ -13,7 +13,7 @@ final correspondenceSeeksProvider = FutureProvider.autoDispose<IList<Corresponde
 class LobbyRepository {
   LobbyRepository(this.client);
 
-  final ChessigmaClient client;
+  final ExoChessClient client;
 
   Future<void> createSeek(GameSeek seek, {required String sri}) async {
     final uri = Uri(path: '/api/board/seek', queryParameters: {'sri': sri});

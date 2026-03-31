@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/account/profile_screen.dart';
-import 'package:chessigma_mobile/src/view/user/user_screen.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/account/profile_screen.dart';
+import 'package:exochess_mobile/src/view/user/user_screen.dart';
 
 class UserOrProfileScreen extends ConsumerWidget {
   const UserOrProfileScreen({required this.user, super.key});

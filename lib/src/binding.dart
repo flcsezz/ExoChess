@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// A singleton class that provides access to plugins and external APIs.
 ///
 /// Only one instance of this class will be created during the app's lifetime.
-/// See [AppChessigmaBinding] for the concrete implementation.
+/// See [AppExoChessBinding] for the concrete implementation.
 ///
 /// Modeled after the Flutter framework's [WidgetsBinding] class.
 ///
@@ -14,14 +14,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 /// the behavior of the fake.
 /// However, if the plugin is used in a way that doesn't allow for easy mocking
 /// with riverpod, a test binding can be used to provide a fake implementation.
-abstract class ChessigmaBinding {
-  ChessigmaBinding() : assert(_instance == null) {
+abstract class ExoChessBinding {
+  ExoChessBinding() : assert(_instance == null) {
     initInstance();
   }
 
-  /// The single instance of [ChessigmaBinding].
-  static ChessigmaBinding get instance => checkInstance(_instance);
-  static ChessigmaBinding? _instance;
+  /// The single instance of [ExoChessBinding].
+  static ExoChessBinding get instance => checkInstance(_instance);
+  static ExoChessBinding? _instance;
 
   @protected
   @mustCallSuper
@@ -29,17 +29,17 @@ abstract class ChessigmaBinding {
     _instance = this;
   }
 
-  static T checkInstance<T extends ChessigmaBinding>(T? instance) {
+  static T checkInstance<T extends ExoChessBinding>(T? instance) {
     assert(() {
       if (instance == null) {
         throw FlutterError.fromParts([
-          ErrorSummary('Chessigma binding has not yet been initialized.'),
+          ErrorSummary('ExoChess binding has not yet been initialized.'),
           ErrorHint(
-            'In the app, this is done by the `AppChessigmaBinding.ensureInitialized()` call '
+            'In the app, this is done by the `AppExoChessBinding.ensureInitialized()` call '
             'in the `void main()` method.',
           ),
           ErrorHint(
-            'In a test, one can call `TestChessigmaBinding.ensureInitialized()` as the '
+            'In a test, one can call `TestExoChessBinding.ensureInitialized()` as the '
             "first line in the test's `main()` method to initialize the binding.",
           ),
         ]);
@@ -62,19 +62,19 @@ abstract class ChessigmaBinding {
   Stockfish get stockfish;
 }
 
-/// A concrete implementation of [ChessigmaBinding] for the app.
-class AppChessigmaBinding extends ChessigmaBinding {
-  AppChessigmaBinding();
+/// A concrete implementation of [ExoChessBinding] for the app.
+class AppExoChessBinding extends ExoChessBinding {
+  AppExoChessBinding();
 
-  /// Returns an instance of the binding that implements [ChessigmaBinding].
+  /// Returns an instance of the binding that implements [ExoChessBinding].
   ///
-  /// If no binding has yet been initialized, the [AppChessigmaBinding] class is
+  /// If no binding has yet been initialized, the [AppExoChessBinding] class is
   /// used to create and initialize one.
-  factory AppChessigmaBinding.ensureInitialized() {
-    if (ChessigmaBinding._instance == null) {
-      AppChessigmaBinding();
+  factory AppExoChessBinding.ensureInitialized() {
+    if (ExoChessBinding._instance == null) {
+      AppExoChessBinding();
     }
-    return ChessigmaBinding.instance as AppChessigmaBinding;
+    return ExoChessBinding.instance as AppExoChessBinding;
   }
 
   late Future<SharedPreferencesWithCache> _sharedPreferencesWithCache;
@@ -86,11 +86,11 @@ class AppChessigmaBinding extends ChessigmaBinding {
       throw FlutterError.fromParts([
         ErrorSummary('Shared preferences have not yet been preloaded.'),
         ErrorHint(
-          'In the app, this is done by the `await AppChessigmaBinding.preloadSharedPreferences()` call '
+          'In the app, this is done by the `await AppExoChessBinding.preloadSharedPreferences()` call '
           'in the `Future<void> main()` method.',
         ),
         ErrorHint(
-          'In a test, one can call `TestChessigmaBinding.setInitialSharedPreferencesValues({})` as the '
+          'In a test, one can call `TestExoChessBinding.setInitialSharedPreferencesValues({})` as the '
           "first line in the test's `main()` method.",
         ),
       ]);

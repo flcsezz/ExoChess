@@ -1,7 +1,7 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
 
 final fakeUser = User(
   id: const UserId('test'),

@@ -1,12 +1,12 @@
 import 'package:flutter_riverpod/experimental/mutation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_repository.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_storage.dart';
-import 'package:chessigma_mobile/src/model/common/preloaded_data.dart';
-import 'package:chessigma_mobile/src/model/notifications/notification_service.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/network/socket.dart';
+import 'package:exochess_mobile/src/model/auth/auth_repository.dart';
+import 'package:exochess_mobile/src/model/auth/auth_storage.dart';
+import 'package:exochess_mobile/src/model/common/preloaded_data.dart';
+import 'package:exochess_mobile/src/model/notifications/notification_service.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/network/socket.dart';
 
 part 'auth_controller.freezed.dart';
 part 'auth_controller.g.dart';

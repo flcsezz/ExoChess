@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/account/account_preferences.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/account/account_preferences.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
 
 const _kClockFontSize = 26.0;
 const _kClockTenthFontSize = 20.0;
@@ -66,7 +66,7 @@ class Clock extends StatelessWidget {
     final brightness = Theme.of(context).brightness;
     final colorScheme = ColorScheme.of(context);
     final effectiveClockStyle =
-        clockStyle ?? ClockStyle.defaultStyle(brightness, colorScheme, context.chessigmaColors);
+        clockStyle ?? ClockStyle.defaultStyle(brightness, colorScheme, context.exochessColors);
 
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -148,7 +148,7 @@ class ClockStyle {
   factory ClockStyle.defaultStyle(
     Brightness brightness,
     ColorScheme colorScheme,
-    LichessCustomColors chessigmaColors,
+    LichessCustomColors exochessColors,
   ) => ClockStyle(
     backgroundColor: colorScheme.surface,
     textColor: colorScheme.outline,
@@ -158,7 +158,7 @@ class ClockStyle {
     activeTextColor: brightness == Brightness.dark
         ? colorScheme.onInverseSurface
         : colorScheme.onTertiaryContainer,
-    emergencyBackgroundColor: chessigmaColors.error.withValues(
+    emergencyBackgroundColor: exochessColors.error.withValues(
       alpha: brightness == Brightness.dark ? 0.6 : 0.4,
     ),
     emergencyTextColor: brightness == Brightness.dark ? Colors.white60 : Colors.black87,

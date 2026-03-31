@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/utils/lichess_assets.dart';
-import 'package:chessigma_mobile/src/widgets/emoji_picker/emoji_picker_models.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/utils/lichess_assets.dart';
+import 'package:exochess_mobile/src/widgets/emoji_picker/emoji_picker_models.dart';
 
 /// A provider that fetches the list of available flairs.
 final flairListProvider = FutureProvider<EmojiData>((Ref ref) async {

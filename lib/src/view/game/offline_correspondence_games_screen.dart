@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/correspondence/correspondence_game_storage.dart';
-import 'package:chessigma_mobile/src/model/correspondence/offline_correspondence_game.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/correspondence/offline_correspondence_game_screen.dart';
-import 'package:chessigma_mobile/src/widgets/board_preview.dart';
-import 'package:chessigma_mobile/src/widgets/user.dart';
+import 'package:exochess_mobile/src/model/correspondence/correspondence_game_storage.dart';
+import 'package:exochess_mobile/src/model/correspondence/offline_correspondence_game.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/correspondence/offline_correspondence_game_screen.dart';
+import 'package:exochess_mobile/src/widgets/board_preview.dart';
+import 'package:exochess_mobile/src/widgets/user.dart';
 
 class OfflineCorrespondenceGamesScreen extends ConsumerWidget {
   const OfflineCorrespondenceGamesScreen({super.key});

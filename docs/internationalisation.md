@@ -1,6 +1,6 @@
 # Internationalisation
 
-We're using the official Flutter way of internationalising Chessigma Mobile, as described in the
+We're using the official Flutter way of internationalising ExoChess Mobile, as described in the
 [documentation](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#setting-up).
 
 What is specific to this project is the way the ARB files are generated.

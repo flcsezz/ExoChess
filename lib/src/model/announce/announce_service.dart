@@ -1,10 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/common/socket.dart';
-import 'package:chessigma_mobile/src/model/notifications/notification_service.dart';
-import 'package:chessigma_mobile/src/model/notifications/notifications.dart';
-import 'package:chessigma_mobile/src/network/socket.dart';
+import 'package:exochess_mobile/src/model/common/socket.dart';
+import 'package:exochess_mobile/src/model/notifications/notification_service.dart';
+import 'package:exochess_mobile/src/model/notifications/notifications.dart';
+import 'package:exochess_mobile/src/network/socket.dart';
 
 final announceServiceProvider = Provider<AnnounceService>((ref) {
   final service = AnnounceService(ref);

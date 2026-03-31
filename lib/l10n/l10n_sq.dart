@@ -284,10 +284,10 @@ class AppLocalizationsSq extends AppLocalizations {
   String get mobileOrImportPgnFile => 'Ose importoni një kartelë PNG';
 
   @override
-  String get showUnreadChessigmaMessage => 'You have an unread Chessigma message';
+  String get showUnreadExoChessMessage => 'You have an unread ExoChess message';
 
   @override
-  String get mobileWelcomeToChessigmaApp => 'Welcome to Chessigma app!';
+  String get mobileWelcomeToExoChessApp => 'Welcome to ExoChess app!';
 
   @override
   String get variantStandardTitle => 'Rregulla standarde shahu (FIDE)';
@@ -1237,7 +1237,7 @@ class AppLocalizationsSq extends AppLocalizations {
   String get patronDonate => 'Dhuroni';
 
   @override
-  String get patronChessigmaPatron => 'Chessigma Patron';
+  String get patronExoChessPatron => 'ExoChess Patron';
 
   @override
   String get patronLichessPatron => 'Bamirës Lichess-i';

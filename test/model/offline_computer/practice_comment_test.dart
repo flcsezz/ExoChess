@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/offline_computer/practice_comment.dart';
+import 'package:exochess_mobile/src/model/offline_computer/practice_comment.dart';
 
 void main() {
   group('MoveVerdict', () {

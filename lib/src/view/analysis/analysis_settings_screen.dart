@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_preferences.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/analysis/engine_settings_widget.dart';
-import 'package:chessigma_mobile/src/view/explorer/opening_explorer_settings.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/settings.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_preferences.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/analysis/engine_settings_widget.dart';
+import 'package:exochess_mobile/src/view/explorer/opening_explorer_settings.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/settings.dart';
 
 class AnalysisSettingsScreen extends ConsumerWidget {
   const AnalysisSettingsScreen(this.options);

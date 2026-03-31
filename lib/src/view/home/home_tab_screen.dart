@@ -1,50 +1,46 @@
 import 'dart:async';
 
+import 'package:exochess_mobile/src/binding.dart';
+import 'package:exochess_mobile/src/model/account/account_repository.dart';
+import 'package:exochess_mobile/src/model/account/home_preferences.dart';
+import 'package:exochess_mobile/src/model/account/home_widgets.dart';
+import 'package:exochess_mobile/src/model/account/ongoing_game.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/correspondence/correspondence_game_storage.dart';
+import 'package:exochess_mobile/src/model/correspondence/offline_correspondence_game.dart';
+import 'package:exochess_mobile/src/model/engine/evaluation_preferences.dart';
+import 'package:exochess_mobile/src/model/engine/nnue_service.dart';
+import 'package:exochess_mobile/src/model/game/game_history.dart';
+import 'package:exochess_mobile/src/model/message/message_repository.dart';
+import 'package:exochess_mobile/src/model/onboarding/onboarding_preferences.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/network/connectivity.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/tab_scaffold.dart';
+import 'package:exochess_mobile/src/utils/focus_detector.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/view/account/account_drawer.dart';
+import 'package:exochess_mobile/src/view/account/profile_screen.dart';
+import 'package:exochess_mobile/src/view/correspondence/offline_correspondence_game_screen.dart';
+import 'package:exochess_mobile/src/view/game/offline_correspondence_games_screen.dart';
+import 'package:exochess_mobile/src/view/home/external_game_fetch_widget.dart';
+import 'package:exochess_mobile/src/view/home/games_carousel.dart';
+import 'package:exochess_mobile/src/view/message/conversation_screen.dart';
+import 'package:exochess_mobile/src/view/play/play_bottom_sheet.dart';
+import 'package:exochess_mobile/src/view/settings/engine_settings_screen.dart';
+import 'package:exochess_mobile/src/view/user/recent_games.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/haptic_refresh_indicator.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/misc.dart';
+import 'package:exochess_mobile/src/widgets/platform.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/experimental/mutation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/binding.dart';
-import 'package:chessigma_mobile/src/model/account/account_repository.dart';
-import 'package:chessigma_mobile/src/model/account/home_preferences.dart';
-import 'package:chessigma_mobile/src/model/account/home_widgets.dart';
-import 'package:chessigma_mobile/src/model/account/ongoing_game.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/correspondence/correspondence_game_storage.dart';
-import 'package:chessigma_mobile/src/model/correspondence/offline_correspondence_game.dart';
-import 'package:chessigma_mobile/src/model/engine/evaluation_preferences.dart';
-import 'package:chessigma_mobile/src/model/engine/nnue_service.dart';
-import 'package:chessigma_mobile/src/model/game/game_history.dart';
-import 'package:chessigma_mobile/src/model/external_history/external_history_provider.dart';
-import 'package:chessigma_mobile/src/model/message/message_repository.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/network/connectivity.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/tab_scaffold.dart';
-import 'package:chessigma_mobile/src/utils/focus_detector.dart';
-import 'package:chessigma_mobile/src/utils/l10n.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/view/account/account_drawer.dart';
-import 'package:chessigma_mobile/src/view/account/profile_screen.dart';
-import 'package:chessigma_mobile/src/view/correspondence/offline_correspondence_game_screen.dart';
-import 'package:chessigma_mobile/src/view/game/offline_correspondence_games_screen.dart';
-import 'package:chessigma_mobile/src/view/home/games_carousel.dart';
-import 'package:chessigma_mobile/src/view/home/external_game_fetch_widget.dart';
-import 'package:chessigma_mobile/src/view/message/conversation_screen.dart';
-import 'package:chessigma_mobile/src/view/play/play_bottom_sheet.dart';
-import 'package:chessigma_mobile/src/view/play/play_menu.dart';
-import 'package:chessigma_mobile/src/view/settings/engine_settings_screen.dart';
-import 'package:chessigma_mobile/src/view/user/recent_games.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/haptic_refresh_indicator.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/misc.dart';
-import 'package:chessigma_mobile/src/widgets/platform.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 /// Number of cold app starts before hiding the home customization tip.
 const kColdAppStartsHideCustomizationTipThreshold = 5;
@@ -111,245 +107,152 @@ class _HomeScreenState extends ConsumerState<HomeTabScreen> {
     });
 
     final connectivity = ref.watch(connectivityChangesProvider);
+    final authUser = ref.watch(authControllerProvider);
+    final unreadExoChessMessage = ref.watch(unreadMessagesProvider).value?.lichess == true;
+    final offlineCorresGames = ref.watch(offlineOngoingCorrespondenceGamesProvider);
+    final recentGames = ref.watch(myRecentGamesProvider);
+    final nbOfGames = ref.watch(userNumberOfGamesProvider(null)).value ?? 0;
+    final isTablet = isTabletOrLarger(context);
 
-    return connectivity.when(
-      skipLoadingOnReload: true,
-      data: (status) {
-        final authUser = ref.watch(authControllerProvider);
-        final unreadChessigmaMessage = ref.watch(unreadMessagesProvider).value?.lichess == true;
-        final offlineCorresGames = ref.watch(offlineOngoingCorrespondenceGamesProvider);
-        final recentGames = ref.watch(myRecentGamesProvider);
-        final nbOfGames = ref.watch(userNumberOfGamesProvider(null)).value ?? 0;
-        final isTablet = isTabletOrLarger(context);
+    final status = connectivity.value;
+    final isOnline = status?.isOnline ?? false;
 
-        // Show the welcome screen if not logged in and there are no recent games and no stored games
-        // (i.e. first installation, or the user has never played a game)
-        final shouldShowWelcomeScreen =
-            authUser == null &&
-            recentGames.maybeWhen(data: (data) => data.isEmpty, orElse: () => false);
+    final hasOngoingGames = offlineCorresGames.maybeWhen(
+      data: (data) => data.isNotEmpty,
+      orElse: () => false,
+    );
 
-        List<Widget> widgets;
+    final widgets = [
+      if (!widget.editModeEnabled) ...[
+        const _HomeCustomizationTip(),
+        const _NNUEFilesOutdatedTip(),
+      ],
+      _EditableWidget(
+        widget: HomeEditableWidget.perfCards,
+        shouldShow: authUser != null && isOnline,
+        child: AccountPerfCards(
+          padding: Styles.horizontalBodyPadding.add(const EdgeInsets.only(bottom: 12.0)),
+        ),
+      ),
+      _EditableWidget(
+        widget: HomeEditableWidget.ongoingGames,
+        shouldShow: hasOngoingGames,
+        child: _OfflineCorrespondenceCarousel(offlineCorresGames, maxGamesToShow: 20),
+      ),
+      _EditableWidget(
+        widget: HomeEditableWidget.externalFetch,
+        shouldShow: true,
+        child: const ExternalGameFetchWidget(),
+      ),
 
-        if (shouldShowWelcomeScreen) {
-          final welcomeWidgets = [
-            const _EditableWidget(
-              widget: HomeEditableWidget.hello,
-              shouldShow: true,
-              child: _GreetingWidget(),
-            ),
-            const _EditableWidget(
-              widget: HomeEditableWidget.externalFetch,
-              shouldShow: true,
-              child: ExternalGameFetchWidget(),
-            ),
-            if (!widget.editModeEnabled) ...[
-              Padding(
-                padding: Styles.bodySectionPadding,
-                child: ChessigmaMessage(style: TextTheme.of(context).bodyLarge),
-              ),
-              const SizedBox(height: 8.0),
-              const _WelcomeMessageCard(),
-              const _HomeCustomizationTip(),
-            ],
-          ];
+      _EditableWidget(
+        widget: HomeEditableWidget.recentGames,
+        shouldShow: true,
+        child: RecentGamesWidget(
+          recentGames: recentGames,
+          nbOfGames: nbOfGames,
+          user: null,
+          showError: false,
+        ),
+      ),
+    ];
 
-          widgets = [
-            if (isTablet)
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ...welcomeWidgets,
-                        const SizedBox(height: 32.0),
-                        const _TabletCreateAGameSection(),
-                      ],
-                    ),
-                  ),
-                ],
-              )
-            else ...[
-              ...welcomeWidgets,
-            ],
-          ];
-        } else if (isTablet) {
-          widgets = [
-            const _EditableWidget(
-              widget: HomeEditableWidget.hello,
-              shouldShow: true,
-              child: _GreetingWidget(),
-            ),
-            if (!widget.editModeEnabled) ...[
-              const _HomeCustomizationTip(),
-              const _NNUEFilesOutdatedTip(),
-            ],
-            if (status.isOnline)
-              _EditableWidget(
-                widget: HomeEditableWidget.perfCards,
-                shouldShow: authUser != null,
-                child: const AccountPerfCards(padding: Styles.bodySectionPadding),
-              ),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Flexible(
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 8.0),
-                      const _TabletCreateAGameSection(),
-                      const _EditableWidget(
-                        widget: HomeEditableWidget.externalFetch,
-                        shouldShow: true,
-                        child: ExternalGameFetchWidget(),
-                        ),
+    debugPrint('DEBUG: HomeTabScreen build. isOnline: $isOnline, authUser: \${authUser?.user.id}, hasOngoingGames: $hasOngoingGames');
+    debugPrint('DEBUG: Home widgets count: \${widgets.length}');
 
-                      _OfflineCorrespondencePreview(offlineCorresGames, maxGamesToShow: 5),
-                    ],
-                  ),
+    final content = CustomScrollView(
+      controller: homeScrollController,
+      slivers: [
+        if (unreadExoChessMessage)
+          const SliverToBoxAdapter(child: _ExoChessMessageBanner()),
+        const SliverToBoxAdapter(child: SizedBox(height: 4)),
+        const SliverToBoxAdapter(
+          child: _EditableWidget(
+            widget: HomeEditableWidget.hello,
+            shouldShow: true,
+            child: _GreetingWidget(),
+          ),
+        ),
+        if (!widget.editModeEnabled)
+          const SliverToBoxAdapter(child: _WelcomeMessageCard()),
+        for (final widget in widgets) SliverToBoxAdapter(child: widget),
+        const SliverToBoxAdapter(
+          child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 32.0),
+            child: Center(
+              child: Text(
+                'ExoChess is a Free and Opensourced Hobby Project XD',
+                style: TextStyle(
+                  fontFamily: 'SpaceMono',
+                  fontSize: 10,
+                  color: Colors.grey,
                 ),
-                Flexible(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 8.0),
-                      RecentGamesWidget(recentGames: recentGames, nbOfGames: nbOfGames, user: null),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ];
-        } else {
-          final hasOngoingGames = offlineCorresGames.maybeWhen(
-            data: (data) => data.isNotEmpty,
-            orElse: () => false,
-          );
-          widgets = [
-            const _EditableWidget(
-              widget: HomeEditableWidget.hello,
-              shouldShow: true,
-              child: _GreetingWidget(),
-            ),
-            if (!widget.editModeEnabled) ...[
-              const _HomeCustomizationTip(),
-              const _NNUEFilesOutdatedTip(),
-            ],
-            _EditableWidget(
-              widget: HomeEditableWidget.perfCards,
-              shouldShow: authUser != null && status.isOnline,
-              child: AccountPerfCards(
-                padding: Styles.horizontalBodyPadding.add(Styles.sectionBottomPadding),
               ),
-            ),
-            _EditableWidget(
-              widget: HomeEditableWidget.ongoingGames,
-              shouldShow: hasOngoingGames,
-              child: _OfflineCorrespondenceCarousel(offlineCorresGames, maxGamesToShow: 20),
-            ),
-            const _EditableWidget(
-              widget: HomeEditableWidget.externalFetch,
-              shouldShow: true,
-              child: ExternalGameFetchWidget(),
-              ),
-
-            _EditableWidget(
-              widget: HomeEditableWidget.recentGames,
-              shouldShow: true,
-              child: RecentGamesWidget(recentGames: recentGames, nbOfGames: nbOfGames, user: null),
-            ),
-            _EditableWidget(
-              widget: HomeEditableWidget.lichessRecentGames,
-              shouldShow: true,
-              child: RecentGamesWidget(
-                recentGames: ref.watch(lichessRecentConvertedProvider),
-                nbOfGames: 0,
-                user: null,
-                title: 'Lichess Archive',
-              ),
-            ),
-            _EditableWidget(
-              widget: HomeEditableWidget.chesscomRecentGames,
-              shouldShow: true,
-              child: RecentGamesWidget(
-                recentGames: ref.watch(chesscomRecentConvertedProvider),
-                nbOfGames: 0,
-                user: null,
-                title: 'Chess.com Archive',
-              ),
-            ),
-          ];
-        }
-
-        final content = ListView(
-          controller: homeScrollController,
-          children: [if (unreadChessigmaMessage) const _ChessigmaMessageBanner(), ...widgets],
-        );
-
-        return FocusDetector(
-          onFocusLost: () {
-            _focusLostAt = DateTime.now();
-          },
-          onFocusRegained: () {
-            if (context.mounted && _focusLostAt != null) {
-              final duration = DateTime.now().difference(_focusLostAt!);
-              if (duration.inSeconds < 10) {
-                return;
-              }
-              _refreshData(isOnline: status.isOnline);
-            }
-          },
-          child: _IsEditingHome(
-            isEditingWidgets: widget.editModeEnabled,
-            child: PlatformScaffold(
-              appBar: widget.editModeEnabled
-                  ? PlatformAppBar(
-                      title: Text(context.l10n.mobileSettingsHomeWidgets),
-                      leading: const BackButton(),
-                      automaticallyImplyLeading: false,
-                    )
-                  : PlatformAppBar(
-                      title: const AppBarChessigmaTitle(),
-                      centerTitle: true,
-              leading: const SettingsIconButton(),
-            ),
-              body: widget.editModeEnabled
-                  ? content
-                  : HapticRefreshIndicator(
-                      edgeOffset: Theme.of(context).platform == TargetPlatform.iOS
-                          ? MediaQuery.paddingOf(context).top + kToolbarHeight
-                          : 0.0,
-                      key: _refreshKey,
-                      onRefresh: () => _refreshData(isOnline: status.isOnline),
-                      child: content,
-                    ),
-              bottomNavigationBar: widget.editModeEnabled
-                  ? BottomAppBar(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text(context.l10n.ok),
-                          ),
-                        ],
-                      ),
-                    )
-                  : null,
-              floatingActionButton: widget.editModeEnabled || isTablet
-                  ? null
-                  : const FloatingPlayButton(),
-              bottomSheet: widget.editModeEnabled ? null : const OfflineBanner(),
             ),
           ),
-        );
+        ),
+        const SliverToBoxAdapter(child: SizedBox(height: 80)), // Space for FAB
+      ],
+    );
+
+    return FocusDetector(
+      onFocusLost: () {
+        _focusLostAt = DateTime.now();
       },
-      error: (_, _) => const CenterLoadingIndicator(),
-      loading: () => const CenterLoadingIndicator(),
+      onFocusRegained: () {
+        if (context.mounted && _focusLostAt != null) {
+          final duration = DateTime.now().difference(_focusLostAt!);
+          if (duration.inSeconds < 10) {
+            return;
+          }
+          _refreshData(isOnline: isOnline);
+        }
+      },
+      child: _IsEditingHome(
+        isEditingWidgets: widget.editModeEnabled,
+        child: PlatformScaffold(
+          appBar: widget.editModeEnabled
+              ? PlatformAppBar(
+                  title: Text(context.l10n.mobileSettingsHomeWidgets),
+                  leading: const BackButton(),
+                  automaticallyImplyLeading: false,
+                )
+              : PlatformAppBar(
+                  title: const AppBarExoChessTitle(),
+                  centerTitle: true,
+                  leading: const SettingsIconButton(),
+                ),
+          body: widget.editModeEnabled
+              ? content
+              : HapticRefreshIndicator(
+                  edgeOffset: Theme.of(context).platform == TargetPlatform.iOS
+                      ? MediaQuery.paddingOf(context).top + kToolbarHeight
+                      : 0.0,
+                  key: _refreshKey,
+                  onRefresh: () => _refreshData(isOnline: isOnline),
+                  child: content,
+                ),
+          bottomNavigationBar: widget.editModeEnabled
+              ? BottomAppBar(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(context.l10n.ok),
+                      ),
+                    ],
+                  ),
+                )
+              : null,
+          floatingActionButton: widget.editModeEnabled || isTablet
+              ? null
+              : const FloatingPlayButton(),
+          bottomSheet: widget.editModeEnabled ? null : const OfflineBanner(),
+        ),
+      ),
     );
   }
 
@@ -362,42 +265,54 @@ class _HomeScreenState extends ConsumerState<HomeTabScreen> {
   }
 }
 
-class _ChessigmaMessageBanner extends ConsumerWidget {
-  const _ChessigmaMessageBanner();
+class _ExoChessMessageBanner extends ConsumerWidget {
+  const _ExoChessMessageBanner();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
-    return InkWell(
-      onTap: () {
-        Navigator.of(context)
-            .push(
-              ConversationScreen.buildRoute(
-                context,
-                user: const LightUser(id: UserId('lichess'), name: 'lichess'),
-              ),
-            )
-            .then((_) => ref.invalidate(unreadMessagesProvider));
-      },
-      child: ColoredBox(
-        color: theme.colorScheme.tertiaryContainer,
-        child: Padding(
-          padding: Styles.bodyPadding,
-          child: Column(
-            children: [
-              Text(
-                context.l10n.showUnreadChessigmaMessage,
-                style: TextStyle(
-                  color: theme.colorScheme.onTertiaryContainer,
-                  fontWeight: FontWeight.bold,
+
+    return Padding(
+      padding: Styles.horizontalBodyPadding,
+      child: Card(
+        color: theme.colorScheme.primary,
+        child: InkWell(
+          onTap: () {
+            Navigator.of(context)
+                .push(
+                  ConversationScreen.buildRoute(
+                    context,
+                    user: const LightUser(id: UserId('lichess'), name: 'lichess'),
+                  ),
+                )
+                .then((_) => ref.invalidate(unreadMessagesProvider));
+          },
+          borderRadius: Styles.cardBorderRadius,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 24.0),
+            child: Column(
+              children: [
+                Text(
+                  context.l10n.showUnreadExoChessMessage.toUpperCase(),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'NDot',
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4.0),
-              Text(
-                context.l10n.clickHereToReadIt,
-                style: TextStyle(color: theme.colorScheme.onTertiaryContainer),
-              ),
-            ],
+                const SizedBox(height: 8.0),
+                Text(
+                  context.l10n.clickHereToReadIt.toUpperCase(),
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontFamily: 'SpaceMono',
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -405,41 +320,7 @@ class _ChessigmaMessageBanner extends ConsumerWidget {
   }
 }
 
-
-class _SignInWidget extends ConsumerWidget {
-  const _SignInWidget();
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final signInState = ref.watch(signInMutation);
-
-    return FilledButton(
-      onPressed: switch (signInState) {
-        MutationPending() => null,
-        _ => () {
-          signInMutation.run(ref, (tsx) async {
-            await tsx.get(authControllerProvider.notifier).signIn();
-          });
-        },
-      },
-      child: Text(context.l10n.signIn),
-    );
-  }
-}
-
 /// A widget that can be enabled or disabled by the user.
-///
-/// This widget is used to show or hide certain sections of the home screen.
-///
-/// The [homePreferencesProvider] provides a list of enabled widgets.
-///
-/// * The [widget] parameter is the widget that can be enabled or disabled.
-///
-/// * The [shouldShow] parameter is useful when the widget should be shown only
-///   when certain conditions are met. For example, we only want to show the quick
-///   pairing matrix when the user is online.
-///   This parameter is only active when the user is not in edit mode, as we
-///   always want to display the widget in edit mode.
 class _EditableWidget extends ConsumerWidget {
   const _EditableWidget({required this.child, required this.widget, required this.shouldShow});
 
@@ -452,6 +333,8 @@ class _EditableWidget extends ConsumerWidget {
     final disabledWidgets = ref.watch(homePreferencesProvider).disabledWidgets;
     final isEditing = _IsEditingHome.maybeOf(context)?.isEditingWidgets ?? false;
     final isEnabled = !disabledWidgets.contains(widget);
+
+    debugPrint('DEBUG: _EditableWidget(widget: \$widget, shouldShow: \$shouldShow, isEnabled: \$isEnabled)');
 
     if (!shouldShow) {
       return const SizedBox.shrink();
@@ -518,65 +401,58 @@ class _GreetingWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final authUser = ref.watch(authControllerProvider);
+    final onboardingPrefs = ref.watch(onboardingPreferencesProvider);
     final isDayTime = ref.watch(_isDayTimeProvider);
-    final style = TextTheme.of(context).bodyLarge;
+    final style = TextTheme.of(context).titleLarge?.copyWith(
+      fontFamily: 'NDot',
+      fontSize: 28,
+      height: 1.2,
+    );
 
-    const iconSize = 24.0;
+    const iconSize = 32.0;
 
     final user = authUser?.user;
+    // Priority: Lichess username → onboarding display name → 'USER'
+    final userName = user?.name ?? onboardingPrefs.displayName ?? 'USER';
 
     return MediaQuery.withClampedTextScaling(
       maxScaleFactor: 1.3,
       child: Padding(
-        padding: Styles.bodyPadding,
+        padding: Styles.horizontalBodyPadding.add(const EdgeInsets.symmetric(vertical: 8.0)),
         child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () {
             ref.invalidate(accountProvider);
             Navigator.of(context).push(ProfileScreen.buildRoute(context));
           },
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                isDayTime ? '☀️' : '🌙',
-                style: const TextStyle(fontSize: iconSize, height: 1.0),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    isDayTime ? '☀️' : '🌙',
+                    style: const TextStyle(fontSize: iconSize, height: 1.0),
+                  ),
+                ],
               ),
-              const SizedBox(width: 5.0),
-              if (user != null)
-                Flexible(
-                  child: l10nWithWidget(
-                    isDayTime ? context.l10n.mobileGoodDay : context.l10n.mobileGoodEvening,
-                    Text(user.name, style: style),
-                    textStyle: style,
-                  ),
-                )
-              else
-                Flexible(
-                  child: Text(
-                    isDayTime
-                        ? context.l10n.mobileGoodDayWithoutName
-                        : context.l10n.mobileGoodEveningWithoutName,
-                    style: style,
-                  ),
+              const SizedBox(height: 8.0),
+              Text(
+                '${(isDayTime ? context.l10n.mobileGoodDayWithoutName : context.l10n.mobileGoodEveningWithoutName).toUpperCase()},',
+                style: style,
+              ),
+              Text(
+                userName.toUpperCase(),
+                style: style?.copyWith(
+                  color: const Color(0xFFD71921), // brand red
+                  fontSize: 25,
                 ),
+              ),
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class _TabletCreateAGameSection extends StatelessWidget {
-  const _TabletCreateAGameSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        PlayMenu(),
-      ],
     );
   }
 }
@@ -629,29 +505,6 @@ class _OfflineCorrespondenceCarousel extends ConsumerWidget {
   }
 }
 
-class _OfflineCorrespondencePreview extends ConsumerWidget {
-  const _OfflineCorrespondencePreview(this.offlineCorresGames, {required this.maxGamesToShow});
-
-  final int maxGamesToShow;
-
-  final AsyncValue<IList<(DateTime, OfflineCorrespondenceGame)>> offlineCorresGames;
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return offlineCorresGames.maybeWhen(
-      data: (data) {
-        return PreviewGameList(
-          list: data,
-          maxGamesToShow: maxGamesToShow,
-          builder: (el) => OfflineCorrespondenceGamePreview(game: el.$2, lastModified: el.$1),
-          moreScreenRouteBuilder: OfflineCorrespondenceGamesScreen.buildRoute,
-        );
-      },
-      orElse: () => const SizedBox.shrink(),
-    );
-  }
-}
-
 class PreviewGameList<T> extends StatelessWidget {
   const PreviewGameList({
     required this.list,
@@ -670,20 +523,41 @@ class PreviewGameList<T> extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
+    final theme = Theme.of(context);
+
     return Padding(
       padding: Styles.horizontalBodyPadding.add(Styles.sectionTopPadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ListSectionHeader(
-            title: Text(context.l10n.nbGamesInPlay(list.length)),
-            onTap: list.length > maxGamesToShow
-                ? () {
-                    Navigator.of(context).push(moreScreenRouteBuilder(context));
-                  }
-                : null,
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, bottom: 12.0),
+            child: ListSectionHeader(
+              title: Text(
+                context.l10n.nbGamesInPlay(list.length).toUpperCase(),
+                style: const TextStyle(fontFamily: 'NDot', fontSize: 18),
+              ),
+              onTap: list.length > maxGamesToShow
+                  ? () {
+                      Navigator.of(context).push(moreScreenRouteBuilder(context));
+                    }
+                  : null,
+            ),
           ),
-          for (final data in list.take(maxGamesToShow)) builder(data),
+          Card(
+            child: ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: list.take(maxGamesToShow).length,
+              separatorBuilder: (context, index) => Divider(
+                height: 1,
+                indent: 16,
+                endIndent: 16,
+                color: theme.colorScheme.outline.withValues(alpha: 0.5),
+              ),
+              itemBuilder: (context, index) => builder(list[index]),
+            ),
+          ),
         ],
       ),
     );
@@ -699,11 +573,11 @@ class _WelcomeMessageCard extends StatefulWidget {
 
 class _WelcomeMessageCardState extends State<_WelcomeMessageCard> {
   bool _shouldDisplay() {
-    return ChessigmaBinding.instance.sharedPreferences.getBool(kWelcomeMessageShownKey) != true;
+    return ExoChessBinding.instance.sharedPreferences.getBool(kWelcomeMessageShownKey) != true;
   }
 
   void _dismiss() {
-    ChessigmaBinding.instance.sharedPreferences.setBool(kWelcomeMessageShownKey, true);
+    ExoChessBinding.instance.sharedPreferences.setBool(kWelcomeMessageShownKey, true);
     setState(() {});
   }
 
@@ -713,34 +587,42 @@ class _WelcomeMessageCardState extends State<_WelcomeMessageCard> {
       return const SizedBox.shrink();
     }
 
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Padding(
       padding: Styles.bodyPadding,
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: '${context.l10n.mobileWelcomeToChessigmaApp}\n\n',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      TextSpan(
-                        text: context.l10n.mobileNotAllFeaturesAreAvailable,
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ],
-                  ),
+              Text(
+                context.l10n.mobileWelcomeToExoChessApp.toUpperCase(),
+                style: const TextStyle(
+                  fontFamily: 'NDot',
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [TextButton(onPressed: _dismiss, child: Text(context.l10n.ok))],
+              const SizedBox(height: 16.0),
+              Text(
+                context.l10n.mobileNotAllFeaturesAreAvailable.toUpperCase(),
+                style: TextStyle(
+                  fontFamily: 'SpaceMono',
+                  fontSize: 12,
+                  color: isDark ? Colors.white70 : Colors.black87,
+                  height: 1.5,
+                ),
+              ),
+              const SizedBox(height: 24.0),
+              Align(
+                alignment: Alignment.centerRight,
+                child: FilledButton(
+                  onPressed: _dismiss,
+                  child: Text(context.l10n.ok.toUpperCase()),
+                ),
               ),
             ],
           ),
@@ -792,54 +674,66 @@ class _NNUEFilesOutdatedTipState extends ConsumerState<_NNUEFilesOutdatedTip> {
       child: FutureBuilder(
         future: _checkNNUEFilesFuture,
         builder: (context, snapshot) {
+          final theme = Theme.of(context);
           final hasOutdatedNNUEFiles = snapshot.data ?? false;
           if (!hasOutdatedNNUEFiles) {
             return const SizedBox.shrink();
           }
 
           return Padding(
-            padding: Styles.bodyPadding,
+            padding: Styles.horizontalBodyPadding.add(const EdgeInsets.symmetric(vertical: 8.0)),
             child: Card(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(24.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.warning,
-                            size: 25.0,
-                            color: Theme.of(context).colorScheme.primary,
-                          ),
-                          const SizedBox(width: 8.0),
-                          const Flexible(
-                            child: Text(
-                              // TODO l10n
-                              'New Stockfish version available! Go to the settings to download the updated NNUE files.',
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     Row(
                       children: [
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              _openedSettings = true;
-                            });
-                            Navigator.of(
-                              context,
-                              rootNavigator: true,
-                            ).push(EngineSettingsScreen.buildRoute(context));
-                          },
-                          // TODO l10n
-                          child: const Text('Open settings'),
+                        Icon(
+                          Icons.warning_amber_rounded,
+                          size: 24.0,
+                          color: theme.colorScheme.primary,
+                        ),
+                        const SizedBox(width: 12.0),
+                        const Text(
+                          'ENGINE UPDATE',
+                          style: TextStyle(
+                            fontFamily: 'NDot',
+                            fontSize: 16,
+                          ),
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 16.0),
+                    Text(
+                      'NEW STOCKFISH VERSION AVAILABLE! UPDATE NNUE FILES IN SETTINGS FOR BEST PERFORMANCE.'
+                          .toUpperCase(),
+                      style: TextStyle(
+                        fontFamily: 'SpaceMono',
+                        fontSize: 11,
+                        color: theme.brightness == Brightness.dark ? Colors.white70 : Colors.black87,
+                        height: 1.4,
+                      ),
+                    ),
+                    const SizedBox(height: 24.0),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: FilledButton(
+                        onPressed: () {
+                          setState(() {
+                            _openedSettings = true;
+                          });
+                          Navigator.of(
+                            context,
+                            rootNavigator: true,
+                          ).push(EngineSettingsScreen.buildRoute(context));
+                        },
+                        child: const Text(
+                          'OPEN SETTINGS',
+                          style: TextStyle(fontFamily: 'SpaceMono', fontSize: 12),
+                        ),
+                      ),
                     ),
                   ],
                 ),
@@ -861,14 +755,14 @@ class _HomeCustomizationTip extends StatefulWidget {
 
 class _HomeCustomizationTipState extends State<_HomeCustomizationTip> {
   bool _shouldDisplayHomeWidgetCustomizationTip() {
-    final prefs = ChessigmaBinding.instance.sharedPreferences;
+    final prefs = ExoChessBinding.instance.sharedPreferences;
 
     return prefs.getBool(kHideHomeWidgetCustomizationTip) != true &&
-        ChessigmaBinding.instance.numAppStarts <= kColdAppStartsHideCustomizationTipThreshold;
+        ExoChessBinding.instance.numAppStarts <= kColdAppStartsHideCustomizationTipThreshold;
   }
 
   void _setHideHomeWidgetCustomizationTip(BuildContext context) {
-    ChessigmaBinding.instance.sharedPreferences.setBool(kHideHomeWidgetCustomizationTip, true);
+    ExoChessBinding.instance.sharedPreferences.setBool(kHideHomeWidgetCustomizationTip, true);
 
     // trigger rebuild to hide the tip
     setState(() {});
@@ -880,31 +774,60 @@ class _HomeCustomizationTipState extends State<_HomeCustomizationTip> {
       return const SizedBox.shrink();
     }
 
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Padding(
-      padding: Styles.bodyPadding,
+      padding: Styles.horizontalBodyPadding.add(const EdgeInsets.symmetric(vertical: 8.0)),
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(24.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.lightbulb_circle_outlined,
-                      size: 25.0,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    const SizedBox(width: 8.0),
-                    Flexible(child: Text(context.l10n.mobileCustomizeHomeTip)),
-                  ],
-                ),
-              ),
               Row(
                 children: [
+                  Icon(
+                    Icons.auto_awesome_outlined,
+                    size: 24.0,
+                    color: theme.colorScheme.primary,
+                  ),
+                  const SizedBox(width: 12.0),
+                  Text(
+                    'CUSTOMIZE HOME',
+                    style: TextStyle(
+                      fontFamily: 'NDot',
+                      fontSize: 16,
+                      color: theme.colorScheme.onSurface,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16.0),
+              Text(
+                context.l10n.mobileCustomizeHomeTip.toUpperCase(),
+                style: TextStyle(
+                  fontFamily: 'SpaceMono',
+                  fontSize: 11,
+                  color: isDark ? Colors.white70 : Colors.black87,
+                  height: 1.4,
+                ),
+              ),
+              const SizedBox(height: 24.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
                   TextButton(
+                    onPressed: () {
+                      _setHideHomeWidgetCustomizationTip(context);
+                    },
+                    child: Text(
+                      context.l10n.mobileCustomizeHomeTipDismiss.toUpperCase(),
+                      style: const TextStyle(fontFamily: 'SpaceMono', fontSize: 12),
+                    ),
+                  ),
+                  const SizedBox(width: 8.0),
+                  FilledButton(
                     onPressed: () {
                       Navigator.of(
                         context,
@@ -913,13 +836,10 @@ class _HomeCustomizationTipState extends State<_HomeCustomizationTip> {
 
                       _setHideHomeWidgetCustomizationTip(context);
                     },
-                    child: Text(context.l10n.mobileCustomizeButton),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      _setHideHomeWidgetCustomizationTip(context);
-                    },
-                    child: Text(context.l10n.mobileCustomizeHomeTipDismiss),
+                    child: Text(
+                      context.l10n.mobileCustomizeButton.toUpperCase(),
+                      style: const TextStyle(fontFamily: 'SpaceMono', fontSize: 12),
+                    ),
                   ),
                 ],
               ),

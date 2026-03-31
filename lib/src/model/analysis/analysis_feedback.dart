@@ -1,4 +1,4 @@
-import 'package:chessigma_mobile/src/model/common/feedback_data.dart';
+import 'package:exochess_mobile/src/model/common/feedback_data.dart';
 import 'package:flutter/material.dart';
 
 enum AnalysisQuality { brilliant, great, best, excellent, good, inaccuracy, mistake, blunder }
@@ -44,7 +44,9 @@ class AnalysisFeedback implements FeedbackData {
       case AnalysisQuality.great:
         return const Color(0xFF00FF85); // Green Neon
       case AnalysisQuality.best:
+        return const Color(0xFF9DFF00); // Lime Neon
       case AnalysisQuality.excellent:
+        return const Color(0xFF00AAFF); // Blue Neon
       case AnalysisQuality.good:
         return const Color(0xFF9DFF00); // Lime Neon
       case AnalysisQuality.inaccuracy:

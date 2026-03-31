@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/db/database.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/game/exported_game.dart';
-import 'package:chessigma_mobile/src/model/game/game_filter.dart';
+import 'package:exochess_mobile/src/db/database.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/game/exported_game.dart';
+import 'package:exochess_mobile/src/model/game/game_filter.dart';
 import 'package:sqflite/sqflite.dart';
 
 /// A provider for [GameStorage].

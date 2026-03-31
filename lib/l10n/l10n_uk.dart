@@ -284,10 +284,10 @@ class AppLocalizationsUk extends AppLocalizations {
   String get mobileOrImportPgnFile => 'Чи завантажте файл PGN';
 
   @override
-  String get showUnreadChessigmaMessage => 'You have an unread Chessigma message';
+  String get showUnreadExoChessMessage => 'You have an unread ExoChess message';
 
   @override
-  String get mobileWelcomeToChessigmaApp => 'Welcome to Chessigma app!';
+  String get mobileWelcomeToExoChessApp => 'Welcome to ExoChess app!';
 
   @override
   String get variantStandardTitle => 'Стандартні правила шахів (FIDE)';
@@ -1281,7 +1281,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get patronDonate => 'Зробити внесок';
 
   @override
-  String get patronChessigmaPatron => 'Chessigma Patron';
+  String get patronExoChessPatron => 'ExoChess Patron';
 
   @override
   String get patronLichessPatron => 'Покровитель Lichess';

@@ -2,9 +2,9 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/localizations.dart';
-import 'package:chessigma_mobile/src/styles/puzzle_icons.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/src/localizations.dart';
+import 'package:exochess_mobile/src/styles/puzzle_icons.dart';
 
 part 'puzzle_theme.freezed.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:chessigma_mobile/src/utils/rate_limit.dart';
+import 'package:exochess_mobile/src/utils/rate_limit.dart';
 
 void main() {
   group('debounce', () {

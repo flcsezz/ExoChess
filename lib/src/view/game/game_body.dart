@@ -6,38 +6,38 @@ import 'package:dartchess/dartchess.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/account/account_preferences.dart';
-import 'package:chessigma_mobile/src/model/account/account_repository.dart';
-import 'package:chessigma_mobile/src/model/account/ongoing_game.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/speed.dart';
-import 'package:chessigma_mobile/src/model/game/game_board_params.dart';
-import 'package:chessigma_mobile/src/model/game/game_controller.dart';
-import 'package:chessigma_mobile/src/model/game/game_preferences.dart';
-import 'package:chessigma_mobile/src/model/game/playable_game.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/model/user/user_repository_providers.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/utils/chessboard.dart';
-import 'package:chessigma_mobile/src/utils/focus_detector.dart';
-import 'package:chessigma_mobile/src/utils/gestures_exclusion.dart';
-import 'package:chessigma_mobile/src/utils/immersive_mode.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/chat/chat_screen.dart';
-import 'package:chessigma_mobile/src/view/game/correspondence_clock_widget.dart';
-import 'package:chessigma_mobile/src/view/game/game_loading_board.dart';
-import 'package:chessigma_mobile/src/view/game/game_player.dart';
-import 'package:chessigma_mobile/src/view/game/game_result_dialog.dart';
-import 'package:chessigma_mobile/src/view/game/game_screen_providers.dart';
-import 'package:chessigma_mobile/src/view/tournament/tournament_screen.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_action_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/bottom_bar.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/clock.dart';
-import 'package:chessigma_mobile/src/widgets/game_layout.dart';
-import 'package:chessigma_mobile/src/widgets/platform_alert_dialog.dart';
-import 'package:chessigma_mobile/src/widgets/yes_no_dialog.dart';
+import 'package:exochess_mobile/src/model/account/account_preferences.dart';
+import 'package:exochess_mobile/src/model/account/account_repository.dart';
+import 'package:exochess_mobile/src/model/account/ongoing_game.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/speed.dart';
+import 'package:exochess_mobile/src/model/game/game_board_params.dart';
+import 'package:exochess_mobile/src/model/game/game_controller.dart';
+import 'package:exochess_mobile/src/model/game/game_preferences.dart';
+import 'package:exochess_mobile/src/model/game/playable_game.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/model/user/user_repository_providers.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/utils/chessboard.dart';
+import 'package:exochess_mobile/src/utils/focus_detector.dart';
+import 'package:exochess_mobile/src/utils/gestures_exclusion.dart';
+import 'package:exochess_mobile/src/utils/immersive_mode.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/chat/chat_screen.dart';
+import 'package:exochess_mobile/src/view/game/correspondence_clock_widget.dart';
+import 'package:exochess_mobile/src/view/game/game_loading_board.dart';
+import 'package:exochess_mobile/src/view/game/game_player.dart';
+import 'package:exochess_mobile/src/view/game/game_result_dialog.dart';
+import 'package:exochess_mobile/src/view/game/game_screen_providers.dart';
+import 'package:exochess_mobile/src/view/tournament/tournament_screen.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_action_sheet.dart';
+import 'package:exochess_mobile/src/widgets/bottom_bar.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/clock.dart';
+import 'package:exochess_mobile/src/widgets/game_layout.dart';
+import 'package:exochess_mobile/src/widgets/platform_alert_dialog.dart';
+import 'package:exochess_mobile/src/widgets/yes_no_dialog.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 typedef LoadingPosition = ({String? fen, Move? lastMove, Side? orientation});
@@ -459,7 +459,7 @@ class _GameBottomBar extends ConsumerWidget {
                 onTap: gameState.canBerserk && !gameState.hasBerserked
                     ? ref.read(gameControllerProvider(id).notifier).berserk
                     : null,
-                icon: ChessigmaIcons.body_cut,
+                icon: ExoChessIcons.body_cut,
               ),
             if (gameState.game.playable && gameState.game.opponent?.offeringDraw == true)
               BottomBarButton(

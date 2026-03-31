@@ -15,7 +15,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    namespace = "org.chessigma.mobileV2"
+    namespace = "org.exochess.mobileV2"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -33,16 +33,13 @@ android {
     defaultConfig {
         // Flag required by flutter_local_notifications package
         multiDexEnabled = true
-        applicationId = "org.chessigma.mobileV2"
+        applicationId = "org.exochess.mobileV2"
         minSdk = 26
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         // Used by flutter_appauth plugin
-        manifestPlaceholders["appAuthRedirectScheme"] = "org.chessigma.mobile"
-        ndk {
-            abiFilters += listOf("armeabi-v7a", "arm64-v8a", "x86_64")
-        }
+        manifestPlaceholders["appAuthRedirectScheme"] = "org.exochess.mobile"
     }
 
     signingConfigs {
@@ -63,6 +60,7 @@ android {
                 "proguard-rules.pro"
             )
             signingConfig = signingConfigs.getByName("release")
+
             ndk {
                 debugSymbolLevel = "FULL"
             }

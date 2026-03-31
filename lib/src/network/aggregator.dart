@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/utils/cache.dart';
-import 'package:chessigma_mobile/src/utils/json.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/utils/cache.dart';
+import 'package:exochess_mobile/src/utils/json.dart';
 import 'package:logging/logging.dart';
 
 final _logger = Logger('Aggregator');
@@ -53,7 +53,7 @@ final aggregatorProvider = Provider<Aggregator>((ref) {
 class Aggregator {
   Aggregator(this.client, {this.aggregationInterval = kAggregationInterval});
 
-  final ChessigmaClient client;
+  final ExoChessClient client;
   final Duration aggregationInterval;
 
   (Future<void>, ISet<Uri>)? _pending;

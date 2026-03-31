@@ -3,7 +3,7 @@ import 'dart:ui' show Color, Locale;
 import 'package:deep_pick/deep_pick.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:chessigma_mobile/src/model/common/uci.dart';
+import 'package:exochess_mobile/src/model/common/uci.dart';
 import 'package:logging/logging.dart';
 
 final _logger = Logger('JsonUtils');

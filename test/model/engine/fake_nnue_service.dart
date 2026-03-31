@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:chessigma_mobile/src/model/engine/nnue_service.dart';
+import 'package:exochess_mobile/src/model/engine/nnue_service.dart';
 
 /// A fake implementation of [NnueService] for testing.
 ///

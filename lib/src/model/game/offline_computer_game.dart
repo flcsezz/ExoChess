@@ -1,15 +1,15 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/model/common/eval.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/engine/stockfish_level.dart';
-import 'package:chessigma_mobile/src/model/game/game.dart';
-import 'package:chessigma_mobile/src/model/game/game_status.dart';
-import 'package:chessigma_mobile/src/model/game/player.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/model/common/eval.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/engine/stockfish_level.dart';
+import 'package:exochess_mobile/src/model/game/game.dart';
+import 'package:exochess_mobile/src/model/game/game_status.dart';
+import 'package:exochess_mobile/src/model/game/player.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
 
-export 'package:chessigma_mobile/src/model/engine/stockfish_level.dart';
+export 'package:exochess_mobile/src/model/engine/stockfish_level.dart';
 
 part 'offline_computer_game.freezed.dart';
 part 'offline_computer_game.g.dart';

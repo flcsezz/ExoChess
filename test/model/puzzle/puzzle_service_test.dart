@@ -5,14 +5,14 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_angle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_batch_storage.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_service.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_theme.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_angle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_batch_storage.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_service.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_theme.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 import '../../test_container.dart';
 import '../../test_helpers.dart';
@@ -22,7 +22,7 @@ void main() {
     return makeContainer(
       overrides: {
         lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-          return ChessigmaClient(mockClient, ref);
+          return ExoChessClient(mockClient, ref);
         }),
       },
     );

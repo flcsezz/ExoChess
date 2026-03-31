@@ -2,13 +2,13 @@ import 'package:dartchess/dartchess.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/uci.dart';
-import 'package:chessigma_mobile/src/model/engine/evaluation_service.dart';
-import 'package:chessigma_mobile/src/model/engine/nnue_service.dart';
-import 'package:chessigma_mobile/src/model/engine/stockfish_level.dart';
-import 'package:chessigma_mobile/src/model/engine/work.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/uci.dart';
+import 'package:exochess_mobile/src/model/engine/evaluation_service.dart';
+import 'package:exochess_mobile/src/model/engine/nnue_service.dart';
+import 'package:exochess_mobile/src/model/engine/stockfish_level.dart';
+import 'package:exochess_mobile/src/model/engine/work.dart';
 import 'package:multistockfish/multistockfish.dart';
 
 import '../../binding.dart';
@@ -54,7 +54,7 @@ MoveWork makeMoveWork({
 }
 
 void main() {
-  TestChessigmaBinding.ensureInitialized();
+  TestExoChessBinding.ensureInitialized();
 
   setUp(() {
     testBinding.stockfish = FakeStockfish();

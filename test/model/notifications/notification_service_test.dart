@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/notifications/notification_service.dart';
-import 'package:chessigma_mobile/src/model/notifications/notifications.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/notifications/notification_service.dart';
+import 'package:exochess_mobile/src/model/notifications/notifications.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../test_container.dart';

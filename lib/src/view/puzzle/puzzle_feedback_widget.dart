@@ -2,13 +2,13 @@ import 'package:chessground/chessground.dart';
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_controller.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/string.dart';
-import 'package:chessigma_mobile/src/view/account/rating_pref_aware.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_controller.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/string.dart';
+import 'package:exochess_mobile/src/view/account/rating_pref_aware.dart';
 
 class PuzzleFeedbackWidget extends ConsumerWidget {
   const PuzzleFeedbackWidget({required this.puzzle, required this.state, required this.onStreak});
@@ -25,7 +25,7 @@ class PuzzleFeedbackWidget extends ConsumerWidget {
         final playedXTimes = context.l10n.puzzlePlayedXTimes(puzzle.puzzle.plays).localizeNumbers();
         return FeedbackTile(
           leading: state.result == PuzzleResult.win
-              ? Icon(Icons.check, size: 36, color: context.chessigmaColors.good)
+              ? Icon(Icons.check, size: 36, color: context.exochessColors.good)
               : null,
           title: onStreak && state.result == PuzzleResult.lose
               ? const Text(
@@ -55,7 +55,7 @@ class PuzzleFeedbackWidget extends ConsumerWidget {
       case PuzzleMode.play:
         if (state.feedback == PuzzleFeedback.bad) {
           return FeedbackTile(
-            leading: Icon(Icons.close, size: 36, color: context.chessigmaColors.error),
+            leading: Icon(Icons.close, size: 36, color: context.exochessColors.error),
             title: Text(context.l10n.puzzleNotTheMove, overflow: TextOverflow.ellipsis),
             subtitle: Text(
               context.l10n.puzzleTrySomethingElse,
@@ -65,7 +65,7 @@ class PuzzleFeedbackWidget extends ConsumerWidget {
           );
         } else if (state.feedback == PuzzleFeedback.good) {
           return FeedbackTile(
-            leading: Icon(Icons.check, size: 36, color: context.chessigmaColors.good),
+            leading: Icon(Icons.check, size: 36, color: context.exochessColors.good),
             title: Text(context.l10n.puzzleBestMove),
             subtitle: Text(context.l10n.puzzleKeepGoing),
           );

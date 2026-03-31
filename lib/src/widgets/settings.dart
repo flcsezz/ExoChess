@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
 
 const kSettingsTileTitleMaxLines = 3;
 

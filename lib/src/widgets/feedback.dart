@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:chessigma_mobile/src/network/connectivity.dart';
-import 'package:chessigma_mobile/src/network/socket.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/network/connectivity.dart';
+import 'package:exochess_mobile/src/network/socket.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
 import 'package:popover/popover.dart';
 import 'package:signal_strength_indicator/signal_strength_indicator.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -247,7 +247,7 @@ void showSnackBar(BuildContext context, String message, {SnackBarType type = Sna
         message,
         style: type == SnackBarType.error ? const TextStyle(color: Colors.white) : null,
       ),
-      backgroundColor: type == SnackBarType.error ? context.chessigmaColors.error : null,
+      backgroundColor: type == SnackBarType.error ? context.exochessColors.error : null,
     ),
   );
 }

@@ -1,12 +1,12 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/user/leaderboard.dart';
-import 'package:chessigma_mobile/src/model/user/streamer.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/model/user/user_repository.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/user/leaderboard.dart';
+import 'package:exochess_mobile/src/model/user/streamer.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/model/user/user_repository.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 const _kAutoCompleteDebounceTimer = Duration(milliseconds: 300);
 

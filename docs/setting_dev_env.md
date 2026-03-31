@@ -1,6 +1,6 @@
 # Setting up the development environment
 
-The following instructions outline how to set up your development environment for starting development on Chessigma Mobile.
+The following instructions outline how to set up your development environment for starting development on ExoChess Mobile.
 
 If you get stuck during the installation process the most suitable place to seek help is the `#lichess-dev-onboarding` channel on Discord (https://discord.gg/lichess).
 

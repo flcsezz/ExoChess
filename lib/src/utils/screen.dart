@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/widgets/pockets.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/widgets/pockets.dart';
 
 /// Returns the estimated height of what is left after removing the height of the board from the screen.
 double estimateHeightMinusBoard(MediaQueryData mediaQuery) {

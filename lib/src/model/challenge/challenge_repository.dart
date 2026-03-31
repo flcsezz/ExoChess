@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:deep_pick/deep_pick.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/challenge/challenge.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/network/aggregator.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/challenge/challenge.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/network/aggregator.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 /// A provider for [ChallengeRepository].
 final challengeRepositoryProvider = Provider<ChallengeRepository>((Ref ref) {
@@ -18,7 +18,7 @@ typedef ChallengesList = ({IList<Challenge> inward, IList<Challenge> outward});
 class ChallengeRepository {
   const ChallengeRepository(this.client, this.aggregator);
 
-  final ChessigmaClient client;
+  final ExoChessClient client;
   final Aggregator aggregator;
 
   Future<ChallengesList> list() {

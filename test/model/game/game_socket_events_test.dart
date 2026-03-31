@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
 
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/common/speed.dart';
-import 'package:chessigma_mobile/src/model/game/game.dart';
-import 'package:chessigma_mobile/src/model/game/game_socket_events.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/common/speed.dart';
+import 'package:exochess_mobile/src/model/game/game.dart';
+import 'package:exochess_mobile/src/model/game/game_socket_events.dart';
 
 void main() {
   test('decode game full event from websocket json', () {

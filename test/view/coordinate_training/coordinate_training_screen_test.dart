@@ -3,10 +3,10 @@ import 'package:dartchess/dartchess.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/common/game.dart';
-import 'package:chessigma_mobile/src/model/coordinate_training/coordinate_training_controller.dart';
-import 'package:chessigma_mobile/src/model/coordinate_training/coordinate_training_preferences.dart';
-import 'package:chessigma_mobile/src/view/coordinate_training/coordinate_training_screen.dart';
+import 'package:exochess_mobile/src/model/common/game.dart';
+import 'package:exochess_mobile/src/model/coordinate_training/coordinate_training_controller.dart';
+import 'package:exochess_mobile/src/model/coordinate_training/coordinate_training_preferences.dart';
+import 'package:exochess_mobile/src/view/coordinate_training/coordinate_training_screen.dart';
 
 import '../../test_helpers.dart';
 import '../../test_provider_scope.dart';

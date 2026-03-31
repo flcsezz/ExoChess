@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_bottom_sheet.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
 
 class ChatBubbleContextMenu extends StatelessWidget {
   const ChatBubbleContextMenu({

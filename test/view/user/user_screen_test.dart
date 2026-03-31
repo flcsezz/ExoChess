@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/view/user/user_screen.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/view/user/user_screen.dart';
 
 import '../../test_helpers.dart';
 import '../../test_provider_scope.dart';
@@ -23,7 +23,7 @@ void main() {
         home: const UserScreen(user: testUser),
         overrides: {
           lichessClientProvider: lichessClientProvider.overrideWith(
-            (ref) => ChessigmaClient(client, ref),
+            (ref) => ExoChessClient(client, ref),
           ),
         },
       );

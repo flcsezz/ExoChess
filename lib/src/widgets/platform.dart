@@ -1,8 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/tab_scaffold.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/tab_scaffold.dart';
 
 /// A simple widget that builds different things on different platforms.
 class PlatformWidget extends StatelessWidget {

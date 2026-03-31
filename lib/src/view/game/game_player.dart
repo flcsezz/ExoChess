@@ -4,26 +4,26 @@ import 'package:dartchess/dartchess.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/account/account_repository.dart';
-import 'package:chessigma_mobile/src/model/common/service/sound_service.dart';
-import 'package:chessigma_mobile/src/model/game/game.dart';
-import 'package:chessigma_mobile/src/model/game/material_diff.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/lichess_assets.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/view/account/rating_pref_aware.dart';
-import 'package:chessigma_mobile/src/view/user/user_or_profile_screen.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/material_diff.dart';
-import 'package:chessigma_mobile/src/widgets/network_image.dart';
-import 'package:chessigma_mobile/src/widgets/user.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/account/account_repository.dart';
+import 'package:exochess_mobile/src/model/common/service/sound_service.dart';
+import 'package:exochess_mobile/src/model/game/game.dart';
+import 'package:exochess_mobile/src/model/game/material_diff.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/styles/exochess_colors.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/lichess_assets.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/view/account/rating_pref_aware.dart';
+import 'package:exochess_mobile/src/view/user/user_or_profile_screen.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/material_diff.dart';
+import 'package:exochess_mobile/src/widgets/network_image.dart';
+import 'package:exochess_mobile/src/widgets/user.dart';
 
-export 'package:chessigma_mobile/src/widgets/material_diff.dart';
+export 'package:exochess_mobile/src/widgets/material_diff.dart';
 
 /// A widget to display player information above/below the chess board.
 class GamePlayer extends StatelessWidget {
@@ -125,8 +125,8 @@ class GamePlayer extends StatelessWidget {
                     fontSize: playerFontSize,
                     fontWeight: player.user?.title == 'BOT' ? null : FontWeight.bold,
                     color: player.user?.title == 'BOT'
-                        ? context.chessigmaColors.fancy
-                        : context.chessigmaColors.brag,
+                        ? context.exochessColors.fancy
+                        : context.exochessColors.brag,
                   ),
                 ),
                 const SizedBox(width: 5),
@@ -159,10 +159,10 @@ class GamePlayer extends StatelessWidget {
                             text: ' ${player.ratingDiff! > 0 ? '+' : ''}${player.ratingDiff}',
                             style: TextStyle(
                               color: player.ratingDiff! > 0
-                                  ? context.chessigmaColors.good
+                                  ? context.exochessColors.good
                                   : player.ratingDiff! == 0
-                                  ? context.chessigmaColors.brag
-                                  : context.chessigmaColors.error,
+                                  ? context.exochessColors.brag
+                                  : context.exochessColors.error,
                             ),
                           ),
                       ],
@@ -174,8 +174,8 @@ class GamePlayer extends StatelessWidget {
               if (player.berserk == true) ...[
                 const SizedBox(width: 5),
                 Icon(
-                  ChessigmaIcons.body_cut,
-                  color: ChessigmaColors.brag,
+                  ExoChessIcons.body_cut,
+                  color: ExoChessColors.brag,
                   size: playerFontSize,
                   semanticLabel: context.l10n.arenaBerserk,
                 ),
@@ -253,7 +253,7 @@ class ConfirmMove extends StatelessWidget {
       children: [
         SemanticIconButton(
           icon: const Icon(CupertinoIcons.xmark_rectangle_fill),
-          color: context.chessigmaColors.error,
+          color: context.exochessColors.error,
           iconSize: 35,
           semanticsLabel: context.l10n.cancel,
           padding: const EdgeInsets.all(10),
@@ -269,7 +269,7 @@ class ConfirmMove extends StatelessWidget {
         ),
         SemanticIconButton(
           icon: const Icon(CupertinoIcons.checkmark_rectangle_fill),
-          color: context.chessigmaColors.good,
+          color: context.exochessColors.good,
           iconSize: 35,
           semanticsLabel: context.l10n.accept,
           padding: const EdgeInsets.all(10),
@@ -352,7 +352,7 @@ class _MoveExpirationState extends ConsumerState<MoveExpiration> {
     return secs <= 20
         ? Text(
             context.l10n.nbSecondsToPlayTheFirstMove(secs),
-            style: TextStyle(color: widget.mePlaying && emerg ? context.chessigmaColors.error : null),
+            style: TextStyle(color: widget.mePlaying && emerg ? context.exochessColors.error : null),
           )
         : const Text('');
   }

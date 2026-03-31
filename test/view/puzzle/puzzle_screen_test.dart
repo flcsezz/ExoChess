@@ -5,21 +5,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/model/account/account_preferences.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_angle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_batch_storage.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_difficulty.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_preferences.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_storage.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_theme.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/utils/string.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_screen.dart';
-import 'package:chessigma_mobile/src/widgets/bottom_bar.dart';
-import 'package:chessigma_mobile/src/widgets/settings.dart';
+import 'package:exochess_mobile/src/model/account/account_preferences.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_angle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_batch_storage.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_difficulty.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_preferences.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_storage.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_theme.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/utils/string.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_screen.dart';
+import 'package:exochess_mobile/src/widgets/bottom_bar.dart';
+import 'package:exochess_mobile/src/widgets/settings.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../model/auth/fake_auth_storage.dart';
@@ -173,7 +173,7 @@ void main() {
         ),
         overrides: {
           lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-            return ChessigmaClient(mockClient, ref);
+            return ExoChessClient(mockClient, ref);
           }),
           puzzleBatchStorageProvider: puzzleBatchStorageProvider.overrideWith((ref) {
             return mockBatchStorage;
@@ -278,7 +278,7 @@ void main() {
           ),
           overrides: {
             lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-              return ChessigmaClient(mockClient, ref);
+              return ExoChessClient(mockClient, ref);
             }),
             puzzleBatchStorageProvider: puzzleBatchStorageProvider.overrideWith((ref) {
               return mockBatchStorage;
@@ -376,7 +376,7 @@ void main() {
         ),
         overrides: {
           lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-            return ChessigmaClient(mockClient, ref);
+            return ExoChessClient(mockClient, ref);
           }),
           puzzleBatchStorageProvider: puzzleBatchStorageProvider.overrideWith((ref) {
             return mockBatchStorage;
@@ -474,7 +474,7 @@ void main() {
             ),
             overrides: {
               lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-                return ChessigmaClient(mockClient, ref);
+                return ExoChessClient(mockClient, ref);
               }),
               puzzleBatchStorageProvider: puzzleBatchStorageProvider.overrideWith(
                 (ref) => mockBatchStorage,
@@ -550,7 +550,7 @@ void main() {
         ),
         overrides: {
           lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-            return ChessigmaClient(mockClient, ref);
+            return ExoChessClient(mockClient, ref);
           }),
           puzzleBatchStorageProvider: puzzleBatchStorageProvider.overrideWith(
             (ref) => mockBatchStorage,
@@ -655,7 +655,7 @@ void main() {
       ),
       overrides: {
         lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-          return ChessigmaClient(mockClient, ref);
+          return ExoChessClient(mockClient, ref);
         }),
         puzzleBatchStorageProvider: puzzleBatchStorageProvider.overrideWith(
           (ref) => mockBatchStorage,

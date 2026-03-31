@@ -1,12 +1,12 @@
-import 'package:chessigma_mobile/src/model/external_history/external_history.dart';
-import 'package:chessigma_mobile/src/model/external_history/external_history_provider.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/external_history/external_game_history_tile.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/glass_card.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/neon_button.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/platform.dart';
+import 'package:exochess_mobile/src/model/external_history/external_history.dart';
+import 'package:exochess_mobile/src/model/external_history/external_history_provider.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/external_history/external_game_history_tile.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/glass_card.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/neon_button.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/platform.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,18 +24,36 @@ class ExternalGameHistoryScreen extends ConsumerWidget {
     final historyState = ref.watch(externalUserHistoryProvider(params));
 
     return PlatformScaffold(
-      appBar: PlatformAppBar(title: Text('${params.source.displayName}: ${params.username}')),
+      appBar: PlatformAppBar(
+        title: Text(
+          '${params.source.displayName}: ${params.username}'.toUpperCase(),
+          style: const TextStyle(fontFamily: 'NDot', fontSize: 18),
+        ),
+      ),
       body: historyState.when(
         data: (games) {
           if (games.isEmpty) {
-            return const Center(child: Text('No games found'));
+            return Center(
+              child: Text(
+                'NO GAMES FOUND',
+                style: TextStyle(
+                  fontFamily: 'SpaceMono',
+                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white24 : Colors.black26,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            );
           }
           return ListView.separated(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(20.0),
             itemCount: games.length,
-            separatorBuilder: (context, index) => const SizedBox(height: 8.0),
+            separatorBuilder: (context, index) => const SizedBox(height: 12.0),
             itemBuilder: (context, index) {
-              return GlassCard(child: ExternalGameHistoryTile(item: games[index]));
+              return Card(
+                elevation: 0,
+                color: Theme.of(context).brightness == Brightness.dark ? null : Colors.white,
+                child: ExternalGameHistoryTile(item: games[index]),
+              );
             },
           );
         },
@@ -74,6 +92,7 @@ class _ErrorView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     if (_isUserNotFound) {
       return Center(
@@ -85,36 +104,36 @@ class _ErrorView extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  color: Colors.red.withValues(alpha: 0.1),
+                  color: theme.colorScheme.primary.withOpacity(0.1),
                   shape: BoxShape.circle,
+                  border: Border.all(color: theme.colorScheme.primary.withOpacity(0.3)),
                 ),
-                child: const Icon(Icons.person_off, size: 64, color: Colors.redAccent),
+                child: Icon(Icons.person_off, size: 64, color: theme.colorScheme.primary),
               ),
-              const SizedBox(height: 24),
+              const SizedBox(height: 32),
               Text(
-                'Username Not Found',
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  color: Colors.white,
+                'USERNAME NOT FOUND'.toUpperCase(),
+                style: const TextStyle(
+                  fontFamily: 'NDot',
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
               Text(
-                'No player named "${params.username}" was found on ${params.source.displayName}.',
+                'NO PLAYER NAMED "${params.username.toUpperCase()}" WAS FOUND ON ${params.source.displayName.toUpperCase()}.',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 15),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Please check the spelling and try again.',
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white.withValues(alpha: 0.5), fontSize: 13),
+                style: TextStyle(
+                  fontFamily: 'SpaceMono',
+                  color: isDark ? Colors.white70 : Colors.black87,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 32),
-              NeonButton(
+              FilledButton(
                 onPressed: () => Navigator.of(context).pop(),
-                label: 'Go Back',
-                glowColor: Colors.redAccent,
+                child: const Text('GO BACK'),
               ),
             ],
           ),
@@ -132,27 +151,37 @@ class _ErrorView extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  color: Colors.orange.withValues(alpha: 0.1),
+                  color: Colors.orange.withOpacity(0.1),
                   shape: BoxShape.circle,
+                  border: Border.all(color: Colors.orange.withOpacity(0.3)),
                 ),
-                child: const Icon(Icons.hourglass_empty, size: 64, color: Colors.orangeAccent),
+                child: const Icon(Icons.hourglass_empty, size: 64, color: Colors.orange),
               ),
-              const SizedBox(height: 24),
-              Text(
-                'Rate Limited',
-                style: theme.textTheme.headlineSmall?.copyWith(
-                  color: Colors.white,
+              const SizedBox(height: 32),
+              const Text(
+                'RATE LIMITED',
+                style: TextStyle(
+                  fontFamily: 'NDot',
+                  fontSize: 22,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 16),
               Text(
-                'Too many requests. Please wait a moment and try again.',
+                'TOO MANY REQUESTS. PLEASE WAIT A MOMENT AND TRY AGAIN.'.toUpperCase(),
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 15),
+                style: TextStyle(
+                  fontFamily: 'SpaceMono',
+                  color: isDark ? Colors.white70 : Colors.black87,
+                  fontSize: 13,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 32),
-              NeonButton(onPressed: onRetry, label: 'Retry', glowColor: Colors.orangeAccent),
+              FilledButton(
+                onPressed: onRetry,
+                child: const Text('RETRY'),
+              ),
             ],
           ),
         ),
@@ -168,27 +197,33 @@ class _ErrorView extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(24),
               decoration: BoxDecoration(
-                color: Colors.red.withValues(alpha: 0.1),
+                color: theme.colorScheme.primary.withOpacity(0.1),
                 shape: BoxShape.circle,
+                border: Border.all(color: theme.colorScheme.primary.withOpacity(0.3)),
               ),
-              child: const Icon(Icons.error_outline, size: 64, color: Colors.redAccent),
+              child: Icon(Icons.error_outline, size: 64, color: theme.colorScheme.primary),
             ),
-            const SizedBox(height: 24),
-            Text(
-              'Something Went Wrong',
-              style: theme.textTheme.headlineSmall?.copyWith(
-                color: Colors.white,
+            const SizedBox(height: 32),
+            const Text(
+              'SOMETHING WENT WRONG',
+              style: TextStyle(
+                fontFamily: 'NDot',
+                fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
             Text(
-              error.toString(),
+              error.toString().toUpperCase(),
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.white.withValues(alpha: 0.7), fontSize: 13),
+              style: TextStyle(
+                fontFamily: 'SpaceMono',
+                color: isDark ? Colors.white70 : Colors.black87,
+                fontSize: 12,
+              ),
             ),
             const SizedBox(height: 32),
-            NeonButton(onPressed: onRetry, label: 'Retry', glowColor: Colors.redAccent),
+            FilledButton(onPressed: onRetry, child: const Text('RETRY')),
           ],
         ),
       ),

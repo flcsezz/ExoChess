@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/common/service/sound_service.dart';
-import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/settings.dart';
+import 'package:exochess_mobile/src/model/common/service/sound_service.dart';
+import 'package:exochess_mobile/src/model/settings/general_preferences.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/settings.dart';
 
 const kMasterVolumeValues = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
 

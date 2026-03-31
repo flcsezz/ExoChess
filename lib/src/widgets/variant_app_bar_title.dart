@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/widgets.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/widgets/misc.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/widgets/misc.dart';
 
 /// A widget that displays a variant [Icon] followed by [variant.label], sized and colored to match
 /// the surrounding text style, with a description below. Intended for use as a [labelBuilder] in

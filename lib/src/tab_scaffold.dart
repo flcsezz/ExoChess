@@ -1,19 +1,19 @@
 import 'dart:ui' show ImageFilter;
 
+import 'package:exochess_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/view/home/home_tab_screen.dart';
+import 'package:exochess_mobile/src/view/learn/learn_tab_screen.dart';
+import 'package:exochess_mobile/src/view/more/more_tab_screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_tab_screen.dart';
+import 'package:exochess_mobile/src/widgets/background.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/view/home/home_tab_screen.dart';
-import 'package:chessigma_mobile/src/view/learn/learn_tab_screen.dart';
-import 'package:chessigma_mobile/src/view/more/more_tab_screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_tab_screen.dart';
-import 'package:chessigma_mobile/src/widgets/background.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 enum BottomTab {
@@ -266,29 +266,25 @@ class _TabSwitchingViewState extends State<_TabSwitchingView> {
 
   @override
   Widget build(BuildContext context) {
+    shouldBuildTab[widget.currentTab.index] = true;
     return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 400),
       switchInCurve: Curves.easeOutCubic,
       switchOutCurve: Curves.easeInCubic,
       transitionBuilder: (Widget child, Animation<double> animation) {
-        final isEntering = child.key == ValueKey(widget.currentTab.index);
-        final offset = isEntering
-            ? Tween<Offset>(begin: const Offset(0.05, 0.0), end: Offset.zero).animate(animation)
-            : Tween<Offset>(begin: const Offset(-0.05, 0.0), end: Offset.zero).animate(animation);
+        final slideAnimation = Tween<Offset>(
+          begin: const Offset(0.0, 0.01),
+          end: Offset.zero,
+        ).animate(animation);
 
         return FadeTransition(
           opacity: animation,
-          child: SlideTransition(position: offset, child: child),
+          child: SlideTransition(position: slideAnimation, child: child),
         );
       },
-      child: Container(
+      child: RepaintBoundary(
         key: ValueKey(widget.currentTab.index),
-        child: Builder(
-          builder: (BuildContext context) {
-            shouldBuildTab[widget.currentTab.index] = true;
-            return widget.tabBuilder(context, widget.currentTab.index);
-          },
-        ),
+        child: widget.tabBuilder(context, widget.currentTab.index),
       ),
     );
   }
@@ -742,89 +738,23 @@ class _GlassBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bottomPadding = MediaQuery.of(context).padding.bottom;
+    final theme = Theme.of(context);
+    final nothingRed = theme.colorScheme.primary;
 
-    return ClipRRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
-        child: Container(
-          height: 64 + bottomPadding,
-          padding: EdgeInsets.only(bottom: bottomPadding),
-          decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.4),
-            border: Border(top: BorderSide(color: Colors.white.withValues(alpha: 0.1), width: 1)),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              for (final tab in BottomTab.values)
-                _NavItem(tab: tab, isActive: tab == currentTab, onTap: () => onTap(tab.index)),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _NavItem extends StatelessWidget {
-  const _NavItem({required this.tab, required this.isActive, required this.onTap});
-
-  final BottomTab tab;
-  final bool isActive;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    const activeColor = Color(0xFFE8B84B); // Golden glow
-    final color = isActive ? activeColor : Colors.white54;
-
-    return GestureDetector(
-      onTap: () {
-        HapticFeedback.lightImpact();
-        onTap();
-      },
-      behavior: HitTestBehavior.opaque,
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          // Background Glow for Active
-          if (isActive)
-            Positioned(
-              top: 4,
-              child: Container(
-                width: 32,
-                height: 32,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: activeColor.withValues(alpha: 0.3),
-                      blurRadius: 16,
-                      spreadRadius: 4,
-                    ),
-                  ],
-                ),
-              ),
+    return ExcludeSemantics(
+      child: NavigationBar(
+        selectedIndex: currentTab.index,
+        onDestinationSelected: (i) {
+          HapticFeedback.lightImpact();
+          onTap(i);
+        },
+        destinations: [
+          for (final tab in BottomTab.values)
+            NavigationDestination(
+              icon: Icon(tab.icon),
+              label: tab.label(context.l10n).toUpperCase(),
+              selectedIcon: Icon(tab.icon, color: nothingRed),
             ),
-          SizedBox(
-            width: 72,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(tab.icon, color: color, size: isActive ? 28 : 24),
-                const SizedBox(height: 4),
-                Text(
-                  tab.label(context.l10n),
-                  style: TextStyle(
-                    color: color,
-                    fontSize: 10,
-                    fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     );

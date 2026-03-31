@@ -4,15 +4,15 @@ import 'dart:math' show max;
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_preferences.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/engine/evaluation_preferences.dart';
-import 'package:chessigma_mobile/src/model/settings/preferences_storage.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/network/socket.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_preferences.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/engine/evaluation_preferences.dart';
+import 'package:exochess_mobile/src/model/settings/preferences_storage.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/network/socket.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
 import 'package:multistockfish/multistockfish.dart';
 
 import '../../binding.dart';
@@ -41,7 +41,7 @@ Future<void> makeEngineTestApp(
   Stockfish? stockfish,
 }) async {
   // Ensure the binding is initialized before accessing it
-  final binding = TestChessigmaBinding.ensureInitialized();
+  final binding = TestExoChessBinding.ensureInitialized();
 
   // Set custom stockfish if provided
   if (stockfish != null) {
@@ -79,7 +79,7 @@ Future<void> makeEngineTestApp(
             return mockResponse('', 404);
           });
 
-          return ChessigmaClient(client, ref);
+          return ExoChessClient(client, ref);
         }),
       webSocketChannelFactoryProvider: webSocketChannelFactoryProvider.overrideWith(
         (_) => FakeWebSocketChannelFactory(

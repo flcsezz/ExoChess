@@ -1,5 +1,5 @@
 import 'package:http/http.dart' as http;
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 class FakeHttpClientFactory implements HttpClientFactory {
   const FakeHttpClientFactory(this._factory);

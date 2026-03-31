@@ -3,8 +3,8 @@ import 'package:deep_pick/deep_pick.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
 
 part 'chess.freezed.dart';
 part 'chess.g.dart';
@@ -114,16 +114,16 @@ const IList<Variant> playSupportedVariants = IListConst([
 ]);
 
 enum Variant {
-  standard('Standard', ChessigmaIcons.crown),
-  chess960('Chess960', ChessigmaIcons.die_six),
-  fromPosition('From Position', ChessigmaIcons.feather),
-  antichess('Antichess', ChessigmaIcons.antichess),
-  kingOfTheHill('King of the Hill', ChessigmaIcons.flag),
-  threeCheck('Three Check', ChessigmaIcons.three_check),
-  atomic('Atomic', ChessigmaIcons.atom),
-  horde('Horde', ChessigmaIcons.horde),
-  racingKings('Racing Kings', ChessigmaIcons.racing_kings),
-  crazyhouse('Crazyhouse', ChessigmaIcons.h_square);
+  standard('Standard', ExoChessIcons.crown),
+  chess960('Chess960', ExoChessIcons.die_six),
+  fromPosition('From Position', ExoChessIcons.feather),
+  antichess('Antichess', ExoChessIcons.antichess),
+  kingOfTheHill('King of the Hill', ExoChessIcons.flag),
+  threeCheck('Three Check', ExoChessIcons.three_check),
+  atomic('Atomic', ExoChessIcons.atom),
+  horde('Horde', ExoChessIcons.horde),
+  racingKings('Racing Kings', ExoChessIcons.racing_kings),
+  crazyhouse('Crazyhouse', ExoChessIcons.h_square);
 
   const Variant(this.label, this.icon);
 

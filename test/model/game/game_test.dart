@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/src/model/game/exported_game.dart';
-import 'package:chessigma_mobile/src/model/game/playable_game.dart';
+import 'package:exochess_mobile/src/model/game/exported_game.dart';
+import 'package:exochess_mobile/src/model/game/playable_game.dart';
 
 void main() {
   final dateFormat = DateFormat('yyyy.MM.dd');

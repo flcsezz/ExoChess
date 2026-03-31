@@ -1,13 +1,13 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/explorer/tablebase.dart';
-import 'package:chessigma_mobile/src/model/explorer/tablebase_repository.dart';
-import 'package:chessigma_mobile/src/network/connectivity.dart';
-import 'package:chessigma_mobile/src/theme.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/view/explorer/explorer_view.dart';
-import 'package:chessigma_mobile/src/widgets/shimmer.dart';
+import 'package:exochess_mobile/src/model/explorer/tablebase.dart';
+import 'package:exochess_mobile/src/model/explorer/tablebase_repository.dart';
+import 'package:exochess_mobile/src/network/connectivity.dart';
+import 'package:exochess_mobile/src/theme.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/view/explorer/explorer_view.dart';
+import 'package:exochess_mobile/src/widgets/shimmer.dart';
 
 class TablebaseView extends ConsumerWidget {
   const TablebaseView({required this.position, this.onMoveSelected, super.key});

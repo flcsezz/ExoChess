@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/model/common/time_increment.dart';
+import 'package:exochess_mobile/src/model/common/time_increment.dart';
 
 part 'over_the_board_clock.freezed.dart';
 

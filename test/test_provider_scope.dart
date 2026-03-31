@@ -9,22 +9,22 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/db/database.dart';
-import 'package:chessigma_mobile/src/model/account/account_preferences.dart';
-import 'package:chessigma_mobile/src/model/analysis/opening_service.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_storage.dart';
-import 'package:chessigma_mobile/src/model/common/preloaded_data.dart';
-import 'package:chessigma_mobile/src/model/common/service/sound_service.dart';
-import 'package:chessigma_mobile/src/model/notifications/notification_service.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/model/settings/preferences_storage.dart';
-import 'package:chessigma_mobile/src/network/aggregator.dart';
-import 'package:chessigma_mobile/src/network/connectivity.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/network/socket.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/db/database.dart';
+import 'package:exochess_mobile/src/model/account/account_preferences.dart';
+import 'package:exochess_mobile/src/model/analysis/opening_service.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/auth/auth_storage.dart';
+import 'package:exochess_mobile/src/model/common/preloaded_data.dart';
+import 'package:exochess_mobile/src/model/common/service/sound_service.dart';
+import 'package:exochess_mobile/src/model/notifications/notification_service.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/model/settings/preferences_storage.dart';
+import 'package:exochess_mobile/src/network/aggregator.dart';
+import 'package:exochess_mobile/src/network/connectivity.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/network/socket.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:visibility_detector/visibility_detector.dart';
@@ -137,7 +137,7 @@ Future<Widget> makeTestProviderScope(
   Size surfaceSize = kTestSurfaceSize,
   Key? key,
 }) async {
-  final binding = TestChessigmaBinding.ensureInitialized();
+  final binding = TestExoChessBinding.ensureInitialized();
 
   addTearDown(binding.reset);
 

@@ -2,14 +2,14 @@ import 'package:collection/collection.dart';
 import 'package:dynamic_system_colors/dynamic_system_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_controller.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_providers.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_service.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_session.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/view/account/rating_pref_aware.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_controller.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_providers.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_service.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_session.dart';
+import 'package:exochess_mobile/src/styles/exochess_colors.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/view/account/rating_pref_aware.dart';
 
 class PuzzleSessionWidget extends ConsumerStatefulWidget {
   const PuzzleSessionWidget({required this.initialPuzzleContext});
@@ -148,10 +148,10 @@ class _SessionItem extends StatelessWidget {
   final void Function(PuzzleId id)? onTap;
 
   Color get good =>
-      brightness == Brightness.light ? ChessigmaColors.good.shade300 : ChessigmaColors.good.shade400;
+      brightness == Brightness.light ? ExoChessColors.good[300]! : ExoChessColors.good[400]!;
 
   Color get error =>
-      brightness == Brightness.light ? ChessigmaColors.error.shade300 : ChessigmaColors.error.shade400;
+      brightness == Brightness.light ? ExoChessColors.primary[300]! : ExoChessColors.primary[400]!;
 
   Color get next => Colors.grey.withValues(alpha: 0.5);
 

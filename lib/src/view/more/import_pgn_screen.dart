@@ -5,15 +5,15 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/analysis/pgn_games_list_screen.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/analysis/pgn_games_list_screen.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
 
 class ImportPgnScreen extends StatelessWidget {
   const ImportPgnScreen({super.key});

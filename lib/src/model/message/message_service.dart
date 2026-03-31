@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/message/message_repository.dart';
-import 'package:chessigma_mobile/src/model/notifications/notification_service.dart';
-import 'package:chessigma_mobile/src/model/notifications/notifications.dart';
-import 'package:chessigma_mobile/src/model/user/user_repository.dart';
-import 'package:chessigma_mobile/src/tab_scaffold.dart';
-import 'package:chessigma_mobile/src/view/message/conversation_screen.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/message/message_repository.dart';
+import 'package:exochess_mobile/src/model/notifications/notification_service.dart';
+import 'package:exochess_mobile/src/model/notifications/notifications.dart';
+import 'package:exochess_mobile/src/model/user/user_repository.dart';
+import 'package:exochess_mobile/src/tab_scaffold.dart';
+import 'package:exochess_mobile/src/view/message/conversation_screen.dart';
 
 /// A provider for [MessageService].
 final messageServiceProvider = Provider<MessageService>((Ref ref) {

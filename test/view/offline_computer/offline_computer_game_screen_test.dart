@@ -5,27 +5,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/eval.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/common/speed.dart';
-import 'package:chessigma_mobile/src/model/game/game.dart';
-import 'package:chessigma_mobile/src/model/game/game_status.dart';
-import 'package:chessigma_mobile/src/model/game/offline_computer_game.dart';
-import 'package:chessigma_mobile/src/model/game/player.dart';
-import 'package:chessigma_mobile/src/model/offline_computer/computer_analysis.dart';
-import 'package:chessigma_mobile/src/model/offline_computer/offline_computer_game_controller.dart';
-import 'package:chessigma_mobile/src/model/offline_computer/offline_computer_game_preferences.dart';
-import 'package:chessigma_mobile/src/model/offline_computer/offline_computer_game_storage.dart';
-import 'package:chessigma_mobile/src/model/offline_computer/practice_comment.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/offline_computer/offline_computer_game_screen.dart';
-import 'package:chessigma_mobile/src/widgets/bottom_bar.dart';
-import 'package:chessigma_mobile/src/widgets/move_list.dart';
-import 'package:chessigma_mobile/src/widgets/pgn.dart';
-import 'package:chessigma_mobile/src/widgets/pockets.dart';
-import 'package:chessigma_mobile/src/widgets/settings.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/eval.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/common/speed.dart';
+import 'package:exochess_mobile/src/model/game/game.dart';
+import 'package:exochess_mobile/src/model/game/game_status.dart';
+import 'package:exochess_mobile/src/model/game/offline_computer_game.dart';
+import 'package:exochess_mobile/src/model/game/player.dart';
+import 'package:exochess_mobile/src/model/offline_computer/computer_analysis.dart';
+import 'package:exochess_mobile/src/model/offline_computer/offline_computer_game_controller.dart';
+import 'package:exochess_mobile/src/model/offline_computer/offline_computer_game_preferences.dart';
+import 'package:exochess_mobile/src/model/offline_computer/offline_computer_game_storage.dart';
+import 'package:exochess_mobile/src/model/offline_computer/practice_comment.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/offline_computer/offline_computer_game_screen.dart';
+import 'package:exochess_mobile/src/widgets/bottom_bar.dart';
+import 'package:exochess_mobile/src/widgets/move_list.dart';
+import 'package:exochess_mobile/src/widgets/pgn.dart';
+import 'package:exochess_mobile/src/widgets/pockets.dart';
+import 'package:exochess_mobile/src/widgets/settings.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../../binding.dart';
@@ -36,7 +36,7 @@ import '../../test_provider_scope.dart';
 class MockOfflineComputerGameStorage extends Mock implements OfflineComputerGameStorage {}
 
 void main() {
-  TestChessigmaBinding.ensureInitialized();
+  TestExoChessBinding.ensureInitialized();
 
   setUpAll(() {
     final game = OfflineComputerGame(

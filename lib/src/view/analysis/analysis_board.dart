@@ -1,19 +1,19 @@
 import 'package:chessground/chessground.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/analysis/common_analysis_prefs.dart';
-import 'package:chessigma_mobile/src/model/analysis/common_analysis_state.dart';
-import 'package:chessigma_mobile/src/model/analysis/move_evaluation.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/eval.dart';
-import 'package:chessigma_mobile/src/model/engine/evaluation_preferences.dart';
-import 'package:chessigma_mobile/src/model/engine/evaluation_service.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
-import 'package:chessigma_mobile/src/view/analysis/game_analysis_board.dart';
-import 'package:chessigma_mobile/src/view/analysis/move_feedback_widget.dart';
-import 'package:chessigma_mobile/src/view/analysis/retro_screen.dart';
-import 'package:chessigma_mobile/src/view/study/study_screen.dart';
-import 'package:chessigma_mobile/src/widgets/pgn.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/analysis/common_analysis_prefs.dart';
+import 'package:exochess_mobile/src/model/analysis/common_analysis_state.dart';
+import 'package:exochess_mobile/src/model/analysis/move_evaluation.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/eval.dart';
+import 'package:exochess_mobile/src/model/engine/evaluation_preferences.dart';
+import 'package:exochess_mobile/src/model/engine/evaluation_service.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/styles/exochess_colors.dart';
+import 'package:exochess_mobile/src/view/analysis/game_analysis_board.dart';
+import 'package:exochess_mobile/src/view/analysis/move_feedback_widget.dart';
+import 'package:exochess_mobile/src/view/analysis/retro_screen.dart';
+import 'package:exochess_mobile/src/view/study/study_screen.dart';
+import 'package:exochess_mobile/src/widgets/pgn.dart';
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/widgets.dart';
@@ -113,8 +113,8 @@ abstract class AnalysisBoardState<
         localEval!.bestMoves,
         currentPosition.turn.opposite,
         pieceAssets,
-        bestMoveColor: ChessigmaColors.red.withValues(alpha: 0.6),
-        nextBestMovesColor: ChessigmaColors.red.withValues(alpha: 0.4),
+        bestMoveColor: ExoChessColors.red.withValues(alpha: 0.6),
+        nextBestMovesColor: ExoChessColors.red.withValues(alpha: 0.4),
       );
       return {...threatMoveShapes, if (bestMoveShapes.isNotEmpty) bestMoveShapes.first}.toISet();
     }

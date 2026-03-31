@@ -4,8 +4,8 @@ import 'dart:ui' show ImageFilter;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/common/preloaded_data.dart';
-import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
+import 'package:exochess_mobile/src/model/common/preloaded_data.dart';
+import 'package:exochess_mobile/src/model/settings/general_preferences.dart';
 
 const kBackgroundImageBlurFactor = 8.0;
 

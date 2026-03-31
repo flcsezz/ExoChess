@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/common/socket.dart';
-import 'package:chessigma_mobile/src/network/socket.dart';
+import 'package:exochess_mobile/src/model/common/socket.dart';
+import 'package:exochess_mobile/src/network/socket.dart';
 
 /// The [LobbyNumbers] provider is used to display the number of players and
 /// games on lichess in real time.

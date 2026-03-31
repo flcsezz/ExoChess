@@ -284,10 +284,10 @@ class AppLocalizationsVi extends AppLocalizations {
   String get mobileOrImportPgnFile => 'Hoặc nhập một tệp PGN';
 
   @override
-  String get showUnreadChessigmaMessage => 'You have an unread Chessigma message';
+  String get showUnreadExoChessMessage => 'You have an unread ExoChess message';
 
   @override
-  String get mobileWelcomeToChessigmaApp => 'Welcome to Chessigma app!';
+  String get mobileWelcomeToExoChessApp => 'Welcome to ExoChess app!';
 
   @override
   String get variantStandardTitle => 'Luật cờ vua tiêu chuẩn (FIDE)';
@@ -1215,7 +1215,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get patronDonate => 'Ủng hộ';
 
   @override
-  String get patronChessigmaPatron => 'Chessigma Patron';
+  String get patronExoChessPatron => 'ExoChess Patron';
 
   @override
   String get patronLichessPatron => 'Người bảo trợ Lichess';

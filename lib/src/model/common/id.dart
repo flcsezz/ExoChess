@@ -11,7 +11,7 @@ extension type const StringId(String value) {
 extension type const IntId(int value) {}
 
 extension type const GameAnyId._(String value) implements StringId {
-  GameAnyId(this.value) : assert(value.length == 8 || value.length == 12);
+  GameAnyId(this.value);
   GameId get gameId => GameId(value.substring(0, 8));
   bool get isFullId => value.length == 12;
   bool get isGameId => value.length == 8;
@@ -21,15 +21,15 @@ extension type const GameAnyId._(String value) implements StringId {
 }
 
 extension type const GameId._(String value) implements StringId, GameAnyId {
-  const GameId(this.value) : assert(value.length == 8);
+  const GameId(this.value);
 
-  bool get isValid => RegExp(r'''[\w-]{8}''').hasMatch(value);
+  bool get isValid => value.length == 8 && RegExp(r'''[\w-]{8}''').hasMatch(value);
 
   GameId.fromJson(dynamic json) : this(json as String);
 }
 
 extension type const GameFullId._(String value) implements StringId, GameAnyId {
-  const GameFullId(this.value) : assert(value.length == 12);
+  const GameFullId(this.value);
 
   GameFullId.fromJson(dynamic json) : this(json as String);
 }

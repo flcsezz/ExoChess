@@ -1,21 +1,25 @@
-# Current Task
+# Current Task: Home Screen Refinement
 
-**Status:** COMPLETED
-**Task ID:** Opening Explorer & Startup FIX
+**Status:** IN_PROGRESS
+**Task ID:** HOME-REFINEMENT
+**Agent:** Antigravity (Gemini 3 Flash)
 
 ## Description
 
-Stabilized the application startup and restored the Opening Explorer functionality.
+Refining the Home Screen UI based on user feedback:
+1. Adding "Show More" and "Collapse" functionality to the External Game History section.
+2. Fixing the "Could not load recent games" error message at the bottom of the screen.
+3. Restoring the "ExoChess is a Free and Opensourced Hobby Project XD" footer text.
 
-## Fixes Applied
+## Tasks
 
-1. **Splash Screen Recovery**: Deleted the crash-prone `ChessigmaSplashScreen` and transitioned to `flutter_native_splash`. Implemented a 500ms `FadeTransition` for smooth app entry.
-2. **Branding Correction**: Replaced the white-box logo with a high-quality transparent version (`chessigma-logo-new.png`) in the app bar.
-3. **Opening Explorer Restoration**: Integrated **ChessDB.cn** as an unauthenticated alternative to the restricted Lichess API.
-   - Added support for engine evaluations (CP score).
-   - Updated UI table for score visualization.
-   - Defaulted to ChessDB for immediate functionality.
+- [x] `REF-01`: External Game History Show More/Collapse in `external_game_fetch_widget.dart`.
+- [x] `REF-02`: Handle "Could not load recent games" error gracefully on the home screen.
+- [x] `REF-03`: Restore footer branding text ("ExoChess is a Free and Opensourced Hobby Project XD").
+- [x] `REF-04`: Final verification and cleanup.
 
-## Blockers
+## Files to Change
 
-- None.
+- `lib/src/view/home/external_game_fetch_widget.dart`
+- `lib/src/view/user/recent_games.dart`
+- `lib/src/view/home/home_tab_screen.dart`

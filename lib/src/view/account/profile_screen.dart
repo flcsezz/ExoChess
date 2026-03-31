@@ -1,30 +1,30 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/account/account_repository.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/game/game_history.dart';
-import 'package:chessigma_mobile/src/model/external_history/external_history_provider.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/model/user/user_repository.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/share.dart';
-import 'package:chessigma_mobile/src/view/account/edit_profile_screen.dart';
-import 'package:chessigma_mobile/src/view/account/game_bookmarks_screen.dart';
-import 'package:chessigma_mobile/src/view/user/perf_cards.dart';
-import 'package:chessigma_mobile/src/view/user/recent_games.dart';
-import 'package:chessigma_mobile/src/view/user/user_activity.dart';
-import 'package:chessigma_mobile/src/view/user/user_profile.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/haptic_refresh_indicator.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/platform.dart';
-import 'package:chessigma_mobile/src/widgets/shimmer.dart';
-import 'package:chessigma_mobile/src/widgets/user.dart';
+import 'package:exochess_mobile/src/model/account/account_repository.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/game/game_history.dart';
+import 'package:exochess_mobile/src/model/external_history/external_history_provider.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/model/user/user_repository.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/share.dart';
+import 'package:exochess_mobile/src/view/account/edit_profile_screen.dart';
+import 'package:exochess_mobile/src/view/account/game_bookmarks_screen.dart';
+import 'package:exochess_mobile/src/view/user/perf_cards.dart';
+import 'package:exochess_mobile/src/view/user/recent_games.dart';
+import 'package:exochess_mobile/src/view/user/user_activity.dart';
+import 'package:exochess_mobile/src/view/user/user_profile.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/haptic_refresh_indicator.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/platform.dart';
+import 'package:exochess_mobile/src/widgets/shimmer.dart';
+import 'package:exochess_mobile/src/widgets/user.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ProfileScreen extends ConsumerStatefulWidget {
@@ -53,14 +53,19 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
     return PlatformScaffold(
       appBar: PlatformAppBar(
         title: account.when(
-          data: (user) =>
-              user == null ? const SizedBox.shrink() : UserFullNameWidget(user: user.lightUser),
+          data: (user) => user == null
+              ? const SizedBox.shrink()
+              : Text(
+                  user.username.toUpperCase(),
+                  style: const TextStyle(fontFamily: 'NDot', fontSize: 20),
+                ),
           loading: () => const SizedBox.shrink(),
           error: (error, _) => const SizedBox.shrink(),
         ),
+        centerTitle: true,
         actions: [
           SemanticIconButton(
-            icon: const Icon(Icons.edit),
+            icon: const Icon(Icons.edit_outlined),
             semanticsLabel: context.l10n.editProfile,
             onPressed: () => Navigator.of(context).push(EditProfileScreen.buildRoute(context)),
           ),
@@ -72,7 +77,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     semanticsLabel: 'Share profile',
                     onPressed: () => launchShareDialog(
                       context,
-                      ShareParams(uri: chessigmaUri('/@/${user.username}')),
+                      ShareParams(uri: exochessUri('/@/${user.username}')),
                     ),
                   ),
             loading: () => const SizedBox.shrink(),
@@ -88,6 +93,8 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
           final activity = ref.watch(_accountActivityProvider);
           final recentGames = ref.watch(myRecentGamesProvider);
           final nbOfGames = ref.watch(userNumberOfGamesProvider(null)).value ?? 0;
+          final theme = Theme.of(context);
+
           return DefaultTabController(
             length: 3,
             child: HapticRefreshIndicator(
@@ -102,59 +109,68 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                 ref.refresh(lichessRecentConvertedProvider.future),
                 ref.refresh(chesscomRecentConvertedProvider.future),
               ]),
-              child: ListView(
-                children: [
-                  UserProfileWidget(user: user),
-                  const AccountPerfCards(),
+              child: CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(child: UserProfileWidget(user: user)),
+                  const SliverToBoxAdapter(child: AccountPerfCards()),
                   if (user.count != null && user.count!.bookmark > 0)
-                    ListSection(
-                      hasLeading: true,
-                      children: [
-                        ListTile(
-                          title: Text(context.l10n.nbBookmarks(user.count!.bookmark)),
-                          leading: const Icon(Icons.bookmarks_outlined),
-                          onTap: () {
-                            Navigator.of(context).push(
-                              GameBookmarksScreen.buildRoute(
-                                context,
-                                nbBookmarks: user.count!.bookmark,
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                    SliverToBoxAdapter(
+                      child: ListSection(
+                        hasLeading: true,
+                        children: [
+                          ListTile(
+                            title: Text(context.l10n.nbBookmarks(user.count!.bookmark).toUpperCase(), style: const TextStyle(fontFamily: 'SpaceMono', fontWeight: FontWeight.bold)),
+                            leading: const Icon(Icons.bookmarks_outlined),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                GameBookmarksScreen.buildRoute(
+                                  context,
+                                  nbBookmarks: user.count!.bookmark,
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
-                  UserActivityWidget(activity: activity, user: user.lightUser),
-                  
-                  const TabBar(
-                    tabs: [
-                      Tab(text: 'Local', icon: Icon(Icons.phone_android)),
-                      Tab(text: 'Lichess', icon: Icon(Icons.api)),
-                      Tab(text: 'Chess.com', icon: Icon(Icons.person_search)),
-                    ],
+                  SliverToBoxAdapter(child: UserActivityWidget(activity: activity, user: user.lightUser)),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: Styles.horizontalBodyPadding,
+                      child: TabBar(
+                        dividerColor: Colors.transparent,
+                        indicatorColor: theme.colorScheme.primary,
+                        labelColor: theme.colorScheme.primary,
+                        unselectedLabelColor: Colors.grey,
+                        labelStyle: const TextStyle(fontFamily: 'SpaceMono', fontWeight: FontWeight.bold, fontSize: 12),
+                        tabs: [
+                          Tab(text: 'LOCAL'.toUpperCase()),
+                          Tab(text: 'LICHESS'.toUpperCase()),
+                          Tab(text: 'CHESS.COM'.toUpperCase()),
+                        ],
+                      ),
+                    ),
                   ),
-                  
-                  SizedBox(
-                    height: 500, // Fixed height or use a sliver approach
+                  SliverFillRemaining(
                     child: TabBarView(
                       children: [
                         RecentGamesWidget(
                           recentGames: recentGames,
                           nbOfGames: nbOfGames,
                           user: null,
-                          title: 'Local Game History',
+                          title: 'Local History',
                         ),
                         RecentGamesWidget(
                           recentGames: ref.watch(lichessRecentConvertedProvider),
                           nbOfGames: 0,
                           user: null,
-                          title: 'Lichess Game History',
+                          title: 'Lichess History',
                         ),
                         RecentGamesWidget(
                           recentGames: ref.watch(chesscomRecentConvertedProvider),
                           nbOfGames: 0,
                           user: null,
-                          title: 'Chess.com Game History',
+                          title: 'Chess.com History',
                         ),
                       ],
                     ),
@@ -181,6 +197,9 @@ class AccountPerfCards extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final account = ref.watch(accountProvider);
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return account.when(
       data: (user) {
         if (user != null) {
@@ -193,20 +212,21 @@ class AccountPerfCards extends ConsumerWidget {
         child: Padding(
           padding: padding ?? Styles.bodySectionPadding,
           child: SizedBox(
-            height: 106,
+            height: 120,
             child: ListView.separated(
-              padding: const EdgeInsets.symmetric(vertical: 3.0),
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
               scrollDirection: Axis.horizontal,
               itemCount: 5,
-              separatorBuilder: (context, index) => const SizedBox(width: 10),
+              separatorBuilder: (context, index) => const SizedBox(width: 12),
               itemBuilder: (context, index) => ShimmerLoading(
                 isLoading: true,
                 child: Container(
-                  width: 100,
-                  height: 100,
+                  width: 110,
+                  height: 110,
                   decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(10.0),
+                    color: isDark ? Colors.white10 : Colors.black12,
+                    borderRadius: Styles.cardBorderRadius,
+                    border: Border.all(color: theme.colorScheme.outline),
                   ),
                 ),
               ),

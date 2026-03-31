@@ -1,13 +1,13 @@
 import 'package:deep_pick/deep_pick.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/account/account_preferences.dart';
-import 'package:chessigma_mobile/src/model/account/ongoing_game.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/network/aggregator.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/account/account_preferences.dart';
+import 'package:exochess_mobile/src/model/account/ongoing_game.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/network/aggregator.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 /// A provider that fetches the current user's account information.
 final accountProvider = FutureProvider.autoDispose<User?>((Ref ref) {
@@ -32,7 +32,7 @@ final accountRepositoryProvider = Provider<AccountRepository>((ref) {
 class AccountRepository {
   AccountRepository(this.client, this.aggregator);
 
-  final ChessigmaClient client;
+  final ExoChessClient client;
   final Aggregator aggregator;
 
   Future<User> getProfile() {

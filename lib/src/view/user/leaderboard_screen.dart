@@ -3,15 +3,15 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_layout_grid/flutter_layout_grid.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/user/leaderboard.dart';
-import 'package:chessigma_mobile/src/model/user/user_repository_providers.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/user/user_or_profile_screen.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/user.dart';
+import 'package:exochess_mobile/src/model/user/leaderboard.dart';
+import 'package:exochess_mobile/src/model/user/user_repository_providers.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/user/user_or_profile_screen.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/user.dart';
 
 /// Create a Screen with Top 10 players for each Lichess Variant
 class LeaderboardScreen extends StatelessWidget {
@@ -24,7 +24,12 @@ class LeaderboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(context.l10n.leaderboard)),
+      appBar: AppBar(
+        title: Text(
+          context.l10n.leaderboard.toUpperCase(),
+          style: const TextStyle(fontFamily: 'NDot'),
+        ),
+      ),
       body: const _Body(),
     );
   }
@@ -40,19 +45,19 @@ class _Body extends ConsumerWidget {
     return leaderboard.when(
       data: (data) {
         final List<Widget> list = [
-          _Leaderboard(data.bullet, ChessigmaIcons.bullet, 'BULLET'),
-          _Leaderboard(data.blitz, ChessigmaIcons.blitz, 'BLITZ'),
-          _Leaderboard(data.rapid, ChessigmaIcons.rapid, 'RAPID'),
-          _Leaderboard(data.classical, ChessigmaIcons.classical, 'CLASSICAL'),
-          _Leaderboard(data.ultrabullet, ChessigmaIcons.ultrabullet, 'ULTRA BULLET'),
-          _Leaderboard(data.crazyhouse, ChessigmaIcons.h_square, 'CRAZYHOUSE'),
-          _Leaderboard(data.chess960, ChessigmaIcons.die_six, 'CHESS 960'),
-          _Leaderboard(data.kingOfThehill, ChessigmaIcons.bullet, 'KING OF THE HILL'),
-          _Leaderboard(data.threeCheck, ChessigmaIcons.three_check, 'THREE CHECK'),
-          _Leaderboard(data.atomic, ChessigmaIcons.atom, 'ATOMIC'),
-          _Leaderboard(data.horde, ChessigmaIcons.horde, 'HORDE'),
-          _Leaderboard(data.antichess, ChessigmaIcons.antichess, 'ANTICHESS'),
-          _Leaderboard(data.racingKings, ChessigmaIcons.racing_kings, 'RACING KINGS'),
+          _Leaderboard(data.bullet, ExoChessIcons.bullet, 'BULLET'),
+          _Leaderboard(data.blitz, ExoChessIcons.blitz, 'BLITZ'),
+          _Leaderboard(data.rapid, ExoChessIcons.rapid, 'RAPID'),
+          _Leaderboard(data.classical, ExoChessIcons.classical, 'CLASSICAL'),
+          _Leaderboard(data.ultrabullet, ExoChessIcons.ultrabullet, 'ULTRA BULLET'),
+          _Leaderboard(data.crazyhouse, ExoChessIcons.h_square, 'CRAZYHOUSE'),
+          _Leaderboard(data.chess960, ExoChessIcons.die_six, 'CHESS 960'),
+          _Leaderboard(data.kingOfThehill, ExoChessIcons.bullet, 'KING OF THE HILL'),
+          _Leaderboard(data.threeCheck, ExoChessIcons.three_check, 'THREE CHECK'),
+          _Leaderboard(data.atomic, ExoChessIcons.atom, 'ATOMIC'),
+          _Leaderboard(data.horde, ExoChessIcons.horde, 'HORDE'),
+          _Leaderboard(data.antichess, ExoChessIcons.antichess, 'ANTICHESS'),
+          _Leaderboard(data.racingKings, ExoChessIcons.racing_kings, 'RACING KINGS'),
         ];
 
         return SafeArea(
@@ -111,25 +116,30 @@ class _Progress extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (progress == 0) return const SizedBox.shrink();
+    if (progress == 0) return Text(rating.toString(), style: const TextStyle(fontFamily: 'SpaceMono', fontWeight: FontWeight.bold));
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(rating.toString(), maxLines: 1),
+        Text(
+          rating.toString(), 
+          maxLines: 1, 
+          style: const TextStyle(fontFamily: 'SpaceMono', fontWeight: FontWeight.bold),
+        ),
         const SizedBox(width: 5),
         Icon(
-          progress > 0 ? ChessigmaIcons.arrow_full_upperright : ChessigmaIcons.arrow_full_lowerright,
-          size: 16,
-          color: progress > 0 ? context.chessigmaColors.good : context.chessigmaColors.error,
+          progress > 0 ? ExoChessIcons.arrow_full_upperright : ExoChessIcons.arrow_full_lowerright,
+          size: 14,
+          color: progress > 0 ? Colors.green : const Color(0xFFD71921),
         ),
         Text(
-          progress.abs().toString().padRight(2),
+          progress.abs().toString(),
           maxLines: 1,
           style: TextStyle(
-            fontSize: 12,
-            fontFeatures: const [FontFeature.tabularFigures()],
-            color: progress > 0 ? context.chessigmaColors.good : context.chessigmaColors.error,
+            fontSize: 11,
+            fontFamily: 'SpaceMono',
+            fontWeight: FontWeight.bold,
+            color: progress > 0 ? Colors.green : const Color(0xFFD71921),
           ),
         ),
       ],
@@ -146,14 +156,17 @@ class _Leaderboard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 6),
+      padding: const EdgeInsets.only(bottom: 8),
       child: ListSection(
         hasLeading: false,
         header: Row(
           children: [
-            Icon(iconData, color: context.chessigmaColors.brag),
-            const SizedBox(width: 10.0),
-            Text(title),
+            Icon(iconData, size: 18, color: Theme.of(context).colorScheme.primary),
+            const SizedBox(width: 12.0),
+            Text(
+              title.toUpperCase(),
+              style: const TextStyle(fontFamily: 'NDot', fontSize: 16),
+            ),
           ],
         ),
         children: userList.map((user) => LeaderboardListTile(user: user)).toList(),

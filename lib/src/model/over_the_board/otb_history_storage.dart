@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:chessigma_mobile/src/db/database.dart';
-import 'package:chessigma_mobile/src/model/game/over_the_board_game.dart';
+import 'package:exochess_mobile/src/db/database.dart';
+import 'package:exochess_mobile/src/model/game/over_the_board_game.dart';
 
 final otbHistoryStorageProvider = Provider<OtbHistoryStorage>((ref) {
   return OtbHistoryStorage(ref);

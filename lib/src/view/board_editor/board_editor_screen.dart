@@ -4,29 +4,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/board_editor/board_editor_controller.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/utils/share.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/board_editor/board_editor_filters.dart';
-import 'package:chessigma_mobile/src/view/board_editor/board_editor_positions.dart';
-import 'package:chessigma_mobile/src/view/offline_computer/offline_computer_game_screen.dart';
-import 'package:chessigma_mobile/src/view/over_the_board/over_the_board_screen.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_action_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_choice_picker.dart';
-import 'package:chessigma_mobile/src/widgets/bottom_bar.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/platform.dart';
-import 'package:chessigma_mobile/src/widgets/variant_app_bar_title.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/board_editor/board_editor_controller.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/utils/share.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/board_editor/board_editor_filters.dart';
+import 'package:exochess_mobile/src/view/board_editor/board_editor_positions.dart';
+import 'package:exochess_mobile/src/view/offline_computer/offline_computer_game_screen.dart';
+import 'package:exochess_mobile/src/view/over_the_board/over_the_board_screen.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_action_sheet.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_choice_picker.dart';
+import 'package:exochess_mobile/src/widgets/bottom_bar.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/platform.dart';
+import 'package:exochess_mobile/src/widgets/variant_app_bar_title.dart';
 import 'package:share_plus/share_plus.dart';
 
 class BoardEditorScreen extends ConsumerWidget {
@@ -206,7 +206,7 @@ class _PieceMenuState extends ConsumerState<_PieceMenu> {
               child: ColoredBox(
                 key: Key('drag-button-${widget.side.name}'),
                 color: editorState.editorPointerMode == EditorPointerMode.drag
-                    ? context.chessigmaColors.good
+                    ? context.exochessColors.good
                     : Colors.transparent,
                 child: GestureDetector(
                   onTap: () =>
@@ -253,7 +253,7 @@ class _PieceMenuState extends ConsumerState<_PieceMenu> {
               height: squareSize,
               child: ColoredBox(
                 color: editorState.deletePiecesActive
-                    ? context.chessigmaColors.error
+                    ? context.exochessColors.error
                     : Colors.transparent,
                 child: GestureDetector(
                   onTap: () => {

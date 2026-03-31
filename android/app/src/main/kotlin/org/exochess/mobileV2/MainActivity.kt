@@ -1,4 +1,4 @@
-package org.chessigma.mobileV2
+package org.exochess.mobileV2
 
 import android.app.ActivityManager
 import android.content.Context
@@ -11,8 +11,8 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity: FlutterActivity() {
-  private val GESTURES_CHANNEL = "mobile.chessigma/gestures_exclusion"
-  private val SYSTEM_CHANNEL = "mobile.chessigma/system"
+  private val GESTURES_CHANNEL = "mobile.exochess/gestures_exclusion"
+  private val SYSTEM_CHANNEL = "mobile.exochess/system"
 
   override fun onCreate(savedInstanceState: Bundle?) {
     installSplashScreen()

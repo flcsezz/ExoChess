@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/account/account_preferences.dart';
-import 'package:chessigma_mobile/src/model/account/account_repository.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_choice_picker.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/platform.dart';
-import 'package:chessigma_mobile/src/widgets/settings.dart';
+import 'package:exochess_mobile/src/model/account/account_preferences.dart';
+import 'package:exochess_mobile/src/model/account/account_repository.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_choice_picker.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/platform.dart';
+import 'package:exochess_mobile/src/widgets/settings.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -364,7 +364,7 @@ class _AccountPreferencesScreenState extends ConsumerState<AccountPreferencesScr
                   title: Text(kidMode ? context.l10n.disableKidMode : context.l10n.enableKidMode),
                   trailing: const _OpenInNewIcon(),
                   onTap: () {
-                    launchUrl(chessigmaUri('/account/kid')).then((_) {
+                    launchUrl(exochessUri('/account/kid')).then((_) {
                       ref.invalidate(kidModeProvider);
                     });
                   },
@@ -380,7 +380,7 @@ class _AccountPreferencesScreenState extends ConsumerState<AccountPreferencesScr
                   title: Text(context.l10n.changePassword),
                   trailing: const _OpenInNewIcon(),
                   onTap: () {
-                    launchUrl(chessigmaUri('/account/passwd'));
+                    launchUrl(exochessUri('/account/passwd'));
                   },
                 ),
                 ListTile(
@@ -388,7 +388,7 @@ class _AccountPreferencesScreenState extends ConsumerState<AccountPreferencesScr
                   title: Text(context.l10n.tfaTwoFactorAuth),
                   trailing: const _OpenInNewIcon(),
                   onTap: () {
-                    launchUrl(chessigmaUri('/account/twofactor'));
+                    launchUrl(exochessUri('/account/twofactor'));
                   },
                 ),
               ],
@@ -403,7 +403,7 @@ class _AccountPreferencesScreenState extends ConsumerState<AccountPreferencesScr
                     title: const Text('Delete your account'),
                     trailing: const _OpenInNewIcon(),
                     onTap: () {
-                      launchUrl(chessigmaUri('/account/delete'));
+                      launchUrl(exochessUri('/account/delete'));
                     },
                   )
                 else
@@ -412,7 +412,7 @@ class _AccountPreferencesScreenState extends ConsumerState<AccountPreferencesScr
                     title: Text(context.l10n.settingsCloseAccount),
                     trailing: const _OpenInNewIcon(),
                     onTap: () {
-                      launchUrl(chessigmaUri('/account/close'));
+                      launchUrl(exochessUri('/account/close'));
                     },
                   ),
               ],

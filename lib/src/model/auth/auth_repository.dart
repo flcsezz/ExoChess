@@ -5,16 +5,16 @@ import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/auth/bearer.dart';
-import 'package:chessigma_mobile/src/model/auth/oauth_callback.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/auth/bearer.dart';
+import 'package:exochess_mobile/src/model/auth/oauth_callback.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 import 'package:logging/logging.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-const kOAuthRedirectUriScheme = 'org.chessigma.mobile';
+const kOAuthRedirectUriScheme = 'org.exochess.mobile';
 const kOAuthRedirectUriHost = 'login-callback';
 const kOAuthRedirectUri = '$kOAuthRedirectUriScheme://$kOAuthRedirectUriHost';
 const oauthScopes = ['web:mobile'];
@@ -30,7 +30,7 @@ class AuthRepository {
   final Logger _log = Logger('AuthRepository');
   final _random = Random.secure();
 
-  ChessigmaClient get _client => _ref.read(lichessClientProvider);
+  ExoChessClient get _client => _ref.read(lichessClientProvider);
 
   /// Sign in with Lichess using OAuth 2.0 PKCE.
   ///
@@ -43,10 +43,10 @@ class AuthRepository {
     final codeChallenge = _generateCodeChallenge(codeVerifier);
     final state = _generateState();
 
-    final authUrl = chessigmaUri('/oauth').replace(
+    final authUrl = exochessUri('/oauth').replace(
       queryParameters: {
         'response_type': 'code',
-        'client_id': kChessigmaClientId,
+        'client_id': kExoChessClientId,
         'redirect_uri': kOAuthRedirectUri,
         'scope': oauthScopes.join(' '),
         'code_challenge': codeChallenge,
@@ -126,7 +126,7 @@ class AuthRepository {
         'code': code,
         'code_verifier': codeVerifier,
         'redirect_uri': kOAuthRedirectUri,
-        'client_id': kChessigmaClientId,
+        'client_id': kExoChessClientId,
       },
       mapper: (json) => json,
     );
@@ -155,7 +155,7 @@ class AuthRepository {
   Future<bool> checkToken(AuthUser authUser) async {
     final defaultClient = _ref.read(defaultClientProvider);
     final data = await defaultClient
-        .postReadJson(chessigmaUri('/api/token/test'), mapper: (json) => json, body: authUser.token)
+        .postReadJson(exochessUri('/api/token/test'), mapper: (json) => json, body: authUser.token)
         .timeout(const Duration(seconds: 5));
     return data[authUser.token] != null;
   }

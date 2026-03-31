@@ -1,7 +1,7 @@
 import 'package:deep_pick/deep_pick.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:chessigma_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
 
 part 'streamer.freezed.dart';
 

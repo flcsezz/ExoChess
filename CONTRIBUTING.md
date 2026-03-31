@@ -1,6 +1,6 @@
 # Contributing
 
-## I want to contribute code to Chessigma Mobile
+## I want to contribute code to ExoChess Mobile
 
 - [Set up your development environment](https://github.com/lichess-org/mobile/blob/main/docs/setting_dev_env.md);
 - Communicate with other devs on [Discord](https://discord.gg/lichess).
@@ -52,7 +52,7 @@ flutter test
 ```
 - Ensure your code is formatted correctly (or use your editor's "format on save" feature):
 ```sh
-dart format --output=none --set-exit-if-changed $(find lib/src -name "*.dart" -not \( -name "*.*freezed.dart" -o -name "*.*g.dart" -o -name "*chessigma_icons.dart" \) )
+dart format --output=none --set-exit-if-changed $(find lib/src -name "*.dart" -not \( -name "*.*freezed.dart" -o -name "*.*g.dart" -o -name "*exochess_icons.dart" \) )
 dart format --output=none --set-exit-if-changed $(find test -name "*.dart" -not \( -name "*.*freezed.dart" -o -name "*.*g.dart" \) )
 ```
 

@@ -4,9 +4,9 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/localizations.dart';
-import 'package:chessigma_mobile/src/model/notifications/notifications.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/src/localizations.dart';
+import 'package:exochess_mobile/src/model/notifications/notifications.dart';
 import 'package:logging/logging.dart';
 
 final _logger = Logger('NotificationService');

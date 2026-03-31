@@ -1,4 +1,4 @@
-import 'package:chessigma_mobile/src/model/common/feedback_data.dart';
+import 'package:exochess_mobile/src/model/common/feedback_data.dart';
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
 
@@ -129,28 +129,14 @@ class _MoveFeedbackWidgetState extends State<MoveFeedbackWidget>
                       width: badgeSize,
                       height: badgeSize,
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                          colors: [
-                            widget.evaluation.color.withValues(alpha: 0.8),
-                            widget.evaluation.color,
-                          ],
-                        ),
+                        color: widget.evaluation.color,
                         shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 2.5),
+                        border: Border.all(color: Colors.white, width: 2.0),
                         boxShadow: [
                           BoxShadow(
-                            color: widget.evaluation.color.withValues(alpha: 0.6),
-                            blurRadius: 8,
+                            color: widget.evaluation.color.withValues(alpha: 0.4),
+                            blurRadius: 12,
                             spreadRadius: 2,
-                            offset: Offset.zero,
-                          ),
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.4),
-                            blurRadius: 6,
-                            spreadRadius: 1,
-                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
@@ -158,14 +144,7 @@ class _MoveFeedbackWidgetState extends State<MoveFeedbackWidget>
                         child: Icon(
                           widget.evaluation.icon,
                           color: Colors.white,
-                          size: badgeSize * 0.65,
-                          shadows: [
-                            Shadow(
-                              color: Colors.black.withValues(alpha: 0.4),
-                              blurRadius: 2,
-                              offset: const Offset(0, 1),
-                            ),
-                          ],
+                          size: badgeSize * 0.6,
                         ),
                       ),
                     ),
@@ -182,39 +161,24 @@ class _MoveFeedbackWidgetState extends State<MoveFeedbackWidget>
                   child: FadeTransition(
                     opacity: _opacityAnimation,
                     child: Center(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(11),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: Colors.black.withValues(alpha: 0.75),
-                            borderRadius: BorderRadius.circular(11),
-                            border: Border.all(
-                              color: widget.evaluation.color.withValues(alpha: 0.8),
-                              width: 1.0,
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: widget.evaluation.color.withValues(alpha: 0.3),
-                                blurRadius: 8,
-                                spreadRadius: 1,
-                              ),
-                            ],
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: widget.evaluation.color.withValues(alpha: 0.8),
+                            width: 1.5,
                           ),
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                          child: Text(
-                            widget.evaluation.label(context).toUpperCase(),
-                            style: TextStyle(
-                              color: widget.evaluation.color,
-                              fontSize: 8.5,
-                              fontWeight: FontWeight.w900,
-                              letterSpacing: 1.0,
-                              shadows: [
-                                Shadow(
-                                  color: widget.evaluation.color.withValues(alpha: 1.0),
-                                  blurRadius: 6,
-                                ),
-                              ],
-                            ),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                        child: Text(
+                          widget.evaluation.label(context).toUpperCase(),
+                          style: TextStyle(
+                            color: widget.evaluation.color,
+                            fontSize: 9,
+                            fontFamily: 'SpaceMono',
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 1.0,
                           ),
                         ),
                       ),

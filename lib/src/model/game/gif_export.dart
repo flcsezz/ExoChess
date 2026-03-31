@@ -2,11 +2,11 @@ import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/game/game_share_service.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/share.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/game/game_share_service.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/share.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
 import 'package:share_plus/share_plus.dart';
 
 part 'gif_export.freezed.dart';

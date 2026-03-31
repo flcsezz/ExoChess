@@ -284,10 +284,10 @@ class AppLocalizationsId extends AppLocalizations {
   String get mobileOrImportPgnFile => 'Or import a PGN file';
 
   @override
-  String get showUnreadChessigmaMessage => 'You have an unread Chessigma message';
+  String get showUnreadExoChessMessage => 'You have an unread ExoChess message';
 
   @override
-  String get mobileWelcomeToChessigmaApp => 'Welcome to Chessigma app!';
+  String get mobileWelcomeToExoChessApp => 'Welcome to ExoChess app!';
 
   @override
   String get variantStandardTitle => 'Aturan catur standar (FIDE)';
@@ -1218,7 +1218,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get patronDonate => 'Donasi';
 
   @override
-  String get patronChessigmaPatron => 'Chessigma Patron';
+  String get patronExoChessPatron => 'ExoChess Patron';
 
   @override
   String get patronLichessPatron => 'Patron Lichess';

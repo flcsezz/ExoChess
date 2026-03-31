@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
+import 'package:exochess_mobile/src/styles/exochess_colors.dart';
 
 // A simple badge widget to display text in a pill-shaped container.
 class TextBadge extends StatelessWidget {
   const TextBadge({
     super.key,
     required this.text,
-    this.badgeColor = ChessigmaColors.red,
+    this.badgeColor = ExoChessColors.red,
     this.textColor = Colors.white,
   });
 

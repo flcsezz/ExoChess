@@ -4,10 +4,10 @@ import 'package:deep_pick/deep_pick.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/tournament/tournament.dart';
-import 'package:chessigma_mobile/src/network/aggregator.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/tournament/tournament.dart';
+import 'package:exochess_mobile/src/network/aggregator.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 /// A provider for [TournamentRepository].
 final tournamentRepositoryProvider = Provider<TournamentRepository>((Ref ref) {
@@ -79,7 +79,7 @@ class TournamentRepository {
     final client = _ref.read(defaultClientProvider);
     return downloadFile(
       client,
-      chessigmaUri('/api/tournament/$id/games', userId != null ? {'player': userId.value} : null),
+      exochessUri('/api/tournament/$id/games', userId != null ? {'player': userId.value} : null),
       file,
     );
   }

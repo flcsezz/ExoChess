@@ -1,15 +1,15 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/game/exported_game.dart';
-import 'package:chessigma_mobile/src/model/game/game_filter.dart';
-import 'package:chessigma_mobile/src/model/game/game_storage.dart';
-import 'package:chessigma_mobile/src/model/game/playable_game.dart';
-import 'package:chessigma_mobile/src/network/aggregator.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/game/exported_game.dart';
+import 'package:exochess_mobile/src/model/game/game_filter.dart';
+import 'package:exochess_mobile/src/model/game/game_storage.dart';
+import 'package:exochess_mobile/src/model/game/playable_game.dart';
+import 'package:exochess_mobile/src/network/aggregator.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 /// A provider for the [GameRepository].
 final gameRepositoryProvider = Provider<GameRepository>((ref) {
@@ -22,7 +22,7 @@ final gameRepositoryProvider = Provider<GameRepository>((ref) {
 class GameRepository {
   const GameRepository(this.client, this.aggregator, this.storage);
 
-  final ChessigmaClient client;
+  final ExoChessClient client;
   final Aggregator aggregator;
   final Future<GameStorage> storage;
 

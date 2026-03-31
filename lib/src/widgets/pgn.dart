@@ -1,22 +1,22 @@
 import 'package:chessground/chessground.dart';
-import 'package:chessigma_mobile/src/model/account/account_preferences.dart';
-import 'package:chessigma_mobile/src/model/analysis/move_evaluation.dart';
-import 'package:chessigma_mobile/src/model/common/feedback_data.dart';
-import 'package:chessigma_mobile/src/model/common/node.dart';
-import 'package:chessigma_mobile/src/model/common/uci.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
-import 'package:chessigma_mobile/src/utils/duration.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/rate_limit.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/model/account/account_preferences.dart';
+import 'package:exochess_mobile/src/model/analysis/move_evaluation.dart';
+import 'package:exochess_mobile/src/model/common/feedback_data.dart';
+import 'package:exochess_mobile/src/model/common/node.dart';
+import 'package:exochess_mobile/src/model/common/uci.dart';
+import 'package:exochess_mobile/src/styles/exochess_colors.dart';
+import 'package:exochess_mobile/src/utils/duration.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/rate_limit.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_bottom_sheet.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
 import 'package:collection/collection.dart';
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-const innacuracyColor = ChessigmaColors.cyan;
+const innacuracyColor = ExoChessColors.cyan;
 const mistakeColor = Color(0xFFe69f00);
 const blunderColor = Color(0xFFdf5353);
 const kInlineMovePadding = EdgeInsets.symmetric(horizontal: 6.0, vertical: 2.0);
@@ -77,7 +77,7 @@ Annotation? makeAnnotation(Iterable<int>? nags) {
     1 => const Annotation(symbol: '!', color: Colors.lightGreen),
     3 => const Annotation(symbol: '!!', color: Colors.teal),
     5 => const Annotation(symbol: '!?', color: Colors.purple),
-    6 => const Annotation(symbol: '?!', color: ChessigmaColors.cyan),
+    6 => const Annotation(symbol: '?!', color: ExoChessColors.cyan),
     2 => const Annotation(symbol: '?', color: mistakeColor),
     4 => const Annotation(symbol: '??', color: blunderColor),
     8 => const Annotation(symbol: '□', color: Colors.grey),
@@ -1336,7 +1336,7 @@ class InlineMove extends ConsumerWidget {
                         style: moveTextStyle.copyWith(
                           color: isPremove
                               // TODO Possibly choose a more suitable color
-                              ? ChessigmaColors.brag
+                              ? ExoChessColors.brag
                               : _textColor(
                                   context,
                                   isCurrentMove ? 1 : 0.9,

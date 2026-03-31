@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' show ClientException;
-import 'package:chessigma_mobile/src/model/account/account_repository.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/game/game_filter.dart';
-import 'package:chessigma_mobile/src/model/relation/relation_repository.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/model/user/user_repository.dart';
-import 'package:chessigma_mobile/src/network/connectivity.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/model/account/account_repository.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/game/game_filter.dart';
+import 'package:exochess_mobile/src/model/relation/relation_repository.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/model/user/user_repository.dart';
+import 'package:exochess_mobile/src/network/connectivity.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
 
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/share.dart';
-import 'package:chessigma_mobile/src/view/message/conversation_screen.dart';
-import 'package:chessigma_mobile/src/view/user/game_history_screen.dart';
-import 'package:chessigma_mobile/src/view/user/perf_cards.dart';
-import 'package:chessigma_mobile/src/view/user/recent_games.dart';
-import 'package:chessigma_mobile/src/view/user/user_activity.dart';
-import 'package:chessigma_mobile/src/view/user/user_profile.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/haptic_refresh_indicator.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/platform.dart';
-import 'package:chessigma_mobile/src/widgets/user.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/share.dart';
+import 'package:exochess_mobile/src/view/message/conversation_screen.dart';
+import 'package:exochess_mobile/src/view/user/game_history_screen.dart';
+import 'package:exochess_mobile/src/view/user/perf_cards.dart';
+import 'package:exochess_mobile/src/view/user/recent_games.dart';
+import 'package:exochess_mobile/src/view/user/user_activity.dart';
+import 'package:exochess_mobile/src/view/user/user_profile.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/haptic_refresh_indicator.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/platform.dart';
+import 'package:exochess_mobile/src/widgets/user.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -78,7 +78,7 @@ class _UserScreenState extends ConsumerState<UserScreen> {
             icon: const PlatformShareIcon(),
             semanticsLabel: 'Share profile',
             onPressed: () =>
-                launchShareDialog(context, ShareParams(uri: chessigmaUri('/@/${widget.user.name}'))),
+                launchShareDialog(context, ShareParams(uri: exochessUri('/@/${widget.user.name}'))),
           ),
         ],
       ),
@@ -144,7 +144,7 @@ class _UserProfileListView extends ConsumerWidget {
       return Center(child: Text(context.l10n.settingsThisAccountIsClosed, style: Styles.bold));
     }
 
-    Future<void> userAction(Future<void> Function(ChessigmaClient client) action) async {
+    Future<void> userAction(Future<void> Function(ExoChessClient client) action) async {
       setIsLoading(true);
       try {
         await ref.withClient(action).then((_) => ref.invalidate(_userScreenDataProvider(user.id)));
@@ -241,7 +241,7 @@ class _UserProfileListView extends ConsumerWidget {
                   title: Text(context.l10n.reportXToModerators(user.username)),
                   onTap: () {
                     launchUrl(
-                      chessigmaUri('/report', {'username': user.id, 'login': authUser.user.id}),
+                      exochessUri('/report', {'username': user.id, 'login': authUser.user.id}),
                     );
                   },
                 ),

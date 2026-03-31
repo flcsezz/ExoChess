@@ -8,27 +8,27 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_preferences.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/engine/evaluation_mixin.dart';
-import 'package:chessigma_mobile/src/model/engine/evaluation_preferences.dart';
-import 'package:chessigma_mobile/src/model/engine/evaluation_service.dart';
-import 'package:chessigma_mobile/src/model/game/game.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/model/settings/preferences_storage.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/network/socket.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/engine/engine_button.dart';
-import 'package:chessigma_mobile/src/view/engine/engine_gauge.dart';
-import 'package:chessigma_mobile/src/view/engine/engine_lines.dart';
-import 'package:chessigma_mobile/src/view/more/more_tab_screen.dart';
-import 'package:chessigma_mobile/src/widgets/bottom_bar.dart';
-import 'package:chessigma_mobile/src/widgets/pgn.dart';
-import 'package:chessigma_mobile/src/widgets/pockets.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_preferences.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/engine/evaluation_mixin.dart';
+import 'package:exochess_mobile/src/model/engine/evaluation_preferences.dart';
+import 'package:exochess_mobile/src/model/engine/evaluation_service.dart';
+import 'package:exochess_mobile/src/model/game/game.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/model/settings/preferences_storage.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/network/socket.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/engine/engine_button.dart';
+import 'package:exochess_mobile/src/view/engine/engine_gauge.dart';
+import 'package:exochess_mobile/src/view/engine/engine_lines.dart';
+import 'package:exochess_mobile/src/view/more/more_tab_screen.dart';
+import 'package:exochess_mobile/src/widgets/bottom_bar.dart';
+import 'package:exochess_mobile/src/widgets/pgn.dart';
+import 'package:exochess_mobile/src/widgets/pockets.dart';
 import 'package:multistockfish/multistockfish.dart';
 
 import '../../binding.dart';
@@ -312,7 +312,7 @@ void main() {
         overrides: {
           if (mockClient != null)
             lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-              return ChessigmaClient(mockClient, ref);
+              return ExoChessClient(mockClient, ref);
             }),
         },
       );
@@ -953,7 +953,7 @@ void main() {
       });
 
       testWidgets('can be tapped to play a drop move in crazyhouse', (tester) async {
-        final binding = TestChessigmaBinding.ensureInitialized();
+        final binding = TestExoChessBinding.ensureInitialized();
         final stockfish = FakeCrazyhouseDropMoveStockfish();
         binding.stockfish = stockfish;
         addTearDown(() => binding.stockfish = FakeStockfish());
@@ -1455,8 +1455,8 @@ void main() {
 
       await tester.pumpWidget(app);
 
-      expect(find.byIcon(ChessigmaIcons.flow_cascade), findsOneWidget);
-      await tester.tap(find.byIcon(ChessigmaIcons.flow_cascade));
+      expect(find.byIcon(ExoChessIcons.flow_cascade), findsOneWidget);
+      await tester.tap(find.byIcon(ExoChessIcons.flow_cascade));
 
       // Wait for menu to open
       await tester.pumpAndSettle();
@@ -1466,8 +1466,8 @@ void main() {
     });
 
     Future<void> switchToPremoveTab(WidgetTester tester) async {
-      expect(find.byIcon(ChessigmaIcons.flow_cascade), findsOneWidget);
-      await tester.tap(find.byIcon(ChessigmaIcons.flow_cascade));
+      expect(find.byIcon(ExoChessIcons.flow_cascade), findsOneWidget);
+      await tester.tap(find.byIcon(ExoChessIcons.flow_cascade));
 
       // Wait for menu to open
       await tester.pumpAndSettle();
@@ -1559,7 +1559,7 @@ void main() {
         ),
         overrides: {
           lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-            return ChessigmaClient(mockClient, ref);
+            return ExoChessClient(mockClient, ref);
           }),
         },
       );
@@ -1650,7 +1650,7 @@ void main() {
         ),
         overrides: {
           lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-            return ChessigmaClient(mockClient, ref);
+            return ExoChessClient(mockClient, ref);
           }),
         },
       );
@@ -1793,7 +1793,7 @@ void main() {
         ),
         overrides: {
           lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-            return ChessigmaClient(mockClient, ref);
+            return ExoChessClient(mockClient, ref);
           }),
         },
       );
@@ -1861,7 +1861,7 @@ void main() {
         ),
         overrides: {
           lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-            return ChessigmaClient(mockClient, ref);
+            return ExoChessClient(mockClient, ref);
           }),
         },
       );

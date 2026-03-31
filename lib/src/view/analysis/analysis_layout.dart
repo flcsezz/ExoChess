@@ -1,15 +1,15 @@
 import 'package:chessground/chessground.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/view/engine/engine_gauge.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_action_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
-import 'package:chessigma_mobile/src/widgets/pockets.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/view/engine/engine_gauge.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_action_sheet.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/cyberpunk.dart';
+import 'package:exochess_mobile/src/widgets/pockets.dart';
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +26,7 @@ typedef EngineGaugeBuilder = Widget Function(BuildContext context);
 
 enum AnalysisTab {
   explorer(Icons.explore),
-  moves(ChessigmaIcons.flow_cascade),
+  moves(ExoChessIcons.flow_cascade),
   summary(Icons.area_chart),
   // TODO add hint dialog on new install to show this tab
   conditionalPremoves(Icons.save);

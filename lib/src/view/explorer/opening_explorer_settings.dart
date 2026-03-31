@@ -2,13 +2,13 @@ import 'package:dartchess/dartchess.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/explorer/opening_explorer.dart';
-import 'package:chessigma_mobile/src/model/explorer/opening_explorer_preferences.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/view/user/search_screen.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/explorer/opening_explorer.dart';
+import 'package:exochess_mobile/src/model/explorer/opening_explorer_preferences.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/view/user/search_screen.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_bottom_sheet.dart';
 
 class OpeningExplorerSettings extends ConsumerWidget {
   const OpeningExplorerSettings();
@@ -124,7 +124,7 @@ class OpeningExplorerSettings extends ConsumerWidget {
                   fontSize: 18,
                   decoration: TextDecoration.underline,
                 ),
-                text: prefs.playerDb.username ?? 'Select a Chessigma player',
+                text: prefs.playerDb.username ?? 'Select a ExoChess player',
               ),
             ],
           ),
@@ -224,7 +224,7 @@ class OpeningExplorerSettings extends ConsumerWidget {
                     .setDatabase(OpeningDatabase.master),
               ),
               ChoiceChip(
-                label: const Text('Chessigma'),
+                label: const Text('ExoChess'),
                 selected: prefs.db == OpeningDatabase.lichess,
                 onSelected: (_) => ref
                     .read(openingExplorerPreferencesProvider.notifier)

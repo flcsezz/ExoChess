@@ -116,8 +116,8 @@
   "mobileChallengeCreated": "Challenge created: You will be notified when the game starts.\\nYou can access it from the home tab.",
   "mobilePreviousPage": "Previous",
   "mobileOrImportPgnFile": "Or import a PGN file",
-  "showUnreadChessigmaMessage": "You have an unread Chessigma message",
-  "mobileWelcomeToChessigmaApp": "Welcome to Chessigma app!",
+  "showUnreadExoChessMessage": "You have an unread ExoChess message",
+  "mobileWelcomeToExoChessApp": "Welcome to ExoChess app!",
   "variantStandardTitle": "Standard rules of chess (FIDE)",
   "variantChess960Title": "The starting position of the home rank pieces is randomised.",
   "variantKingOfTheHillTitle": "Bring your King to the center to win the game.",
@@ -714,7 +714,7 @@
   "coordinatesNameSquare": "Name square",
   "coordinatesPracticeOnlySomeFilesAndRanks": "Practice only some files & ranks",
   "patronDonate": "Donate",
-  "patronChessigmaPatron": "Chessigma Patron",
+  "patronExoChessPatron": "ExoChess Patron",
   "patronLichessPatron": "Lichess Patron",
   "patronBecomePatron": "Become a Lichess Patron",
   "perfStatPerfStats": "{param} stats",
@@ -2152,7 +2152,7 @@
       }
     }
   },
-  "xIsAFreeYLibreOpenSourceChessServer": "Chessigma is a Free and Opensourced Hobby Project XD",
+  "xIsAFreeYLibreOpenSourceChessServer": "ExoChess is a Free and Opensourced Hobby Project XD",
   "really": "really",
   "contribute": "Contribute",
   "termsOfService": "Terms of Service",

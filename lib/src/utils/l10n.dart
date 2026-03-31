@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
 
 /// Returns a localized string with a single placeholder replaced by a widget.
 ///

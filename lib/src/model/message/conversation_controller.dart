@@ -1,14 +1,14 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/socket.dart';
-import 'package:chessigma_mobile/src/model/message/message.dart';
-import 'package:chessigma_mobile/src/model/message/message_repository.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/network/socket.dart';
-import 'package:chessigma_mobile/src/utils/rate_limit.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/socket.dart';
+import 'package:exochess_mobile/src/model/message/message.dart';
+import 'package:exochess_mobile/src/model/message/message_repository.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/network/socket.dart';
+import 'package:exochess_mobile/src/utils/rate_limit.dart';
 
 part 'conversation_controller.freezed.dart';
 

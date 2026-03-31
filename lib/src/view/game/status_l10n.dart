@@ -1,8 +1,8 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/widgets.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/game/game_status.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/game/game_status.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
 
 String gameStatusL10n(
   BuildContext context, {

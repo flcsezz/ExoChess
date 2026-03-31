@@ -284,10 +284,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mobileOrImportPgnFile => 'Or import a PGN file';
 
   @override
-  String get showUnreadChessigmaMessage => 'You have an unread Chessigma message';
+  String get showUnreadExoChessMessage => 'You have an unread ExoChess message';
 
   @override
-  String get mobileWelcomeToChessigmaApp => 'Welcome to Chessigma app!';
+  String get mobileWelcomeToExoChessApp => 'Welcome to ExoChess app!';
 
   @override
   String get variantStandardTitle => 'Standard rules of chess (FIDE)';
@@ -1237,7 +1237,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get patronDonate => 'Donate';
 
   @override
-  String get patronChessigmaPatron => 'Chessigma Patron';
+  String get patronExoChessPatron => 'ExoChess Patron';
 
   @override
   String get patronLichessPatron => 'Lichess Patron';
@@ -4030,7 +4030,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String xIsAFreeYLibreOpenSourceChessServer(Object param1, Object param2) {
-    return 'Chessigma is a Free and Opensourced Hobby Project XD';
+    return 'ExoChess is a Free and Opensourced Hobby Project XD';
   }
 
   @override
@@ -10571,7 +10571,7 @@ class AppLocalizationsEnUs extends AppLocalizationsEn {
 
   @override
   String xIsAFreeYLibreOpenSourceChessServer(Object param1, Object param2) {
-    return 'Chessigma is a Free and Opensourced Hobby Project XD';
+    return 'ExoChess is a Free and Opensourced Hobby Project XD';
   }
 
   @override

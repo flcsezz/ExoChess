@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/widgets/clock.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/widgets/clock.dart';
 
 class CorrespondenceClock extends StatefulWidget {
   /// The duration left on the clock.
@@ -89,7 +89,7 @@ class _CorrespondenceClockState extends State<CorrespondenceClock> {
     final secs = timeLeft.inSeconds.remainder(60).toString().padLeft(2, '0');
     final brightness = Theme.of(context).brightness;
     final colorScheme = ColorScheme.of(context);
-    final clockStyle = ClockStyle.defaultStyle(brightness, colorScheme, context.chessigmaColors);
+    final clockStyle = ClockStyle.defaultStyle(brightness, colorScheme, context.exochessColors);
 
     final daysStr = days > 1
         ? context.l10n.nbDays(days)

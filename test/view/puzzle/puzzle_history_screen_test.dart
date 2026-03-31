@@ -2,10 +2,10 @@ import 'dart:math' as math;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_history_screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_screen.dart';
-import 'package:chessigma_mobile/src/widgets/board_thumbnail.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_history_screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_screen.dart';
+import 'package:exochess_mobile/src/widgets/board_thumbnail.dart';
 
 import '../../model/auth/fake_auth_storage.dart';
 import '../../model/puzzle/mock_server_responses.dart';
@@ -55,7 +55,7 @@ void main() {
       authUser: fakeAuthUser,
       overrides: {
         lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-          return ChessigmaClient(makeClient(4), ref);
+          return ExoChessClient(makeClient(4), ref);
         }),
       },
     );
@@ -81,7 +81,7 @@ void main() {
       authUser: fakeAuthUser,
       overrides: {
         lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-          return ChessigmaClient(makeClient(80), ref);
+          return ExoChessClient(makeClient(80), ref);
         }),
       },
     );

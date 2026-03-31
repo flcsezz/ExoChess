@@ -2,15 +2,15 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/binding.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/eval.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/preloaded_data.dart';
-import 'package:chessigma_mobile/src/model/common/uci.dart';
-import 'package:chessigma_mobile/src/model/engine/nnue_service.dart';
-import 'package:chessigma_mobile/src/model/engine/uci_protocol.dart';
-import 'package:chessigma_mobile/src/model/engine/work.dart';
+import 'package:exochess_mobile/src/binding.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/eval.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/preloaded_data.dart';
+import 'package:exochess_mobile/src/model/common/uci.dart';
+import 'package:exochess_mobile/src/model/engine/nnue_service.dart';
+import 'package:exochess_mobile/src/model/engine/uci_protocol.dart';
+import 'package:exochess_mobile/src/model/engine/work.dart';
 import 'package:logging/logging.dart';
 import 'package:multistockfish/multistockfish.dart';
 
@@ -82,7 +82,7 @@ class EvaluationService {
   final int maxMemory;
   final NnueService _nnueService;
 
-  Stockfish get _stockfish => ChessigmaBinding.instance.stockfish;
+  Stockfish get _stockfish => ExoChessBinding.instance.stockfish;
 
   final UCIProtocol _protocol = UCIProtocol();
 

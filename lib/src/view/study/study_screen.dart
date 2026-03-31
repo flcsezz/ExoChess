@@ -4,41 +4,41 @@ import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/account/account_repository.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/eval.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/engine/evaluation_preferences.dart';
-import 'package:chessigma_mobile/src/model/engine/evaluation_service.dart';
-import 'package:chessigma_mobile/src/model/game/game_share_service.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/model/study/study_controller.dart';
-import 'package:chessigma_mobile/src/model/study/study_preferences.dart';
-import 'package:chessigma_mobile/src/model/study/study_repository.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/share.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_board.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_layout.dart';
-import 'package:chessigma_mobile/src/view/chat/chat_screen.dart';
-import 'package:chessigma_mobile/src/view/engine/engine_gauge.dart';
-import 'package:chessigma_mobile/src/view/engine/engine_lines.dart';
-import 'package:chessigma_mobile/src/view/explorer/explorer_view.dart';
-import 'package:chessigma_mobile/src/view/study/study_bottom_bar.dart';
-import 'package:chessigma_mobile/src/view/study/study_gamebook.dart';
-import 'package:chessigma_mobile/src/view/study/study_settings.dart';
-import 'package:chessigma_mobile/src/view/study/study_tree_view.dart';
-import 'package:chessigma_mobile/src/view/user/user_or_profile_screen.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_action_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/misc.dart';
-import 'package:chessigma_mobile/src/widgets/platform_context_menu_button.dart';
-import 'package:chessigma_mobile/src/widgets/shimmer.dart';
-import 'package:chessigma_mobile/src/widgets/user.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/account/account_repository.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/eval.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/engine/evaluation_preferences.dart';
+import 'package:exochess_mobile/src/model/engine/evaluation_service.dart';
+import 'package:exochess_mobile/src/model/game/game_share_service.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/model/study/study_controller.dart';
+import 'package:exochess_mobile/src/model/study/study_preferences.dart';
+import 'package:exochess_mobile/src/model/study/study_repository.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/share.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_board.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_layout.dart';
+import 'package:exochess_mobile/src/view/chat/chat_screen.dart';
+import 'package:exochess_mobile/src/view/engine/engine_gauge.dart';
+import 'package:exochess_mobile/src/view/engine/engine_lines.dart';
+import 'package:exochess_mobile/src/view/explorer/explorer_view.dart';
+import 'package:exochess_mobile/src/view/study/study_bottom_bar.dart';
+import 'package:exochess_mobile/src/view/study/study_gamebook.dart';
+import 'package:exochess_mobile/src/view/study/study_settings.dart';
+import 'package:exochess_mobile/src/view/study/study_tree_view.dart';
+import 'package:exochess_mobile/src/view/user/user_or_profile_screen.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_action_sheet.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_bottom_sheet.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/misc.dart';
+import 'package:exochess_mobile/src/widgets/platform_context_menu_button.dart';
+import 'package:exochess_mobile/src/widgets/shimmer.dart';
+import 'package:exochess_mobile/src/widgets/user.dart';
 import 'package:logging/logging.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -260,7 +260,7 @@ class _StudyMenu extends ConsumerWidget {
                   onPressed: () {
                     launchShareDialog(
                       context,
-                      ShareParams(uri: chessigmaUri('/study/${state.study.id}')),
+                      ShareParams(uri: exochessUri('/study/${state.study.id}')),
                     );
                   },
                 ),
@@ -270,7 +270,7 @@ class _StudyMenu extends ConsumerWidget {
                     launchShareDialog(
                       context,
                       ShareParams(
-                        uri: chessigmaUri('/study/${state.study.id}/${state.study.chapter.id}'),
+                        uri: exochessUri('/study/${state.study.id}/${state.study.chapter.id}'),
                       ),
                     );
                   },
@@ -317,7 +317,7 @@ class _StudyMenu extends ConsumerWidget {
                               ShareParams(
                                 files: [image],
                                 subject: context.l10n.puzzleFromGameLink(
-                                  chessigmaUri('/study/${state.study.id}').toString(),
+                                  exochessUri('/study/${state.study.id}').toString(),
                                 ),
                               ),
                             );

@@ -7,30 +7,30 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_preferences.dart';
-import 'package:chessigma_mobile/src/model/analysis/retro_controller.dart';
-import 'package:chessigma_mobile/src/model/common/eval.dart';
-import 'package:chessigma_mobile/src/model/common/node.dart';
-import 'package:chessigma_mobile/src/model/engine/evaluation_preferences.dart';
-import 'package:chessigma_mobile/src/model/engine/evaluation_service.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_board.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_layout.dart';
-import 'package:chessigma_mobile/src/view/analysis/retro_settings_screen.dart';
-import 'package:chessigma_mobile/src/view/engine/engine_button.dart';
-import 'package:chessigma_mobile/src/view/engine/engine_gauge.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_feedback_widget.dart';
-import 'package:chessigma_mobile/src/view/settings/toggle_sound_button.dart';
-import 'package:chessigma_mobile/src/widgets/bottom_bar.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/misc.dart';
-import 'package:chessigma_mobile/src/widgets/pgn.dart';
-import 'package:chessigma_mobile/src/widgets/platform_context_menu_button.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_preferences.dart';
+import 'package:exochess_mobile/src/model/analysis/retro_controller.dart';
+import 'package:exochess_mobile/src/model/common/eval.dart';
+import 'package:exochess_mobile/src/model/common/node.dart';
+import 'package:exochess_mobile/src/model/engine/evaluation_preferences.dart';
+import 'package:exochess_mobile/src/model/engine/evaluation_service.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/model/settings/general_preferences.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_board.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_layout.dart';
+import 'package:exochess_mobile/src/view/analysis/retro_settings_screen.dart';
+import 'package:exochess_mobile/src/view/engine/engine_button.dart';
+import 'package:exochess_mobile/src/view/engine/engine_gauge.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_feedback_widget.dart';
+import 'package:exochess_mobile/src/view/settings/toggle_sound_button.dart';
+import 'package:exochess_mobile/src/widgets/bottom_bar.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/misc.dart';
+import 'package:exochess_mobile/src/widgets/pgn.dart';
+import 'package:exochess_mobile/src/widgets/platform_context_menu_button.dart';
 
 class RetroScreen extends ConsumerWidget {
   const RetroScreen({required this.options, super.key});
@@ -317,11 +317,11 @@ class _FeedbackWidget extends ConsumerWidget {
               ),
             ),
             RetroFeedback.correct => FeedbackTile(
-              leading: Icon(Icons.check, size: 36, color: context.chessigmaColors.good),
+              leading: Icon(Icons.check, size: 36, color: context.exochessColors.good),
               title: Text(context.l10n.puzzleGoodMove),
             ),
             RetroFeedback.incorrect => FeedbackTile(
-              leading: Icon(Icons.close, size: 36, color: context.chessigmaColors.error),
+              leading: Icon(Icons.close, size: 36, color: context.exochessColors.error),
               title: Text(context.l10n.youCanDoBetter),
               subtitle: state.pov == Side.white
                   ? Text(context.l10n.tryAnotherMoveForWhite)

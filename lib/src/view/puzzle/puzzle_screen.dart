@@ -6,49 +6,49 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/game/game_repository.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_angle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_controller.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_difficulty.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_opening.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_preferences.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_providers.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_service.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_theme.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/network/connectivity.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/tab_scaffold.dart';
-import 'package:chessigma_mobile/src/utils/gestures_exclusion.dart';
-import 'package:chessigma_mobile/src/utils/immersive_mode.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/utils/share.dart';
-import 'package:chessigma_mobile/src/view/account/rating_pref_aware.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_error_board_widget.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_feedback_widget.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_session_widget.dart';
-import 'package:chessigma_mobile/src/view/settings/board_settings_screen.dart';
-import 'package:chessigma_mobile/src/view/settings/toggle_sound_button.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_action_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_choice_picker.dart';
-import 'package:chessigma_mobile/src/widgets/board.dart';
-import 'package:chessigma_mobile/src/widgets/bottom_bar.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/pgn.dart';
-import 'package:chessigma_mobile/src/widgets/settings.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/game/game_repository.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_angle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_controller.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_difficulty.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_opening.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_preferences.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_providers.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_service.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_theme.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/network/connectivity.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/tab_scaffold.dart';
+import 'package:exochess_mobile/src/utils/gestures_exclusion.dart';
+import 'package:exochess_mobile/src/utils/immersive_mode.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/utils/share.dart';
+import 'package:exochess_mobile/src/view/account/rating_pref_aware.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_error_board_widget.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_feedback_widget.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_session_widget.dart';
+import 'package:exochess_mobile/src/view/settings/board_settings_screen.dart';
+import 'package:exochess_mobile/src/view/settings/toggle_sound_button.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_action_sheet.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_bottom_sheet.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_choice_picker.dart';
+import 'package:exochess_mobile/src/widgets/board.dart';
+import 'package:exochess_mobile/src/widgets/bottom_bar.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/pgn.dart';
+import 'package:exochess_mobile/src/widgets/settings.dart';
 import 'package:share_plus/share_plus.dart';
 
 class PuzzleScreen extends ConsumerStatefulWidget {
@@ -773,7 +773,7 @@ class _BottomBarState extends ConsumerState<_BottomBar> {
           onPressed: () {
             launchShareDialog(
               context,
-              ShareParams(text: chessigmaUri('/training/${puzzleState.puzzle.puzzle.id}').toString()),
+              ShareParams(text: exochessUri('/training/${puzzleState.puzzle.puzzle.id}').toString()),
             );
           },
         ),

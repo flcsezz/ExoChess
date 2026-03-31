@@ -3,18 +3,18 @@ import 'dart:math' as math;
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/binding.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/common/speed.dart';
-import 'package:chessigma_mobile/src/model/common/time_increment.dart';
-import 'package:chessigma_mobile/src/model/game/game.dart';
-import 'package:chessigma_mobile/src/model/game/playable_game.dart';
-import 'package:chessigma_mobile/src/model/lobby/game_setup_preferences.dart';
-import 'package:chessigma_mobile/src/model/settings/preferences_storage.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/binding.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/common/speed.dart';
+import 'package:exochess_mobile/src/model/common/time_increment.dart';
+import 'package:exochess_mobile/src/model/game/game.dart';
+import 'package:exochess_mobile/src/model/game/playable_game.dart';
+import 'package:exochess_mobile/src/model/lobby/game_setup_preferences.dart';
+import 'package:exochess_mobile/src/model/settings/preferences_storage.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
 
 part 'game_seek.freezed.dart';
 part 'game_seek.g.dart';
@@ -189,7 +189,7 @@ class RecentGameSeek extends Notifier<RecentGameSeekPrefs>
   }
 
   Future<void> clearRequests() async {
-    await ChessigmaBinding.instance.sharedPreferences.remove(prefCategory.storageKey);
+    await ExoChessBinding.instance.sharedPreferences.remove(prefCategory.storageKey);
     state = RecentGameSeekPrefs.empty;
   }
 }

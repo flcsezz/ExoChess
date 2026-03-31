@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/model/game/offline_computer_game.dart';
+import 'package:exochess_mobile/src/model/game/offline_computer_game.dart';
 import 'package:logging/logging.dart';
 import 'package:path_provider/path_provider.dart';
 

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/app_links.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/model/user/user_repository_providers.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/view/user/user_or_profile_screen.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/user.dart';
+import 'package:exochess_mobile/src/app_links.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/model/user/user_repository_providers.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/view/user/user_or_profile_screen.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_bottom_sheet.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/user.dart';
 
 class UserContextMenu extends ConsumerWidget {
   const UserContextMenu({this.user, this.userId, super.key})
@@ -39,7 +39,7 @@ class UserContextMenu extends ConsumerWidget {
                   if (value.profile?.bio != null)
                     Linkify(
                       onOpen: (link) => onLinkifyOpen(context, link),
-                      linkifiers: kChessigmaLinkifiers,
+                      linkifiers: kExoChessLinkifiers,
                       text: value.profile!.bio!,
                       maxLines: 20,
                       overflow: TextOverflow.ellipsis,

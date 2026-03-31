@@ -2,9 +2,9 @@ import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/model/common/speed.dart';
-import 'package:chessigma_mobile/src/model/explorer/opening_explorer.dart';
-import 'package:chessigma_mobile/src/model/explorer/opening_explorer_repository.dart';
+import 'package:exochess_mobile/src/model/common/speed.dart';
+import 'package:exochess_mobile/src/model/explorer/opening_explorer.dart';
+import 'package:exochess_mobile/src/model/explorer/opening_explorer_repository.dart';
 
 import '../../test_container.dart';
 import '../../test_helpers.dart';

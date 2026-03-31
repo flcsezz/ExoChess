@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/message/message.dart';
-import 'package:chessigma_mobile/src/network/aggregator.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/message/message.dart';
+import 'package:exochess_mobile/src/network/aggregator.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 /// A provider that gets the conversation data for the current user.
 final contactsProvider = FutureProvider.autoDispose<Contacts>((ref) {
@@ -33,7 +33,7 @@ final unreadMessagesProvider = FutureProvider.autoDispose<UnreadMessages>((ref) 
 class MessageRepository {
   const MessageRepository(this.client, this.aggregator);
 
-  final ChessigmaClient client;
+  final ExoChessClient client;
   final Aggregator aggregator;
 
   Future<UnreadMessages> unreadMessages() {

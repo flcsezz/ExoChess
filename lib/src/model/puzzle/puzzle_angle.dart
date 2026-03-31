@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_theme.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_theme.dart';
 
 part 'puzzle_angle.freezed.dart';
 

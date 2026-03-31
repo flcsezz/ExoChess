@@ -3,9 +3,9 @@ import 'dart:async' show unawaited;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/model/lobby/create_game_service.dart';
-import 'package:chessigma_mobile/src/model/lobby/game_seek.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/lobby/create_game_service.dart';
+import 'package:exochess_mobile/src/model/lobby/game_seek.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 import '../../network/fake_http_client_factory.dart';
 import '../../test_container.dart';

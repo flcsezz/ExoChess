@@ -1,9 +1,9 @@
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/external_history/external_history.dart';
-import 'package:chessigma_mobile/src/model/game/game_status.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/external_history/external_history.dart';
+import 'package:exochess_mobile/src/model/game/game_status.dart';
+import 'package:exochess_mobile/src/styles/exochess_colors.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,13 +26,13 @@ class ExternalGameHistoryTile extends StatelessWidget {
 
     Widget getResultIcon() {
       if (item.status == GameStatus.aborted || item.status == GameStatus.noStart) {
-        return const Icon(CupertinoIcons.xmark_square_fill, color: ChessigmaColors.grey);
+        return const Icon(CupertinoIcons.xmark_square_fill, color: ExoChessColors.grey);
       } else {
         return item.winner == null
-            ? const Icon(CupertinoIcons.equal_square_fill, color: ChessigmaColors.grey)
+            ? const Icon(CupertinoIcons.equal_square_fill, color: ExoChessColors.grey)
             : item.winner == pov
-                ? Icon(CupertinoIcons.plus_square_fill, color: context.chessigmaColors.good)
-                : Icon(CupertinoIcons.minus_square_fill, color: context.chessigmaColors.error);
+                ? Icon(CupertinoIcons.plus_square_fill, color: context.exochessColors.good)
+                : Icon(CupertinoIcons.minus_square_fill, color: context.exochessColors.error);
       }
     }
 

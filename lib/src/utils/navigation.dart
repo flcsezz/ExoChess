@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/widgets/background.dart';
+import 'package:exochess_mobile/src/widgets/background.dart';
 
 /// A page route that always builds the same screen widget.
 ///
@@ -13,16 +13,14 @@ abstract class ScreenRoute<T extends Object?> extends PageRoute<T> {
 ///
 /// This route wraps the [screen] with a [FullScreenBackground] to ensure that the background
 /// is always filled with the configured app's background color or image.
-class MaterialScreenRoute<T extends Object?> extends MaterialPageRoute<T>
+class MaterialScreenRoute<T extends Object?> extends PageRoute<T>
     implements ScreenRoute<T> {
   MaterialScreenRoute({
     required this.screen,
     super.settings,
-    super.maintainState,
     super.fullscreenDialog,
-    super.allowSnapshotting,
     this.overrideTransitionDuration,
-  }) : super(builder: (_) => FullScreenBackground(child: screen));
+  }) : super();
 
   @override
   final Widget screen;
@@ -30,7 +28,44 @@ class MaterialScreenRoute<T extends Object?> extends MaterialPageRoute<T>
   final Duration? overrideTransitionDuration;
 
   @override
-  Duration get transitionDuration => overrideTransitionDuration ?? super.transitionDuration;
+  Duration get transitionDuration => overrideTransitionDuration ?? const Duration(milliseconds: 400);
+
+  @override
+  Color? get barrierColor => null;
+
+  @override
+  String? get barrierLabel => null;
+
+  @override
+  bool get maintainState => true;
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+    return FullScreenBackground(child: screen);
+  }
+
+  @override
+  Widget buildTransitions(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation, Widget child) {
+    final fadeAnimation = CurvedAnimation(
+      parent: animation,
+      curve: Curves.easeIn,
+    );
+    final slideAnimation = Tween<Offset>(
+      begin: const Offset(0.0, 0.05),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(
+      parent: animation,
+      curve: Curves.easeOutCubic,
+    ));
+
+    return FadeTransition(
+      opacity: fadeAnimation,
+      child: SlideTransition(
+        position: slideAnimation,
+        child: child,
+      ),
+    );
+  }
 }
 
 /// Builds a new route for the [screen] based on the platform.

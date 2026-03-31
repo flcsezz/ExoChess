@@ -3,13 +3,13 @@ import 'dart:io' show Directory;
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/db/secure_storage.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_storage.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/utils/string.dart';
-import 'package:chessigma_mobile/src/utils/system.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/db/secure_storage.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/auth/auth_storage.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/utils/string.dart';
+import 'package:exochess_mobile/src/utils/system.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart'
     show getApplicationDocumentsDirectory, getApplicationSupportDirectory;
@@ -55,7 +55,7 @@ final preloadedDataProvider = FutureProvider<PreloadedData>((Ref ref) async {
     final userAgent = makeUserAgent(pInfo, deviceInfo, sri, null);
     final client = DefaultClient(ref.read(httpClientFactoryProvider)(), userAgent: userAgent);
     client
-        .postReadJson(chessigmaUri('/api/token/test'), mapper: (json) => json, body: token)
+        .postReadJson(exochessUri('/api/token/test'), mapper: (json) => json, body: token)
         .timeout(const Duration(seconds: 5))
         .then((data) {
           final isValid = data[token] != null;

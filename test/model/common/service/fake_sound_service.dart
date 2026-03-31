@@ -1,6 +1,6 @@
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/service/sound_service.dart';
-import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/service/sound_service.dart';
+import 'package:exochess_mobile/src/model/settings/general_preferences.dart';
 
 class FakeSoundService implements SoundService {
   @override

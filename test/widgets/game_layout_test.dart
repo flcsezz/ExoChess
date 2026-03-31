@@ -4,11 +4,11 @@ import 'package:chessground/chessground.dart';
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/game/game_board_params.dart';
-import 'package:chessigma_mobile/src/widgets/game_layout.dart';
-import 'package:chessigma_mobile/src/widgets/pockets.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/game/game_board_params.dart';
+import 'package:exochess_mobile/src/widgets/game_layout.dart';
+import 'package:exochess_mobile/src/widgets/pockets.dart';
 
 import '../test_helpers.dart';
 import '../test_provider_scope.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/intl.dart';
-import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/src/intl.dart';
+import 'package:exochess_mobile/src/model/settings/general_preferences.dart';
 
 typedef ActiveLocalizations = ({Locale locale, AppLocalizations strings});
 

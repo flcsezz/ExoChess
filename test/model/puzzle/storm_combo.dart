@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/puzzle/storm_controller.dart';
+import 'package:exochess_mobile/src/model/puzzle/storm_controller.dart';
 
 void main() {
   group('StormCombo', () {

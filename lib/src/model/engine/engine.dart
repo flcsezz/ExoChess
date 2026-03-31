@@ -2,7 +2,7 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:dartchess/dartchess.dart';
-import 'package:chessigma_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/constants.dart';
 import 'package:multistockfish/multistockfish.dart';
 
 /// Maximum number of CPU cores available for engine use.

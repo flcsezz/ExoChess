@@ -4,8 +4,8 @@ import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 /// Unified interface for both broadcast and regular game analysis.
@@ -201,8 +201,8 @@ class _SummaryPlayerName extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: .bold,
                           color: playerTitle == 'BOT'
-                              ? context.chessigmaColors.fancy
-                              : context.chessigmaColors.brag,
+                              ? context.exochessColors.fancy
+                              : context.exochessColors.brag,
                         ),
                       ),
                     TextSpan(

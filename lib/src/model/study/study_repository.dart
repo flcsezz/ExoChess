@@ -4,11 +4,11 @@ import 'package:deep_pick/deep_pick.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/study/study.dart';
-import 'package:chessigma_mobile/src/model/study/study_filter.dart';
-import 'package:chessigma_mobile/src/model/study/study_list_paginator.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/study/study.dart';
+import 'package:exochess_mobile/src/model/study/study_filter.dart';
+import 'package:exochess_mobile/src/model/study/study_list_paginator.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 /// A provider for [StudyRepository].
 final studyRepositoryProvider = Provider<StudyRepository>((Ref ref) {

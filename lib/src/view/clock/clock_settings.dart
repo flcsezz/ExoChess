@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/clock/clock_tool_controller.dart';
-import 'package:chessigma_mobile/src/model/common/time_increment.dart';
-import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/view/play/time_control_modal.dart';
+import 'package:exochess_mobile/src/model/clock/clock_tool_controller.dart';
+import 'package:exochess_mobile/src/model/common/time_increment.dart';
+import 'package:exochess_mobile/src/model/settings/general_preferences.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/view/play/time_control_modal.dart';
 
 const _iconSize = 38.0;
 const _kIconPadding = EdgeInsets.all(10.0);

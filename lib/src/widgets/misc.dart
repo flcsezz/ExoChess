@@ -1,35 +1,26 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AppBarChessigmaTitle extends StatelessWidget {
-  const AppBarChessigmaTitle({super.key});
+class AppBarExoChessTitle extends StatelessWidget {
+  const AppBarExoChessTitle({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12.0),
-            child: Image.asset('assets/images/home_logo.png', height: 48),
-          ),
-          const SizedBox(width: 12),
-          Text(
-            'CHESSIGMA',
-            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 1.5,
-                ),
-          ),
-        ],
+    return const Text(
+      'ExoChess',
+      style: TextStyle(
+        fontFamily: 'NDot',
+        fontSize: 24,
+        fontWeight: FontWeight.bold,
+        letterSpacing: 1.0,
       ),
     );
   }
 }
+
 
 /// A widget that displays a title in the app bar with auto-sizing text.
 class AppBarTitleText extends StatelessWidget {
@@ -61,17 +52,17 @@ class AppBarTitleText extends StatelessWidget {
   }
 }
 
-class ChessigmaMessage extends StatefulWidget {
-  const ChessigmaMessage({super.key, this.style, this.textAlign = TextAlign.start});
+class ExoChessMessage extends StatefulWidget {
+  const ExoChessMessage({super.key, this.style, this.textAlign = TextAlign.start});
 
   final TextStyle? style;
   final TextAlign textAlign;
 
   @override
-  State<ChessigmaMessage> createState() => _ChessigmaMessageState();
+  State<ExoChessMessage> createState() => _ExoChessMessageState();
 }
 
-class _ChessigmaMessageState extends State<ChessigmaMessage> {
+class _ExoChessMessageState extends State<ExoChessMessage> {
   late TapGestureRecognizer _recognizer;
 
   @override
@@ -87,12 +78,12 @@ class _ChessigmaMessageState extends State<ChessigmaMessage> {
   }
 
   void _handleTap() {
-    launchUrl(Uri.parse('https://chessigma.com/features'));
+    launchUrl(Uri.parse('https://exochess.com/features'));
   }
 
   @override
   Widget build(BuildContext context) {
-    final trans = context.l10n.xIsAFreeYLibreOpenSourceChessServer('Chessigma', context.l10n.really);
+    final trans = context.l10n.xIsAFreeYLibreOpenSourceChessServer('ExoChess', context.l10n.really);
     final regexp = RegExp(r'''^([^(]*\()([^)]*)(\).*)$''');
     final match = regexp.firstMatch(trans);
     final List<TextSpan> spans = [];
@@ -110,11 +101,9 @@ class _ChessigmaMessageState extends State<ChessigmaMessage> {
       spans.add(TextSpan(text: trans));
     }
 
-    return MergeSemantics(
-      child: Text.rich(
-        TextSpan(style: widget.style, children: spans),
-        textAlign: widget.textAlign,
-      ),
+    return Text.rich(
+      TextSpan(style: widget.style, children: spans),
+      textAlign: widget.textAlign,
     );
   }
 }

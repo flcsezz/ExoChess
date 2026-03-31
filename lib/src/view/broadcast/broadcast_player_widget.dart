@@ -1,0 +1,58 @@
+import 'package:exochess_mobile/src/theme.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:exochess_mobile/src/model/broadcast/broadcast.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+
+class BroadcastPlayerWidget extends ConsumerWidget {
+  const BroadcastPlayerWidget({
+    required this.player,
+    this.showFederation = true,
+    this.showRating = true,
+    this.textStyle,
+  });
+
+  final BroadcastPlayer player;
+  final bool showFederation;
+  final bool showRating;
+  final TextStyle? textStyle;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final BroadcastPlayer(:federation, :title, :name, :rating) = player;
+
+    return Row(
+      children: [
+        if (federation != null && showFederation) ...[
+          Image.asset(
+            'assets/images/fide-fed/$federation.png',
+            height: ((textStyle ?? DefaultTextStyle.of(context).style).fontSize ?? 14) - 2,
+          ),
+          const SizedBox(width: 5),
+        ],
+        if (title != null) ...[
+          Text(
+            title,
+            style: TextStyle(
+              color: (title == 'BOT') ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.primary,
+              fontWeight: .bold,
+              fontSize: textStyle?.fontSize,
+            ),
+          ),
+          const SizedBox(width: 5),
+        ],
+        Flexible(
+          child: Text(name ?? '', style: textStyle, overflow: .ellipsis),
+        ),
+        if (rating != null && showRating) ...[
+          const SizedBox(width: 5),
+          Text(
+            rating.toString(),
+            overflow: .ellipsis,
+            style: TextStyle(fontSize: textStyle?.fontSize),
+          ),
+        ],
+      ],
+    );
+  }
+}

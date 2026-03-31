@@ -1,16 +1,16 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/common/speed.dart';
-import 'package:chessigma_mobile/src/model/correspondence/offline_correspondence_game.dart';
-import 'package:chessigma_mobile/src/model/game/exported_game.dart';
-import 'package:chessigma_mobile/src/model/game/game.dart';
-import 'package:chessigma_mobile/src/model/game/game_status.dart';
-import 'package:chessigma_mobile/src/model/game/material_diff.dart';
-import 'package:chessigma_mobile/src/model/game/player.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/common/speed.dart';
+import 'package:exochess_mobile/src/model/correspondence/offline_correspondence_game.dart';
+import 'package:exochess_mobile/src/model/game/exported_game.dart';
+import 'package:exochess_mobile/src/model/game/game.dart';
+import 'package:exochess_mobile/src/model/game/game_status.dart';
+import 'package:exochess_mobile/src/model/game/material_diff.dart';
+import 'package:exochess_mobile/src/model/game/player.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
 
 List<ExportedGame> generateExportedGames({int count = 100, String? username}) {
   return List.generate(count, (index) {

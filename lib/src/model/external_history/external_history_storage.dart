@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:chessigma_mobile/src/db/database.dart';
-import 'package:chessigma_mobile/src/model/external_history/external_history.dart';
+import 'package:exochess_mobile/src/db/database.dart';
+import 'package:exochess_mobile/src/model/external_history/external_history.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sqflite/sqflite.dart';
 

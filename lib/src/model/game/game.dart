@@ -5,19 +5,19 @@ import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart' show AppLocalizations;
-import 'package:chessigma_mobile/src/model/account/account_preferences.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/eval.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/node.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/common/speed.dart';
-import 'package:chessigma_mobile/src/model/game/game_status.dart';
-import 'package:chessigma_mobile/src/model/game/material_diff.dart';
-import 'package:chessigma_mobile/src/model/game/player.dart';
-import 'package:chessigma_mobile/src/model/offline_computer/computer_analysis.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/l10n/l10n.dart' show AppLocalizations;
+import 'package:exochess_mobile/src/model/account/account_preferences.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/eval.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/node.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/common/speed.dart';
+import 'package:exochess_mobile/src/model/game/game_status.dart';
+import 'package:exochess_mobile/src/model/game/material_diff.dart';
+import 'package:exochess_mobile/src/model/game/player.dart';
+import 'package:exochess_mobile/src/model/offline_computer/computer_analysis.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 part 'game.freezed.dart';
 part 'game.g.dart';
@@ -174,7 +174,7 @@ abstract mixin class BaseGame {
     final pgn = node.makePgn(
       IMap({
         'Event': '${meta.rated ? 'Rated' : ''} ${meta.perf.title} game',
-        if (id is GameId) 'Site': chessigmaUri('/$id').toString(),
+        if (id is GameId) 'Site': exochessUri('/$id').toString(),
         'Date': _dateFormat.format(meta.createdAt),
         'White':
             white.user?.name ??

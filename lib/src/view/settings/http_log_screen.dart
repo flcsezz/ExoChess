@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/log/http_log_paginator.dart';
-import 'package:chessigma_mobile/src/model/log/http_log_storage.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_action_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/haptic_refresh_indicator.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/log/http_log_paginator.dart';
+import 'package:exochess_mobile/src/model/log/http_log_storage.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_action_sheet.dart';
+import 'package:exochess_mobile/src/widgets/haptic_refresh_indicator.dart';
 
 class HttpLogScreen extends ConsumerStatefulWidget {
   const HttpLogScreen({super.key});
@@ -166,7 +166,7 @@ class HttpLogTile extends StatelessWidget {
                   Text(
                     httpLog.responseCode!.toString(),
                     style: TextStyle(
-                      color: httpLog.responseCode! >= 400 ? context.chessigmaColors.error : null,
+                      color: httpLog.responseCode! >= 400 ? context.exochessColors.error : null,
                       fontFeatures: const [FontFeature.tabularFigures()],
                       fontSize: 12,
                     ),
@@ -195,7 +195,7 @@ class HttpLogTile extends StatelessWidget {
           letterSpacing: -0.15,
           color: httpLog.hasResponse
               ? httpLog.responseCode! >= 400
-                    ? context.chessigmaColors.error
+                    ? context.exochessColors.error
                     : null
               : textShade(context, 0.7),
         ),

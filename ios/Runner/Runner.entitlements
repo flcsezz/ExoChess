@@ -6,7 +6,7 @@
 	<string>development</string>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:chessigma.org</string>
+		<string>applinks:exochess.org</string>
 	</array>
 </dict>
 </plist>

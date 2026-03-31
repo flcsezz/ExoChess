@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 
 /// A platform agnostic list section.
 ///
@@ -80,6 +80,9 @@ class ListSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return MediaQuery.withClampedTextScaling(
       maxScaleFactor: 1.64,
       child: _isLoading
@@ -87,8 +90,7 @@ class ListSection extends StatelessWidget {
               children: [
                 Padding(
                   padding: margin ?? Styles.bodySectionPadding,
-                  child: GlassCard(
-                    padding: EdgeInsets.zero,
+                  child: Card(
                     child: Column(
                       children: [
                         const SizedBox(height: materialVerticalPadding),
@@ -98,9 +100,9 @@ class ListSection extends StatelessWidget {
                             child: Container(
                               width: double.infinity,
                               height: 25,
-                              decoration: const BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.all(Radius.circular(16)),
+                              decoration: BoxDecoration(
+                                color: isDark ? Colors.white10 : Colors.black12,
+                                borderRadius: const BorderRadius.all(Radius.circular(16)),
                               ),
                             ),
                           ),
@@ -110,9 +112,9 @@ class ListSection extends StatelessWidget {
                           child: Container(
                             width: double.infinity,
                             height: 25,
-                            decoration: const BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
+                            decoration: BoxDecoration(
+                              color: isDark ? Colors.white10 : Colors.black12,
+                              borderRadius: const BorderRadius.all(Radius.circular(12)),
                             ),
                           ),
                         ),
@@ -127,15 +129,18 @@ class ListSection extends StatelessWidget {
               padding: margin ?? Styles.bodySectionPadding,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   if (header != null)
-                    ListSectionHeader(title: header!, onTap: onHeaderTap, trailing: headerTrailing),
-                  GlassCard(
-                    padding: EdgeInsets.zero,
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
+                      child: ListSectionHeader(title: header!, onTap: onHeaderTap, trailing: headerTrailing),
+                    ),
+                  Card(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        if (Theme.of(context).platform == TargetPlatform.iOS)
+                        if (theme.platform == TargetPlatform.iOS)
                           ..._divideTiles(
                             context: context,
                             tiles: children,
@@ -167,14 +172,16 @@ class ListSection extends StatelessWidget {
     }
 
     final List<Widget> result = [];
+    final theme = Theme.of(context);
     for (int i = 0; i < tilesList.length; i++) {
       result.add(tilesList.elementAt(i));
       if (i != tilesList.length - 1) {
         result.add(
-          PlatformDivider(
-            height: 0,
-            cupertinoHasLeading: cupertinoHasLeading,
-            cupertinoLeadingIndent: cupertinoLeadingIndent,
+          Divider(
+            height: 1,
+            indent: cupertinoHasLeading ? 56 : 16,
+            endIndent: 16,
+            color: theme.colorScheme.outline.withOpacity(0.5),
           ),
         );
       }
@@ -197,28 +204,43 @@ class ListSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return OpacityButton(
       onPressed: onTap,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Flexible(
-              child: DefaultTextStyle.merge(style: Styles.sectionTitle, child: title),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            child: DefaultTextStyle.merge(
+              style: Styles.sectionTitle.copyWith(
+                letterSpacing: 1.2,
+              ),
+              child: title is Text 
+                ? Text((title as Text).data?.toUpperCase() ?? '', style: Styles.sectionTitle.copyWith(letterSpacing: 1.2))
+                : title,
             ),
-            if (onTap != null)
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(context.l10n.more, style: TextStyle(color: ColorScheme.of(context).primary)),
-                  Icon(Icons.chevron_right, size: 16, color: ColorScheme.of(context).primary),
-                ],
-              )
-            else if (trailing != null)
-              trailing!,
-          ],
-        ),
+          ),
+          if (onTap != null)
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  context.l10n.more.toUpperCase(), 
+                  style: TextStyle(
+                    color: theme.colorScheme.primary,
+                    fontFamily: 'SpaceMono',
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Icon(Icons.chevron_right, size: 16, color: theme.colorScheme.primary),
+              ],
+            )
+          else if (trailing != null)
+            trailing!,
+        ],
       ),
     );
   }

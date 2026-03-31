@@ -3,29 +3,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/game/exported_game.dart';
-import 'package:chessigma_mobile/src/model/game/game_share_service.dart';
-import 'package:chessigma_mobile/src/model/game/game_status.dart';
-import 'package:chessigma_mobile/src/model/game/gif_export.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/utils/share.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/game/game_common_widgets.dart';
-import 'package:chessigma_mobile/src/view/game/gif_export_dialog.dart';
-import 'package:chessigma_mobile/src/view/game/status_l10n.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/board_thumbnail.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/user.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/glass_card.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/game/exported_game.dart';
+import 'package:exochess_mobile/src/model/game/game_share_service.dart';
+import 'package:exochess_mobile/src/model/game/game_status.dart';
+import 'package:exochess_mobile/src/model/game/gif_export.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/styles/exochess_colors.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/utils/share.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/game/game_common_widgets.dart';
+import 'package:exochess_mobile/src/view/game/gif_export_dialog.dart';
+import 'package:exochess_mobile/src/view/game/status_l10n.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_bottom_sheet.dart';
+import 'package:exochess_mobile/src/widgets/board_thumbnail.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/user.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/glass_card.dart';
 import 'package:share_plus/share_plus.dart';
 
 final _dateFormatter = DateFormat.yMMMd().add_Hm();
@@ -43,62 +43,94 @@ class GameListTile extends StatelessWidget {
     final (game: game, pov: youAre) = item;
     final me = youAre == Side.white ? game.white : game.black;
     final opponent = youAre == Side.white ? game.black : game.white;
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
-    Widget getResultIcon(LightExportedGame game, Side mySide) {
+    Widget getResultIndicator(LightExportedGame game, Side mySide) {
+      final Color resultColor;
       if (game.status == GameStatus.aborted || game.status == GameStatus.noStart) {
-        return Icon(CupertinoIcons.xmark_square_fill, color: ChessigmaColors.grey);
+        resultColor = Colors.grey;
       } else {
-        return game.winner == null
-            ? Icon(CupertinoIcons.equal_square_fill, color: context.chessigmaColors.brag)
+        resultColor = game.winner == null
+            ? Colors.grey
             : game.winner == mySide
-            ? Icon(CupertinoIcons.plus_square_fill, color: context.chessigmaColors.good)
-            : Icon(CupertinoIcons.minus_square_fill, color: context.chessigmaColors.error);
+            ? Colors.green
+            : const Color(0xFFD71921);
       }
+
+      return Container(
+        width: 8,
+        height: 8,
+        decoration: BoxDecoration(
+          color: resultColor,
+          shape: BoxShape.circle,
+        ),
+      );
     }
 
-    final opponentTitle = UserFullNameWidget.player(
-      user: opponent.user,
-      aiLevel: opponent.aiLevel,
-      rating: opponent.rating,
-    );
-
-    return GlassCard(
-      child: ListTile(
-        onTap: () => openGameScreen(
-          context,
-          game: item.game,
-          orientation: item.pov,
-          loadingFen: game.lastFen,
-          loadingLastMove: game.lastMove,
-          lastMoveAt: game.lastMoveAt,
-        ),
-        onLongPress: () {
-          showModalBottomSheet<void>(
-            context: context,
-            useRootNavigator: true,
-            isDismissible: true,
-            isScrollControlled: true,
-            builder: (context) => GameContextMenu(
-              game: game,
-              mySide: youAre,
-              opponentTitle: opponentTitle,
-              onPressedBookmark: onPressedBookmark,
+    return ListTile(
+      onTap: () => openGameScreen(
+        context,
+        game: item.game,
+        orientation: item.pov,
+        loadingFen: game.lastFen,
+        loadingLastMove: game.lastMove,
+        lastMoveAt: game.lastMoveAt,
+      ),
+      onLongPress: () {
+        showModalBottomSheet<void>(
+          context: context,
+          useRootNavigator: true,
+          isDismissible: true,
+          isScrollControlled: true,
+          builder: (context) => GameContextMenu(
+            game: game,
+            mySide: youAre,
+            opponentTitle: UserFullNameWidget.player(
+              user: opponent.user,
+              aiLevel: opponent.aiLevel,
+              rating: opponent.rating,
             ),
-          );
-        },
-        leading: Icon(game.perf.icon),
-        title: opponentTitle,
-        subtitle: Text(relativeDate(context.l10n, game.lastMoveAt, shortDate: false)),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (me.analysis != null) ...[
-              Icon(CupertinoIcons.chart_bar_alt_fill, color: textShade(context, 0.5)),
-              const SizedBox(width: 5),
-            ],
-            getResultIcon(game, youAre),
-          ],
+            onPressedBookmark: onPressedBookmark,
+          ),
+        );
+      },
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      leading: Container(
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          border: Border.all(color: theme.colorScheme.outline),
         ),
+        child: Icon(game.perf.icon, size: 20, color: theme.colorScheme.onSurface),
+      ),
+      title: UserFullNameWidget.player(
+        user: opponent.user,
+        aiLevel: opponent.aiLevel,
+        rating: opponent.rating,
+        style: const TextStyle(
+          fontFamily: 'SpaceMono',
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+        ),
+      ),
+      subtitle: Text(
+        '${game.clockDisplay(context.l10n)} • ${relativeDate(context.l10n, game.lastMoveAt)}'.toUpperCase(),
+        style: TextStyle(
+          fontFamily: 'SpaceMono',
+          fontSize: 11,
+          color: isDark ? Colors.white38 : Colors.black38,
+        ),
+      ),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (me.analysis != null) ...[
+            Icon(Icons.analytics_outlined, size: 16, color: isDark ? Colors.white24 : Colors.black26),
+            const SizedBox(width: 12),
+          ],
+          getResultIndicator(game, youAre),
+        ],
       ),
     );
   }
@@ -128,19 +160,27 @@ class GameContextMenu extends ConsumerWidget {
         Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 16.0,
-          ).add(const EdgeInsets.only(bottom: 4.0)),
+          ).add(const EdgeInsets.only(bottom: 12.0)),
           child: Text(
             context.l10n.resVsX(
               game.white.fullName(context.l10n),
               game.black.fullName(context.l10n),
+            ).toUpperCase(),
+            style: const TextStyle(
+              fontFamily: 'NDot',
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.0,
             ),
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600, letterSpacing: -0.5),
           ),
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: LayoutBuilder(
             builder: (context, constraints) {
+              final theme = Theme.of(context);
+              final isDark = theme.brightness == Brightness.dark;
+              
               return IntrinsicHeight(
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
@@ -154,7 +194,7 @@ class GameContextMenu extends ConsumerWidget {
                       ),
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Column(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -164,14 +204,20 @@ class GameContextMenu extends ConsumerWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '${game.clockDisplay(context.l10n)} • ${game.rated ? context.l10n.rated : context.l10n.casual}',
-                                  style: const TextStyle(fontWeight: FontWeight.w500),
+                                  '${game.clockDisplay(context.l10n)} • ${game.rated ? context.l10n.rated : context.l10n.casual}'.toUpperCase(),
+                                  style: const TextStyle(
+                                    fontFamily: 'SpaceMono',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13,
+                                  ),
                                 ),
+                                const SizedBox(height: 4),
                                 Text(
-                                  _dateFormatter.format(game.lastMoveAt),
+                                  _dateFormatter.format(game.lastMoveAt).toUpperCase(),
                                   style: TextStyle(
-                                    color: textShade(context, Styles.subtitleOpacity),
-                                    fontSize: 12,
+                                    color: isDark ? Colors.white38 : Colors.black38,
+                                    fontFamily: 'SpaceMono',
+                                    fontSize: 11,
                                   ),
                                 ),
                               ],
@@ -187,24 +233,17 @@ class GameContextMenu extends ConsumerWidget {
                                     Setup.parseFen(game.lastFen!),
                                   ),
                                   winner: game.winner,
-                                ),
+                                ).toUpperCase(),
                                 style: TextStyle(
-                                  color: game.winner == null
-                                      ? context.chessigmaColors.brag
-                                      : game.winner == mySide
-                                      ? context.chessigmaColors.good
-                                      : context.chessigmaColors.error,
-                                ),
-                              ),
-                            if (game.opening != null)
-                              Text(
-                                game.opening!.name,
-                                maxLines: 2,
-                                style: TextStyle(
-                                  color: textShade(context, Styles.subtitleOpacity),
+                                  fontFamily: 'SpaceMono',
+                                  fontWeight: FontWeight.bold,
                                   fontSize: 12,
+                                  color: game.winner == null
+                                      ? Colors.grey
+                                      : game.winner == mySide
+                                      ? Colors.green
+                                      : const Color(0xFFD71921),
                                 ),
-                                overflow: TextOverflow.ellipsis,
                               ),
                           ],
                         ),
@@ -256,7 +295,7 @@ class GameContextMenu extends ConsumerWidget {
                 onPressed: () {
                   launchShareDialog(
                     context,
-                    ShareParams(uri: chessigmaUri('/${game.id}/${orientation.name}')),
+                    ShareParams(uri: exochessUri('/${game.id}/${orientation.name}')),
                   );
                 },
                 icon: Theme.of(context).platform == TargetPlatform.iOS

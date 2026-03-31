@@ -1,7 +1,7 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/game/material_diff.dart';
+import 'package:exochess_mobile/src/model/game/material_diff.dart';
 
 void main() {
   group('GameMaterialDiff', () {

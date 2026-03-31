@@ -4,9 +4,9 @@ import 'dart:math' as math;
 import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
-import 'package:chessigma_mobile/src/model/common/eval.dart';
-import 'package:chessigma_mobile/src/model/engine/engine.dart';
-import 'package:chessigma_mobile/src/model/engine/work.dart';
+import 'package:exochess_mobile/src/model/common/eval.dart';
+import 'package:exochess_mobile/src/model/engine/engine.dart';
+import 'package:exochess_mobile/src/model/engine/work.dart';
 import 'package:logging/logging.dart';
 
 const minDepth = 6;

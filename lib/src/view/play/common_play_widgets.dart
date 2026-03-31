@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/model/lobby/game_setup_preferences.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/widgets/non_linear_slider.dart';
+import 'package:exochess_mobile/src/model/lobby/game_setup_preferences.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/widgets/non_linear_slider.dart';
 
 class PlayRatingRange extends StatefulWidget {
   const PlayRatingRange({

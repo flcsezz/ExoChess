@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/account/account_preferences.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/lichess_assets.dart';
-import 'package:chessigma_mobile/src/widgets/network_image.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/account/account_preferences.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/lichess_assets.dart';
+import 'package:exochess_mobile/src/widgets/network_image.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 /// A Wifi icon representing that the user is currently connected (online) or not.
@@ -54,14 +54,14 @@ class PatronIcon extends StatelessWidget {
     final textStyle = DefaultTextStyle.of(context).style;
     final brightness = Theme.of(context).brightness;
     return Icon(
-      ChessigmaIcons.patron,
+      ExoChessIcons.patron,
       color: color != null
           ? brightness == Brightness.dark
                 ? patronColorsDark[(color! - 1)]
                 : patronColorsLight[(color! - 1)]
           : null,
       size: size ?? textStyle.fontSize,
-      semanticLabel: context.l10n.patronChessigmaPatron,
+      semanticLabel: context.l10n.patronExoChessPatron,
     );
   }
 
@@ -178,8 +178,8 @@ class UserFullNameWidget extends ConsumerWidget {
             user!.title!,
             style: (style ?? const TextStyle()).copyWith(
               color: user?.title == 'BOT'
-                  ? context.chessigmaColors.fancy
-                  : context.chessigmaColors.brag,
+                  ? context.exochessColors.fancy
+                  : context.exochessColors.brag,
               fontWeight: user?.title == 'BOT' ? null : FontWeight.bold,
             ),
           ),
@@ -202,9 +202,10 @@ class UserFullNameWidget extends ConsumerWidget {
           Text(
             ratingStr,
             style: contextTextStyle.copyWith(
-              fontWeight: FontWeight.w400,
-              fontSize: contextTextStyle.fontSize != null ? contextTextStyle.fontSize! - 3 : 13,
-              color: textShade(context, 0.8),
+              fontFamily: 'SpaceMono',
+              fontWeight: FontWeight.bold,
+              fontSize: contextTextStyle.fontSize != null ? contextTextStyle.fontSize! - 2 : 13,
+              color: textShade(context, 0.6),
             ),
           ),
         ],

@@ -2,30 +2,30 @@ import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:chessigma_mobile/src/model/account/account_service.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/game/game_filter.dart';
-import 'package:chessigma_mobile/src/model/game/game_history.dart';
-import 'package:chessigma_mobile/src/model/user/game_history_preferences.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/model/user/user_repository_providers.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/string.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/game/game_list_detail_tile.dart';
-import 'package:chessigma_mobile/src/view/game/game_list_tile.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/filter.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/misc.dart';
-import 'package:chessigma_mobile/src/widgets/platform.dart';
-import 'package:chessigma_mobile/src/widgets/platform_context_menu_button.dart';
+import 'package:exochess_mobile/src/model/account/account_service.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/game/game_filter.dart';
+import 'package:exochess_mobile/src/model/game/game_history.dart';
+import 'package:exochess_mobile/src/model/user/game_history_preferences.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/model/user/user_repository_providers.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/string.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/game/game_list_detail_tile.dart';
+import 'package:exochess_mobile/src/view/game/game_list_tile.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_bottom_sheet.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/filter.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/misc.dart';
+import 'package:exochess_mobile/src/widgets/platform.dart';
+import 'package:exochess_mobile/src/widgets/platform_context_menu_button.dart';
 
 String displayModeL10n(BuildContext context, GameHistoryDisplayMode mode) {
   switch (mode) {
@@ -292,7 +292,7 @@ class _BodyState extends ConsumerState<_Body> {
                             motion: const StretchMotion(),
                             children: [
                               SlidableAction(
-                                backgroundColor: context.chessigmaColors.brag,
+                                backgroundColor: context.exochessColors.brag,
                                 onPressed: onPressedBookmark,
                                 icon: game.isBookmarked
                                     ? Icons.bookmark_remove_outlined

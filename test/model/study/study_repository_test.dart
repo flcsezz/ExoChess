@@ -3,12 +3,12 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/study/study.dart';
-import 'package:chessigma_mobile/src/model/study/study_repository.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/study/study.dart';
+import 'package:exochess_mobile/src/model/study/study_repository.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 import '../../test_container.dart';
 import '../../test_helpers.dart';
@@ -18,7 +18,7 @@ void main() {
     return makeContainer(
       overrides: {
         lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-          return ChessigmaClient(mockClient, ref);
+          return ExoChessClient(mockClient, ref);
         }),
       },
     );

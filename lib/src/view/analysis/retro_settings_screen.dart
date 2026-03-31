@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/analysis/retro_controller.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/analysis/engine_settings_widget.dart';
+import 'package:exochess_mobile/src/model/analysis/retro_controller.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/analysis/engine_settings_widget.dart';
 
 class RetroSettingsScreen extends ConsumerWidget {
   const RetroSettingsScreen(this.options);

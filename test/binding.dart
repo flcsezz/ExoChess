@@ -1,18 +1,18 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/binding.dart';
+import 'package:exochess_mobile/src/binding.dart';
 import 'package:multistockfish/multistockfish.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'model/engine/fake_stockfish.dart';
 
 /// The binding instance used in tests.
-TestChessigmaBinding get testBinding => TestChessigmaBinding.instance;
+TestExoChessBinding get testBinding => TestExoChessBinding.instance;
 
 /// Lichess binding for testing.
-class TestChessigmaBinding extends ChessigmaBinding {
-  TestChessigmaBinding() {
+class TestExoChessBinding extends ExoChessBinding {
+  TestExoChessBinding() {
     // Logger.root.level = Level.ALL;
     // Logger.root.onRecord.listen((record) {
     //   // ignore: avoid_print
@@ -22,20 +22,20 @@ class TestChessigmaBinding extends ChessigmaBinding {
     // });
   }
 
-  /// Initialize the binding if necessary, and ensure it is a [TestChessigmaBinding].
+  /// Initialize the binding if necessary, and ensure it is a [TestExoChessBinding].
   ///
-  /// If there is an existing binding but it is not a [TestChessigmaBinding],
+  /// If there is an existing binding but it is not a [TestExoChessBinding],
   /// this method throws an error.
-  factory TestChessigmaBinding.ensureInitialized() {
+  factory TestExoChessBinding.ensureInitialized() {
     if (_instance == null) {
-      TestChessigmaBinding();
+      TestExoChessBinding();
     }
     return instance;
   }
 
   /// The single instance of the binding.
-  static TestChessigmaBinding get instance => ChessigmaBinding.checkInstance(_instance);
-  static TestChessigmaBinding? _instance;
+  static TestExoChessBinding get instance => ExoChessBinding.checkInstance(_instance);
+  static TestExoChessBinding? _instance;
 
   @override
   void initInstance() {

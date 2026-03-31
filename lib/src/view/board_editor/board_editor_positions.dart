@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:chessigma_mobile/src/model/board_editor/position.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/model/board_editor/position.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
 
 class BoardEditorPositionsScreen extends StatelessWidget {
   const BoardEditorPositionsScreen({required this.onPositionSelected, super.key});

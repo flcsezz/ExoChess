@@ -2,11 +2,11 @@ import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/node.dart';
-import 'package:chessigma_mobile/src/model/study/study_controller.dart';
-import 'package:chessigma_mobile/src/model/study/study_preferences.dart';
-import 'package:chessigma_mobile/src/widgets/pgn.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/node.dart';
+import 'package:exochess_mobile/src/model/study/study_controller.dart';
+import 'package:exochess_mobile/src/model/study/study_preferences.dart';
+import 'package:exochess_mobile/src/widgets/pgn.dart';
 
 const kNextChapterButtonHeight = 32.0;
 

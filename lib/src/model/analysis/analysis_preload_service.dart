@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/utils/cache.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/utils/cache.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 enum PreloadStatus { initial, loading, success, error }

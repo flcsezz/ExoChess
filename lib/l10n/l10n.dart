@@ -730,17 +730,17 @@ abstract class AppLocalizations {
   /// **'Or import a PGN file'**
   String get mobileOrImportPgnFile;
 
-  /// No description provided for @showUnreadChessigmaMessage.
+  /// No description provided for @showUnreadExoChessMessage.
   ///
   /// In en, this message translates to:
-  /// **'You have an unread Chessigma message'**
-  String get showUnreadChessigmaMessage;
+  /// **'You have an unread ExoChess message'**
+  String get showUnreadExoChessMessage;
 
-  /// No description provided for @mobileWelcomeToChessigmaApp.
+  /// No description provided for @mobileWelcomeToExoChessApp.
   ///
   /// In en, this message translates to:
-  /// **'Welcome to Chessigma app!'**
-  String get mobileWelcomeToChessigmaApp;
+  /// **'Welcome to ExoChess app!'**
+  String get mobileWelcomeToExoChessApp;
 
   /// No description provided for @variantStandardTitle.
   ///
@@ -2188,11 +2188,11 @@ abstract class AppLocalizations {
   /// **'Donate'**
   String get patronDonate;
 
-  /// No description provided for @patronChessigmaPatron.
+  /// No description provided for @patronExoChessPatron.
   ///
   /// In en, this message translates to:
-  /// **'Chessigma Patron'**
-  String get patronChessigmaPatron;
+  /// **'ExoChess Patron'**
+  String get patronExoChessPatron;
 
   /// No description provided for @patronLichessPatron.
   ///
@@ -7423,7 +7423,7 @@ abstract class AppLocalizations {
   /// No description provided for @xIsAFreeYLibreOpenSourceChessServer.
   ///
   /// In en, this message translates to:
-  /// **'Chessigma is a Free and Opensourced Hobby Project XD'**
+  /// **'ExoChess is a Free and Opensourced Hobby Project XD'**
   String xIsAFreeYLibreOpenSourceChessServer(Object param1, Object param2);
 
   /// No description provided for @really.

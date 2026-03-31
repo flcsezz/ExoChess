@@ -1,6 +1,6 @@
 import 'dart:math' show Random;
 
-import 'package:chessigma_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/constants.dart';
 
 final _random = Random();
 const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';

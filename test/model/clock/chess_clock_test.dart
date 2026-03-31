@@ -1,7 +1,7 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/clock/chess_clock.dart';
+import 'package:exochess_mobile/src/model/clock/chess_clock.dart';
 
 void main() {
   test('make clock', () {

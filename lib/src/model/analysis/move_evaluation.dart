@@ -1,5 +1,5 @@
-import 'package:chessigma_mobile/src/model/common/feedback_data.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/model/common/feedback_data.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
 import 'package:flutter/material.dart';
 
 enum MoveEvaluation implements FeedbackData {
@@ -48,7 +48,9 @@ enum MoveEvaluation implements FeedbackData {
       case MoveEvaluation.great:
         return const Color(0xFF00FF88); // Luminous Green
       case MoveEvaluation.best:
+        return const Color(0xFFAAFF00); // Luminous Lime
       case MoveEvaluation.excellent:
+        return const Color(0xFF00AAFF); // Luminous Blue
       case MoveEvaluation.good:
         return const Color(0xFFAAFF00); // Luminous Lime
       case MoveEvaluation.book:

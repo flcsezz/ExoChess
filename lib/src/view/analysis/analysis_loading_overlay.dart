@@ -1,4 +1,4 @@
-import 'package:chessigma_mobile/src/model/analysis/analysis_preload_service.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_preload_service.dart';
 import 'package:flutter/material.dart';
 
 class AnalysisLoadingOverlay extends StatelessWidget {

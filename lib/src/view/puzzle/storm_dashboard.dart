@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_providers.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/shimmer.dart';
-import 'package:chessigma_mobile/src/widgets/stat_card.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_providers.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/styles/exochess_colors.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/shimmer.dart';
+import 'package:exochess_mobile/src/widgets/stat_card.dart';
 
 class StormDashboardModal extends StatelessWidget {
   const StormDashboardModal({super.key, required this.user});
@@ -28,7 +28,7 @@ class StormDashboardModal extends StatelessWidget {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(ChessigmaIcons.storm, size: 20),
+            const Icon(ExoChessIcons.storm, size: 20),
             const SizedBox(width: 8.0),
             Text(context.l10n.stormHighscores),
           ],
@@ -61,7 +61,7 @@ class _Body extends ConsumerWidget {
               padding: Styles.sectionTopPadding.add(Styles.horizontalBodyPadding),
               child: StatCardRow([
                 StatCard(
-                  backgroundColor: ChessigmaColors.brag.withValues(alpha: 0.5),
+                  backgroundColor: ExoChessColors.brag.withValues(alpha: 0.5),
                   context.l10n.stormAllTime,
                   value: data.highScore.allTime.toString(),
                   valueFontSize: 26,
@@ -123,7 +123,7 @@ class _Body extends ConsumerWidget {
                     // Date row
                     final entryIndex = index ~/ 2;
                     return ColoredBox(
-                      color: ChessigmaColors.grey.withValues(alpha: 0.23),
+                      color: ExoChessColors.grey.withValues(alpha: 0.23),
                       child: Padding(
                         padding: Styles.horizontalBodyPadding,
                         child: Text(
@@ -146,7 +146,7 @@ class _Body extends ConsumerWidget {
                                 textAlign: TextAlign.center,
                                 data.dayHighscores[entryIndex].score.toString(),
                                 style: TextStyle(
-                                  color: context.chessigmaColors.brag,
+                                  color: context.exochessColors.brag,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

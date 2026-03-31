@@ -1,8 +1,8 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/study/study.dart';
-import 'package:chessigma_mobile/src/model/study/study_filter.dart';
-import 'package:chessigma_mobile/src/model/study/study_repository.dart';
+import 'package:exochess_mobile/src/model/study/study.dart';
+import 'package:exochess_mobile/src/model/study/study_filter.dart';
+import 'package:exochess_mobile/src/model/study/study_repository.dart';
 
 typedef StudyList = ({IList<StudyPageItem> studies, int? nextPage});
 typedef StudyListNotifierParams = ({StudyCategory category, StudyListOrder order, String? search});

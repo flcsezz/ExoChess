@@ -1,6 +1,6 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_providers.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_providers.dart';
 
 typedef PuzzleOpeningFamily = ({
   String key,

@@ -284,10 +284,10 @@ class AppLocalizationsPl extends AppLocalizations {
   String get mobileOrImportPgnFile => 'Lub zaimportuj plik PGN';
 
   @override
-  String get showUnreadChessigmaMessage => 'You have an unread Chessigma message';
+  String get showUnreadExoChessMessage => 'You have an unread ExoChess message';
 
   @override
-  String get mobileWelcomeToChessigmaApp => 'Welcome to Chessigma app!';
+  String get mobileWelcomeToExoChessApp => 'Welcome to ExoChess app!';
 
   @override
   String get variantStandardTitle => 'Standardowe zasady szachów (FIDE)';
@@ -1281,7 +1281,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get patronDonate => 'Przekaż datek';
 
   @override
-  String get patronChessigmaPatron => 'Chessigma Patron';
+  String get patronExoChessPatron => 'ExoChess Patron';
 
   @override
   String get patronLichessPatron => 'Patron Lichess';

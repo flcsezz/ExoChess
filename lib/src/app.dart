@@ -6,28 +6,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:l10n_esperanto/l10n_esperanto.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/app_links.dart';
-import 'package:chessigma_mobile/src/model/account/account_service.dart';
-import 'package:chessigma_mobile/src/model/account/ongoing_game.dart';
-import 'package:chessigma_mobile/src/model/announce/announce_service.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_repository.dart';
-import 'package:chessigma_mobile/src/model/auth/oauth_callback.dart';
-import 'package:chessigma_mobile/src/model/challenge/challenge_service.dart';
-import 'package:chessigma_mobile/src/model/common/preloaded_data.dart';
-import 'package:chessigma_mobile/src/model/correspondence/correspondence_service.dart';
-import 'package:chessigma_mobile/src/model/log/app_log_service.dart';
-import 'package:chessigma_mobile/src/model/message/message_service.dart';
-import 'package:chessigma_mobile/src/model/notifications/notification_service.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
-import 'package:chessigma_mobile/src/network/connectivity.dart';
-import 'package:chessigma_mobile/src/network/socket.dart';
-import 'package:chessigma_mobile/src/quick_actions.dart';
-import 'package:chessigma_mobile/src/tab_scaffold.dart';
-import 'package:chessigma_mobile/src/theme.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/view/more/import_pgn_screen.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/src/app_links.dart';
+import 'package:exochess_mobile/src/model/account/account_service.dart';
+import 'package:exochess_mobile/src/model/account/ongoing_game.dart';
+import 'package:exochess_mobile/src/model/announce/announce_service.dart';
+import 'package:exochess_mobile/src/model/auth/auth_repository.dart';
+import 'package:exochess_mobile/src/model/auth/oauth_callback.dart';
+import 'package:exochess_mobile/src/model/challenge/challenge_service.dart';
+import 'package:exochess_mobile/src/model/common/preloaded_data.dart';
+import 'package:exochess_mobile/src/model/correspondence/correspondence_service.dart';
+import 'package:exochess_mobile/src/model/log/app_log_service.dart';
+import 'package:exochess_mobile/src/model/message/message_service.dart';
+import 'package:exochess_mobile/src/model/notifications/notification_service.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/model/settings/general_preferences.dart';
+import 'package:exochess_mobile/src/network/connectivity.dart';
+import 'package:exochess_mobile/src/network/socket.dart';
+import 'package:exochess_mobile/src/quick_actions.dart';
+import 'package:exochess_mobile/src/model/onboarding/onboarding_preferences.dart';
+import 'package:exochess_mobile/src/tab_scaffold.dart';
+import 'package:exochess_mobile/src/theme.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/view/more/import_pgn_screen.dart';
+import 'package:exochess_mobile/src/view/onboarding/onboarding_screen.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 /// Application initialization and main entry point.
@@ -180,7 +182,7 @@ class _AppState extends ConsumerState<Application> {
         CupertinoLocalizationsEo.delegate,
       ],
       supportedLocales: AppLocalizations.supportedLocales,
-      title: 'Chessigma',
+      title: 'ExoChess',
       locale: generalPrefs.locale,
       theme: theme.copyWith(
         navigationBarTheme: isIOS
@@ -189,7 +191,7 @@ class _AppState extends ConsumerState<Application> {
                 context,
               ).copyWith(height: isShortVerticalScreen(context) ? 60 : null),
       ),
-      home: const MainTabScaffold(),
+      home: const _AppRouter(),
       navigatorObservers: [rootNavPageRouteObserver],
     );
   }
@@ -245,5 +247,20 @@ class _AppState extends ConsumerState<Application> {
     } catch (e) {
       debugPrint('Failed to process incoming file: $e');
     }
+  }
+}
+
+/// Navigation guard: shows [OnboardingScreen] on first launch,
+/// then [MainTabScaffold] for every subsequent launch.
+class _AppRouter extends ConsumerWidget {
+  const _AppRouter();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final onboarding = ref.watch(onboardingPreferencesProvider);
+    if (!onboarding.hasCompleted) {
+      return const OnboardingScreen();
+    }
+    return const MainTabScaffold();
   }
 }

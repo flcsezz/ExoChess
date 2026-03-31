@@ -1,8 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/model/explorer/tablebase.dart';
-import 'package:chessigma_mobile/src/model/explorer/tablebase_repository.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/explorer/tablebase.dart';
+import 'package:exochess_mobile/src/model/explorer/tablebase_repository.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 import '../../test_container.dart';
 import '../../test_helpers.dart';

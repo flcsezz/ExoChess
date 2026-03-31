@@ -4,11 +4,11 @@ import 'package:collection/collection.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/binding.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_angle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_theme.dart';
+import 'package:exochess_mobile/src/binding.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_angle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'puzzle_session.freezed.dart';
@@ -82,7 +82,7 @@ class PuzzleSession extends Notifier<PuzzleSessionData> {
     return PuzzleSessionData.fromJson(jsonDecode(stored) as Map<String, dynamic>);
   }
 
-  SharedPreferencesWithCache get _store => ChessigmaBinding.instance.sharedPreferences;
+  SharedPreferencesWithCache get _store => ExoChessBinding.instance.sharedPreferences;
 
   String get _storageKey => 'puzzle_session.${params.userId ?? '**anon**'}';
 }

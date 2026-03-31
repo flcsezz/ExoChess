@@ -5,19 +5,19 @@ import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/node.dart';
-import 'package:chessigma_mobile/src/model/common/service/move_feedback.dart';
-import 'package:chessigma_mobile/src/model/common/service/sound_service.dart';
-import 'package:chessigma_mobile/src/model/common/uci.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_difficulty.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_preferences.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_repository.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_service.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_session.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/node.dart';
+import 'package:exochess_mobile/src/model/common/service/move_feedback.dart';
+import 'package:exochess_mobile/src/model/common/service/sound_service.dart';
+import 'package:exochess_mobile/src/model/common/uci.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_difficulty.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_preferences.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_repository.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_service.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_session.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 part 'puzzle_controller.freezed.dart';
 
@@ -348,7 +348,7 @@ class PuzzleController extends Notifier<PuzzleState> {
       return acc;
     });
     final pgn =
-        '[FEN "${initPosition.fen}"][Site "${chessigmaUri('/training/${state.puzzle.puzzle.id}')}"]${pgnMoves.join(' ')}';
+        '[FEN "${initPosition.fen}"][Site "${exochessUri('/training/${state.puzzle.puzzle.id}')}"]${pgnMoves.join(' ')}';
     return pgn;
   }
 

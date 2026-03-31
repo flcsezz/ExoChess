@@ -1,18 +1,18 @@
 import 'dart:convert';
 
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/common/speed.dart';
-import 'package:chessigma_mobile/src/model/external_history/external_history.dart';
-import 'package:chessigma_mobile/src/model/external_history/external_history_provider.dart';
-import 'package:chessigma_mobile/src/model/external_history/external_history_storage.dart';
-import 'package:chessigma_mobile/src/model/game/game_status.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/view/external_history/external_game_history_screen.dart';
-import 'package:chessigma_mobile/src/view/more/import_pgn_screen.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/neon_button.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/glass_card.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/common/speed.dart';
+import 'package:exochess_mobile/src/model/external_history/external_history.dart';
+import 'package:exochess_mobile/src/model/external_history/external_history_provider.dart';
+import 'package:exochess_mobile/src/model/external_history/external_history_storage.dart';
+import 'package:exochess_mobile/src/model/game/game_status.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/view/external_history/external_game_history_screen.dart';
+import 'package:exochess_mobile/src/view/more/import_pgn_screen.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/neon_button.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/glass_card.dart';
 import 'package:dartchess/dartchess.dart' hide Variant;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -47,224 +47,203 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final inputBgColor = Colors.white.withValues(alpha: 0.05);
+    final isDark = theme.brightness == Brightness.dark;
+    final accentColor = theme.colorScheme.primary;
 
     return Padding(
-      padding: Styles.bodySectionPadding,
-      child: GlassCard(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // Source Selection
-            Row(
-              children: [
-                Expanded(
-                  child: _SourceCard(
-                    title: 'Chess.com',
-                    icon: Icons.person,
-                    isSelected: !_isPgnSelected && _selectedSource == ExternalSource.chesscom,
-                    onTap: () => setState(() {
-                      _isPgnSelected = false;
-                      _selectedSource = ExternalSource.chesscom;
-                    }),
+      padding: Styles.horizontalBodyPadding.add(const EdgeInsets.only(top: 4, bottom: 8)),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'EXTERNAL GAMES',
+                style: theme.textTheme.labelLarge?.copyWith(
+                  fontFamily: 'SpaceMono',
+                  letterSpacing: 2.0,
+                  color: isDark ? Colors.white38 : Colors.black38,
+                ),
+              ),
+              const SizedBox(height: 24),
+              // Source Selection
+              Row(
+                children: [
+                  Expanded(
+                    child: _SourceCard(
+                      title: 'Chess.com',
+                      icon: Icons.person,
+                      isSelected: !_isPgnSelected && _selectedSource == ExternalSource.chesscom,
+                      onTap: () => setState(() {
+                        _isPgnSelected = false;
+                        _selectedSource = ExternalSource.chesscom;
+                      }),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: _SourceCard(
+                      title: 'Lichess.org',
+                      icon: ExoChessIcons.logo_lichess,
+                      isSelected: !_isPgnSelected && _selectedSource == ExternalSource.lichess,
+                      onTap: () => setState(() {
+                        _isPgnSelected = false;
+                        _selectedSource = ExternalSource.lichess;
+                      }),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: _SourceCard(
+                      title: 'PGN',
+                      icon: Icons.description,
+                      isSelected: _isPgnSelected,
+                      onTap: () => setState(() {
+                        _isPgnSelected = true;
+                      }),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 32),
+
+              if (!_isPgnSelected) ...[
+                Text(
+                  '${_selectedSource.displayName} username'.toUpperCase(),
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'SpaceMono',
                   ),
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: _SourceCard(
-                    title: 'Lichess.org',
-                    icon: ChessigmaIcons.logo_lichess,
-                    isSelected: !_isPgnSelected && _selectedSource == ExternalSource.lichess,
-                    onTap: () => setState(() {
-                      _isPgnSelected = false;
-                      _selectedSource = ExternalSource.lichess;
-                    }),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    hintText: _selectedSource == ExternalSource.chesscom
+                        ? 'MagnusCarlsen'
+                        : 'DrNykterstein',
+                  ),
+                  style: theme.textTheme.bodyLarge?.copyWith(fontFamily: 'SpaceMono'),
+                ),
+                const SizedBox(height: 24),
+                FilledButton(
+                  onPressed: _handleFetch,
+                  child: const Text('FETCH RECENT GAMES'),
+                ),
+              ] else ...[
+                Text(
+                  'USERNAME',
+                  style: theme.textTheme.labelSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'SpaceMono',
                   ),
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: _SourceCard(
-                    title: 'PGN',
-                    icon: Icons.description,
-                    isSelected: _isPgnSelected,
-                    onTap: () => setState(() {
-                      _isPgnSelected = true;
-                    }),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: _usernameController,
+                  decoration: const InputDecoration(
+                    hintText: 'Akenosir',
                   ),
+                  style: theme.textTheme.bodyLarge?.copyWith(fontFamily: 'SpaceMono'),
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'PGN CONTENT',
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'SpaceMono',
+                      ),
+                    ),
+                    TextButton.icon(
+                      onPressed: _pickPgnFile,
+                      icon: const Icon(Icons.upload, size: 16),
+                      label: const Text('IMPORT FILE'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: _pgnController,
+                  maxLines: 5,
+                  decoration: const InputDecoration(
+                    hintText: 'Paste PGN games here...',
+                  ),
+                  style: theme.textTheme.bodyMedium?.copyWith(fontFamily: 'SpaceMono'),
+                ),
+                const SizedBox(height: 24),
+                FilledButton(
+                  onPressed: _handleImportPgn,
+                  child: const Text('IMPORT PGN GAMES'),
                 ),
               ],
-            ),
-            const SizedBox(height: 24),
 
-            if (!_isPgnSelected) ...[
-              Text(
-                '${_selectedSource.displayName} username',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white70,
-                ),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  hintText: _selectedSource == ExternalSource.chesscom
-                      ? 'MagnusCarlsen'
-                      : 'DrNykterstein',
-                  hintStyle: const TextStyle(color: Colors.white38),
-                  filled: true,
-                  fillColor: inputBgColor,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                style: const TextStyle(color: Colors.white),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                child: NeonButton(
-                  onPressed: _handleFetch,
-                  label: 'Fetch Recent Games',
-                  glowColor: const Color(0xFFE8B84B), // Gold glow for external search
-                ),
-              ),
-            ] else ...[
-              Text(
-                'Username',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white70,
-                ),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  hintText: 'Akenosir',
-                  hintStyle: const TextStyle(color: Colors.white38),
-                  filled: true,
-                  fillColor: inputBgColor,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-                style: const TextStyle(color: Colors.white),
-              ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'PGN Content',
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white70,
+                    'RECENT HISTORY',
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      fontFamily: 'NDot',
                     ),
                   ),
-                  TextButton.icon(
-                    onPressed: _pickPgnFile,
-                    icon: const Icon(Icons.upload, size: 16, color: Colors.white),
-                    label: const Text('Import File', style: TextStyle(color: Colors.white)),
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.white.withValues(alpha: 0.1),
-                    ),
+                  IconButton(
+                    onPressed: () {
+                      ref.invalidate(
+                        externalGameHistorySourceLocalProvider(
+                          _isPgnSelected ? ExternalSource.pgn : _selectedSource,
+                        ),
+                      );
+                    },
+                    icon: const Icon(Icons.refresh, size: 20),
                   ),
                 ],
               ),
-              const SizedBox(height: 8),
-              TextField(
-                controller: _pgnController,
-                maxLines: 5,
-                decoration: InputDecoration(
-                  hintText: 'Paste PGN games here or import a file... (supports multiple games)',
-                  hintStyle: const TextStyle(color: Colors.white38),
-                  filled: true,
-                  fillColor: inputBgColor,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide.none,
-                  ),
+              const SizedBox(height: 12),
+              _GameHistoryList(source: _isPgnSelected ? ExternalSource.pgn : _selectedSource),
+
+              const SizedBox(height: 32),
+              Text(
+                _isPgnSelected ? 'Import multiple games by pasting them above.' : 'Try with top players:',
+                style: theme.textTheme.labelSmall?.copyWith(
+                  color: isDark ? Colors.white38 : Colors.black38,
+                  fontFamily: 'SpaceMono',
                 ),
-                style: const TextStyle(color: Colors.white),
               ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                child: NeonButton(
-                  onPressed: _handleImportPgn,
-                  label: 'Import PGN Games',
-                  glowColor: const Color(0xFFE8B84B),
+              const SizedBox(height: 16),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    _TryItOutAvatar(
+                      name: 'Magnus Carlsen',
+                      imageUrl: 'assets/images/anon-face.webp',
+                      onTap: () => _usernameController.text = 'MagnusCarlsen',
+                    ),
+                    const SizedBox(width: 12),
+                    _TryItOutAvatar(
+                      name: 'GothamChess',
+                      imageUrl: 'assets/images/anon-face.webp',
+                      onTap: () => _usernameController.text = 'GothamChess',
+                    ),
+                    const SizedBox(width: 12),
+                    _TryItOutAvatar(
+                      name: 'Hikaru',
+                      imageUrl: 'assets/images/anon-face.webp',
+                      onTap: () {
+                        _usernameController.text = 'Hikaru';
+                      },
+                    ),
+                  ],
                 ),
               ),
             ],
-
-            const SizedBox(height: 24),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Recent History',
-                  style: theme.textTheme.titleSmall?.copyWith(
-                    color: const Color(0xFFE8B84B),
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    ref.invalidate(
-                      externalGameHistorySourceLocalProvider(
-                        _isPgnSelected ? ExternalSource.pgn : _selectedSource,
-                      ),
-                    );
-                  },
-                  child: const Icon(Icons.refresh, color: Colors.white70, size: 20),
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-            _GameHistoryList(source: _isPgnSelected ? ExternalSource.pgn : _selectedSource),
-
-            const SizedBox(height: 24),
-            if (!_isPgnSelected)
-              const Text('Try it out:', style: TextStyle(color: Colors.white38, fontSize: 12))
-            else
-              const Text(
-                'You can paste one or multiple PGN games to import them',
-                style: TextStyle(color: Colors.white38, fontSize: 12),
-              ),
-            const SizedBox(height: 12),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  _TryItOutAvatar(
-                    name: 'Magnus Carlsen',
-                    imageUrl: 'assets/images/anon-face.webp',
-                    onTap: () => _usernameController.text = 'MagnusCarlsen',
-                  ),
-                  const SizedBox(width: 8),
-                  _TryItOutAvatar(
-                    name: 'GothamChess',
-                    imageUrl: 'assets/images/anon-face.webp',
-                    onTap: () => _usernameController.text = 'GothamChess',
-                  ),
-                  const SizedBox(width: 8),
-                  _TryItOutAvatar(
-                    name: 'Hikaru vs Magnus',
-                    imageUrl: 'assets/images/anon-face.webp',
-                    onTap: () {
-                      _usernameController.text = 'Hikaru';
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -375,33 +354,88 @@ class _ExternalGameFetchWidgetState extends ConsumerState<ExternalGameFetchWidge
   }
 }
 
-class _GameHistoryList extends ConsumerWidget {
+class _GameHistoryList extends ConsumerStatefulWidget {
   const _GameHistoryList({required this.source});
 
   final ExternalSource source;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final history = ref.watch(externalGameHistorySourceLocalProvider(source));
+  ConsumerState<_GameHistoryList> createState() => _GameHistoryListState();
+}
+
+class _GameHistoryListState extends ConsumerState<_GameHistoryList> {
+  bool _isExpanded = false;
+  static const int _initialCount = 3;
+
+  @override
+  Widget build(BuildContext context) {
+    final history = ref.watch(externalGameHistorySourceLocalProvider(widget.source));
+    final theme = Theme.of(context);
 
     return history.when(
       data: (games) {
         if (games.isEmpty) {
           return Container(
-            padding: const EdgeInsets.symmetric(vertical: 20),
+            padding: const EdgeInsets.symmetric(vertical: 32),
             decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.02),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.white.withValues(alpha: 0.05)),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: theme.colorScheme.outline),
             ),
             child: const Center(
-              child: Text('No recent games', style: TextStyle(color: Colors.white24, fontSize: 13)),
+              child: Text(
+                'NO RECENT GAMES',
+                style: TextStyle(fontFamily: 'SpaceMono', fontSize: 12, color: Colors.grey),
+              ),
             ),
           );
         }
 
-        final displayGames = games.take(15).toList();
-        return Column(children: displayGames.map((game) => _GameHistoryItem(game: game)).toList());
+        final totalGamesList = games.toList();
+        final displayGames =
+            _isExpanded ? totalGamesList : totalGamesList.take(_initialCount).toList();
+
+        return Column(
+          children: [
+            AnimatedSize(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              child: Column(
+                children: displayGames.map((game) => _GameHistoryItem(game: game)).toList(),
+              ),
+            ),
+            if (totalGamesList.length > _initialCount)
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: TextButton(
+                  onPressed: () {
+                    setState(() {
+                      _isExpanded = !_isExpanded;
+                    });
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        (_isExpanded ? 'COLLAPSE' : 'SHOW MORE').toUpperCase(),
+                        style: TextStyle(
+                          fontFamily: 'SpaceMono',
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: theme.colorScheme.primary,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Icon(
+                        _isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                        size: 16,
+                        color: theme.colorScheme.primary,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+          ],
+        );
       },
       loading: () => const Center(child: CircularProgressIndicator()),
       error: (e, _) => Text('Error loading history: $e'),
@@ -416,58 +450,69 @@ class _GameHistoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     final pov = game.orientationForUsername(game.username) ?? Side.white;
     final isWinner = game.winner == pov;
     final isDraw = game.winner == null;
 
     final resultColor = isWinner
-        ? Colors.greenAccent
+        ? Colors.green
         : isDraw
-        ? Colors.white54
-        : Colors.redAccent;
+        ? Colors.grey
+        : const Color(0xFFD71921);
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: GlassCard(
+      padding: const EdgeInsets.only(bottom: 12),
+      child: InkWell(
         onTap: () {
           ImportPgnScreen.handlePgnText(context, game.pgn);
         },
-        padding: const EdgeInsets.all(12),
-        child: Row(
-          children: [
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: resultColor.withValues(alpha: 0.1),
-                shape: BoxShape.circle,
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(color: theme.colorScheme.outline),
+          ),
+          child: Row(
+            children: [
+              Container(
+                width: 12,
+                height: 12,
+                decoration: BoxDecoration(
+                  color: resultColor,
+                  shape: BoxShape.circle,
+                ),
               ),
-              child: Icon(Symbols.chess_pawn_rounded, color: resultColor, size: 20),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${game.players.white.name} vs ${game.players.black.name}',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${game.players.white.name} vs ${game.players.black.name}'.toUpperCase(),
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        fontFamily: 'SpaceMono',
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    '${game.username} • ${_formatDate(game.createdAt)}',
-                    style: TextStyle(color: Colors.white.withValues(alpha: 0.4), fontSize: 11),
-                  ),
-                ],
+                    const SizedBox(height: 4),
+                    Text(
+                      '${game.username} • ${_formatDate(game.createdAt)}',
+                      style: theme.textTheme.labelSmall?.copyWith(
+                        fontFamily: 'SpaceMono',
+                        color: isDark ? Colors.white38 : Colors.black38,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Icon(Icons.chevron_right, color: Colors.white.withValues(alpha: 0.2), size: 16),
-          ],
+              const Icon(Icons.arrow_forward_ios, size: 14),
+            ],
+          ),
         ),
       ),
     );
@@ -493,49 +538,42 @@ class _SourceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const accentColor = Color(0xFFE8B84B);
+    final theme = Theme.of(context);
+    final accentColor = theme.colorScheme.primary;
+    final isDark = theme.brightness == Brightness.dark;
+
     return GestureDetector(
       onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.all(12),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 20),
         decoration: BoxDecoration(
           color: isSelected
-              ? accentColor.withValues(alpha: 0.1)
-              : Colors.white.withValues(alpha: 0.02),
-          borderRadius: BorderRadius.circular(12),
-          border: isSelected
-              ? Border.all(color: accentColor, width: 2.5)
-              : Border.all(color: Colors.white.withValues(alpha: 0.1)),
+              ? (isDark ? Colors.white.withOpacity(0.05) : Colors.black.withOpacity(0.05))
+              : Colors.transparent,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isSelected ? accentColor : theme.colorScheme.outline,
+            width: isSelected ? 2 : 1,
+          ),
         ),
-        child: Stack(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(icon, size: 32, color: isSelected ? accentColor : Colors.white24),
-                  const SizedBox(height: 8),
-                  Text(
-                    title,
-                    style: TextStyle(
-                      color: isSelected ? Colors.white : Colors.white38,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
+            Icon(
+              icon,
+              size: 28,
+              color: isSelected ? accentColor : (isDark ? Colors.white38 : Colors.black38),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              title.toUpperCase(),
+              style: theme.textTheme.labelSmall?.copyWith(
+                fontFamily: 'SpaceMono',
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                color: isSelected ? (isDark ? Colors.white : Colors.black) : (isDark ? Colors.white38 : Colors.black38),
               ),
             ),
-            if (isSelected)
-              Positioned(
-                top: 0,
-                right: 0,
-                child: Container(
-                  width: 6,
-                  height: 6,
-                  decoration: const BoxDecoration(color: accentColor, shape: BoxShape.circle),
-                ),
-              ),
           ],
         ),
       ),
@@ -552,26 +590,30 @@ class _TryItOutAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    final theme = Theme.of(context);
+    return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(30),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
-          color: Colors.white.withValues(alpha: 0.05),
-          borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+          borderRadius: BorderRadius.circular(30),
+          border: Border.all(color: theme.colorScheme.outline),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircleAvatar(radius: 10, backgroundImage: AssetImage(imageUrl)),
-            const SizedBox(width: 8),
+            CircleAvatar(
+              radius: 12,
+              backgroundColor: Colors.grey[200],
+              backgroundImage: AssetImage(imageUrl),
+            ),
+            const SizedBox(width: 12),
             Text(
-              name,
-              style: const TextStyle(
-                fontSize: 12,
-                color: Colors.white70,
-                fontWeight: FontWeight.w500,
+              name.toUpperCase(),
+              style: theme.textTheme.labelSmall?.copyWith(
+                fontFamily: 'SpaceMono',
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],

@@ -5,20 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/binding.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/db/secure_storage.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_preferences.dart';
-import 'package:chessigma_mobile/src/model/notifications/notification_service.dart';
-import 'package:chessigma_mobile/src/model/notifications/notifications.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/model/settings/preferences_storage.dart';
-import 'package:chessigma_mobile/src/model/study/study_preferences.dart';
-import 'package:chessigma_mobile/src/utils/chessboard.dart';
-import 'package:chessigma_mobile/src/utils/color_palette.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/utils/string.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/src/binding.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/db/secure_storage.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_preferences.dart';
+import 'package:exochess_mobile/src/model/notifications/notification_service.dart';
+import 'package:exochess_mobile/src/model/notifications/notifications.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/model/settings/preferences_storage.dart';
+import 'package:exochess_mobile/src/model/study/study_preferences.dart';
+import 'package:exochess_mobile/src/utils/chessboard.dart';
+import 'package:exochess_mobile/src/utils/color_palette.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/utils/string.dart';
 import 'package:logging/logging.dart';
 import 'package:material_color_utilities/palettes/core_palette.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -28,7 +28,7 @@ final _logger = Logger('Init');
 
 /// Run initialization tasks only once on first app launch or after an update.
 Future<void> initializeApp() async {
-  final prefs = ChessigmaBinding.instance.sharedPreferences;
+  final prefs = ExoChessBinding.instance.sharedPreferences;
 
   try {
     final pInfo = await PackageInfo.fromPlatform();
@@ -86,7 +86,7 @@ Future<void> initializeLocalNotifications(Locale locale) async {
 }
 
 Future<void> preloadPieceImages() async {
-  final prefs = ChessigmaBinding.instance.sharedPreferences;
+  final prefs = ExoChessBinding.instance.sharedPreferences;
   final storedPrefs = prefs.getString(PrefCategory.board.storageKey);
   BoardPrefs boardPrefs = BoardPrefs.defaults;
   if (storedPrefs != null) {
@@ -159,7 +159,7 @@ Future<void> androidDisplayInitialization(WidgetsBinding widgetsBinding) async {
 
 // Adjusts some settings for small screens based on the MediaQuery data.
 Future<void> _screenSizeBasedInitialization() async {
-  final prefs = ChessigmaBinding.instance.sharedPreferences;
+  final prefs = ExoChessBinding.instance.sharedPreferences;
   final mediaQueryData = MediaQueryData.fromView(
     WidgetsBinding.instance.platformDispatcher.views.first,
   );

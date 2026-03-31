@@ -1,20 +1,20 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/game/exported_game.dart';
-import 'package:chessigma_mobile/src/model/game/game_share_service.dart';
-import 'package:chessigma_mobile/src/model/game/gif_export.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/share.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/game/game_screen.dart';
-import 'package:chessigma_mobile/src/view/game/game_screen_providers.dart';
-import 'package:chessigma_mobile/src/view/game/gif_export_dialog.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/platform_context_menu_button.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/game/exported_game.dart';
+import 'package:exochess_mobile/src/model/game/game_share_service.dart';
+import 'package:exochess_mobile/src/model/game/gif_export.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/share.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/game/game_screen.dart';
+import 'package:exochess_mobile/src/view/game/game_screen_providers.dart';
+import 'package:exochess_mobile/src/view/game/gif_export_dialog.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/platform_context_menu_button.dart';
 import 'package:share_plus/share_plus.dart';
 
 /// Opens a game screen for the given [LightExportedGame].
@@ -131,7 +131,7 @@ List<Widget> makeFinishedGameShareContextMenuActions(
           : Icons.share_outlined,
       label: context.l10n.mobileShareGameURL,
       onPressed: () {
-        launchShareDialog(context, ShareParams(uri: chessigmaUri('/$gameId/${orientation.name}')));
+        launchShareDialog(context, ShareParams(uri: exochessUri('/$gameId/${orientation.name}')));
       },
     ),
     ContextMenuAction(

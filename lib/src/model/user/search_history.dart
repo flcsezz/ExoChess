@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/binding.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/binding.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 part 'search_history.g.dart';
@@ -20,7 +20,7 @@ class SearchHistory extends Notifier<SearchHistoryState> {
 
   String _storageKey(AuthUser? authUser) => 'search.history.${authUser?.user.id ?? '**anon**'}';
 
-  SharedPreferencesWithCache get _prefs => ChessigmaBinding.instance.sharedPreferences;
+  SharedPreferencesWithCache get _prefs => ExoChessBinding.instance.sharedPreferences;
 
   @override
   SearchHistoryState build() {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/model/common/game.dart';
-import 'package:chessigma_mobile/src/model/settings/preferences_storage.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/src/model/common/game.dart';
+import 'package:exochess_mobile/src/model/settings/preferences_storage.dart';
 
 part 'coordinate_training_preferences.freezed.dart';
 part 'coordinate_training_preferences.g.dart';

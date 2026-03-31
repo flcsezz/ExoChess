@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/binding.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_streak.dart';
+import 'package:exochess_mobile/src/binding.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_streak.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 /// Provider for the streak storage for a given user.
@@ -50,7 +50,7 @@ class StreakStorage {
     ref.invalidate(savedStreakScoreProvider);
   }
 
-  SharedPreferencesWithCache get _store => ChessigmaBinding.instance.sharedPreferences;
+  SharedPreferencesWithCache get _store => ExoChessBinding.instance.sharedPreferences;
 
   String get _storageKey => 'puzzle_streak.${userId ?? '**anon**'}';
 }

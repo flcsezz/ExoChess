@@ -2,17 +2,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/app.dart';
-import 'package:chessigma_mobile/src/binding.dart';
-import 'package:chessigma_mobile/src/init.dart';
-import 'package:chessigma_mobile/src/intl.dart';
-import 'package:chessigma_mobile/src/model/common/service/sound_service.dart';
-import 'package:chessigma_mobile/src/model/log/app_log_service.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/app.dart';
+import 'package:exochess_mobile/src/binding.dart';
+import 'package:exochess_mobile/src/init.dart';
+import 'package:exochess_mobile/src/intl.dart';
+import 'package:exochess_mobile/src/model/common/service/sound_service.dart';
+import 'package:exochess_mobile/src/model/log/app_log_service.dart';
+import 'package:exochess_mobile/src/network/http.dart';
 
 Future<void> main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  final lichessBinding = AppChessigmaBinding.ensureInitialized();
+  final lichessBinding = AppExoChessBinding.ensureInitialized();
 
   // Show splash screen until app is ready
   // See src/app.dart for splash screen removal

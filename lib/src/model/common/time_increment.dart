@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import 'package:chessigma_mobile/src/model/common/speed.dart';
+import 'package:exochess_mobile/src/model/common/speed.dart';
 
 /// A pair of time and increment in seconds used as game clock
 @immutable

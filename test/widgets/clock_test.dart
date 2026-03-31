@@ -1,8 +1,8 @@
 import 'package:clock/clock.dart' as clock;
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/account/account_preferences.dart';
-import 'package:chessigma_mobile/src/widgets/clock.dart';
+import 'package:exochess_mobile/src/model/account/account_preferences.dart';
+import 'package:exochess_mobile/src/widgets/clock.dart';
 
 void main() {
   group('Clock', () {

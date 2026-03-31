@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/binding.dart';
-import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
-import 'package:chessigma_mobile/src/model/settings/preferences_storage.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/src/binding.dart';
+import 'package:exochess_mobile/src/model/settings/general_preferences.dart';
+import 'package:exochess_mobile/src/model/settings/preferences_storage.dart';
 
 Locale getSystemLocale(WidgetsBinding widgetsBinding) {
   return AppLocalizations.delegate.isSupported(widgetsBinding.platformDispatcher.locale)
@@ -18,7 +18,7 @@ Future<Locale> setupIntl(WidgetsBinding widgetsBinding) async {
   final systemLocale = getSystemLocale(widgetsBinding);
 
   // Get locale from shared preferences, if any
-  final json = ChessigmaBinding.instance.sharedPreferences.getString(PrefCategory.general.storageKey);
+  final json = ExoChessBinding.instance.sharedPreferences.getString(PrefCategory.general.storageKey);
   final generalPref = json != null
       ? GeneralPrefs.fromJson(jsonDecode(json) as Map<String, dynamic>)
       : GeneralPrefs.defaults;

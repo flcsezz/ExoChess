@@ -7,31 +7,31 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/game/game_filter.dart';
-import 'package:chessigma_mobile/src/model/game/game_repository.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/model/user/user_repository_providers.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/duration.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/string.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/dashboard_screen.dart';
-import 'package:chessigma_mobile/src/view/user/game_history_screen.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_action_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/progression_widget.dart';
-import 'package:chessigma_mobile/src/widgets/rating.dart';
-import 'package:chessigma_mobile/src/widgets/stat_card.dart';
-import 'package:chessigma_mobile/src/widgets/user.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/game/game_filter.dart';
+import 'package:exochess_mobile/src/model/game/game_repository.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/model/user/user_repository_providers.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/duration.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/string.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/dashboard_screen.dart';
+import 'package:exochess_mobile/src/view/user/game_history_screen.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_action_sheet.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/progression_widget.dart';
+import 'package:exochess_mobile/src/widgets/rating.dart';
+import 'package:exochess_mobile/src/widgets/stat_card.dart';
+import 'package:exochess_mobile/src/widgets/user.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 
 final _dateFormatter = DateFormat.yMMMd();
 
@@ -154,7 +154,9 @@ class _Body extends ConsumerWidget {
               if (ratingHistoryPerfData == null || ratingHistoryPerfData.points.length <= 1) {
                 return const SizedBox.shrink();
               }
-              return GlassCard(
+              return Card(
+                elevation: 0,
+                color: Theme.of(context).brightness == Brightness.dark ? null : Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: _EloChart(ratingHistoryPerfData),
@@ -227,7 +229,9 @@ class _Body extends ConsumerWidget {
                   ),
                 ],
               ),
-              GlassCard(
+              Card(
+                elevation: 0,
+                color: Theme.of(context).brightness == Brightness.dark ? null : Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -244,7 +248,12 @@ class _Body extends ConsumerWidget {
                                   '${data.percentile!.toStringAsFixed(2)}%',
                                   perf.title,
                                 ),
-                          style: TextStyle(color: textShade(context, 0.7)),
+                          style: TextStyle(
+                            color: Theme.of(context).brightness == Brightness.dark ? Colors.white38 : Colors.black54,
+                            fontFamily: 'SpaceMono',
+                            fontSize: 11,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       subStatSpace,
                       // The number '12' here is not arbitrary, since the API returns the progression for the last 12 games (as far as I know).
@@ -273,7 +282,7 @@ class _Body extends ConsumerWidget {
                           child: _RatingWidget(
                             data.highestRating,
                             data.highestRatingGame,
-                            context.chessigmaColors.good,
+                            Theme.of(context).colorScheme.primary,
                           ),
                         ),
                         StatCard(
@@ -281,7 +290,7 @@ class _Body extends ConsumerWidget {
                           child: _RatingWidget(
                             data.lowestRating,
                             data.lowestRatingGame,
-                            context.chessigmaColors.error,
+                            Theme.of(context).colorScheme.primary,
                           ),
                         ),
                       ]),
@@ -316,24 +325,24 @@ class _Body extends ConsumerWidget {
                         textBaseline: TextBaseline.alphabetic,
                         children: [
                           Text(
-                            '${context.l10n.perfStatTotalGames} '.localizeNumbers(),
+                            '${context.l10n.perfStatTotalGames} '.localizeNumbers().toUpperCase(),
                             style: Styles.sectionTitle,
                           ),
                           Text(
                             data.totalGames.toString().localizeNumbers(),
-                            style: _mainValueStyle,
+                            style: _mainValueStyle.copyWith(fontFamily: 'SpaceMono'),
                           ),
-                          Text(
-                            String.fromCharCode(Icons.arrow_forward_ios.codePoint),
-                            style: Styles.sectionTitle.copyWith(fontFamily: 'MaterialIcons'),
-                          ),
+                          const SizedBox(width: 8),
+                          Icon(Icons.arrow_forward_ios, size: 18, color: Theme.of(context).colorScheme.primary),
                         ],
                       ),
                     ),
                   ),
                 ),
               ),
-              GlassCard(
+              Card(
+                elevation: 0,
+                color: Theme.of(context).brightness == Brightness.dark ? null : Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
@@ -344,7 +353,7 @@ class _Body extends ConsumerWidget {
                           child: _PercentageValueWidget(
                             data.wonGames,
                             data.totalGames,
-                            color: context.chessigmaColors.good,
+                            color: Colors.green,
                           ),
                         ),
                         StatCard(
@@ -352,7 +361,7 @@ class _Body extends ConsumerWidget {
                           child: _PercentageValueWidget(
                             data.drawnGames,
                             data.totalGames,
-                            color: textShade(context, _customOpacity),
+                            color: Colors.grey,
                             isShaded: true,
                           ),
                         ),
@@ -361,7 +370,7 @@ class _Body extends ConsumerWidget {
                           child: _PercentageValueWidget(
                             data.lostGames,
                             data.totalGames,
-                            color: context.chessigmaColors.error,
+                            color: const Color(0xFFD71921),
                           ),
                         ),
                       ]),
@@ -404,7 +413,7 @@ class _Body extends ConsumerWidget {
                           _StreakWidget(
                             data.maxWinStreak,
                             data.curWinStreak,
-                            color: context.chessigmaColors.good,
+                            color: context.exochessColors.good,
                           ),
                         ],
                       ),
@@ -414,7 +423,7 @@ class _Body extends ConsumerWidget {
                           _StreakWidget(
                             data.maxLossStreak,
                             data.curLossStreak,
-                            color: context.chessigmaColors.error,
+                            color: context.exochessColors.error,
                           ),
                         ],
                       ),

@@ -3,18 +3,18 @@ import 'package:dartchess/dartchess.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/account/account_preferences.dart';
-import 'package:chessigma_mobile/src/model/game/exported_game.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/view/game/game_common_widgets.dart';
-import 'package:chessigma_mobile/src/view/game/game_list_tile.dart';
-import 'package:chessigma_mobile/src/view/game/status_l10n.dart';
-import 'package:chessigma_mobile/src/widgets/board_thumbnail.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/glass_card.dart';
-import 'package:chessigma_mobile/src/widgets/user.dart';
+import 'package:exochess_mobile/src/model/account/account_preferences.dart';
+import 'package:exochess_mobile/src/model/game/exported_game.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/view/game/game_common_widgets.dart';
+import 'package:exochess_mobile/src/view/game/game_list_tile.dart';
+import 'package:exochess_mobile/src/view/game/status_l10n.dart';
+import 'package:exochess_mobile/src/widgets/board_thumbnail.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/glass_card.dart';
+import 'package:exochess_mobile/src/widgets/user.dart';
 
 /// A list tile that shows more detailed game info than [GameListTile].
 class GameListDetailTile extends StatelessWidget {
@@ -160,10 +160,10 @@ class GameListDetailTile extends StatelessWidget {
                                       style: TextStyle(
                                         fontSize: subtitleFontSize,
                                         color: game.winner == null
-                                            ? context.chessigmaColors.brag
+                                            ? context.exochessColors.brag
                                             : game.winner == mySide
-                                            ? context.chessigmaColors.good
-                                            : context.chessigmaColors.error,
+                                            ? context.exochessColors.good
+                                            : context.exochessColors.error,
                                       ),
                                       children: [
                                         if (me.ratingDiff != null)

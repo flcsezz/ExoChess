@@ -2,17 +2,17 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/view/account/rating_pref_aware.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_history_screen.dart';
-import 'package:chessigma_mobile/src/view/user/game_history_screen.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/rating.dart';
-import 'package:chessigma_mobile/src/widgets/shimmer.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/view/account/rating_pref_aware.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_history_screen.dart';
+import 'package:exochess_mobile/src/view/user/game_history_screen.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/rating.dart';
+import 'package:exochess_mobile/src/widgets/shimmer.dart';
 
 final _dateFormatter = DateFormat.yMMMd();
 
@@ -65,8 +65,8 @@ class UserActivityEntry extends ConsumerWidget {
     const leadingIconSize = 26.0;
     final emptySubtitle = theme.platform == TargetPlatform.iOS ? const SizedBox.shrink() : null;
 
-    final redColor = context.chessigmaColors.error;
-    final greenColor = context.chessigmaColors.good;
+    final redColor = context.exochessColors.error;
+    final greenColor = context.exochessColors.good;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -75,7 +75,7 @@ class UserActivityEntry extends ConsumerWidget {
           padding: const EdgeInsets.only(left: 14.0, top: 16.0, right: 14.0, bottom: 4.0),
           child: Text(
             _dateFormatter.format(entry.startTime),
-            style: TextStyle(color: context.chessigmaColors.brag, fontWeight: FontWeight.bold),
+            style: TextStyle(color: context.exochessColors.brag, fontWeight: FontWeight.bold),
           ),
         ),
         if (entry.games != null)
@@ -94,8 +94,8 @@ class UserActivityEntry extends ConsumerWidget {
                     if (gameEntry.value.ratingAfter - gameEntry.value.ratingBefore != 0) ...[
                       Icon(
                         gameEntry.value.ratingAfter - gameEntry.value.ratingBefore > 0
-                            ? ChessigmaIcons.arrow_full_upperright
-                            : ChessigmaIcons.arrow_full_lowerright,
+                            ? ExoChessIcons.arrow_full_upperright
+                            : ExoChessIcons.arrow_full_lowerright,
                         color: gameEntry.value.ratingAfter - gameEntry.value.ratingBefore > 0
                             ? greenColor
                             : redColor,
@@ -127,7 +127,7 @@ class UserActivityEntry extends ConsumerWidget {
             ),
         if (entry.puzzles != null)
           _UserActivityListTile(
-            leading: const Icon(ChessigmaIcons.target, size: leadingIconSize),
+            leading: const Icon(ExoChessIcons.target, size: leadingIconSize),
             title: context.l10n.activitySolvedNbPuzzles(entry.puzzles!.win + entry.puzzles!.loss),
             subtitle: RatingPrefAware(
               child: Row(
@@ -137,8 +137,8 @@ class UserActivityEntry extends ConsumerWidget {
                   if (entry.puzzles!.ratingAfter - entry.puzzles!.ratingBefore != 0) ...[
                     Icon(
                       entry.puzzles!.ratingAfter - entry.puzzles!.ratingBefore > 0
-                          ? ChessigmaIcons.arrow_full_upperright
-                          : ChessigmaIcons.arrow_full_lowerright,
+                          ? ExoChessIcons.arrow_full_upperright
+                          : ExoChessIcons.arrow_full_lowerright,
                       color: entry.puzzles!.ratingAfter - entry.puzzles!.ratingBefore > 0
                           ? greenColor
                           : redColor,
@@ -166,14 +166,14 @@ class UserActivityEntry extends ConsumerWidget {
           ),
         if (entry.streak != null)
           _UserActivityListTile(
-            leading: const Icon(ChessigmaIcons.streak, size: leadingIconSize),
+            leading: const Icon(ExoChessIcons.streak, size: leadingIconSize),
             title: context.l10n.stormPlayedNbRunsOfPuzzleStorm(entry.streak!.runs, 'Puzzle Streak'),
             subtitle: emptySubtitle,
             trailing: BriefGameResultBox(win: entry.streak!.score, draw: 0, loss: 0),
           ),
         if (entry.storm != null)
           _UserActivityListTile(
-            leading: const Icon(ChessigmaIcons.storm, size: leadingIconSize),
+            leading: const Icon(ExoChessIcons.storm, size: leadingIconSize),
             title: context.l10n.stormPlayedNbRunsOfPuzzleStorm(entry.storm!.runs, 'Puzzle Storm'),
             subtitle: emptySubtitle,
             trailing: BriefGameResultBox(win: entry.storm!.score, draw: 0, loss: 0),
@@ -203,7 +203,7 @@ class UserActivityEntry extends ConsumerWidget {
             ),
         if (entry.correspondenceMovesNb != null && entry.correspondenceGamesNb != null)
           _UserActivityListTile(
-            leading: const Icon(ChessigmaIcons.correspondence, size: leadingIconSize),
+            leading: const Icon(ExoChessIcons.correspondence, size: leadingIconSize),
             title: context.l10n.activityPlayedNbMoves(entry.correspondenceMovesNb!),
             subtitle: Text(
               context.l10n.activityInNbCorrespondenceGames(entry.correspondenceGamesNb!),
@@ -318,12 +318,12 @@ class BriefGameResultBox extends StatelessWidget {
             ((win != 0 ? 1 : 0) + (draw != 0 ? 1 : 0) + (loss != 0 ? 1 : 0) - 1) * _spaceWidth,
         child: Row(
           children: [
-            if (win != 0) _ResultBox(number: win, color: context.chessigmaColors.good),
+            if (win != 0) _ResultBox(number: win, color: context.exochessColors.good),
             if (win != 0 && draw != 0) const SizedBox(width: _spaceWidth),
-            if (draw != 0) _ResultBox(number: draw, color: context.chessigmaColors.brag),
+            if (draw != 0) _ResultBox(number: draw, color: context.exochessColors.brag),
             if ((draw != 0 && loss != 0) || (win != 0 && loss != 0))
               const SizedBox(width: _spaceWidth),
-            if (loss != 0) _ResultBox(number: loss, color: context.chessigmaColors.error),
+            if (loss != 0) _ResultBox(number: loss, color: context.exochessColors.error),
           ],
         ),
       ),

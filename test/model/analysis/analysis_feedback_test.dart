@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_feedback.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_feedback.dart';
 
 void main() {
   group('AnalysisFeedback', () {

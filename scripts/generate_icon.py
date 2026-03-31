@@ -9,7 +9,7 @@ import fontforge
 import os
 
 input_directory = "../lila/public/images/puzzle-themes"
-output_font_file = "assets/fonts/ChessigmaPuzzleIcons.ttf"
+output_font_file = "assets/fonts/ExoChessPuzzleIcons.ttf"
 
 
 font = fontforge.font()
@@ -17,7 +17,7 @@ font = fontforge.font()
 # Set font properties (adjust as needed)
 font.fontname = "Puzzle Icons"
 font.fullname = "Puzzle Theme Icons"
-font.familyname = "ChessigmaPuzzleIcons"
+font.familyname = "ExoChessPuzzleIcons"
 
 # unicode private area start index
 unicode_code_point = 0xE000
@@ -72,7 +72,7 @@ import 'package:flutter/widgets.dart';
 class PuzzleIcons {{
   PuzzleIcons._();
 
-  static const _kFontFam = 'ChessigmaPuzzleIcons';
+  static const _kFontFam = 'ExoChessPuzzleIcons';
   static const String? _kFontPkg = null;
 
   // dart format off

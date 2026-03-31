@@ -2,16 +2,16 @@ import 'dart:async';
 
 import 'package:deep_pick/deep_pick.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/account/account_repository.dart';
-import 'package:chessigma_mobile/src/model/challenge/challenge.dart';
-import 'package:chessigma_mobile/src/model/challenge/challenge_repository.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/preloaded_data.dart';
-import 'package:chessigma_mobile/src/model/common/socket.dart';
-import 'package:chessigma_mobile/src/model/lobby/game_seek.dart';
-import 'package:chessigma_mobile/src/model/lobby/lobby_repository.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/network/socket.dart';
+import 'package:exochess_mobile/src/model/account/account_repository.dart';
+import 'package:exochess_mobile/src/model/challenge/challenge.dart';
+import 'package:exochess_mobile/src/model/challenge/challenge_repository.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/preloaded_data.dart';
+import 'package:exochess_mobile/src/model/common/socket.dart';
+import 'package:exochess_mobile/src/model/lobby/game_seek.dart';
+import 'package:exochess_mobile/src/model/lobby/lobby_repository.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/network/socket.dart';
 import 'package:logging/logging.dart';
 
 /// A provider for the [CreateGameService].
@@ -35,7 +35,7 @@ class CreateGameService {
   final String sri;
   final Logger _log;
 
-  ChessigmaClient get lichessClient => ref.read(lichessClientProvider);
+  ExoChessClient get lichessClient => ref.read(lichessClientProvider);
   ChallengeRepository get challengeRepository => ref.read(challengeRepositoryProvider);
 
   /// The current lobby connection if we are creating a game from the lobby.

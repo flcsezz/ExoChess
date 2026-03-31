@@ -4,12 +4,12 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_providers.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_repository.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/view/puzzle/storm_screen.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_providers.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_repository.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/view/puzzle/storm_screen.dart';
 
 import '../../test_helpers.dart';
 import '../../test_provider_scope.dart';
@@ -32,7 +32,7 @@ void main() {
         overrides: {
           stormProvider: stormProvider.overrideWith((ref) => mockStromRun),
           lichessClientProvider: lichessClientProvider.overrideWith(
-            (ref) => ChessigmaClient(client, ref),
+            (ref) => ExoChessClient(client, ref),
           ),
         },
       );
@@ -50,7 +50,7 @@ void main() {
         overrides: {
           stormProvider: stormProvider.overrideWith((ref) => mockStromRun),
           lichessClientProvider: lichessClientProvider.overrideWith(
-            (ref) => ChessigmaClient(client, ref),
+            (ref) => ExoChessClient(client, ref),
           ),
         },
       );
@@ -68,7 +68,7 @@ void main() {
         overrides: {
           stormProvider: stormProvider.overrideWith((ref) => mockStromRun),
           lichessClientProvider: lichessClientProvider.overrideWith(
-            (ref) => ChessigmaClient(client, ref),
+            (ref) => ExoChessClient(client, ref),
           ),
         },
       );
@@ -108,7 +108,7 @@ void main() {
         overrides: {
           stormProvider: stormProvider.overrideWith((ref) => mockStromRun),
           lichessClientProvider: lichessClientProvider.overrideWith(
-            (ref) => ChessigmaClient(client, ref),
+            (ref) => ExoChessClient(client, ref),
           ),
         },
       );
@@ -140,7 +140,7 @@ void main() {
         overrides: {
           stormProvider: stormProvider.overrideWith((ref) => mockStromRun),
           lichessClientProvider: lichessClientProvider.overrideWith(
-            (ref) => ChessigmaClient(client, ref),
+            (ref) => ExoChessClient(client, ref),
           ),
         },
       );
@@ -162,7 +162,7 @@ void main() {
         overrides: {
           stormProvider: stormProvider.overrideWith((ref) => mockStromRun),
           lichessClientProvider: lichessClientProvider.overrideWith(
-            (ref) => ChessigmaClient(client, ref),
+            (ref) => ExoChessClient(client, ref),
           ),
         },
       );

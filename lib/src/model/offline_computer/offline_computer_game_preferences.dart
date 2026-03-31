@@ -1,9 +1,9 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/game/offline_computer_game.dart';
-import 'package:chessigma_mobile/src/model/settings/preferences_storage.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/game/offline_computer_game.dart';
+import 'package:exochess_mobile/src/model/settings/preferences_storage.dart';
 
 part 'offline_computer_game_preferences.freezed.dart';
 part 'offline_computer_game_preferences.g.dart';

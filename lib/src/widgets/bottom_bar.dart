@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/constants.dart';
 
 /// A bottom bar that can be used in a [Scaffold.bottomNavigationBar].
 ///

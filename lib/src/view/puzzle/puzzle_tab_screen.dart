@@ -1,38 +1,38 @@
 import 'package:dartchess/dartchess.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_angle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_opening.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_providers.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_service.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_theme.dart';
+import 'package:exochess_mobile/src/model/puzzle/streak_storage.dart';
+import 'package:exochess_mobile/src/network/connectivity.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/styles/puzzle_icons.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/tab_scaffold.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/utils/string.dart';
+import 'package:exochess_mobile/src/view/account/account_drawer.dart';
+import 'package:exochess_mobile/src/view/puzzle/dashboard_screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_history_screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_themes_screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/storm_screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/streak_screen.dart';
+import 'package:exochess_mobile/src/widgets/board_preview.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/platform.dart';
+import 'package:exochess_mobile/src/widgets/shimmer.dart';
+import 'package:exochess_mobile/src/widgets/vector_cards.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_angle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_opening.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_providers.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_service.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_theme.dart';
-import 'package:chessigma_mobile/src/model/puzzle/streak_storage.dart';
-import 'package:chessigma_mobile/src/network/connectivity.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/styles/puzzle_icons.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/tab_scaffold.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/utils/string.dart';
-import 'package:chessigma_mobile/src/view/account/account_drawer.dart';
-import 'package:chessigma_mobile/src/view/puzzle/dashboard_screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_history_screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_themes_screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/storm_screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/streak_screen.dart';
-import 'package:chessigma_mobile/src/widgets/board_preview.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/platform.dart';
-import 'package:chessigma_mobile/src/widgets/shimmer.dart';
 
 const _kNumberOfHistoryItemsOnHandset = 8;
 const _kNumberOfHistoryItemsOnTablet = 16;
@@ -200,47 +200,6 @@ Widget _buildMainListRemovedItem(
   );
 }
 
-class _PuzzleMenuListTile extends StatelessWidget {
-  const _PuzzleMenuListTile({
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-    this.badgeLabel,
-    this.onTap,
-    this.enabled = true,
-  });
-
-  final IconData icon;
-  final String title;
-  final String subtitle;
-  final String? badgeLabel;
-  final VoidCallback? onTap;
-  final bool enabled;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      enabled: enabled,
-      leading: Badge(
-        backgroundColor: ColorScheme.of(context).secondary,
-        textStyle: TextStyle(
-          color: ColorScheme.of(context).onSecondary,
-          fontSize: 11,
-          fontWeight: FontWeight.bold,
-        ),
-        isLabelVisible: badgeLabel != null,
-        label: (badgeLabel != null) ? Text(badgeLabel!) : null,
-        child: Icon(icon, color: ColorScheme.of(context).primary),
-      ),
-      title: Text(title, style: Styles.mainListTileTitle),
-      subtitle: Text(subtitle, maxLines: 3),
-      trailing: Theme.of(context).platform == TargetPlatform.iOS
-          ? const CupertinoListTileChevron()
-          : null,
-      onTap: onTap,
-    );
-  }
-}
 
 class _PuzzleMenu extends ConsumerWidget {
   const _PuzzleMenu();
@@ -250,48 +209,56 @@ class _PuzzleMenu extends ConsumerWidget {
     final connectivity = ref.watch(connectivityChangesProvider);
     final bool isOnline = connectivity.value?.isOnline ?? false;
 
-    return ListSection(
-      hasLeading: true,
-      children: [
-        _PuzzleMenuListTile(
-          icon: PuzzleIcons.opening,
-          title: context.l10n.puzzlePuzzleThemes,
-          subtitle: context.l10n.mobilePuzzleThemesSubtitle,
-          onTap: () {
-            Navigator.of(context).push(PuzzleThemesScreen.buildRoute(context));
-          },
-        ),
-        _PuzzleMenuListTile(
-          enabled: isOnline,
-          icon: ChessigmaIcons.streak,
-          title: 'Puzzle Streak',
-          badgeLabel: switch (ref.watch(savedStreakScoreProvider)) {
-            AsyncData(:final value?) => value.toString(),
-            _ => null,
-          },
-          subtitle:
-              context.l10n.puzzleStreakDescription.characters
-                  .takeWhile((c) => c != '.')
-                  .toString() +
-              (context.l10n.puzzleStreakDescription.contains('.') ? '.' : ''),
-          onTap: isOnline
-              ? () {
-                  Navigator.of(context, rootNavigator: true).push(StreakScreen.buildRoute(context));
-                }
-              : null,
-        ),
-        _PuzzleMenuListTile(
-          enabled: isOnline,
-          icon: ChessigmaIcons.storm,
-          title: 'Puzzle Storm',
-          subtitle: context.l10n.mobilePuzzleStormSubtitle,
-          onTap: isOnline
-              ? () {
-                  Navigator.of(context, rootNavigator: true).push(StormScreen.buildRoute(context));
-                }
-              : null,
-        ),
-      ],
+    return Padding(
+      padding: Styles.verticalBodyPadding,
+      child: Column(
+        children: [
+          Padding(
+            padding: Styles.horizontalBodyPadding.add(const EdgeInsets.only(bottom: 12)),
+            child: VectorHeader(
+              title: context.l10n.puzzlePuzzleThemes.toUpperCase(),
+              subtitle: 'CHOOSE BY PATTERN OR OPENING',
+              icon: PuzzleIcons.opening,
+              onTap: () {
+                Navigator.of(context).push(PuzzleThemesScreen.buildRoute(context));
+              },
+            ),
+          ),
+          Padding(
+            padding: Styles.horizontalBodyPadding.add(const EdgeInsets.only(bottom: 12)),
+            child: Row(
+              children: [
+                Expanded(
+                  child: SmallVectorCard(
+                    title: 'STREAK',
+                    subtitle: switch (ref.watch(savedStreakScoreProvider)) {
+                      AsyncData(:final value?) => '$value BEST',
+                      _ => "DON'T STOP",
+                    },
+                    icon: ExoChessIcons.streak,
+                    enabled: isOnline,
+                    onTap: () {
+                      Navigator.of(context, rootNavigator: true).push(StreakScreen.buildRoute(context));
+                    },
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: SmallVectorCard(
+                    title: 'STORM',
+                    subtitle: 'BEAT THE CLOCK',
+                    icon: ExoChessIcons.storm,
+                    enabled: isOnline,
+                    onTap: () {
+                      Navigator.of(context, rootNavigator: true).push(StormScreen.buildRoute(context));
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -409,12 +376,6 @@ class _HistoryButton extends ConsumerWidget {
   }
 }
 
-TextStyle _puzzlePreviewSubtitleStyle(BuildContext context) {
-  return TextStyle(
-    fontSize: 14.0,
-    color: DefaultTextStyle.of(context).style.color?.withValues(alpha: 0.6),
-  );
-}
 
 /// A widget that displays the daily puzzle.
 class DailyPuzzle extends ConsumerWidget {
@@ -439,28 +400,32 @@ class DailyPuzzle extends ConsumerWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(context.l10n.puzzlePuzzleOfTheDay, style: Styles.boardPreviewTitle),
                   Text(
-                    context.l10n.puzzlePlayedXTimes(data.puzzle.plays).localizeNumbers(),
-                    style: _puzzlePreviewSubtitleStyle(context),
+                    context.l10n.puzzlePuzzleOfTheDay.toUpperCase(), 
+                    style: const TextStyle(fontFamily: 'NDot', fontSize: 16),
+                  ),
+                  Text(
+                    context.l10n.puzzlePlayedXTimes(data.puzzle.plays).localizeNumbers().toUpperCase(),
+                    style: const TextStyle(fontFamily: 'SpaceMono', fontSize: 10, color: Colors.grey),
                   ),
                 ],
               ),
+              const SizedBox(height: 12),
               Row(
                 children: [
                   Icon(
-                    Icons.today,
-                    size: 32,
-                    color: context.chessigmaColors.brag.withValues(alpha: 0.7),
+                    Icons.today_outlined,
+                    size: 24,
+                    color: Theme.of(context).colorScheme.primary,
                   ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
-                      data.puzzle.sideToMove == Side.white
+                      (data.puzzle.sideToMove == Side.white
                           ? context.l10n.whitePlays
-                          : context.l10n.blackPlays,
+                          : context.l10n.blackPlays).toUpperCase(),
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(color: textShade(context, 0.8)),
+                      style: const TextStyle(fontFamily: 'SpaceMono', fontWeight: FontWeight.bold, fontSize: 12),
                     ),
                   ),
                 ],
@@ -534,7 +499,7 @@ class PuzzleAnglePreview extends ConsumerWidget {
                       }
                     },
                     spacing: 8.0,
-                    backgroundColor: context.chessigmaColors.error,
+                    backgroundColor: context.exochessColors.error,
                     foregroundColor: Colors.white,
                     label: context.l10n.delete,
                   ),
@@ -554,27 +519,26 @@ class PuzzleAnglePreview extends ConsumerWidget {
                       children: switch (angle) {
                         PuzzleTheme(themeKey: final themeKey) => [
                           Text(
-                            themeKey.l10n(context.l10n).name,
-                            style: Styles.boardPreviewTitle,
+                            themeKey.l10n(context.l10n).name.toUpperCase(),
+                            style: const TextStyle(fontFamily: 'NDot', fontSize: 16),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
                           Text(
-                            themeKey.l10n(context.l10n).description,
-                            maxLines: 3,
+                            themeKey.l10n(context.l10n).description.toUpperCase(),
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
+                            style: const TextStyle(
                               height: 1.2,
-                              fontSize: 12.0,
-                              color: DefaultTextStyle.of(
-                                context,
-                              ).style.color?.withValues(alpha: 0.6),
+                              fontSize: 10.0,
+                              fontFamily: 'SpaceMono',
+                              color: Colors.grey,
                             ),
                           ),
                         ],
                         PuzzleOpening(key: final openingKey) => [
                           Text(
-                            flatOpenings.value
+                            (flatOpenings.value
                                     ?.firstWhere(
                                       (o) => o.key == openingKey,
                                       orElse: () => (
@@ -584,14 +548,15 @@ class PuzzleAnglePreview extends ConsumerWidget {
                                       ),
                                     )
                                     .name ??
-                                openingKey.replaceAll('_', ' '),
-                            style: Styles.boardPreviewTitle,
-                            maxLines: 3,
+                                openingKey.replaceAll('_', ' ')).toUpperCase(),
+                            style: const TextStyle(fontFamily: 'NDot', fontSize: 16),
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
                         ],
                       },
                     ),
+                    const SizedBox(height: 8),
                     Row(
                       children: [
                         Icon(
@@ -599,23 +564,23 @@ class PuzzleAnglePreview extends ConsumerWidget {
                             PuzzleTheme(themeKey: final themeKey) => themeKey.icon,
                             PuzzleOpening() => PuzzleIcons.opening,
                           },
-                          size: 32,
-                          color: DefaultTextStyle.of(context).style.color?.withValues(alpha: 0.6),
+                          size: 24,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                         const SizedBox(width: 8),
                         if (puzzle != null)
                           Flexible(
                             child: Text(
-                              puzzle.puzzle.sideToMove == Side.white
+                              (puzzle.puzzle.sideToMove == Side.white
                                   ? context.l10n.whitePlays
-                                  : context.l10n.blackPlays,
-                              style: TextStyle(color: textShade(context, 0.8)),
+                                  : context.l10n.blackPlays).toUpperCase(),
+                              style: const TextStyle(fontFamily: 'SpaceMono', fontWeight: FontWeight.bold, fontSize: 12),
                               overflow: TextOverflow.ellipsis,
                             ),
                           )
                         else
                           const Flexible(
-                            child: Text('No puzzles available, please go online to fetch them.'),
+                            child: Text('FETCHING PUZZLES...', style: TextStyle(fontFamily: 'SpaceMono', fontSize: 10)),
                           ),
                       ],
                     ),
@@ -632,3 +597,6 @@ class PuzzleAnglePreview extends ConsumerWidget {
     );
   }
 }
+
+
+

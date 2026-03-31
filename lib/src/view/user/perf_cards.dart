@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/view/account/rating_pref_aware.dart';
-import 'package:chessigma_mobile/src/view/puzzle/storm_dashboard.dart';
-import 'package:chessigma_mobile/src/view/user/perf_stats_screen.dart';
-import 'package:chessigma_mobile/src/widgets/rating.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/view/account/rating_pref_aware.dart';
+import 'package:exochess_mobile/src/view/puzzle/storm_dashboard.dart';
+import 'package:exochess_mobile/src/view/user/perf_stats_screen.dart';
+import 'package:exochess_mobile/src/widgets/rating.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 
 /// A widget that displays the performance cards of a user.
 class PerfCards extends StatelessWidget {
@@ -67,71 +67,77 @@ class PerfCards extends StatelessWidget {
         child: Padding(
           padding: padding ?? Styles.bodySectionPadding,
           child: SizedBox(
-            height: 106,
+            height: 120,
             child: ListView.separated(
-              padding: const EdgeInsets.symmetric(vertical: 3.0),
+              padding: const EdgeInsets.symmetric(vertical: 4.0),
               scrollDirection: Axis.horizontal,
               itemCount: userPerfs.length,
               itemBuilder: (context, index) {
                 final perf = userPerfs[index];
                 final userPerf = user.perfs[perf]!;
                 final bool isPerfWithoutStats = Perf.streak == perf;
+                final theme = Theme.of(context);
+                final isDark = theme.brightness == Brightness.dark;
+
                 return SizedBox(
-                  height: 100,
-                  width: 100,
-                  child: GlassCard(
-                    padding: const EdgeInsets.all(6.0),
-                    borderRadius: _kCardBorderRadius,
-                    onTap: isPerfWithoutStats ? null : () => _handlePerfCardTap(context, perf),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(perf.shortTitle, style: TextStyle(color: textShade(context, 0.7))),
-                        Icon(perf.icon, color: textShade(context, 0.6)),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          textBaseline: TextBaseline.alphabetic,
+                  width: 110,
+                  child: Card(
+                    child: InkWell(
+                      onTap: isPerfWithoutStats ? null : () => _handlePerfCardTap(context, perf),
+                      borderRadius: Styles.cardBorderRadius,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            RatingWidget(
-                              rating: userPerf.rating,
-                              deviation: userPerf.ratingDeviation,
-                              provisional: userPerf.provisional,
-                              style: Styles.bold,
-                            ),
-                            const SizedBox(width: 3),
-                            if (userPerf.progression != 0) ...[
-                              Icon(
-                                userPerf.progression > 0
-                                    ? ChessigmaIcons.arrow_full_upperright
-                                    : ChessigmaIcons.arrow_full_lowerright,
-                                color: userPerf.progression > 0
-                                    ? context.chessigmaColors.good
-                                    : context.chessigmaColors.error,
-                                size: 12,
+                            Text(
+                              perf.shortTitle.toUpperCase(),
+                              style: theme.textTheme.labelSmall?.copyWith(
+                                fontFamily: 'SpaceMono',
+                                color: isDark ? Colors.white38 : Colors.black38,
+                                fontWeight: FontWeight.bold,
                               ),
-                              Flexible(
-                                child: Text(
-                                  userPerf.progression.abs().toString(),
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    color: userPerf.progression > 0
-                                        ? context.chessigmaColors.good
-                                        : context.chessigmaColors.error,
-                                    fontSize: 11,
+                            ),
+                            Icon(perf.icon, size: 20, color: theme.colorScheme.primary),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.baseline,
+                              textBaseline: TextBaseline.alphabetic,
+                              children: [
+                                RatingWidget(
+                                  rating: userPerf.rating,
+                                  deviation: userPerf.ratingDeviation,
+                                  provisional: userPerf.provisional,
+                                  style: const TextStyle(
+                                    fontFamily: 'SpaceMono',
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
                                   ),
                                 ),
-                              ),
-                            ],
+                                if (userPerf.progression != 0) ...[
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    '${userPerf.progression > 0 ? '+' : ''}${userPerf.progression}',
+                                    style: TextStyle(
+                                      color: userPerf.progression > 0
+                                          ? Colors.green
+                                          : const Color(0xFFD71921),
+                                      fontSize: 10,
+                                      fontFamily: 'SpaceMono',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ],
+                            ),
                           ],
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 );
               },
-              separatorBuilder: (context, index) => const SizedBox(width: 10),
+              separatorBuilder: (context, index) => const SizedBox(width: 12),
             ),
           ),
         ),

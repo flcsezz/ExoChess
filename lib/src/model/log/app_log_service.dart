@@ -4,10 +4,10 @@ import 'dart:io' show Platform;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/binding.dart';
-import 'package:chessigma_mobile/src/model/log/app_log_storage.dart';
-import 'package:chessigma_mobile/src/model/settings/log_preferences.dart';
-import 'package:chessigma_mobile/src/utils/lru_list.dart';
+import 'package:exochess_mobile/src/binding.dart';
+import 'package:exochess_mobile/src/model/log/app_log_storage.dart';
+import 'package:exochess_mobile/src/model/settings/log_preferences.dart';
+import 'package:exochess_mobile/src/utils/lru_list.dart';
 import 'package:logging/logging.dart';
 
 const _loggersToShowInTerminal = {'HttpClient', 'Socket', 'EvaluationService'};

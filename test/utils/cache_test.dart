@@ -1,6 +1,6 @@
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/utils/cache.dart';
+import 'package:exochess_mobile/src/utils/cache.dart';
 
 void main() {
   const key = 'key0';

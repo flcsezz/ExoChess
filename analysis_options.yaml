@@ -17,7 +17,7 @@ analyzer:
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
-    - lib/src/styles/chessigma_icons.dart
+    - lib/src/styles/exochess_icons.dart
     - lib/src/styles/social_icons.dart
     - lib/firebase_options.dart
     - lib/firebase_stubs.dart

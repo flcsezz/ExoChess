@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart' show AppLocalizations;
+import 'package:exochess_mobile/l10n/l10n.dart' show AppLocalizations;
 
-import 'package:chessigma_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
 
 part 'player.freezed.dart';
 part 'player.g.dart';

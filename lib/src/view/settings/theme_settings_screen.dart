@@ -3,21 +3,21 @@ import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/color_palette.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/view/settings/background_theme_choice_screen.dart';
-import 'package:chessigma_mobile/src/view/settings/board_choice_screen.dart';
-import 'package:chessigma_mobile/src/view/settings/piece_set_screen.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_choice_picker.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/settings.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/model/settings/general_preferences.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/color_palette.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/view/settings/background_theme_choice_screen.dart';
+import 'package:exochess_mobile/src/view/settings/board_choice_screen.dart';
+import 'package:exochess_mobile/src/view/settings/piece_set_screen.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_choice_picker.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/settings.dart';
 
 class ThemeSettingsScreen extends ConsumerWidget {
   const ThemeSettingsScreen({super.key});
@@ -136,6 +136,26 @@ class _BodyState extends ConsumerState<_Body> {
                         },
                       ),
                     SettingsListTile(
+                      icon: const Icon(Icons.brightness_medium),
+                      settingsLabel: Text(context.l10n.mobileTheme),
+                      settingsValue: generalPrefs.themeMode.title(context.l10n),
+                      onTap: () {
+                        showChoicePicker(
+                          context,
+                          choices: BackgroundThemeMode.values,
+                          selectedItem: generalPrefs.themeMode,
+                          labelBuilder: (t) => Text(t.title(context.l10n)),
+                          onSelectedItemChanged: (BackgroundThemeMode? value) {
+                            if (value != null) {
+                              ref
+                                  .read(generalPreferencesProvider.notifier)
+                                  .setBackgroundThemeMode(value);
+                            }
+                          },
+                        );
+                      },
+                    ),
+                    SettingsListTile(
                       icon: const Icon(Icons.wallpaper),
                       settingsLabel: Text(context.l10n.background),
                       settingsValue: generalPrefs.backgroundColor != null
@@ -157,7 +177,7 @@ class _BodyState extends ConsumerState<_Body> {
                         },
                       ),
                     SettingsListTile(
-                      icon: const Icon(ChessigmaIcons.chess_board),
+                      icon: const Icon(ExoChessIcons.chess_board),
                       settingsLabel: Text(context.l10n.board),
                       settingsValue: boardPrefs.boardTheme.label,
                       onTap: () {
@@ -165,7 +185,7 @@ class _BodyState extends ConsumerState<_Body> {
                       },
                     ),
                     SettingsListTile(
-                      icon: const Icon(ChessigmaIcons.chess_pawn),
+                      icon: const Icon(ExoChessIcons.chess_pawn),
                       settingsLabel: Text(context.l10n.pieceSet),
                       settingsValue: boardPrefs.pieceSet.label,
                       onTap: () {
@@ -173,7 +193,7 @@ class _BodyState extends ConsumerState<_Body> {
                       },
                     ),
                     SettingsListTile(
-                      icon: const Icon(ChessigmaIcons.arrow_full_upperright),
+                      icon: const Icon(ExoChessIcons.arrow_full_upperright),
                       settingsLabel: const Text('Drawn shape color'),
                       explanation:
                           'This color is only used for shapes drawn by hand using two fingers.',

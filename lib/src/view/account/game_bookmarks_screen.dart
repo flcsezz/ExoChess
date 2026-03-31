@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:chessigma_mobile/src/model/account/account_service.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/game/game_bookmarks.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/game/game_list_tile.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/model/account/account_service.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/game/game_bookmarks.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/game/game_list_tile.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
 
 class GameBookmarksScreen extends ConsumerWidget {
   const GameBookmarksScreen({required this.nbBookmarks, super.key});
@@ -160,7 +160,7 @@ class _BodyState extends ConsumerState<_Body> {
                       motion: const ScrollMotion(),
                       children: [
                         SlidableAction(
-                          backgroundColor: context.chessigmaColors.error,
+                          backgroundColor: context.exochessColors.error,
                           onPressed: onRemoveBookmark,
                           icon: Icons.bookmark_remove_outlined,
                           label: context.l10n.mobileRemoveBookmark,

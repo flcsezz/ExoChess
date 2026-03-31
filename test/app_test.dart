@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/l10n/l10n.dart';
-import 'package:chessigma_mobile/src/app.dart';
-import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
-import 'package:chessigma_mobile/src/model/settings/preferences_storage.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/tab_scaffold.dart';
-import 'package:chessigma_mobile/src/view/home/home_tab_screen.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/src/app.dart';
+import 'package:exochess_mobile/src/model/settings/general_preferences.dart';
+import 'package:exochess_mobile/src/model/settings/preferences_storage.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/tab_scaffold.dart';
+import 'package:exochess_mobile/src/view/home/home_tab_screen.dart';
 
 import 'model/auth/fake_auth_storage.dart';
 import 'network/fake_http_client_factory.dart';
@@ -76,7 +76,7 @@ void main() {
       // should see welcome message
       expect(
         find.text(
-          'Chessigma is a Free and Opensourced Hobby Project XD',
+          'ExoChess is a Free and Opensourced Hobby Project XD',
           findRichText: true,
         ),
         findsOneWidget,

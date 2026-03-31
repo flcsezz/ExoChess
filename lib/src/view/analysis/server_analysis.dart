@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_preferences.dart';
-import 'package:chessigma_mobile/src/model/analysis/server_analysis_service.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/widgets/acpl_chart.dart';
-import 'package:chessigma_mobile/src/widgets/feedback.dart';
-import 'package:chessigma_mobile/src/widgets/game_summary_table.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/neon_button.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_preferences.dart';
+import 'package:exochess_mobile/src/model/analysis/server_analysis_service.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/widgets/acpl_chart.dart';
+import 'package:exochess_mobile/src/widgets/feedback.dart';
+import 'package:exochess_mobile/src/widgets/game_summary_table.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/neon_button.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 
 class ServerAnalysisSummary extends ConsumerWidget {
   const ServerAnalysisSummary(this.options, {super.key});

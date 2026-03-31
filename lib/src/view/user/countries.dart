@@ -268,7 +268,7 @@ const Map<String, String> countries = {
   '_adygea': 'Adygea',
   '_belarus-wrw': 'Belarus White-red-white',
   '_east-turkestan': 'East Turkestan',
-  '_lichess': 'Chessigma',
+  '_lichess': 'ExoChess',
   '_pirate': 'Pirate',
   '_rainbow': 'Rainbow',
   '_russia-wbw': 'Russia White-blue-white',

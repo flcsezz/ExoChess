@@ -5,23 +5,23 @@ import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/common/game.dart';
-import 'package:chessigma_mobile/src/model/coordinate_training/coordinate_training_controller.dart';
-import 'package:chessigma_mobile/src/model/coordinate_training/coordinate_training_preferences.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/view/coordinate_training/coordinate_display.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/bottom_bar.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/filter.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/platform_alert_dialog.dart';
-import 'package:chessigma_mobile/src/widgets/settings.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/common/game.dart';
+import 'package:exochess_mobile/src/model/coordinate_training/coordinate_training_controller.dart';
+import 'package:exochess_mobile/src/model/coordinate_training/coordinate_training_preferences.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/view/coordinate_training/coordinate_display.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_bottom_sheet.dart';
+import 'package:exochess_mobile/src/widgets/bottom_bar.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/filter.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/platform_alert_dialog.dart';
+import 'package:exochess_mobile/src/widgets/settings.dart';
 
 class CoordinateTrainingScreen extends StatelessWidget {
   const CoordinateTrainingScreen({super.key});
@@ -87,8 +87,8 @@ class _BodyState extends ConsumerState<_Body> {
               details: HighlightDetails(
                 solidColor:
                     (trainingState.lastGuess == Guess.correct
-                            ? context.chessigmaColors.good
-                            : context.chessigmaColors.error)
+                            ? context.exochessColors.good
+                            : context.exochessColors.error)
                         .withValues(alpha: 0.5),
               ),
             ),
@@ -96,7 +96,7 @@ class _BodyState extends ConsumerState<_Body> {
         } else ...{
           trainingState.currentCoord!: SquareHighlight(
             details: HighlightDetails(
-              solidColor: context.chessigmaColors.good.withValues(alpha: 0.5),
+              solidColor: context.exochessColors.good.withValues(alpha: 0.5),
             ),
           ),
         },
@@ -133,8 +133,8 @@ class _BodyState extends ConsumerState<_Body> {
                           maxWidth: boardSize,
                           timeFractionElapsed: trainingState.timeFractionElapsed,
                           color: trainingState.lastGuess == Guess.incorrect
-                              ? context.chessigmaColors.error
-                              : context.chessigmaColors.good,
+                              ? context.exochessColors.error
+                              : context.exochessColors.good,
                         ),
                         _TrainingBoard(
                           boardSize: boardSize,
@@ -296,8 +296,8 @@ class _ScoreAndTrainingButton extends ConsumerWidget {
             score: score,
             size: scoreSize,
             color: trainingState.lastGuess == Guess.incorrect
-                ? context.chessigmaColors.error
-                : context.chessigmaColors.good,
+                ? context.exochessColors.error
+                : context.exochessColors.good,
           ),
           _Button(label: label, onPressed: onPressed),
         ],

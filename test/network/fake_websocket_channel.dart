@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:async/src/stream_sink_transformer.dart';
 import 'package:flutter/material.dart' show debugPrint;
-import 'package:chessigma_mobile/src/network/socket.dart';
+import 'package:exochess_mobile/src/network/socket.dart';
 import 'package:stream_channel/stream_channel.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 

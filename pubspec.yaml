@@ -1,5 +1,5 @@
-name: chessigma_mobile
-description: Chessigma mobile app
+name: exochess_mobile
+description: ExoChess mobile app
 publish_to: "none"
 
 version: 0.22.7+002207 # See README.md for details about versioning
@@ -82,6 +82,7 @@ dependencies:
   wakelock_plus: ^1.1.1
   web_socket_channel: ^3.0.0
   video_player: ^2.11.1
+  webview_flutter: ^4.13.1
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
@@ -126,18 +127,24 @@ flutter:
     - assets/videos/
 
   fonts:
-    - family: ChessigmaIcons
+    - family: ExoChessIcons
       fonts:
-        - asset: assets/fonts/ChessigmaIcons.ttf
+        - asset: assets/fonts/ExoChessIcons.ttf
     - family: SocialIcons
       fonts:
         - asset: assets/fonts/SocialIcons.ttf
     - family: ChessFont
       fonts:
         - asset: assets/fonts/ChessSansPiratf.ttf
-    - family: ChessigmaPuzzleIcons
+    - family: ExoChessPuzzleIcons
       fonts:
-        - asset: assets/fonts/ChessigmaPuzzleIcons.ttf
+        - asset: assets/fonts/ExoChessPuzzleIcons.ttf
+    - family: NDot
+      fonts:
+        - asset: assets/fonts/NDot55.ttf
+          weight: 400
+        - asset: assets/fonts/NDot57.ttf
+          weight: 700
 
   # Enable generation of localized Strings from arb files.
   generate: true

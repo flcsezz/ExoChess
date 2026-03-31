@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/db/secure_storage.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/db/secure_storage.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
 
 const kAuthStorageKey = '$kLichessHost.userSession';
 

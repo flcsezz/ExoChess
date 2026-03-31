@@ -3,15 +3,15 @@ import 'package:dartchess/dartchess.dart' show Side;
 import 'package:deep_pick/deep_pick.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/common/id.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/model/game/exported_game.dart';
-import 'package:chessigma_mobile/src/model/user/leaderboard.dart';
-import 'package:chessigma_mobile/src/model/user/streamer.dart';
-import 'package:chessigma_mobile/src/model/user/user.dart';
-import 'package:chessigma_mobile/src/network/aggregator.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/utils/json.dart';
+import 'package:exochess_mobile/src/model/common/id.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/model/game/exported_game.dart';
+import 'package:exochess_mobile/src/model/user/leaderboard.dart';
+import 'package:exochess_mobile/src/model/user/streamer.dart';
+import 'package:exochess_mobile/src/model/user/user.dart';
+import 'package:exochess_mobile/src/network/aggregator.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/utils/json.dart';
 
 /// A provider for the [UserRepository].
 final userRepositoryProvider = Provider<UserRepository>((ref) {
@@ -32,7 +32,7 @@ typedef UserScreenData = ({
 class UserRepository {
   UserRepository(this.client, this.aggregator);
 
-  final ChessigmaClient client;
+  final ExoChessClient client;
   final Aggregator aggregator;
 
   Future<UserScreenData> getUserScreenData(UserId id) {

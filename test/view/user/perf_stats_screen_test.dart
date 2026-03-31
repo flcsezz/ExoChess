@@ -2,9 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/testing.dart';
-import 'package:chessigma_mobile/src/model/common/perf.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/view/user/perf_stats_screen.dart';
+import 'package:exochess_mobile/src/model/common/perf.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/view/user/perf_stats_screen.dart';
 
 import '../../model/auth/fake_auth_repository.dart';
 import '../../test_helpers.dart';
@@ -30,7 +30,7 @@ void main() {
         home: PerfStatsScreen(user: fakeUser, perf: testPerf),
         overrides: {
           lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-            return ChessigmaClient(client, ref);
+            return ExoChessClient(client, ref);
           }),
         },
       );
@@ -55,7 +55,7 @@ void main() {
         home: PerfStatsScreen(user: fakeUser, perf: testPerf),
         overrides: {
           lichessClientProvider: lichessClientProvider.overrideWith((ref) {
-            return ChessigmaClient(client, ref);
+            return ExoChessClient(client, ref);
           }),
         },
       );

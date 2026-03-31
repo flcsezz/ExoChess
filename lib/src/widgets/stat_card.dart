@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/cyberpunk.dart';
 
 const _customOpacity = 0.6;
 const _defaultStatFontSize = 12.0;
@@ -32,28 +32,36 @@ class StatCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final defaultStatStyle = TextStyle(
-      color: textShade(context, opacity ?? _customOpacity),
+      color: isDark ? Colors.white38 : Colors.black54,
       fontSize: statFontSize ?? _defaultStatFontSize,
+      fontFamily: 'SpaceMono',
+      fontWeight: FontWeight.bold,
     );
 
-    final defaultValueStyle = TextStyle(fontSize: valueFontSize ?? _defaultValueFontSize);
+    final defaultValueStyle = TextStyle(
+      fontSize: valueFontSize ?? _defaultValueFontSize,
+      fontFamily: 'SpaceMono',
+      fontWeight: FontWeight.bold,
+    );
 
-    return GlassCard(
-      padding: EdgeInsets.zero,
+    return Card(
+      elevation: 0,
       margin: const EdgeInsets.symmetric(vertical: 6.0),
+      color: isDark ? null : Colors.white,
       child: Padding(
-        padding: contentPadding ?? EdgeInsets.zero,
+        padding: contentPadding ?? const EdgeInsets.all(12.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             FittedBox(
               alignment: Alignment.center,
               fit: BoxFit.scaleDown,
-              child: Text(stat, style: defaultStatStyle, textAlign: TextAlign.center),
+              child: Text(stat.toUpperCase(), style: defaultStatStyle, textAlign: TextAlign.center),
             ),
             if (value != null)
-              Text(value!, style: defaultValueStyle, textAlign: TextAlign.center)
+              Text(value!.toUpperCase(), style: defaultValueStyle, textAlign: TextAlign.center)
             else if (child != null)
               child!
             else

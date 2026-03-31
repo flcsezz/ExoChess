@@ -3,20 +3,20 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/tournament/tournament.dart';
-import 'package:chessigma_mobile/src/model/tournament/tournament_providers.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/focus_detector.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/tournament/tournament_faq.dart';
-import 'package:chessigma_mobile/src/view/tournament/tournament_screen.dart';
-import 'package:chessigma_mobile/src/widgets/haptic_refresh_indicator.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/platform.dart';
-import 'package:chessigma_mobile/src/widgets/shimmer.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/tournament/tournament.dart';
+import 'package:exochess_mobile/src/model/tournament/tournament_providers.dart';
+import 'package:exochess_mobile/src/styles/exochess_colors.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/focus_detector.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/tournament/tournament_faq.dart';
+import 'package:exochess_mobile/src/view/tournament/tournament_screen.dart';
+import 'package:exochess_mobile/src/widgets/haptic_refresh_indicator.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/platform.dart';
+import 'package:exochess_mobile/src/widgets/shimmer.dart';
 
 class TournamentListScreen extends ConsumerStatefulWidget {
   const TournamentListScreen({super.key});
@@ -234,11 +234,11 @@ class _TournamentListBodyState extends ConsumerState<_TournamentListBody> {
 
 Color? _iconColor(LightTournament tournament) {
   return tournament.meta.maxRating != null
-      ? ChessigmaColors.purple
+      ? ExoChessColors.purple
       : switch (tournament.meta.freq) {
-          TournamentFreq.hourly => ChessigmaColors.green,
-          TournamentFreq.daily => ChessigmaColors.blue,
-          TournamentFreq.monthly => ChessigmaColors.red,
+          TournamentFreq.hourly => ExoChessColors.green,
+          TournamentFreq.daily => ExoChessColors.blue,
+          TournamentFreq.monthly => ExoChessColors.red,
           _ => null,
         };
 }

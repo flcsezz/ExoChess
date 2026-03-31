@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/board_editor/board_editor_controller.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/view/board_editor/board_editor_screen.dart';
-import 'package:chessigma_mobile/src/widgets/bottom_bar.dart';
+import 'package:exochess_mobile/src/model/board_editor/board_editor_controller.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/view/board_editor/board_editor_screen.dart';
+import 'package:exochess_mobile/src/widgets/bottom_bar.dart';
 
 import '../../test_provider_scope.dart';
 

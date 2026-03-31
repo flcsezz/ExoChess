@@ -1,4 +1,4 @@
-import 'package:chessigma_mobile/l10n/l10n.dart';
+import 'package:exochess_mobile/l10n/l10n.dart';
 
 extension DurationExtensions on Duration {
   /// Returns a string representation of this duration, like H:MM:SS.mm.

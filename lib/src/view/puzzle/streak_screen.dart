@@ -4,34 +4,34 @@ import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/analysis/analysis_controller.dart';
-import 'package:chessigma_mobile/src/model/auth/auth_controller.dart';
-import 'package:chessigma_mobile/src/model/common/chess.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_angle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_controller.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_service.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_streak.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_theme.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/network/http.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/gestures_exclusion.dart';
-import 'package:chessigma_mobile/src/utils/immersive_mode.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/utils/share.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_error_board_widget.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_feedback_widget.dart';
-import 'package:chessigma_mobile/src/view/settings/toggle_sound_button.dart';
-import 'package:chessigma_mobile/src/widgets/board.dart';
-import 'package:chessigma_mobile/src/widgets/bottom_bar.dart';
-import 'package:chessigma_mobile/src/widgets/pgn.dart';
-import 'package:chessigma_mobile/src/widgets/platform_alert_dialog.dart';
-import 'package:chessigma_mobile/src/widgets/yes_no_dialog.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/analysis/analysis_controller.dart';
+import 'package:exochess_mobile/src/model/auth/auth_controller.dart';
+import 'package:exochess_mobile/src/model/common/chess.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_angle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_controller.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_service.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_streak.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_theme.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/network/http.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/gestures_exclusion.dart';
+import 'package:exochess_mobile/src/utils/immersive_mode.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/utils/share.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_error_board_widget.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_feedback_widget.dart';
+import 'package:exochess_mobile/src/view/settings/toggle_sound_button.dart';
+import 'package:exochess_mobile/src/widgets/board.dart';
+import 'package:exochess_mobile/src/widgets/bottom_bar.dart';
+import 'package:exochess_mobile/src/widgets/pgn.dart';
+import 'package:exochess_mobile/src/widgets/platform_alert_dialog.dart';
+import 'package:exochess_mobile/src/widgets/yes_no_dialog.dart';
 import 'package:share_plus/share_plus.dart';
 
 class StreakScreen extends StatelessWidget {
@@ -258,7 +258,7 @@ class _BodyState extends ConsumerState<_Body> {
                                               mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 Icon(
-                                                  ChessigmaIcons.streak,
+                                                  ExoChessIcons.streak,
                                                   size: 150.0,
                                                   color: ColorScheme.of(context).primary,
                                                 ),
@@ -373,7 +373,7 @@ class _BodyState extends ConsumerState<_Body> {
                                           child: Row(
                                             children: [
                                               Icon(
-                                                ChessigmaIcons.streak,
+                                                ExoChessIcons.streak,
                                                 size: 50.0,
                                                 color: ColorScheme.of(context).primary,
                                               ),
@@ -489,7 +489,7 @@ class _BottomBar extends ConsumerWidget {
               launchShareDialog(
                 context,
                 ShareParams(
-                  text: chessigmaUri('/training/${puzzleState.puzzle.puzzle.id}').toString(),
+                  text: exochessUri('/training/${puzzleState.puzzle.puzzle.id}').toString(),
                 ),
               );
             },

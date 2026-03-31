@@ -2,10 +2,10 @@ import 'package:dartchess/dartchess.dart' hide Position;
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/board_editor/board_editor_controller.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
+import 'package:exochess_mobile/src/model/board_editor/board_editor_controller.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_bottom_sheet.dart';
 
 class BoardEditorFilters extends ConsumerWidget {
   const BoardEditorFilters({required this.params, super.key});

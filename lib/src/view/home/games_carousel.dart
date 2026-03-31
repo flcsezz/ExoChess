@@ -3,14 +3,14 @@ import 'package:dartchess/dartchess.dart';
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/account/ongoing_game.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/tab_scaffold.dart';
-import 'package:chessigma_mobile/src/utils/l10n.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/user.dart';
+import 'package:exochess_mobile/src/model/account/ongoing_game.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/tab_scaffold.dart';
+import 'package:exochess_mobile/src/utils/l10n.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/user.dart';
 
 const _kDefaultCardOpacity = 0.9;
 const kGameCarouselFlexWeights = [6, 2];
@@ -62,6 +62,9 @@ class _GamesCarouselState<T> extends State<GamesCarousel<T>> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Padding(
       padding: Styles.verticalBodyPadding,
       child: Column(
@@ -70,7 +73,10 @@ class _GamesCarouselState<T> extends State<GamesCarousel<T>> {
           Padding(
             padding: Styles.horizontalBodyPadding,
             child: ListSectionHeader(
-              title: Text(context.l10n.nbGamesInPlay(widget.list.length)),
+              title: Text(
+                context.l10n.nbGamesInPlay(widget.list.length).toUpperCase(),
+                style: const TextStyle(fontFamily: 'NDot', fontSize: 18),
+              ),
               onTap: widget.list.length > 2
                   ? () {
                       Navigator.of(context).push(widget.moreScreenRouteBuilder(context));
@@ -78,15 +84,19 @@ class _GamesCarouselState<T> extends State<GamesCarousel<T>> {
                   : null,
             ),
           ),
+          const SizedBox(height: 8.0),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: AspectRatio(
               aspectRatio: 1.15,
               child: CarouselView.weighted(
                 controller: _controller,
-                padding: kGameCarouselPadding,
-                shape: const RoundedRectangleBorder(borderRadius: Styles.cardBorderRadius),
-                elevation: Theme.of(context).platform == TargetPlatform.iOS ? 0 : 1,
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.0),
+                  side: BorderSide(color: theme.colorScheme.outline),
+                ),
+                elevation: 0,
                 flexWeights: kGameCarouselFlexWeights,
                 itemSnapping: true,
                 onTap: (index) {
@@ -112,51 +122,55 @@ class OngoingGameCarouselItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    
     final timeLeft = game.secondsLeft != null
         ? relativeDate(context.l10n, DateTime.now().add(Duration(seconds: game.secondsLeft!)))
         : null;
     final timeTextStyle = TextStyle(
-      color: Colors.white.withValues(alpha: game.isMyTurn ? 1.0 : 0.7),
-      fontSize: TextTheme.of(context).labelMedium?.fontSize,
-      fontWeight: FontWeight.w500,
+      color: theme.colorScheme.onSurface,
+      fontSize: 12,
+      fontFamily: 'SpaceMono',
+      fontWeight: FontWeight.bold,
     );
 
-    return Opacity(
-      opacity: game.isRealTime || game.isMyTurn ? _kDefaultCardOpacity : 0.7,
-      child: _BoardCarouselItem(
-        isRealTimeGame: game.isRealTime,
-        fen: game.fen,
-        orientation: game.orientation,
-        lastMove: game.lastMove,
-        description: Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  children: [
-                    if (game.isMyTurn) ...[
-                      const Icon(Icons.timer, size: 16.0, color: Colors.white),
-                      const SizedBox(width: 4.0),
-                      if (timeLeft != null) Text(timeLeft, style: timeTextStyle),
-                    ] else
-                      Text(context.l10n.waitingForOpponent, style: timeTextStyle),
-                  ],
+    return _BoardCarouselItem(
+      isRealTimeGame: game.isRealTime,
+      fen: game.fen,
+      orientation: game.orientation,
+      lastMove: game.lastMove,
+      description: Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  if (game.isMyTurn) ...[
+                    Icon(Icons.timer, size: 14.0, color: theme.colorScheme.primary),
+                    const SizedBox(width: 6.0),
+                    if (timeLeft != null) Text(timeLeft.toUpperCase(), style: timeTextStyle),
+                  ] else
+                    Text(context.l10n.waitingForOpponent.toUpperCase(), style: timeTextStyle.copyWith(color: isDark ? Colors.white38 : Colors.black38)),
+                ],
+              ),
+              const SizedBox(height: 4.0),
+              UserFullNameWidget.player(
+                user: game.opponent,
+                rating: game.opponentRating,
+                aiLevel: game.opponentAiLevel,
+                style: TextStyle(
+                  fontFamily: 'SpaceMono',
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: theme.colorScheme.onSurface,
                 ),
-                const SizedBox(height: 4.0),
-                UserFullNameWidget.player(
-                  user: game.opponent,
-                  rating: game.opponentRating,
-                  aiLevel: game.opponentAiLevel,
-                  style: Styles.boardPreviewTitle.copyWith(
-                    color: Colors.white.withValues(alpha: game.isMyTurn ? 1.0 : 0.7),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -190,23 +204,8 @@ class _BoardCarouselItem extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final boardPrefs = ref.watch(boardPreferencesProvider);
-    final brightness = ColorScheme.of(context).brightness;
-
-    final backgroundColor = lighten(
-      isRealTimeGame ? context.chessigmaColors.brag : boardPrefs.boardTheme.colors.darkSquare,
-      brightness == Brightness.light ? 0.25 : 0.0,
-    );
-
-    // apply hue settings to background color
-    final hsl = HSLColor.fromColor(backgroundColor);
-    final hue = (hsl.hue + boardPrefs.hue) % 360;
-
-    final backgroundColorWithHueFilter = HSLColor.fromAHSL(
-      1.0,
-      hue,
-      hsl.saturation,
-      hsl.lightness,
-    ).toColor();
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     final screenWidth = MediaQuery.sizeOf(context).width;
     final totalFlex = kGameCarouselFlexWeights.reduce((a, b) => a + b);
@@ -214,49 +213,45 @@ class _BoardCarouselItem extends ConsumerWidget {
     final boardSize =
         width * kGameCarouselFlexWeights[0] / totalFlex - kGameCarouselPadding.horizontal;
 
-    return ColoredBox(
-      color: backgroundColorWithHueFilter,
-      child: OverflowBox(
-        maxWidth: boardSize,
-        minWidth: boardSize,
-        child: Stack(
-          children: [
-            SizedBox(
-              height: boardSize,
-              child: StaticChessboard(
-                hue: boardPrefs.hue,
-                brightness: boardPrefs.brightness,
-                size: boardSize,
-                fen: fen,
-                orientation: orientation,
-                lastMove: lastMove,
-                enableCoordinates: false,
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10.0),
-                  topRight: Radius.circular(10.0),
-                ),
-                pieceAssets: boardPrefs.pieceSet.assets,
-                colorScheme: isRealTimeGame
-                    ? realTimeColors(context)
-                    : boardPrefs.boardTheme.colors,
+    return Container(
+      decoration: BoxDecoration(
+        color: isDark ? Colors.white.withOpacity(0.02) : Colors.black.withOpacity(0.02),
+      ),
+      child: Stack(
+        children: [
+          SizedBox(
+            height: boardSize,
+            child: StaticChessboard(
+              hue: boardPrefs.hue,
+              brightness: boardPrefs.brightness,
+              size: boardSize,
+              fen: fen,
+              orientation: orientation,
+              lastMove: lastMove,
+              enableCoordinates: false,
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(16.0),
+                topRight: Radius.circular(16.0),
               ),
+              pieceAssets: boardPrefs.pieceSet.assets,
+              colorScheme: isRealTimeGame
+                  ? realTimeColors(context)
+                  : boardPrefs.boardTheme.colors,
             ),
-            Positioned(
-              left: 0,
-              bottom: 8,
-              child: DefaultTextStyle.merge(
-                style: const TextStyle(color: Colors.white),
-                child: description,
-              ),
-            ),
-          ],
-        ),
+          ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            child: description,
+          ),
+        ],
       ),
     );
   }
 
   ChessboardColorScheme realTimeColors(BuildContext context) {
-    final brag = context.chessigmaColors.brag;
+    final brag = context.exochessColors.brag;
     final lightSquare = lighten(brag, 0.55);
     final darkSquare = brag;
     return ChessboardColorScheme(

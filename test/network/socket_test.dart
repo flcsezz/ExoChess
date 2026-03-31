@@ -4,8 +4,8 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:fake_async/fake_async.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/model/common/socket.dart';
-import 'package:chessigma_mobile/src/network/socket.dart';
+import 'package:exochess_mobile/src/model/common/socket.dart';
+import 'package:exochess_mobile/src/network/socket.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../binding.dart';
@@ -50,7 +50,7 @@ SocketClient makeTestSocketClient({
 }
 
 void main() {
-  TestChessigmaBinding.ensureInitialized();
+  TestExoChessBinding.ensureInitialized();
 
   group('SocketClient', () {
     test('handles ping/pong', () async {

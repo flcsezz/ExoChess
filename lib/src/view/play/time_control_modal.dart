@@ -1,15 +1,15 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/model/common/time_increment.dart';
-import 'package:chessigma_mobile/src/model/lobby/game_setup_preferences.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_icons.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/widgets/adaptive_bottom_sheet.dart';
-import 'package:chessigma_mobile/src/widgets/non_linear_slider.dart';
-import 'package:chessigma_mobile/src/widgets/settings.dart';
-import 'package:chessigma_mobile/src/widgets/cyberpunk/cyberpunk.dart';
-import 'package:chessigma_mobile/src/styles/chessigma_colors.dart';
+import 'package:exochess_mobile/src/model/common/time_increment.dart';
+import 'package:exochess_mobile/src/model/lobby/game_setup_preferences.dart';
+import 'package:exochess_mobile/src/styles/exochess_icons.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/widgets/adaptive_bottom_sheet.dart';
+import 'package:exochess_mobile/src/widgets/non_linear_slider.dart';
+import 'package:exochess_mobile/src/widgets/settings.dart';
+import 'package:exochess_mobile/src/widgets/cyberpunk/cyberpunk.dart';
+import 'package:exochess_mobile/src/styles/exochess_colors.dart';
 
 class TimeControlModal extends StatelessWidget {
   const TimeControlModal({
@@ -35,7 +35,7 @@ class TimeControlModal extends StatelessWidget {
     }
 
     return BottomSheetScrollableContainer(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
+      padding: const EdgeInsets.symmetric(vertical: 24.0),
       children: [
         Padding(
           padding: _horizontalPadding,
@@ -43,101 +43,92 @@ class TimeControlModal extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              SettingsSectionTitle(context.l10n.timeControl),
-              Text.rich(
-                TextSpan(
-                  text: context.l10n.minutesPerSide,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.labelSmall?.copyWith(color: textShade(context, 0.7)),
-                  children: [
-                    TextSpan(
-                      text: ' + ',
-                      style: Theme.of(
-                        context,
-                      ).textTheme.labelLarge?.copyWith(color: textShade(context, 0.7)),
-                    ),
-                    TextSpan(
-                      text: context.l10n.incrementInSeconds,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.labelSmall?.copyWith(color: textShade(context, 0.7)),
-                    ),
-                  ],
+              Text(
+                context.l10n.timeControl.toUpperCase(),
+                style: const TextStyle(fontFamily: 'NDot', fontSize: 24),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                '${context.l10n.minutesPerSide} + ${context.l10n.incrementInSeconds}'.toUpperCase(),
+                style: TextStyle(
+                  fontFamily: 'SpaceMono',
+                  fontSize: 11,
+                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white38 : Colors.black38,
                 ),
               ),
             ],
           ),
         ),
-        const SizedBox(height: 4.0),
+        const SizedBox(height: 24.0),
         Padding(
           padding: Styles.horizontalBodyPadding.add(Styles.sectionBottomPadding),
-          child: GlassCard(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 16.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _SectionChoices(
-                  timeIncrement,
-                  choices: [
-                    if (!excludeUltraBullet) const TimeIncrement(0, 1),
-                    const TimeIncrement(60, 0),
-                    const TimeIncrement(60, 1),
-                    const TimeIncrement(120, 1),
-                  ],
-                  title: const _SectionTitle(title: 'Bullet', icon: ChessigmaIcons.bullet),
-                  onSelected: onSelected,
-                ),
-                _sectionSpacing,
-                _SectionChoices(
-                  timeIncrement,
-                  choices: const [
-                    TimeIncrement(180, 0),
-                    TimeIncrement(180, 2),
-                    TimeIncrement(300, 0),
-                    TimeIncrement(300, 3),
-                  ],
-                  title: const _SectionTitle(title: 'Blitz', icon: ChessigmaIcons.blitz),
-                  onSelected: onSelected,
-                ),
-                _sectionSpacing,
-                _SectionChoices(
-                  timeIncrement,
-                  choices: const [
-                    TimeIncrement(600, 0),
-                    TimeIncrement(600, 5),
-                    TimeIncrement(900, 0),
-                    TimeIncrement(900, 10),
-                  ],
-                  title: const _SectionTitle(title: 'Rapid', icon: ChessigmaIcons.rapid),
-                  onSelected: onSelected,
-                ),
-                _sectionSpacing,
-                _SectionChoices(
-                  timeIncrement,
-                  choices: const [
-                    TimeIncrement(1500, 0),
-                    TimeIncrement(1800, 0),
-                    TimeIncrement(1800, 20),
-                    TimeIncrement(3600, 0),
-                  ],
-                  title: const _SectionTitle(title: 'Classical', icon: ChessigmaIcons.classical),
-                  onSelected: onSelected,
-                ),
-              ],
+          child: Card(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _SectionChoices(
+                    timeIncrement,
+                    choices: [
+                      if (!excludeUltraBullet) const TimeIncrement(0, 1),
+                      const TimeIncrement(60, 0),
+                      const TimeIncrement(60, 1),
+                      const TimeIncrement(120, 1),
+                    ],
+                    title: const _SectionTitle(title: 'BULLET', icon: ExoChessIcons.bullet),
+                    onSelected: onSelected,
+                  ),
+                  const SizedBox(height: 24),
+                  _SectionChoices(
+                    timeIncrement,
+                    choices: const [
+                      TimeIncrement(180, 0),
+                      TimeIncrement(180, 2),
+                      TimeIncrement(300, 0),
+                      TimeIncrement(300, 3),
+                    ],
+                    title: const _SectionTitle(title: 'BLITZ', icon: ExoChessIcons.blitz),
+                    onSelected: onSelected,
+                  ),
+                  const SizedBox(height: 24),
+                  _SectionChoices(
+                    timeIncrement,
+                    choices: const [
+                      TimeIncrement(600, 0),
+                      TimeIncrement(600, 5),
+                      TimeIncrement(900, 0),
+                      TimeIncrement(900, 10),
+                    ],
+                    title: const _SectionTitle(title: 'RAPID', icon: ExoChessIcons.rapid),
+                    onSelected: onSelected,
+                  ),
+                  const SizedBox(height: 24),
+                  _SectionChoices(
+                    timeIncrement,
+                    choices: const [
+                      TimeIncrement(1500, 0),
+                      TimeIncrement(1800, 0),
+                      TimeIncrement(1800, 20),
+                      TimeIncrement(3600, 0),
+                    ],
+                    title: const _SectionTitle(title: 'CLASSICAL', icon: ExoChessIcons.classical),
+                    onSelected: onSelected,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
         Padding(
           padding: _horizontalPadding,
-          child: GlassCard(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 16.0),
+          child: Card(
             child: Theme(
               data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
               child: ExpansionTile(
                 initiallyExpanded: timeIncrement.isCustom,
-                title: _SectionTitle(title: context.l10n.custom, icon: Icons.tune),
-                tilePadding: EdgeInsets.zero,
+                title: _SectionTitle(title: context.l10n.custom.toUpperCase(), icon: Icons.tune),
+                tilePadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
                 minTileHeight: 0,
                 children: [
                   Builder(
@@ -145,76 +136,84 @@ class TimeControlModal extends StatelessWidget {
                       TimeIncrement custom = timeIncrement;
                       return StatefulBuilder(
                         builder: (context, setState) {
-                          return Column(
-                            children: [
-                              ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                title: Text.rich(
-                                  TextSpan(
-                                    text: '${context.l10n.minutesPerSide}: ',
-                                    children: [
-                                      TextSpan(
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
+                          return Padding(
+                            padding: const EdgeInsets.all(24.0).copyWith(top: 0),
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  contentPadding: EdgeInsets.zero,
+                                  title: Text.rich(
+                                    TextSpan(
+                                      text: '${context.l10n.minutesPerSide.toUpperCase()}: ',
+                                      style: const TextStyle(fontFamily: 'SpaceMono', fontSize: 12),
+                                      children: [
+                                        TextSpan(
+                                          style: const TextStyle(
+                                            fontFamily: 'NDot',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                          ),
+                                          text: clockLabelInMinutes(custom.time),
                                         ),
-                                        text: clockLabelInMinutes(custom.time),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
+                                  ),
+                                  subtitle: NonLinearSlider(
+                                    value: custom.time,
+                                    values: kAvailableTimesInSeconds,
+                                    labelBuilder: clockLabelInMinutes,
+                                    onChange: (num value) {
+                                      setState(() {
+                                        custom = TimeIncrement(value.toInt(), custom.increment);
+                                      });
+                                    },
+                                    onChangeEnd: (num value) {
+                                      setState(() {
+                                        custom = TimeIncrement(value.toInt(), custom.increment);
+                                      });
+                                    },
                                   ),
                                 ),
-                                subtitle: NonLinearSlider(
-                                  value: custom.time,
-                                  values: kAvailableTimesInSeconds,
-                                  labelBuilder: clockLabelInMinutes,
-                                  onChange: (num value) {
-                                    setState(() {
-                                      custom = TimeIncrement(value.toInt(), custom.increment);
-                                    });
-                                  },
-                                  onChangeEnd: (num value) {
-                                    setState(() {
-                                      custom = TimeIncrement(value.toInt(), custom.increment);
-                                    });
-                                  },
-                                ),
-                              ),
-                              ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                title: Text.rich(
-                                  TextSpan(
-                                    text: '${context.l10n.incrementInSeconds}: ',
-                                    children: [
-                                      TextSpan(
-                                        style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
+                                ListTile(
+                                  contentPadding: EdgeInsets.zero,
+                                  title: Text.rich(
+                                    TextSpan(
+                                      text: '${context.l10n.incrementInSeconds.toUpperCase()}: ',
+                                      style: const TextStyle(fontFamily: 'SpaceMono', fontSize: 12),
+                                      children: [
+                                        TextSpan(
+                                          style: const TextStyle(
+                                            fontFamily: 'NDot',
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                          ),
+                                          text: custom.increment.toString(),
                                         ),
-                                        text: custom.increment.toString(),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
+                                  ),
+                                  subtitle: NonLinearSlider(
+                                    value: custom.increment,
+                                    values: kAvailableIncrementsInSeconds,
+                                    onChange: (num value) {
+                                      setState(() {
+                                        custom = TimeIncrement(custom.time, value.toInt());
+                                      });
+                                    },
+                                    onChangeEnd: (num value) {
+                                      setState(() {
+                                        custom = TimeIncrement(custom.time, value.toInt());
+                                      });
+                                    },
                                   ),
                                 ),
-                                subtitle: NonLinearSlider(
-                                  value: custom.increment,
-                                  values: kAvailableIncrementsInSeconds,
-                                  onChange: (num value) {
-                                    setState(() {
-                                      custom = TimeIncrement(custom.time, value.toInt());
-                                    });
-                                  },
-                                  onChangeEnd: (num value) {
-                                    setState(() {
-                                      custom = TimeIncrement(custom.time, value.toInt());
-                                    });
-                                  },
+                                const SizedBox(height: 16),
+                                FilledButton(
+                                  onPressed: custom.isInfinite ? null : () => onSelected(custom),
+                                  child: Text(context.l10n.mobileOkButton.toUpperCase(), style: const TextStyle(fontFamily: 'SpaceMono', fontWeight: FontWeight.bold)),
                                 ),
-                              ),
-                              FilledButton(
-                                onPressed: custom.isInfinite ? null : () => onSelected(custom),
-                                child: Text(context.l10n.mobileOkButton, style: Styles.bold),
-                              ),
-                            ],
+                              ],
+                            ),
                           );
                         },
                       );
@@ -300,34 +299,36 @@ class _ChoiceChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final glowColor = selected ? context.chessigmaColors.neonBlue : Colors.transparent;
-    final bgColor = selected ? context.chessigmaColors.voidBackgroundLighter : ColorScheme.of(context).surfaceContainerLow.withOpacity(0.3);
+    final theme = Theme.of(context);
+    final accentColor = theme.colorScheme.primary;
+    final isDark = theme.brightness == Brightness.dark;
 
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
       decoration: BoxDecoration(
-        color: bgColor,
-        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-        boxShadow: selected
-            ? [BoxShadow(color: glowColor.withOpacity(0.5), blurRadius: 8, spreadRadius: 1)]
-            : null,
-        border: Border.fromBorderSide(
-          BorderSide(
-            color: selected ? glowColor : Theme.of(context).dividerColor.withOpacity(0.3),
-            width: 1.0,
-          ),
+        color: selected 
+          ? (isDark ? Colors.white.withOpacity(0.05) : Colors.black.withOpacity(0.05))
+          : Colors.transparent,
+        borderRadius: const BorderRadius.all(Radius.circular(12.0)),
+        border: Border.all(
+          color: selected ? accentColor : theme.colorScheme.outline,
+          width: selected ? 2.0 : 1.0,
         ),
       ),
       child: InkWell(
-        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(12.0)),
         onTap: () => onSelected(true),
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10.0),
+          padding: const EdgeInsets.symmetric(vertical: 12.0),
           child: Center(
             child: DefaultTextStyle.merge(
-              style: Styles.timeControl.copyWith(
-                color: selected
-                    ? glowColor
-                    : ColorScheme.of(context).onSurfaceVariant,
+              style: TextStyle(
+                fontFamily: 'SpaceMono',
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: selected 
+                  ? (isDark ? Colors.white : Colors.black)
+                  : (isDark ? Colors.white38 : Colors.black38),
               ),
               child: label,
             ),
@@ -348,12 +349,18 @@ class _SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(icon, size: 20.0),
-        const SizedBox(width: 10),
-        Text(title, style: _titleStyle),
+        Icon(icon, size: 18.0, color: Theme.of(context).colorScheme.primary),
+        const SizedBox(width: 12),
+        Text(
+          title, 
+          style: const TextStyle(
+            fontFamily: 'SpaceMono', 
+            fontWeight: FontWeight.bold,
+            fontSize: 13,
+            letterSpacing: 1.0,
+          ),
+        ),
       ],
     );
   }
 }
-
-const TextStyle _titleStyle = TextStyle(fontSize: 16);

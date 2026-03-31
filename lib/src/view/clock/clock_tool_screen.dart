@@ -2,17 +2,17 @@ import 'package:flutter/cupertino.dart' show CupertinoIcons;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/clock/clock_tool_controller.dart';
-import 'package:chessigma_mobile/src/model/common/time_increment.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/immersive_mode.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/utils/screen.dart';
-import 'package:chessigma_mobile/src/view/clock/clock_settings.dart';
-import 'package:chessigma_mobile/src/view/clock/custom_clock_settings.dart';
-import 'package:chessigma_mobile/src/widgets/buttons.dart';
-import 'package:chessigma_mobile/src/widgets/clock.dart';
+import 'package:exochess_mobile/src/model/clock/clock_tool_controller.dart';
+import 'package:exochess_mobile/src/model/common/time_increment.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/immersive_mode.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/utils/screen.dart';
+import 'package:exochess_mobile/src/view/clock/clock_settings.dart';
+import 'package:exochess_mobile/src/view/clock/custom_clock_settings.dart';
+import 'package:exochess_mobile/src/widgets/buttons.dart';
+import 'package:exochess_mobile/src/widgets/clock.dart';
 
 class ClockToolScreen extends StatelessWidget {
   const ClockToolScreen({super.key});
@@ -169,7 +169,7 @@ class _ClockTileState extends ConsumerState<ClockTile> with SingleTickerProvider
     final colorScheme = ColorScheme.of(context);
     final activeColor = darken(colorScheme.primaryFixedDim, 0.25);
     final normalBackground = clockState.isFlagged(playerType)
-        ? context.chessigmaColors.error.withValues(alpha: 0.7)
+        ? context.exochessColors.error.withValues(alpha: 0.7)
         : clockState.isPlayersTurn(playerType)
         ? activeColor
         : colorScheme.surfaceContainerHighest;
@@ -190,7 +190,7 @@ class _ClockTileState extends ConsumerState<ClockTile> with SingleTickerProvider
     );
 
     final clockOrientation = ref.watch(clockToolControllerProvider).clockOrientation;
-    final emergencyColor = context.chessigmaColors.error;
+    final emergencyColor = context.exochessColors.error;
 
     return AnimatedOpacity(
       opacity: clockState.paused ? 0.8 : 1.0,

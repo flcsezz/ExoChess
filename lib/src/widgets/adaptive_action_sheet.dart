@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
 
 /// A action bottom sheet that adapts to the platform (Android/iOS).
 ///

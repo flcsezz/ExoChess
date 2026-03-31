@@ -14,10 +14,10 @@ import flutter_local_notifications
   func didInitializeImplicitFlutterEngine(_ engineBridge: FlutterImplicitEngineBridge) {
     GeneratedPluginRegistrant.register(with: engineBridge.pluginRegistry)
 
-    let BADGE_CHANNEL = FlutterMethodChannel(name: "mobile.chessigma/badge",
+    let BADGE_CHANNEL = FlutterMethodChannel(name: "mobile.exochess/badge",
                                                     binaryMessenger: engineBridge.applicationRegistrar.messenger())
 
-    let SYSTEM_CHANNEL = FlutterMethodChannel(name: "mobile.chessigma/system",
+    let SYSTEM_CHANNEL = FlutterMethodChannel(name: "mobile.exochess/system",
                                                     binaryMessenger: engineBridge.applicationRegistrar.messenger())
 
     BADGE_CHANNEL.setMethodCallHandler({

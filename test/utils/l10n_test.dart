@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:chessigma_mobile/src/utils/l10n.dart';
+import 'package:exochess_mobile/src/utils/l10n.dart';
 
 void main() {
   group('l10nWithWidget', () {

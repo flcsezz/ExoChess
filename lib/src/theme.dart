@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/constants.dart';
-import 'package:chessigma_mobile/src/model/settings/board_preferences.dart';
-import 'package:chessigma_mobile/src/model/settings/general_preferences.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/color_palette.dart';
+import 'package:exochess_mobile/src/constants.dart';
+import 'package:exochess_mobile/src/model/settings/board_preferences.dart';
+import 'package:exochess_mobile/src/model/settings/general_preferences.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/color_palette.dart';
 import 'package:google_fonts/google_fonts.dart';
 const kSliderTheme = SliderThemeData(
   // ignore: deprecated_member_use
@@ -89,83 +89,137 @@ ThemeData _makeDefaultTheme(
   };
   final hasSystemColors = systemScheme != null && generalPrefs.systemColors == true;
 
-  const chessigmaGold = Color(0xFFE8B84B);
-  
-  final neutralScheme = ColorScheme.fromSeed(
-    seedColor: chessigmaGold,
+  // Nothing Phone Aesthetic: Monochrome with a single Red accent
+  const nothingRed = Color(0xFFD71921);
+  const nothingBlack = Color(0xFF000000);
+  const nothingWhite = Color(0xFFFFFFFF);
+  const nothingGray = Color(0xFF1B1B1D);
+
+  final monochromeScheme = ColorScheme.fromSeed(
+    seedColor: nothingRed,
     brightness: brightness,
-    dynamicSchemeVariant: DynamicSchemeVariant.neutral,
-  );
-  
-  final boardScheme = ColorScheme.fromSeed(
-    seedColor: chessigmaGold,
-    brightness: brightness,
+    dynamicSchemeVariant: DynamicSchemeVariant.monochrome,
   ).copyWith(
-    primary: chessigmaGold,
-    onPrimary: Colors.black,
-    surface: brightness == Brightness.dark ? const Color(0xFF010206) : neutralScheme.surface,
-    onSurface: neutralScheme.onSurface,
-    surfaceDim: brightness == Brightness.dark ? const Color(0xFF000103) : neutralScheme.surfaceDim,
-    surfaceBright: neutralScheme.surfaceBright,
-    surfaceContainer: brightness == Brightness.dark ? const Color(0xFF04060C) : neutralScheme.surfaceContainer,
-    surfaceContainerLowest: brightness == Brightness.dark ? const Color(0xFF000000) : neutralScheme.surfaceContainerLowest,
-    surfaceContainerLow: brightness == Brightness.dark ? const Color(0xFF020409) : neutralScheme.surfaceContainerLow,
-    surfaceContainerHigh: brightness == Brightness.dark ? const Color(0xFF0A0F1A) : neutralScheme.surfaceContainerHigh,
-    surfaceContainerHighest: brightness == Brightness.dark ? const Color(0xFF101625) : neutralScheme.surfaceContainerHighest,
+    primary: nothingRed,
+    onPrimary: Colors.white,
+    secondary: brightness == Brightness.dark ? nothingWhite : nothingBlack,
+    onSecondary: brightness == Brightness.dark ? nothingBlack : nothingWhite,
+    surface: brightness == Brightness.dark ? nothingBlack : nothingWhite,
+    onSurface: brightness == Brightness.dark ? nothingWhite : nothingBlack,
+    outline: brightness == Brightness.dark ? Colors.white24 : Colors.black26,
+    surfaceContainer: brightness == Brightness.dark ? const Color(0xFF111111) : const Color(0xFFF5F5F5),
   );
 
   final baseTextTheme = isIOS ? kCupertinoDefaultTextTheme : ThemeData(brightness: brightness).textTheme;
-  final textTheme = GoogleFonts.outfitTextTheme(baseTextTheme).apply(
-    bodyColor: boardScheme.onSurface,
-    displayColor: boardScheme.onSurface,
+  
+  // Custom Typography Scale using NDot for headers and SpaceMono for technical info
+  final textTheme = GoogleFonts.outfitTextTheme(baseTextTheme).copyWith(
+    displayLarge: const TextStyle(fontFamily: 'NDot', fontWeight: FontWeight.bold),
+    displayMedium: const TextStyle(fontFamily: 'NDot', fontWeight: FontWeight.bold),
+    displaySmall: const TextStyle(fontFamily: 'NDot', fontWeight: FontWeight.bold),
+    headlineLarge: const TextStyle(fontFamily: 'NDot', fontWeight: FontWeight.bold),
+    headlineMedium: const TextStyle(fontFamily: 'NDot', fontWeight: FontWeight.bold),
+    headlineSmall: const TextStyle(fontFamily: 'NDot', fontWeight: FontWeight.bold),
+    titleLarge: const TextStyle(fontFamily: 'NDot', fontWeight: FontWeight.bold, fontSize: 22),
+    labelLarge: GoogleFonts.spaceMono(fontWeight: FontWeight.bold),
+    labelMedium: GoogleFonts.spaceMono(),
+    labelSmall: GoogleFonts.spaceMono(fontSize: 10),
+  ).apply(
+    bodyColor: monochromeScheme.onSurface,
+    displayColor: monochromeScheme.onSurface,
   );
 
   final theme = hasSystemColors
-      ? ThemeData.from(colorScheme: systemScheme!, textTheme: GoogleFonts.outfitTextTheme(baseTextTheme))
-      : ThemeData.from(colorScheme: boardScheme, textTheme: textTheme);
+      ? ThemeData.from(
+          colorScheme: systemScheme!,
+          textTheme: GoogleFonts.outfitTextTheme(baseTextTheme),
+          useMaterial3: true,
+        )
+      : ThemeData.from(
+          colorScheme: monochromeScheme,
+          textTheme: textTheme,
+          useMaterial3: true,
+        );
 
   return theme.copyWith(
     cupertinoOverrideTheme: _makeCupertinoThemeData(theme.colorScheme, brightness),
-    splashFactory: isIOS ? NoSplash.splashFactory : null,
+    splashFactory: isIOS ? NoSplash.splashFactory : InkRipple.splashFactory,
     appBarTheme: _appBarTheme.copyWith(
-      backgroundColor: isIOS
-          ? theme.colorScheme.surface.withValues(alpha: kCupertinoBarOpacity)
-          : null,
-      scrolledUnderElevation: isIOS ? 0 : null,
-      titleTextStyle: isIOS
-          ? const CupertinoTextThemeData().navTitleTextStyle.copyWith(
-              color: theme.colorScheme.onSurface,
-            )
-          : null,
+      backgroundColor: theme.colorScheme.surface,
+      foregroundColor: theme.colorScheme.onSurface,
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      centerTitle: true,
+      titleTextStyle: textTheme.titleLarge?.copyWith(
+        fontFamily: 'NDot',
+        color: theme.colorScheme.onSurface,
+      ),
     ),
-    navigationBarTheme: isIOS
-        ? NavigationBarThemeData(
-            backgroundColor: theme.colorScheme.surface.withValues(alpha: kCupertinoBarOpacity),
-          )
-        : null,
-    bottomAppBarTheme: BottomAppBarThemeData(
+    cardTheme: CardThemeData(
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(24.0),
+        side: BorderSide(color: theme.colorScheme.outline, width: 1),
+      ),
       color: theme.colorScheme.surface,
-      elevation: isIOS ? 0 : null,
     ),
-    searchBarTheme: isIOS ? _kCupertinoSearchBarTheme : null,
-    iconTheme: IconThemeData(color: theme.colorScheme.onSurface.withValues(alpha: 0.7)),
     listTileTheme: _makeListTileTheme(theme.colorScheme, isIOS),
-    cardTheme: isIOS
-        ? _kCupertinoCardTheme.copyWith(color: theme.colorScheme.surfaceContainerHigh)
-        : null,
-    inputDecorationTheme: isIOS ? _makeCupertinoInputDecorationTheme(theme.colorScheme) : null,
-    floatingActionButtonTheme: isIOS
-        ? FloatingActionButtonThemeData(
-            backgroundColor: theme.colorScheme.secondaryFixedDim,
-            foregroundColor: theme.colorScheme.onSecondaryFixedVariant,
-          )
-        : null,
-    dialogTheme: isIOS ? _kCupertinoDialogTheme : null,
-    filledButtonTheme: isIOS ? _kCupertinoFilledButtonTheme : null,
-    outlinedButtonTheme: isIOS ? _kCupertinoOutlinedButtonTheme : null,
-    menuTheme: isIOS ? _kCupertinoMenuThemeData : null,
-    bottomSheetTheme: isIOS ? _kCupertinoBottomSheetTheme : null,
-    sliderTheme: kSliderTheme,
+    filledButtonTheme: FilledButtonThemeData(
+      style: FilledButton.styleFrom(
+        minimumSize: const Size.fromHeight(56),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        backgroundColor: nothingRed,
+        foregroundColor: Colors.white,
+        textStyle: textTheme.labelLarge?.copyWith(fontSize: 16),
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        minimumSize: const Size.fromHeight(56),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        side: BorderSide(color: theme.colorScheme.onSurface, width: 1.5),
+        foregroundColor: theme.colorScheme.onSurface,
+        textStyle: textTheme.labelLarge?.copyWith(fontSize: 16),
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: brightness == Brightness.dark ? nothingGray : Colors.grey[100],
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: const BorderSide(color: nothingRed, width: 2),
+      ),
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+    ),
+    navigationBarTheme: NavigationBarThemeData(
+      backgroundColor: theme.colorScheme.surface,
+      indicatorColor: nothingRed.withOpacity(0.15),
+      iconTheme: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return IconThemeData(color: nothingRed);
+        }
+        return IconThemeData(color: theme.colorScheme.onSurface.withOpacity(0.7));
+      }),
+      labelTextStyle: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.selected)) {
+          return textTheme.labelSmall?.copyWith(color: nothingRed, fontWeight: FontWeight.bold);
+        }
+        return textTheme.labelSmall;
+      }),
+    ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      backgroundColor: nothingRed,
+      foregroundColor: Colors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    ),
+    sliderTheme: kSliderTheme.copyWith(
+      activeTrackColor: nothingRed,
+      thumbColor: nothingRed,
+    ),
     extensions: [lichessCustomColors.harmonized(theme.colorScheme)],
   );
 }

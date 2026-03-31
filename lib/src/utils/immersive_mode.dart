@@ -2,7 +2,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:chessigma_mobile/src/utils/focus_detector.dart';
+import 'package:exochess_mobile/src/utils/focus_detector.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 /// A widget that enables immersive mode when focused.

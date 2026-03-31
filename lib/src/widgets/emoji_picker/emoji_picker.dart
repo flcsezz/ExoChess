@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/rate_limit.dart';
-import 'package:chessigma_mobile/src/widgets/emoji_picker/emoji_item.dart';
-import 'package:chessigma_mobile/src/widgets/emoji_picker/emoji_picker_configuration.dart';
-import 'package:chessigma_mobile/src/widgets/emoji_picker/emoji_picker_models.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/rate_limit.dart';
+import 'package:exochess_mobile/src/widgets/emoji_picker/emoji_item.dart';
+import 'package:exochess_mobile/src/widgets/emoji_picker/emoji_picker_configuration.dart';
+import 'package:exochess_mobile/src/widgets/emoji_picker/emoji_picker_models.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 typedef EmojiSearchBarBuilder =

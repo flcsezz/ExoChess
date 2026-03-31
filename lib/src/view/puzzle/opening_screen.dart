@@ -1,16 +1,16 @@
 import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_angle.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_opening.dart';
-import 'package:chessigma_mobile/src/model/puzzle/puzzle_providers.dart';
-import 'package:chessigma_mobile/src/network/connectivity.dart';
-import 'package:chessigma_mobile/src/styles/styles.dart';
-import 'package:chessigma_mobile/src/utils/l10n_context.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_screen.dart';
-import 'package:chessigma_mobile/src/widgets/list.dart';
-import 'package:chessigma_mobile/src/widgets/platform.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_angle.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_opening.dart';
+import 'package:exochess_mobile/src/model/puzzle/puzzle_providers.dart';
+import 'package:exochess_mobile/src/network/connectivity.dart';
+import 'package:exochess_mobile/src/styles/styles.dart';
+import 'package:exochess_mobile/src/utils/l10n_context.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_screen.dart';
+import 'package:exochess_mobile/src/widgets/list.dart';
+import 'package:exochess_mobile/src/widgets/platform.dart';
 
 final _openingsProvider =
     FutureProvider.autoDispose<(bool, IMap<String, int>, IList<PuzzleOpeningFamily>?)>((ref) async {
@@ -35,7 +35,13 @@ class OpeningThemeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PlatformScaffold(
-      appBar: PlatformAppBar(title: Text(context.l10n.puzzlePuzzlesByOpenings)),
+      appBar: PlatformAppBar(
+        title: Text(
+          context.l10n.puzzlePuzzlesByOpenings.toUpperCase(),
+          style: const TextStyle(fontFamily: 'NDot', fontSize: 18),
+        ),
+        centerTitle: true,
+      ),
       body: const _Body(),
     );
   }
@@ -91,14 +97,20 @@ class _OpeningFamily extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    
     return Theme(
       data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
       child: openingFamily.openings.isNotEmpty
           ? ExpansionTile(
-              title: Text(openingFamily.name, overflow: TextOverflow.ellipsis, style: titleStyle),
+              title: Text(
+                openingFamily.name.toUpperCase(), 
+                overflow: TextOverflow.ellipsis, 
+                style: const TextStyle(fontFamily: 'SpaceMono', fontWeight: FontWeight.bold),
+              ),
               subtitle: Text(
-                '${openingFamily.count}',
-                style: TextStyle(color: textShade(context, Styles.subtitleOpacity)),
+                '${openingFamily.count} PUZZLES',
+                style: TextStyle(fontFamily: 'SpaceMono', fontSize: 10, color: isDark ? Colors.white38 : Colors.black38),
               ),
               children: [
                 ListSection(
@@ -122,10 +134,14 @@ class _OpeningFamily extends ConsumerWidget {
               ],
             )
           : ListTile(
-              title: Text(openingFamily.name, overflow: TextOverflow.ellipsis, style: titleStyle),
+              title: Text(
+                openingFamily.name.toUpperCase(), 
+                overflow: TextOverflow.ellipsis, 
+                style: const TextStyle(fontFamily: 'SpaceMono', fontWeight: FontWeight.bold),
+              ),
               subtitle: Text(
-                '${openingFamily.count}',
-                style: TextStyle(color: textShade(context, 0.5)),
+                '${openingFamily.count} PUZZLES',
+                style: TextStyle(fontFamily: 'SpaceMono', fontSize: 10, color: isDark ? Colors.white38 : Colors.black38),
               ),
               onTap: () {
                 Navigator.of(
@@ -153,9 +169,18 @@ class _OpeningTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return ListTile(
-      title: Text(name, overflow: TextOverflow.ellipsis, style: titleStyle),
-      trailing: Text('$count', style: TextStyle(color: textShade(context, Styles.subtitleOpacity))),
+      title: Text(
+        name.toUpperCase(), 
+        overflow: TextOverflow.ellipsis, 
+        style: const TextStyle(fontFamily: 'SpaceMono', fontSize: 14),
+      ),
+      trailing: Text(
+        '$count', 
+        style: TextStyle(fontFamily: 'SpaceMono', fontWeight: FontWeight.bold, color: isDark ? Colors.white38 : Colors.black38),
+      ),
       onTap: () {
         Navigator.of(
           context,

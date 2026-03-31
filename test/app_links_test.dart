@@ -1,12 +1,12 @@
 import 'package:dartchess/dartchess.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:chessigma_mobile/src/app_links.dart';
-import 'package:chessigma_mobile/src/utils/navigation.dart';
-import 'package:chessigma_mobile/src/view/analysis/analysis_screen.dart';
-import 'package:chessigma_mobile/src/view/puzzle/puzzle_screen.dart';
-import 'package:chessigma_mobile/src/view/study/study_screen.dart';
-import 'package:chessigma_mobile/src/view/tournament/tournament_screen.dart';
+import 'package:exochess_mobile/src/app_links.dart';
+import 'package:exochess_mobile/src/utils/navigation.dart';
+import 'package:exochess_mobile/src/view/analysis/analysis_screen.dart';
+import 'package:exochess_mobile/src/view/puzzle/puzzle_screen.dart';
+import 'package:exochess_mobile/src/view/study/study_screen.dart';
+import 'package:exochess_mobile/src/view/tournament/tournament_screen.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockBuildContext extends Mock implements BuildContext {}
