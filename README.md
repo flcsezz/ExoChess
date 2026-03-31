@@ -41,7 +41,7 @@
 The app features a clean, professional interface following the latest **Material 3** guidelines, including dynamic color support and a professional card-based layout.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/flcsezz/ExoChess/main/assets/videos/m3.gif" width="600" alt="ExoChess Material 3 Demo">
+  <img src="https://raw.githubusercontent.com/flcsezz/ExoChess/main/assets/videos/m3.gif" width="300" alt="ExoChess Material 3 Demo">
 </p>
 
 ---
